@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_block_programmatic">
+    <content_block_programmatic action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <condition/>
+        <conditional>false</conditional>
+        <frame/>
+        <logged_on>false</logged_on>
+        <name>Assets and Contract Tracking</name>
+        <programmatic_content><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<div class="form-group" style="height: 400px; overflow: hidden; "  onclick="location.href='/x_caci_cisco_bcs_Asset_Drilldown.do'">
+		<div>
+			<div class="row">
+				<div class="col-md-4" style="padding-left:15px">
+					<div class="form-group" style="height: 80px; overflow: hidden;"  onclick="location.href='/x_caci_cisco_bcs_Asset_Drilldown.do'" >
+						<div id="asset_count" style="padding-left: 15px; height: 10%"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="contract" style="height: 80%;"></div>
+		<div style="height: 1%;"/>
+	</div>
+
+	<script>
+		var $j = jQuery.noConflict();
+
+		var ga = new GlideAjax('Cisco_ClientServerBridge');
+		ga.addParam('sysparm_name', 'getAssets');
+		ga.getXML(getAssetResponse);
+
+		function getAssetResponse(response) {
+
+		var answer = response.responseXML.documentElement.getAttribute("answer");
+		var result = JSON.parse(answer);
+
+
+		$j("#asset_count").html('<h1>'+result[0]+'</h1>'+'<b>Collected Assets</b> ');
+
+
+		}
+	</script>
+
+	<script>
+		var $j = jQuery.noConflict();
+
+		var ga = new GlideAjax('Cisco_ClientServerBridge');
+		ga.addParam('sysparm_name', 'gettingDetailsOfContractLifecycle');
+		ga.getXML(getContractResponse);
+
+		function getContractResponse(response) {
+		var answer = response.responseXML.documentElement.getAttribute("answer");
+		answer = answer.split(",");
+
+		var data_array = [];
+		var warranty = parseInt(answer[0]);
+		var contract = parseInt(answer[1]);
+		var nw_nc = parseInt(answer[2]);
+		if(warranty !=0) data_array.push({name: 'Warranty ['+warranty+']', y: warranty});
+		if(contract !=0) data_array.push({name: 'Contract ['+contract+']', y: contract});
+		if(nw_nc !=0) data_array.push({name: 'No warranty No contract ['+nw_nc+']', y: nw_nc});
+		
+
+		var json = [{
+		type: 'pie',
+		name: 'Brwsr share',
+		innerSize: '70%',
+		data: data_array
+		}];
+		
+		var color_array = ['#EDAC41', '#51B8E4','#FE7E63', '#FE7E63'];
+		
+		ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+			x_caci_cisco_bcs.Cisco_RenderGraph.renderDonutChart("contract", " ", json, color_array);
+		});
+		}
+		
+
+	</script>
+
+</j:jelly>]]></programmatic_content>
+        <sys_class_name>content_block_programmatic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-28 08:31:20</sys_created_on>
+        <sys_id>b52ddffe2f406410bd2551172799b672</sys_id>
+        <sys_mod_count>148</sys_mod_count>
+        <sys_name>Assets and Contract Tracking</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>content_block_programmatic_b52ddffe2f406410bd2551172799b672</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 06:20:39</sys_updated_on>
+        <two_phase>false</two_phase>
+    </content_block_programmatic>
+</record_update>

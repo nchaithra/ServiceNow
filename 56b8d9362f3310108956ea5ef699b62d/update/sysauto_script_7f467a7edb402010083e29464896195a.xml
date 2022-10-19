@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition><![CDATA[var daoScript = new Cisco_DAOScript();
+gs.getProperty('x_caci_cisco_bcs.start.import')+'' == "true" && daoScript.checkWhetherAnyScheduleJobIsRunningOrNot() + "" == "false";]]></condition>
+        <conditional>true</conditional>
+        <entered_time/>
+        <name>Cisco_BCS_ImportInventory</name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as/>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period>1970-01-01 05:00:00</run_period>
+        <run_start>2020-10-28 05:40:34</run_start>
+        <run_time>1970-01-01 06:00:00</run_time>
+        <run_type>periodically</run_type>
+        <script><![CDATA[var logger = new Cisco_BCS_SNLogger();
+var appUtil = new Cisco_AppUtil();
+try{
+	logger.debug('Inside Cisco_ImportInProcessQueue Schedule Job.');
+	
+	var dao = new Cisco_DAOScript();
+	dao.insertIntoQueue('Start Import', '', '', appUtil.configuration.property.authSysId);
+}catch(e){
+	logger.error('Exception caught Inside Cisco_ImportInProcessQueue Schedule Job.' + e);
+}]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-28 07:07:03</sys_created_on>
+        <sys_id>7f467a7edb402010083e29464896195a</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>Cisco_BCS_ImportInventory</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sysauto_script_7f467a7edb402010083e29464896195a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-14 05:28:11</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

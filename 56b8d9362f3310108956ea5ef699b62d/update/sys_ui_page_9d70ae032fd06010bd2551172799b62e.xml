@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function myFunction(ratingData) {
+	var comments = document.getElementById("textData").value;
+	var ga = new GlideAjax('Cisco_ClientServerBridge');
+	ga.addParam('sysparm_name', 'submitFeedback');
+	var feedbackArr = [];
+	feedbackArr.push(ratingData[0]);
+	feedbackArr.push(ratingData[1]);
+	feedbackArr.push(comments);
+	feedbackArr.push(ratingData[2]);
+	ga.addParam('sysparm_feedback',JSON.stringify(feedbackArr));
+	ga.getXML(feedbackParser);
+	function feedbackParser(response) {
+		var answer = response.responseXML.documentElement.getAttribute("answer");
+		if (answer + "" == "true") {
+			var gm = new GlideModal().get('x_caci_cisco_bcs_My_Feedback_Form');
+			gm.setTitle('Thank you!!'); 
+			gm.setDialog('x_caci_cisco_bcs_Cisco_Thankyoupage');
+			gm.render();
+		}
+	}
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_My_Feedback_Form.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<div class="form-group">
+		<!-- <textarea class="form-control"  rows="3" id="textData"  ></textarea><br></br> -->
+
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-12">
+					<textarea class="form-control" id="textData"/>
+				</div>
+			</div>
+		</div>
+
+
+		<div class = "row">
+			<div class="col-md-12">
+				<span class="input-group-checkbox">
+					<input id="acknowledgement" class="checkbox" onclick="enableBtn()" type="checkbox" value="false"/>
+					<label for="acknowledgement" class="checkbox-label"><strong>By clicking Agree and Continue, I here by expressly instruct Cisco BCS to reach out to me further to follow up on the submitted feedback.</strong></label>
+				</span>
+			</div>
+		</div>
+
+		<!--
+  <div class="modal-footer" >
+   <div class="row">
+ <div class="col-sm-9 pull-right" style="width: max-content;">
+  <input class="btn btn-primary" id="submit" type="submit" onclick="myFunction(${sysparm_message})"  value="Submit"/>$[AMP]nbsp;
+  <input class="btn btn-primary"  id="cancel" type="submit" value="Cancel" onclick="location.reload()"/>
+ </div>
+   </div>
+</div> -->
+
+		<div class="modal-footer">
+			<div class="row">
+				<div class="col-sm-9 pull-right" style="width: max-content;">
+					<button class="btn btn-primary" id="submitsd" onclick="myFunction(${sysparm_message})">Submit</button>$[AMP]nbsp;
+					<button class="btn btn-default" id="cancelsd" onclick="location.reload()">Cancel</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		document.getElementById("submitsd").disabled = true;
+
+		function enableBtn() {
+		if(document.getElementById("acknowledgement").checked)
+		document.getElementById("submitsd").disabled = false;
+		else
+		document.getElementById("submitsd").disabled = true;
+		}
+	</script>
+
+</j:jelly>]]></html>
+        <name>My_Feedback_Form</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-10 09:35:21</sys_created_on>
+        <sys_id>9d70ae032fd06010bd2551172799b62e</sys_id>
+        <sys_mod_count>128</sys_mod_count>
+        <sys_name>My_Feedback_Form</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_9d70ae032fd06010bd2551172799b62e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 05:44:49</sys_updated_on>
+    </sys_ui_page>
+</record_update>

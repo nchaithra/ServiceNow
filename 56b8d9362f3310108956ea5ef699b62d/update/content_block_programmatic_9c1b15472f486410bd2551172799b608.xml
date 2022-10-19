@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_block_programmatic">
+    <content_block_programmatic action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <condition/>
+        <conditional>false</conditional>
+        <frame/>
+        <logged_on>false</logged_on>
+        <name>Devices Inventory</name>
+        <programmatic_content><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<div class="form-group" style="height: 400px; overflow: hidden;"  onclick="location.href='ui_page.do?sys_id=1e3e64652f902010bd2551172799b6a9'">
+		<div id="devices_donut"/>
+		<div id="totalLable" style="position:absolute; left:0px; top:0px;"/>
+	</div>
+	<script>
+		
+		var $j = jQuery.noConflict();
+
+		//$j(".home-icon.icon-refresh").remove();
+		
+		var ga = new GlideAjax('Cisco_ClientServerBridge');
+		ga.addParam('sysparm_name', 'getDevices');
+		ga.getXML(getAssetResponse);
+		function getAssetResponse(response) {
+		var answer = response.responseXML.documentElement.getAttribute("answer");
+		var result = JSON.parse(answer);
+		data_array = [];
+		var total = parseInt(result[2]);
+		var unreachable = parseInt(result[1]);
+		var reachable = parseInt(result[2]) - parseInt(result[1]);
+		/*if(unreachable != 0)  data_array.push({name: 'Unreachable ['+unreachable+']', y: unreachable});
+		if(unreachable != 0)  data_array.push({name: 'Reachable ['+reachable+']', y: reachable});*/
+		if(unreachable != 0)  data_array.push(['Unreachable ['+unreachable+']', unreachable]);
+		if(unreachable != 0)  data_array.push(['Reachable ['+reachable+']', reachable]);
+
+		
+		/*var chart = Highcharts.chart('devices_donut', {
+		chart: {
+		plotBackgroundColor: null,
+		plotBorderWidth: null,
+		plotShadow: false,
+		type: 'pie',
+		events: {
+		click: function () {
+		location.href = '';
+		}
+		}
+
+		},
+		title: {
+		text: ''
+		},
+		tooltip: {
+		pointFormat: '<b>{point.percentage:.1f}%</b>'
+		},
+		accessibility: {
+		point: {
+		valueSuffix: '%'
+		}
+		},
+		plotOptions: {
+		pie: {
+		allowPointSelect: true,
+		innerSize: "60%",
+		cursor: 'pointer',
+		dataLabels: {
+		enabled: false
+		},
+		showInLegend: true
+		},
+		series: {
+		cursor: 'pointer',
+		point: {
+		events: {
+		click: function () {
+		location.href = '';
+		}
+		}
+		}
+		}
+		},
+		credits: {
+		enabled: false
+		},
+		exporting: {
+		enabled: false
+		},
+		colors: ['#EDAC41', '#51B8E4','#3379A9', '#F0F0F0'],
+		series: [{
+		colorByPoint: true,
+		data: data_array
+		}]
+		},function(chart) {
+		if(total == 0)
+		return;
+		var textX = chart.plotLeft + (chart.series[0].center[0]);
+		var textY = chart.plotTop  + (chart.series[0].center[1]);
+
+		var span = '<span id="donutInfoText" style="position:absolute; text-align:center;">';
+		span += '<span style="font-size: 38px">'+total+'</span><br>configured</br>';
+		span += '</span>';
+
+		$j("#totalLable").html(span);
+		span = $j('#donutInfoText');
+		span.css('left', textX + (span.width() * -0.5));
+		span.css('top', textY + (span.height() * 0.3));
+		});*/
+
+		var json = [{
+        type: 'pie',
+        name: 'Browser share',
+        innerSize: '70%',
+        data: data_array
+    }];
+		var color_array = ['#EDAC41', '#51B8E4','#3379A9', '#F0F0F0'];
+		var title = (total + "" == "0") ? "" : '<span style="font-size: 34px">'+total+'</span><br>Configured</br>';
+		
+		ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+			x_caci_cisco_bcs.Cisco_RenderGraph.renderDonutChart("devices_donut", title, json, color_array);
+		});
+		}
+
+	</script>
+</j:jelly>]]></programmatic_content>
+        <sys_class_name>content_block_programmatic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-28 17:40:34</sys_created_on>
+        <sys_id>9c1b15472f486410bd2551172799b608</sys_id>
+        <sys_mod_count>180</sys_mod_count>
+        <sys_name>Devices Inventory</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>content_block_programmatic_9c1b15472f486410bd2551172799b608</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 06:20:39</sys_updated_on>
+        <two_phase>false</two_phase>
+    </content_block_programmatic>
+</record_update>

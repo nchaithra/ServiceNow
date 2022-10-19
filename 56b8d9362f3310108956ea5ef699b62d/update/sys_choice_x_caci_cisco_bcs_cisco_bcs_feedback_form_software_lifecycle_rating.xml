@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="software_lifecycle_rating" table="x_caci_cisco_bcs_cisco_bcs_feedback_form" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>software_lifecycle_rating</element>
+            <name>x_caci_cisco_bcs_cisco_bcs_feedback_form</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-10-30 06:22:22</sys_created_on>
+            <sys_id>db031d2b2f80e410bd2551172799b6ff</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>software_lifecycle_rating</sys_name>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_choice_x_caci_cisco_bcs_cisco_bcs_feedback_form_software_lifecycle_rating</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-10-30 06:22:22</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>software_lifecycle_rating</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Extremely Satisfied</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_cisco_bcs_feedback_form</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-10-30 06:22:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2bd21d2b2f80e410bd2551172799b6f9</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-10-30 06:22:31</sys_updated_on>
+            <value>5</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>software_lifecycle_rating</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Moderately Satisfied</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_cisco_bcs_feedback_form</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-10-30 06:25:57</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a7039d2b2f80e410bd2551172799b60f</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-10-30 06:26:11</sys_updated_on>
+            <value>4</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>software_lifecycle_rating</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Neither Satisfied nor Dissatisfied</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_cisco_bcs_feedback_form</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-10-30 06:28:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9ce3116b2f80e410bd2551172799b600</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-10-30 06:28:18</sys_updated_on>
+            <value>3</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>software_lifecycle_rating</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Slightly Dissatisfied</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_cisco_bcs_feedback_form</name>
+            <sequence>4</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-10-30 06:31:01</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2a54d96b2f80e410bd2551172799b6f0</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-10-30 06:31:25</sys_updated_on>
+            <value>2</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>software_lifecycle_rating</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Extremely Dissatisfied</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_cisco_bcs_feedback_form</name>
+            <sequence>5</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-10-30 06:34:46</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1a05d1ab2f80e410bd2551172799b65b</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-10-30 06:35:32</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

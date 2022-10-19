@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Cisco_BCS_Support_And_Contact.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+ <g:evaluate var="jvar_not" object="true">
+         
+         var supURL = gs.getProperty('x_caci_cisco_bcs.userGuideURL');
+         supURL;
+         
+    </g:evaluate>
+    <g:evaluate var="jvar_not1" object = "true">
+        var supportUrl = gs.getProperty('x_caci_cisco_bcs.supportContact');
+        supportUrl;
+    </g:evaluate>
+    <g:evaluate var="jvar_version" object="true">
+         
+        var version = gs.getProperty('x_caci_cisco_bcs.plugin.version');
+         version;
+         
+    </g:evaluate>
+    
+ 
+    
+    <body onload="onLoad()"> 
+<style>
+  .help-heading {
+        margin-left: 20px;
+        text-decoration: underline;
+  }
+    .details {
+      width: 60%;
+      padding: 10px 10px 20px 10px;
+      margin: 20px;
+      border: 1px solid #BFBFBF;
+      box-shadow: 0px 10px 5px #aaaaaa;
+      border-radius: 10px;
+        margin-top: -9px;
+     
+    }
+    .heading {
+        font-size: 20px;
+      font-weight: bolder;
+      /*text-decoration: underline;
+        text-decoration-color: #1f8476;*/
+    }
+    .summary {
+        padding-left: 20px;
+      padding-top: 10px;
+    }
+    .line-divider {
+      border-bottom: 10px solid #ebebeb;
+      padding: 8px;
+    }
+        </style>
+        <div style="width:250px; padding-left:19px; padding-top:1px; height:80px;margin-top: 5px;">
+        <img src="Cisco_logo_2.png" width="200" height="90" style="margin-left:2%;margin-down:10%"/>    
+            
+        </div>
+        <br></br> 
+        
+    
+<div class="details">
+
+ 
+
+<!-- <div>
+    <div class="heading line-divider">About</div>
+    <div class="summary"><p>This plugin integrates Cisco BCS Platform to your ServiceNow account.</p></div>
+</div> -->
+<!--     <br></br> -->
+<!-- <div class="">
+    
+    <div class="heading line-divider">Cisco BCS</div>
+    <div class="summary">
+         <table style="width:100%;">
+              <tr>
+                <td style="width:250px;">User Guide Version</td>
+                <td>${JS,HTML:jvar_version}</td>
+               </tr>
+               <tr>
+                <td style="width:250px;">Documentation Link</td>
+                <td><a href="${JS,HTML:jvar_not}" target="_blank" rel="noopener noreferrer nofollow" >User Guide</a></td>
+               </tr>
+         </table>
+    </div>
+</div> -->
+<!--     <br></br> -->
+<div class="">
+    <div class="heading line-divider">Cisco BCS Support</div>
+    <div class="summary">
+		<p>Contact our technical support team for any incident at the following email address</p>
+		<p><a href="mailto: ${JS,HTML:jvar_not1}" target="_blank" rel="noopener noreferrer nofollow" >${JS,HTML:jvar_not1}</a></p>
+        
+    </div>
+</div>
+
+ 
+
+</div>
+</body>
+</j:jelly>]]></html>
+        <name>Cisco_BCS_Support_And_Contact</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-22 14:54:28</sys_created_on>
+        <sys_id>324b7901db402010c81a7b82399619f4</sys_id>
+        <sys_mod_count>53</sys_mod_count>
+        <sys_name>Cisco_BCS_Support_And_Contact</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_324b7901db402010c81a7b82399619f4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-02-11 08:27:58</sys_updated_on>
+    </sys_ui_page>
+</record_update>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Cisco_ThankYouForGlobalFeedback.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<html>
+		<img src="Cisco_logo_2.png" width="200" height="90" style="float:left"/>
+		<br></br>
+		<head>
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"></link>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+		</head>
+		<body>
+			
+			<div class="centerAlign">
+				<!-- your widget template -->
+				<h2>
+					Your feedback has been submitted successfully!
+				</h2>
+				<h1>
+					Thank you!!
+				</h1>
+				<!-- <i class="fa fa-smile-o smile" aria-hidden="true"></i> -->
+				<i class="far fa-smile smile"></i>
+
+				<br />
+				<div class="text-center" style="font-size:20px">
+					<a href="/home.do?sysparm_view=Cisco_BCS"> Go back to the Homepage </a>
+				</div>
+
+				</div>
+		</body>
+		<style>
+			.centerAlign{
+
+			}
+			h1{
+			text-align: center;
+			font-size: 5em;
+			color: #4d4c4c;
+			padding-top: 5px;
+			}
+			h2{
+			padding-top: 80px;
+			text-align: center;
+			font-size: 3em;
+			color: #4d4c4c;
+			}
+			.smile{
+			padding-top: 10px;
+			position: relative;
+			left:45%;
+			font-size: 10em;
+			color: #4d4c4c;
+			}
+			.GotoHomepage {
+			font-size:15px;
+			margin-left:450px;
+			}
+		</style>
+	</html>
+</j:jelly>]]></html>
+        <name>Cisco_ThankYouForGlobalFeedback</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-27 10:11:34</sys_created_on>
+        <sys_id>c5f3d6e0073460102001f1e08c1ed054</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>Cisco_ThankYouForGlobalFeedback</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_c5f3d6e0073460102001f1e08c1ed054</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 05:44:49</sys_updated_on>
+    </sys_ui_page>
+</record_update>

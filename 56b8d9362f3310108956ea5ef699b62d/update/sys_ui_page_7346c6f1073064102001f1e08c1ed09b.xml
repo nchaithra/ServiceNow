@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[onLoad("All",false,'All');
+
+var $j = jQuery.noConflict();
+$j('#myframe1').load(function() {
+	$j("#myframe1").contents().find("a").attr("target", "_parent");
+});
+setInterval(function(){ $j("#myframe1").contents().find("a").attr("target","_parent");}, 1500);
+
+function renderGraphOnRadioButton(parm){
+	this.onLoad($j("#milestone").val(),true,parm);
+}
+function myFunction(a) {
+	var arr = [];
+	arr.push(a);
+	arr.push("Configuration Best Practices");
+	arr.push("Individual View");
+	var loadingDialog = new GlideModal("x_caci_cisco_bcs_My_Feedback_Form",true, 'modal-lg');
+	loadingDialog.setTitle('Comments for Configuration Best Practices'); 
+	loadingDialog.setPreference("sysparm_message", JSON.stringify(arr));
+	loadingDialog.render(); 
+}
+
+function renderGraphWithparams(){
+	var arr = ["All","Low","Medium","High"];
+	var id;
+	for(var i in arr){
+		if(document.getElementById(arr[i]).checked == true){
+			id = arr[i];
+			break;
+		}
+	}
+	//alert(id);
+	this.onLoad($j("#milestone").val(),true,id);
+}
+function onLoad(param,flag,param1){
+	
+if(flag == false){
+var ga = new GlideAjax("Cisco_ClientServerBridge");
+ga.addParam('sysparm_name', "gettingOptionsForConfiguration");
+ga.getXML(configurationCallback);
+
+function configurationCallback(response) {
+    var answer = response.responseXML.documentElement.getAttribute("answer");
+	var select = document.getElementById("milestone");
+	answer = JSON.parse(answer);
+	for (var i = 0; i < answer.length; i++) {
+        var option = document.createElement("option");
+        option.text = answer[i];
+        select.add(option);
+    }
+}
+	}
+    document.getElementById(param1).checked = true;
+	var filter1,filter2;
+	if (param == "All" && param1 != "All") {
+       // filter1 = "ANYTHING";
+        filter2 = "=" + param1;
+    } else if (param1 == "All" && param != "All") {
+        //filter2 = "ANYTHING";
+        filter1 = "=" + param;
+    } else if (param == "All" && param1 == "All") {
+       // filter1 = "ANYTHING";
+       // filter2 = "ANYTHING";
+    } else {
+        filter1 = "=" + param;
+        filter2 = "=" + param1;
+    }
+	$j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_cbp_summary_list.do?sysparm_fixed_query=sw_type" + filter1  + "^bp_risk" + filter2);
+	gettingGraphs(param,param1,"configurationFirstGraph","report1","Best Practice Violations by Technology","CBP Count");
+	gettingButtons(param,param1,"gettingDataForConfigurationFirstBox","button1");
+	gettingGraphs(param,param1,"configurationSecondGraph","report2","Devices with Violations by Technology","Devices Count");
+	//gettingButtons(param,"gettingDataForConfigurationSecondBox","button2");
+}
+function gettingGraphs(param,param1,func,div,title,yaxis){
+	if(div == "report2"){
+		$j("#report2").html('<div class="loading-container"><div class="loading-indicator icon-loading icon-lg"></div><br/><h4>Loading graph</h4></div>');
+		//$j("#button2").html('<div class="loading-container"><div class="loading-indicator icon-loading icon-lg"></div></div>');
+	}
+	$j("#"+div).html('<div class="loading-container"><div class="loading-indicator icon-loading icon-lg"></div><br/><h4>Loading graph</h4></div>');
+	var ga = new GlideAjax("Cisco_ClientServerBridge");
+	ga.addParam('sysparm_name', func);
+	ga.addParam('sysparm_param',param);
+	ga.addParam('sysparm_param1',param1);
+	ga.getXML(gettingdata);
+	
+	function gettingdata(response) {
+    var answer = response.responseXML.documentElement.getAttribute("answer");
+		
+		var result = JSON.parse(answer);
+	answer = result[0];//JSON.parse(answer);
+	var output = [];
+		var xAxis = {};
+		var categories = [];
+		var count = 0;
+		for (var i in answer) {
+			categories.push(i);
+			var obj = {};
+			obj.name = i;
+			obj.data = [{
+				x: count,
+				y: parseInt(answer[i]),
+				color:"#0000FF"
+				
+			}];
+			output.push(obj);
+			count++;
+		}
+		xAxis.categories = categories;
+	renderChart(div,title,output,"",xAxis,yaxis);
+		if(result.length > 1)
+			document.getElementById("button2").innerHTML = result[1];
+}
+}
+function gettingButtons(param,param1,func,div){
+	//$j("#"+div).html('<div class="loading-container"><div class="loading-indicator icon-loading icon-lg"></div></div>');
+	var ga = new GlideAjax("Cisco_ClientServerBridge");
+	ga.addParam('sysparm_name', func);
+	ga.addParam('sysparm_param',param);
+	ga.addParam('sysparm_param1',param1);
+	ga.getXML(gettingdata);
+	function gettingdata(response) {
+    var answer = response.responseXML.documentElement.getAttribute("answer");
+	document.getElementById(div).innerHTML = parseInt(answer);
+}
+}
+function renderChart(div,title,output,graphType,xAxis,yaxis){
+	ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+			x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(div, title, output, "column", xAxis,yaxis);
+		});
+	
+	/*if(div == "report2"){
+		new GlideDialogWindow().get("x_caci_cisco_bcs_Cisco_loading_dialog").destroy();
+	}*/
+		
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Cisco_CBP_Drilldown.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>	
+	<g:inline template="reporting_includes.xml" />
+	<div class="headRow">
+	<div class="row">
+			<div class="col-xs-9">
+				<h1>Configuration Best Practices</h1>
+			</div>
+			<div class="col-xs-3">
+				
+			</div>
+		<div class="col-xs-3">
+			</div>
+			<div class="col-xs-3">
+				<div class="stars"  style="float:right;">
+				<h4>Please provide your feedback for Configuration Best Practices</h4>
+				<div class="outer_stars">
+				<input class="star star-5" id="star-5" type="radio" name="star" value="5" onclick="myFunction(5)" />
+    			<label class="star star-5" for="star-5"></label> 
+    			<input class="star star-4" id="star-4" type="radio" name="star"  value="4" onclick="myFunction(4)"/>
+    			<label class="star star-4" for="star-4"></label>
+    			<input class="star star-3" id="star-3" type="radio" name="star"  value="3" onclick="myFunction(3)"/>
+    			<label class="star star-3" for="star-3"></label>
+    			<input class="star star-2" id="star-2" type="radio" name="star"  value="2" onclick="myFunction(2)"/>
+				<label class="star star-2" for="star-2"></label>
+				<input class="star star-1" id="star-1" type="radio" name="star"  value="1" onclick="myFunction(1)"/>
+				<label class="star star-1" for="star-1"></label>
+				</div>
+				</div>
+			</div>
+		</div>
+	
+	
+	
+	
+	
+	<div class="row">
+		<div class="col-xs-4 class1">
+		
+			<div class ="row">
+			<div class="col-xs-1"></div>
+				
+			<div class="col-xs-10">
+				<label  class="control-label"><strong>Software Type</strong></label>
+					<select  id="milestone" onchange="renderGraphWithparams()" class="form-control select2-basic" style="height:auto;" >
+					<option value="All" >All</option>	
+					</select>
+					
+				<label  class="control-label risk-align"><strong>Select Risk</strong></label>
+				<div class="radio-align">
+				<label class="radio-inline">
+						 <input type="radio" name="optradio" id="All" onclick="renderGraphOnRadioButton('All')">All</input>
+    </label>
+			
+    <label class="radio-inline">
+      <input type="radio" name="optradio" id="High" onclick="renderGraphOnRadioButton('High')">High</input>
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="optradio" id="Medium" onclick="renderGraphOnRadioButton('Medium')">Medium</input>
+    </label>
+					<label class="radio-inline">
+						 <input type="radio"  id="Low" name="optradio" onclick="renderGraphOnRadioButton('Low')">Low</input>
+    </label>
+				</div>
+					<br></br>
+			<div style="border:2px solid grey; text-align:center">
+					<h4><b>Best Practice Violations</b></h4>
+					<h1 id="button1"><b>-</b></h1>
+				</div>
+					 <br></br>
+				<div style="border:2px solid grey ;text-align:center; margin-bottom:15px;">
+				 <h4><b>Unique Devices With Best Practice Violations</b></h4>
+				 <h1 id="button2"><b>-</b></h1>
+					
+			</div>
+			
+			</div>
+		</div>
+			</div>
+		
+			<div class="col-xs-4" id = "report1">
+				
+			</div>
+		<div class="col-xs-4" id = "report2">
+		
+		</div>
+			
+		</div>
+	</div>	
+	<iframe id="myframe1" src="/x_caci_cisco_bcs_cisco_cbp_summary_list.do" width="100%" height="450" style="border:none;"></iframe>
+
+	
+	
+<style>
+	.risk-align{
+	margin-top:15px;
+	}
+	.class1{
+	margin-right:0px;
+	}
+	.outer_stars{
+			margin-right:40px;
+		}
+	div.stars {
+ 	width: 270px;
+	display: inline-block;
+}
+#submit{
+	float:right;
+	}
+input.star { display: none; }
+label.star {
+	float: right;
+	padding: 10px;
+	font-size: 28px;
+	color: #444;
+	transition: all .2s;
+}
+.head{
+  	font-size: 2em;
+}
+input.star:checked ~ label.star:before {
+	content: '\f005';
+	color: #FD4;
+	transition: all .25s;
+}
+input.star-5:checked ~ label.star:before {
+	color: #FE7;
+	text-shadow: 0 0 15px #952;
+}
+		
+#feedback{
+		padding-left:20px;
+		padding-top:15px;
+		}
+ input.star-1:checked ~ label.star:before { color: #F62; }
+label.star:hover { transform: rotate(-15deg) scale(1.3); }
+label.star:before {
+content: '\f006';
+font-family: FontAwesome;
+}
+.headRow{
+		margin-left:10px;
+		}
+</style>
+</j:jelly>]]></html>
+        <name>Cisco_CBP_Drilldown</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-12-01 06:24:21</sys_created_on>
+        <sys_id>7346c6f1073064102001f1e08c1ed09b</sys_id>
+        <sys_mod_count>193</sys_mod_count>
+        <sys_name>Cisco_CBP_Drilldown</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_7346c6f1073064102001f1e08c1ed09b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-14 11:59:23</sys_updated_on>
+    </sys_ui_page>
+</record_update>

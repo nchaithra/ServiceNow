@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="potentially_vulnerable_devices_count" label="Potentially Vulnerable Devices" language="en" table="x_caci_cisco_bcs_cisco_security_advisories_bulletins">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>potentially_vulnerable_devices_count</element>
+            <help/>
+            <hint/>
+            <label>Potentially Vulnerable Devices</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_cisco_security_advisories_bulletins</name>
+            <plural>Potentially Vulnerable Devices</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-11-10 09:21:50</sys_created_on>
+            <sys_id>7f95a2872fd06010bd2551172799b62c</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>Potentially Vulnerable Devices</sys_name>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_documentation_x_caci_cisco_bcs_cisco_security_advisories_bulletins_potentially_vulnerable_devices_count_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-11-11 07:34:24</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

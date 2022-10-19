@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_caci_cisco_bcs.Cisco_ImportInventory</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>Cisco_ImportInventory</name>
+        <script><![CDATA[var Cisco_ImportInventory = Class.create();
+Cisco_ImportInventory.prototype = {
+	
+    initialize: function() {
+        this.appUtil = new Cisco_AppUtil();
+        this.daoScript = new Cisco_DAOScript();
+        this.logger = new Cisco_BCS_SNLogger();
+        this.pageBreaker = 500;
+    },
+    importStandaloneData: function(reference) {
+        try {
+//             this.logger.debug("Inside Cisco_ImportInventory.importStandaloneData() importing standalone data.");
+//             var apis = ["devices", "softwareLifecycleBulletins", "hardwareLifecycleBulletins", "securityAdvisioriesBulletins", "fieldNoticesBullitens", "assets", "cbpRules"];
+
+//             var tableName = "";
+//             for (var i = 0; i < apis.length; i++) {
+//                 if (apis[i] == "devices")
+//                     tableName = "devicesDump";
+//                 else if (apis[i] == "softwareLifecycleBulletins")
+//                     tableName = "softwareLifecycleBulletinsDump";
+//                 else if (apis[i] == "hardwareLifecycleBulletins")
+//                     tableName = "hardwareLifecycleBulletinDump";
+//                 else if (apis[i] == "securityAdvisioriesBulletins")
+//                     tableName = "securityAdvisoriesbulletinDump";
+//                 else if (apis[i] == "fieldNoticesBullitens")
+//                     tableName = "fiedlNoticesBulletinDump";
+//                 else if (apis[i] == "assets")
+//                     tableName = "assetsDump";
+// 				else if (apis[i] == "cbpRules")
+//                     tableName = "cbpRulesDump";
+								
+
+//                 var endPoint = this.appUtil.configuration.api[apis[i]] + "?per_page=1";
+//                 var response = this.appUtil.makeApiCall('GET', endPoint, '', reference.bcs);
+
+//                 if (response.getStatusCode() == '200') {
+//                     this.logger.info("Inside Cisco_ImportInventory.importStandaloneData() Connection established to " + this.appUtil.configuration.api[apis[i]]);
+//                     var parsed = this.appUtil.parse(response.getBody());
+//                     var records = parsed.total;
+//                     var pages = parseInt(records / this.pageBreaker);
+
+//                     for (var j = 0; j <= pages; j++) {
+//                         endPoint = this.appUtil.configuration.api[apis[i]] + "?page=" + (j + 1) + "&per_page=" + this.pageBreaker;
+//                         var response = this.appUtil.makeApiCall('GET', endPoint, '', reference.bcs);
+//                         if (response.getStatusCode() == '200') {
+//                             this.logger.info("Inside Cisco_ImportInventory.importStandaloneData() Connection established to " + endPoint);
+//                             var parsed = this.appUtil.parse(response.getBody());
+//                             var results = parsed.items;
+//                             for (var k in results) {
+//                                 this.daoScript.insertIntoIntermediateDump(tableName, results[k]);
+//                             }
+//                         } else {
+//                             this.logger.error("Inside Cisco_ImportInventory.importStandaloneData() Connection to " + this.appUtil.configuration.api[apis[i]] + " not established. Error:-  Status code :- " + response.getStatusCode());
+//                         }
+//                     }
+//                 } else {
+//                     this.logger.error("Inside Cisco_ImportInventory.importStandaloneData() Connection to " + this.appUtil.configuration.api[apis[i]] + " not established. Error:-  Status code :- " + response.getStatusCode());
+//                 }
+//             }
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_ImportInventory.importStandaloneData() . Error :- " + e);
+        }
+    },
+    startInventoryImport: function(reference) {
+        try {
+            this.logger.debug("Inside Cisco_ImportInventory.startInventoryImport() creating API endpoint.");
+            var fetchApi = "";
+            var payload = reference.payload + '';
+			var tableName = "";
+            if (payload == "Field Notices"){
+                fetchApi = "fieldNotices";
+				tableName = "fieldNotices";
+			}
+            else if (payload == "Security Advisories"){
+                fetchApi = "securityAdvisories";
+				tableName = "securityAdvisories";
+			}
+            else if (payload == "Hardware Lifecycle"){
+                fetchApi = "hardwareLifecycle";
+				tableName = "hardwareLifecycle";
+			}
+            else if (payload == "Software Lifecycle"){
+                fetchApi = "softwareLifecycle";
+				tableName = "softwareLifecycle";
+			}
+            else if (payload == "Assets"){
+                fetchApi = "assets";
+				tableName = "assets";
+			}
+            else if (payload == "Devices"){
+				tableName = "devices";
+				fetchApi = "devices";
+			}
+			else if (payload == "CBP Details"){
+				fetchApi = "cbpDetails";
+				tableName = "cbpDetails";
+			}
+            else if (payload == "CBP Summary"){
+                fetchApi = "cbpSummary";
+				tableName = "cbpSummary";
+			}
+			else if(payload == "Contract Lifecycle"){
+				fetchApi = "contractLifecycle";
+				tableName = "contractLifecycle";
+			}
+			else if(payload == "Security Advisory Bulletins"){
+				fetchApi = "securityAdvisioriesBulletins";
+				tableName = "securityAdvisoryBulletins";
+			}
+			else if(payload == "Field Notice Bulletins"){
+				fetchApi = "fieldNoticesBullitens";
+				tableName = "fieldNoticesBulletin";
+			}
+			else if(payload == "Configuration Best Practices Rules"){
+				fetchApi = "cbpRules";
+				tableName = "cbpRules";
+			}
+			else if(payload == "Software Lifecycle Bulletins"){
+				fetchApi = "softwareLifecycleBulletins";
+				tableName = "softwareLifecycleBulletin";
+			}
+			else if(payload == "Hardware Lifecycle Bulletins"){
+				fetchApi = "hardwareLifecycleBulletins";
+				tableName = "hardwareLifecycleBulletin";
+			}
+			else if(payload == "CBP Rules References"){
+				fetchApi = "cbpRulesReferences";
+				tableName = "cbpRulesReferences";
+			}
+			
+
+            var endPoint = this.appUtil.configuration.api[fetchApi] + "?per_page=1";
+            var response = this.appUtil.makeApiCall('GET', endPoint, '', reference.bcs);
+
+            if (response.getStatusCode() == '200') {
+				this.daoScript.setDeleteFlagTrueForNegativeSync(tableName);
+                this.logger.info("Inside Cisco_ImportInventory.startInventoryImport() Connection established to " + this.appUtil.configuration.api[fetchApi]);
+                var parsed = this.appUtil.parse(response.getBody());
+                var records = parsed.total;
+                var pages = parseInt(records / this.pageBreaker);
+
+                for (var i = 0; i <= pages; i++) {
+                    endPoint = this.appUtil.configuration.api[fetchApi] + "?page=" + (i + 1) + "&per_page=" + this.pageBreaker;
+                    this.daoScript.insertIntoQueue('Process Inventory Endpoint', reference.payload + '', endPoint, reference.bcs + '');
+                }
+            } else {
+                this.logger.error("Inside Cisco_ImportInventory.startInventoryImport() Connection to " + this.appUtil.configuration.api[fetchApi] + " not established. Error:-  Status code :- " + response.getStatusCode());
+            }
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_ImportInventory.startInventoryImport while creating endpoint pagination. Error :- " + e);
+        }
+    },
+    processInventoryEndpoint: function(reference) {
+        try {
+            var endPoint = reference.payload + '';
+            this.logger.debug("Inside Cisco_ImportInventory.processInventoryEndpoint() processing endpoint " + endPoint);
+            var response = this.appUtil.makeApiCall('GET', endPoint, '', reference.bcs);
+            if (response.getStatusCode() == '200') {
+                this.logger.info("Inside Cisco_ImportInventory.processInventoryEndpoint. Connection established to " + endPoint);
+                var parsed = this.appUtil.parse(response.getBody());
+                var results = parsed.items;
+				
+               // for (var i in results) {
+                    //this.daoScript.insertIntoQueue('Process Inventory Response', current.parameter + '', this.appUtil.stringify(results), reference.bcs + '');
+                //}
+				this.insertIntoTable(reference.parameter, this.appUtil.stringify(results));
+            } else {
+                this.logger.error("Inside Cisco_ImportInventory.processInventoryEndpoint() Connection to " + endPoint + " not established. Error:-  Status code :- " + response.getStatusCode());
+            }
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_ImportInventory.processInventoryEndpoint while processing endpoint. Error :- " + e);
+        }
+    },
+	insertIntoTable:function(parameter,response){
+		try{
+		//var parameter = reference.parameter + '';
+            if (parameter == 'Field Notices')
+                tableName = 'fieldNoticesDump';
+            else if (parameter == "Security Advisories")
+                tableName = 'securityAdvisoriesDump';
+            else if (parameter == "Hardware Lifecycle")
+                tableName = "hardwareLifecycleDump";
+            else if (parameter == "Software Lifecycle")
+                tableName = "softwareLifecycleDump";
+            else if (parameter == "Assets")
+                tableName = "assetsDump";
+            else if (parameter == "Devices")
+                tableName = "devicesDump";
+			else if (parameter == "CBP Details")
+                tableName = "cbpDetailsDump";
+			else if (parameter == "CBP Summary")
+                tableName = "cbpSummaryDump";
+			else if (parameter == "Contract Lifecycle")
+				tableName = "contractLifecycleDump";
+			else if(parameter == "Devices")
+				tableName = "devicesDump";
+			else if(parameter == "Security Advisory Bulletins")
+				tableName = "securityAdvisoriesbulletinDump";
+			else if(parameter == "Field Notice Bulletins")
+				tableName = "fiedlNoticesBulletinDump";
+			else if(parameter == "Assets")
+				tableName = "assetsDump";
+			else if(parameter == "Configuration Best Practices Rules")
+				tableName = "cbpRulesDump";
+			else if(parameter == "Software Lifecycle Bulletins")
+				tableName = "softwareLifecycleBulletinsDump";
+			else if(parameter == "Hardware Lifecycle Bulletins")
+				tableName = "hardwareLifecycleBulletinDump";
+			else if(parameter == "CBP Rules References")
+				tableName = "cbpRulesReferencesDump";
+			this.daoScript.insertIntoIntermediateDump(tableName, response);
+		var grQueue = new GlideRecord("x_caci_cisco_bcs_cisco_import_queue");
+		grQueue.addQuery("parameter",parameter);
+		grQueue.addEncodedQuery("state!=completed");	
+		grQueue.query();
+		var count = 0;
+		while(grQueue.next())
+			count++;
+		if(count == 1){
+			var targetTableName = this.daoScript.getTargetTableName(tableName);
+			var grTable = new GlideRecord(targetTableName);
+			grTable.addQuery("isdeleted",true);
+			grTable.query();
+			grTable.deleteMultiple();
+		}
+		}catch(e){
+			this.logger.error("Exception caught inside Cisco_ImportInventory.insertIntoTable while inserting data into tables. Error :- " + e);
+		}
+		
+	},
+    processInventoryResponse: function(reference) {
+        try {
+            this.logger.debug("Inside Cisco_ImportInventory.processInventoryResponse processing response JSON.");
+            var tableName = '';
+            var parameter = reference.parameter + '';
+            if (parameter == 'Field Notices')
+                tableName = 'fieldNoticesDump';
+            else if (parameter == "Security Advisories")
+                tableName = 'securityAdvisoriesDump';
+            else if (parameter == "Hardware Lifecycle")
+                tableName = "hardwareLifecycleDump";
+            else if (parameter == "Software Lifecycle")
+                tableName = "softwareLifecycleDump";
+            else if (parameter == "Assets")
+                tableName = "assetsDump";
+            else if (parameter == "Devices")
+                tableName = "devicesDump";
+			else if (parameter == "CBP Details")
+                tableName = "cbpDetailsDump";
+			else if (parameter == "CBP Summary")
+                tableName = "cbpSummaryDump";
+			else if (parameter == "Contract Lifecycle")
+				tableName = "contractLifecycleDump";
+			else if(parameter == "Devices")
+				tableName = "devicesDump";
+			else if(parameter == "Security Advisory Bulletins")
+				tableName = "securityAdvisoriesbulletinDump";
+			else if(parameter == "Field Notice Bulletins")
+				tableName = "fiedlNoticesBulletinDump";
+			else if(parameter == "Assets")
+				tableName = "assetsDump";
+			else if(parameter == "Configuration Best Practices Rules")
+				tableName = "cbpRulesDump";
+			else if(parameter == "Software Lifecycle Bulletins")
+				tableName = "softwareLifecycleBulletinsDump";
+			else if(parameter == "Hardware Lifecycle Bulletins")
+				tableName = "hardwareLifecycleBulletinDump";
+			else if(parameter == "CBP Rules References")
+				tableName = "cbpRulesReferencesDump";
+			 this.daoScript.insertIntoIntermediateDump(tableName, this.appUtil.parse(reference.payload + ''));
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_ImportInventory.processInventoryResponse while processing processing response JSON. Error :- " + e);
+        }
+    },
+    type: 'Cisco_ImportInventory'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-15 13:51:14</sys_created_on>
+        <sys_id>b8d9613a2f7310108956ea5ef699b617</sys_id>
+        <sys_mod_count>53</sys_mod_count>
+        <sys_name>Cisco_ImportInventory</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_script_include_b8d9613a2f7310108956ea5ef699b617</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-08 10:48:04</sys_updated_on>
+    </sys_script_include>
+</record_update>

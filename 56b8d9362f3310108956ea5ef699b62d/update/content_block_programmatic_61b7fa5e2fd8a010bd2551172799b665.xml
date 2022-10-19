@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_block_programmatic">
+    <content_block_programmatic action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <condition/>
+        <conditional>false</conditional>
+        <frame/>
+        <logged_on>false</logged_on>
+        <name>Contract Lifecycle</name>
+        <programmatic_content><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<div class="form-group" style="height: 425px; overflow: hidden;">
+<div style="height: 35%;">
+   <h1 id="rep1" style="padding-left:5px"></h1>
+   <b>
+      <p style="padding-left:5px">Assets under warranty</p>
+   </b>
+   <h1 id="rep2" style="padding-left:5px"></h1>
+   <b>
+      <p style="padding-left:5px">Assets under contract</p>
+   </b>
+</div>
+<div id="contract" style="height: 64%;"></div>
+<div style="height: 1%;"/>
+</div>
+<script>
+	var $j = jQuery.noConflict();
+	
+var ga = new GlideAjax('Cisco_ClientServerBridge');
+ga.addParam('sysparm_name', 'gettingDetailsOfContractLifecycle');
+ga.getXML(getContractResponse);
+
+function getContractResponse(response) {
+	var answer = response.responseXML.documentElement.getAttribute("answer");
+	answer = answer.split(",");
+	document.getElementById("rep1").innerHTML = answer[0];
+	document.getElementById("rep2").innerHTML = answer[1];
+	var output = [];
+	var xAxis = {};
+	var categories = [];
+	var count = 0;
+	answer.forEach(function callback2(value, index) {
+		var i = index + 2;
+		var obj = {};
+		switch (index) {
+			case 2:
+				{
+					obj.data = [{
+						x: 0,
+						y: parseInt(answer[index]),
+						color: "#FF8C00"
+					}];
+					obj.name = "Expired";
+					categories.push("Expired");
+					output.push(obj);
+					break;
+				}
+			case 3:
+				{
+					obj.data = [{
+						x: 1,
+						y: parseInt(answer[index]),
+						color: "#87ceeb"
+					}];
+					obj.name = "0-3m";
+					categories.push("0-3m");
+					output.push(obj);
+					break;
+				}
+			case 4:
+				{
+					obj.data = [{
+						x: 2,
+						y: parseInt(answer[index]),
+						color: "#0000FF"
+					}];
+					obj.name = "3m-1y";
+					categories.push("3m-1y");
+					output.push(obj);
+					break;
+
+				}
+			case 5:
+				{
+					obj.data = [{
+						x: 3,
+						y: parseInt(answer[index]),
+						color: "#D3D3D3"
+					}];
+					obj.name = ">1y";
+					categories.push(">1y");
+					output.push(obj);
+					break;
+
+				}
+		}
+	});
+	xAxis.categories = categories;
+	ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function () {
+		x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart("contract", "", output, "column", xAxis, "Contract count");
+	});
+}
+</script>
+</j:jelly>]]></programmatic_content>
+        <sys_class_name>content_block_programmatic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-08 04:11:05</sys_created_on>
+        <sys_id>61b7fa5e2fd8a010bd2551172799b665</sys_id>
+        <sys_mod_count>62</sys_mod_count>
+        <sys_name>Contract Lifecycle</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>content_block_programmatic_61b7fa5e2fd8a010bd2551172799b665</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 06:20:39</sys_updated_on>
+        <two_phase>false</two_phase>
+    </content_block_programmatic>
+</record_update>

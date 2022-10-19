@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[/*history.pushState(null, null, location.href);
+    history.back();
+    history.forward();
+    window.onpopstate = function () { history.go(1); };*/
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Cisco_Thankyoupage.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<html>
+		<head>
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"></link>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+		</head>
+		<body>
+			
+			<div class="centerAlign">
+				
+				<!-- your widget template -->
+				<h4>
+					Your feedback has been submitted successfully!
+				</h4>
+				<!-- <h3>
+					Thank you!!
+					</h3> -->
+				<!-- <i class="fa fa-smile-o smile" aria-hidden="true"></i> -->
+				
+			
+
+				</div>
+			<a style="font-size:1.25em" href="/ui_page.do?sys_id=1c85ca132fc8a410bd2551172799b60f">Click here to provide us the detailed feedback.</a><br></br>
+				<input class="btn btn-primary" type="submit" value="Close" onclick="location.reload()" style="float:right"/>
+		</body>
+	
+	</html>
+</j:jelly>]]></html>
+        <name>Cisco_Thankyoupage</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-29 17:48:26</sys_created_on>
+        <sys_id>416622572f0ca410bd2551172799b602</sys_id>
+        <sys_mod_count>38</sys_mod_count>
+        <sys_name>Cisco_Thankyoupage</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_416622572f0ca410bd2551172799b602</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 05:44:49</sys_updated_on>
+    </sys_ui_page>
+</record_update>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
+    <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
+        <dependency display_value="System Import Sets" source="com.glide.system_import_set">d5c8ac751b22201026489607b04bcb01</dependency>
+        <min_version>1.0.0</min_version>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2020-10-23 09:11:35</sys_created_on>
+        <sys_id>2e313e711bea201026489607b04bcb87</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-10-23 09:11:35</sys_updated_on>
+    </sys_package_dependency_m2m>
+</record_update>

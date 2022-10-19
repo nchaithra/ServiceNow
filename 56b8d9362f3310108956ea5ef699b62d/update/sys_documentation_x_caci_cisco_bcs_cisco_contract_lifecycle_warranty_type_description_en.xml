@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="warranty_type_description" label="Warranty Type Description" language="en" table="x_caci_cisco_bcs_cisco_contract_lifecycle">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>warranty_type_description</element>
+            <help/>
+            <hint/>
+            <label>Warranty Type Description</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_cisco_contract_lifecycle</name>
+            <plural>Warranty Type Descriptions</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-11-05 07:09:36</sys_created_on>
+            <sys_id>0667dc6d2f1020100a8bd39df699b628</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Warranty Type Description</sys_name>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_documentation_x_caci_cisco_bcs_cisco_contract_lifecycle_warranty_type_description_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-11-05 07:09:36</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var $j = jQuery.noConflict();
+
+security();
+$j('#myframe').load(function(){
+		$j("#myframe").contents().find("a").attr("target","_parent");
+	});
+setInterval(function(){ $j("#myframe").contents().find("a").attr("target","_parent");}, 1500);
+
+
+//$j(".devices_list").load("/x_caci_cisco_bcs_cisco_devices_list.do?sysparm_fixed_query=install_status!=7");
+/*$j(document).ready(function () {
+        var data;
+        $j.ajax({
+            type: 'GET',
+            dataType: 'html',
+            url: '/x_caci_cisco_bcs_cisco_devices_list.do?sysparm_query=install_status!%3D7^&sysparm_view=',
+            data: data,
+            success: function (data) {
+                $j('.devices_list').html('')
+                $j('.devices_list').html(data);
+            }
+        });
+    });*/
+
+
+function myFunction(a) {
+	var arr = [];
+	arr.push(a);
+	arr.push("Devices Inventory");
+	arr.push("Individual View");
+	var loadingDialog = new GlideModal("x_caci_cisco_bcs_My_Feedback_Form",true, 'modal-lg');
+	loadingDialog.setTitle('Comments for Devices Inventory'); 
+	loadingDialog.setPreference("sysparm_message", JSON.stringify(arr));
+	loadingDialog.render(); 
+}
+function security(){
+	$j("#FieldNotice").removeClass("active");
+    $j("#securityAdv").addClass("active");
+		device_drilldown("graphOfFieldNoticeDeviceIdDrilldownForDevices","x_caci_cisco_bcs_cisco_security_advisories", "psirt_cold_id", "device_id", "No. of Security Advisories per Device (Top 10)","column", "#1261A0","Security Advisory Count");
+}
+function field_ntices(){
+	$j("#FieldNotice").addClass("active");
+    $j("#securityAdv").removeClass("active");
+	
+//var fn = "deviceid_ref.name";
+device_drilldown("graphOfFieldNoticeDeviceIdDrilldownForDevices","x_caci_cisco_bcs_cisco_field_notices", "field_notice_id", "device_id", "No. of Field Notices per Device (Top 10)","column" ,"#1261A0","Field Notice Count");
+}
+device_drilldown("getDeviceDrilldownInfo","x_caci_cisco_bcs_cisco_devices","reset_reason","reset_reason","Reset Reason","pie","","");
+	device_drilldown("getDeviceDrilldownInfo","x_caci_cisco_bcs_cisco_devices","sw_type","sw_version","Software Versions per Software Type (Top 10)","column","","SW Versions count");
+	device_drilldown("getDeviceDrilldownInfo","x_caci_cisco_bcs_cisco_devices","product_type","cpu_type","Product Type","pie","","");
+	
+	/*$j('#myframe').load(function(){
+		$j("#myframe").contents().find("a").attr("target","_parent");
+	});
+setTimeout(function(){ $j("#myframe").contents().find("a").attr("target","_parent");}, 3000);*/
+
+function device_drilldown(method,tablename,groupBy,reportID,title,graphType,color,yAxis) {
+
+	var bridge = new GlideAjax("Cisco_ClientServerBridge");
+	bridge.addParam('sysparm_name', method+"");
+	bridge.addParam('sysparm_table_name', tablename+"");
+	bridge.addParam('sysparm_group_by', groupBy+"");
+	bridge.addParam('sysparm_graph_type', graphType+"");
+	bridge.getXML(devices);
+
+	function devices(response) {
+		var categories = [];
+		var value = [];
+		var answer = response.responseXML.documentElement.getAttribute("answer");
+		answer =  JSON.parse(answer); 
+		var t= 0;
+		var count = 0;
+		var data_array = [];
+		var arr = [];
+		for (var i in answer) {
+			if(graphType != "column"){
+				var j = parseInt(answer[i]);
+				if(i + "" == "")
+					i = "Missing";
+				data_array.push({
+					name: i + ' [' + j + ']',
+					y: j//parseInt(answer[i])
+				});
+
+			}else{
+				if(count==10)
+					break;
+				var json = {};
+				//categories.push(i);
+				json.name = i;
+				json.data = [{x:count,y:parseInt(answer[i]),color:"#0000FF"}];
+				data_array.push(json);
+			}
+			count++;
+			
+		}
+		
+		var limit = 0;
+		
+		if(graphType == "column" &&  JSON.stringify(answer)!=JSON.stringify({})) {
+			for (var l =0; l<data_array.length; l++) {
+				for(var k = l+1; k<data_array.length ; k++) {
+					if(data_array[l].data[0].y > data_array[k].data[0].y){
+						var temp  = data_array[k];
+						data_array[k] = data_array[l];
+						data_array[l] = temp;
+					}
+				}
+			}
+			data_array = data_array.reverse();
+			
+			for(var n in data_array) {
+				data_array[n].data[0].x = parseInt(n);
+				categories.push(data_array[n].name+"");
+				t++;
+				if(t==10)
+					break;
+				}
+		}
+		var xAxis = {};
+		xAxis.categories = categories;
+		renderUIScript(reportID,title,data_array,graphType,xAxis,yAxis);
+	}
+
+}
+
+function renderUIScript(reportID,title,data,graphType,xAxis,yAxis) {
+
+	if(graphType == "pie") {
+		ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+			x_caci_cisco_bcs.Cisco_RenderGraph.renderPieChart(reportID,title,data,graphType,xAxis);
+		});
+	}
+
+	if(graphType == "column") {
+		ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+			x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(reportID,title,data,graphType,xAxis,yAxis);
+		});
+	
+	}}
+]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Devices_Drilldown_view.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>	
+	<g:inline template="reporting_includes.xml" />
+	<html>
+		<div class="row">
+			<div class="col-xs-8 SoftwareType">
+				<h1 class="header" > Devices Inventory</h1>
+			</div>
+			<div class="col-xs-4 SoftwareType">
+				<div class="stars"  style="float:right;">
+					<h4>Please provide your feedback for Devices Inventory</h4>
+					<div class="outer_stars">
+						<input class="star star-5" id="star-5" type="radio" name="star" value="5" onclick="myFunction(5)" />
+						<label class="star star-5" for="star-5"></label> 
+						<input class="star star-4" id="star-4" type="radio" name="star"  value="4" onclick="myFunction(4)"/>
+						<label class="star star-4" for="star-4"></label>
+						<input class="star star-3" id="star-3" type="radio" name="star"  value="3" onclick="myFunction(3)"/>
+						<label class="star star-3" for="star-3"></label>
+						<input class="star star-2" id="star-2" type="radio" name="star"  value="2" onclick="myFunction(2)"/>
+						<label class="star star-2" for="star-2"></label>
+						<input class="star star-1" id="star-1" type="radio" name="star"  value="1" onclick="myFunction(1)"/>
+						<label class="star star-1" for="star-1"></label></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="wrapper container-fluid">
+			<div class="row">
+				<div class="col-sm-3 SoftwareType" id="cpu_type"></div>
+				<div class="col-xs-3 ProductType" >
+					<div class="row">
+						<div class="col-sm-12" style="margin-left:60px">
+							<ul role="tablist" id="TabList" el-type="li" class="button-group nav nav-segmented accessible-menu">
+								<li role="tab" tabindex="0" title="" aria-label="Reports created by me" class="" onclick="security()" id="securityAdv">Security Adv.</li>
+								<li role="tab" tabindex="0" title="" id="FieldNotice" aria-label="Reports created by me" class="active" onclick="field_ntices(3)">Field Notices</li>
+							</ul>
+						</div>
+					</div>       
+					<div class="row">
+						<div class="col-sm-12" id="device_id" ></div>
+					</div> 
+				</div>
+				<div class="col-sm-3 DeviceType" id="reset_reason" ></div>
+				<div class="col-sm-3 SwVersion"  id="sw_version"></div>
+			</div>
+		</div>
+		<br />
+		<div class="devices_list">
+			<iframe id="myframe" src="/x_caci_cisco_bcs_cisco_devices_list.do" width="100%" height="550" style="border:none;">
+			</iframe>
+		</div>
+
+		<style>
+			.outer_stars{
+			margin-right:40px;
+			}
+			div.stars {
+			width: 270px;
+			display: inline-block;
+			}
+			#submit{
+			float:right;
+			}
+			input.star { display: none; }
+			label.star {
+			float: right;
+			padding: 10px;
+			font-size: 28px;
+			color: #444;
+			transition: all .2s;
+			}
+			.head{
+			font-size: 2em;
+			}
+			input.star:checked ~ label.star:before {
+			content: '\f005';
+			color: #FD4;
+			transition: all .25s;
+			}
+			input.star-5:checked ~ label.star:before {
+			color: #FE7;
+			text-shadow: 0 0 15px #952;
+			}
+
+
+
+			#feedback{
+			padding-left:20px;
+			padding-top:15px;
+			}
+			input.star-1:checked ~ label.star:before { color: #F62; }
+			label.star:hover { transform: rotate(-15deg) scale(1.3); }
+			label.star:before {
+			content: '\f006';
+			font-family: FontAwesome;
+			}
+			.header {
+			margin:20px;
+			}
+			.SwVersion {
+
+			}
+
+		</style>
+
+		<script>
+
+		</script>
+
+	</html>
+</j:jelly>]]></html>
+        <name>Devices_Drilldown_view</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-05 09:16:15</sys_created_on>
+        <sys_id>1e3e64652f902010bd2551172799b6a9</sys_id>
+        <sys_mod_count>387</sys_mod_count>
+        <sys_name>Devices_Drilldown_view</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_1e3e64652f902010bd2551172799b6a9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-02-08 10:09:30</sys_updated_on>
+    </sys_ui_page>
+</record_update>

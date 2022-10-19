@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_caci_cisco_bcs_cisco_bcs_feedback_form</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>BCS Feedback Post Insert BR</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	try{
+	var appUtil = new Cisco_AppUtil();
+	var logger =  new Cisco_BCS_SNLogger();
+	var json = {};
+	logger.debug("Inside BCS Feedback Post Insert BR for feedback API call");
+	json.app = "Cisco BCS Operational Insight";
+	json.screen = current.drilldown_view + "";
+	json.rating = parseInt(current.rating) ;
+	json.feedback = current.overall_feedback + "";
+	json.email = current.username+"";
+		
+	var gr = new GlideRecord("x_caci_cisco_bcs_configuration");
+	if(gr.get("02b2c23a2fb310108956ea5ef699b60c")){
+	var response = appUtil.makeApiCall("POST","/feedback",JSON.stringify(json),gr);
+	if(response.getStatusCode() + "" =="201"){
+		logger.info("Inside BCS Feedback Post Insert BR feedback has been succesful submit to Cisco BCS");
+	}else{
+		logger.error("Error inside BCS Feedback Post Insert BR feedback statusCode : - " + response.getStatusCode() + "  Body : - " + JSON.stringify(json));
+	}
+	}
+	}catch(e){
+		logger.error("Exception caught inside BCS Feedback Post Insert BR. Error: -" + e);
+	}
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-24 08:54:28</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>d922eeaf2f6c2010cab4d5072799b6ec</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>BCS Feedback Post Insert BR</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_script_d922eeaf2f6c2010cab4d5072799b6ec</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 06:00:19</sys_updated_on>
+        <template/>
+        <when>async</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=d922eeaf2f6c2010cab4d5072799b6ec"/>
+</record_update>

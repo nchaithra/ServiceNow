@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_block_programmatic">
+    <content_block_programmatic action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <condition/>
+        <conditional>false</conditional>
+        <frame/>
+        <logged_on>false</logged_on>
+        <name>Hardware Tracking</name>
+        <programmatic_content><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<div class="form-group" style="height: 400px; overflow: hidden;"  onclick="location.href='ui_page.do?sys_id=cf39dcc32f046410bd2551172799b64a'">
+		<div id="hardware_lifecycle_asset_count" style="padding-left: 4%; padding-bottom: 2%; height: 25%;"></div>
+		<div id="hardware_lifecycle" class="align-bottom" style="height: 74%;"/>
+		<div style="height: 1%;"/>
+</div>
+<script>
+	var $j = jQuery.noConflict();
+	
+	var ga = new GlideAjax('Cisco_ClientServerBridge');
+	ga.addParam('sysparm_name', 'hardwareLifecycleWidget');
+	ga.addParam('sysparm_hw_value',"All");
+	ga.getXML(getHardwareResponse);
+	function getHardwareResponse(response) {
+  		var answer = response.responseXML.documentElement.getAttribute("answer");
+		var result = JSON.parse(answer);
+	$j("#hardware_lifecycle_asset_count").html('<h1>'+result[1]+'</h1><b>Assets Nearing Last Day of Support</b>');
+		var arr = [];
+		var xAxis = {};
+		var categories = [];
+		result.forEach(function callback(value, index) {
+		var obj = {};
+  		switch(index) {
+  				case 0:{
+					obj.data = [{x:0 , y:result[0], color:"#FF8C00"}];
+					obj.name = "Past";
+					categories.push("Past");
+					arr.push(obj);
+					break;
+				}
+ 		    	case 1:{
+				 	obj.data = [{x:1 , y:result[1],color:"#87ceeb"}];
+				 	obj.name = "0-1y";
+			 	 	categories.push("0-1y");
+				 	arr.push(obj);
+    			 	break;
+				}
+  				case 2:{
+				 	obj.data = [{x:2 , y:result[2],color: "#0000FF"}];
+				 	obj.name = "1y-3y";
+				 	categories.push("1y-3y");
+				 	arr.push(obj);
+    			 	break;
+				}
+    			case 3:{
+				 	obj.data = [{x:3 , y:result[3],color:"#D3D3D3"}];
+				 	obj.name = "Further Out";
+				 	categories.push("Further Out");
+				 	arr.push(obj);
+    			 	break;
+				}
+    		}
+		});
+			xAxis.categories = categories;	
+			ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {	x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart("hardware_lifecycle","",arr,"column",xAxis,"Hardware Count");
+	});
+	}
+	</script>
+</j:jelly>]]></programmatic_content>
+        <sys_class_name>content_block_programmatic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-27 09:03:57</sys_created_on>
+        <sys_id>6a5a5ea22f842410bd2551172799b6e1</sys_id>
+        <sys_mod_count>100</sys_mod_count>
+        <sys_name>Hardware Tracking</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>content_block_programmatic_6a5a5ea22f842410bd2551172799b6e1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 06:20:39</sys_updated_on>
+        <two_phase>false</two_phase>
+    </content_block_programmatic>
+</record_update>

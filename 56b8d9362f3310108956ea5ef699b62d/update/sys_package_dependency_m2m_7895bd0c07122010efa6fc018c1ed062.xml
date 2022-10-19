@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
+    <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
+        <dependency display_value="Contract Management" source="com.snc.contract_management">476ce8f11b26201026489607b04bcb68</dependency>
+        <min_version>1.0.0</min_version>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-12-23 05:25:46</sys_created_on>
+        <sys_id>7895bd0c07122010efa6fc018c1ed062</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-12-23 05:25:46</sys_updated_on>
+    </sys_package_dependency_m2m>
+</record_update>

@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_caci_cisco_bcs.Cisco_DAOScript</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>Cisco_DAOScript</name>
+        <script><![CDATA[var Cisco_DAOScript = Class.create();
+
+Cisco_DAOScript.prototype = {
+    initialize: function() {
+        this.logger = new Cisco_BCS_SNLogger();
+        this.table = {
+            "processQueue": "x_caci_cisco_bcs_cisco_import_queue",
+            "fieldNoticesDump": "x_caci_cisco_bcs_cisco_field_notices_dump",
+            "securityAdvisoriesDump": "x_caci_cisco_bcs_cisco_security_advisories_dump",
+            "softwareLifecycleDump": "x_caci_cisco_bcs_cisco_software_lifecycle_dump",
+            "softwareLifecycle": "x_caci_cisco_bcs_cisco_software_lifecycle",
+            "hardwareLifecycleDump": "x_caci_cisco_bcs_cisco_hardware_lifecycle_dump",
+            "fieldNotices": "x_caci_cisco_bcs_cisco_field_notices",
+            "securityAdvisories": "x_caci_cisco_bcs_cisco_security_advisories",
+            "hardwareLifecycle": "x_caci_cisco_bcs_cisco_hardware_lifecycle",
+            "authentication": "x_caci_cisco_bcs_configuration",
+            "assetsDump": "x_caci_cisco_bcs_cisco_assets_dump",
+            "devicesDump": "x_caci_cisco_bcs_cisco_devices_dump",
+            "assets": "x_caci_cisco_bcs_cisco_assets",
+            "devices": "x_caci_cisco_bcs_cisco_devices",
+            "softwareLifecycleBulletinsDump": "x_caci_cisco_bcs_cisco_sw_eox_bulletins_dump",
+            "hardwareLifecycleBulletinDump": "x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump",
+            "hardwareLifecycleBulletin": "x_caci_cisco_bcs_cisco_hw_eox_bulletins",
+            "softwareLifecycleBulletin": "x_caci_cisco_bcs_cisco_sw_eox_bulletins",
+            "securityAdvisoriesbulletinDump": "x_caci_cisco_bcs_cisco_security_advisories_bulletins_dump",
+            "fiedlNoticesBulletinDump": "x_caci_cisco_bcs_fn_bulletins_dump",
+            "securityAdvisoryBulletins": "x_caci_cisco_bcs_cisco_security_advisories_bulletins",
+            "fieldNoticesBulletin": "x_caci_cisco_bcs_cisco_fn_bulletin",
+            "cbpDetails": "x_caci_cisco_bcs_cisco_cbp_details",
+            "cbpRules": "x_caci_cisco_bcs_cisco_cbp_rules",
+            "cbpSummary": "x_caci_cisco_bcs_cisco_cbp_summary",
+            "cbpDetailsDump": "x_caci_cisco_bcs_cisco_cbp_details_dump",
+            "cbpRulesDump": "x_caci_cisco_bcs_cisco_cbp_rules_dump",
+            "cbpSummaryDump": "x_caci_cisco_bcs_cisco_cbp_summary_dump",
+            "contractLifecycleDump": "x_caci_cisco_bcs_cisco_contract_lifecycle_dump",
+            "contractLifecycle": "x_caci_cisco_bcs_cisco_contract_lifecycle",
+			"contractBulletin" : "x_caci_cisco_bcs_cisco_contract_bulletin",
+            "contractLifecycleBulletin": "x_caci_cisco_bcs_cisco_contract_bulletin",
+            "cbpRulesReferences": "x_caci_cisco_bcs_cbp_rules_references",
+            "cbpRulesReferencesDump": "x_caci_cisco_bcs_cbp_rules_references_dump"
+        };
+        this.property = {
+            "retentionPeriod": gs.getProperty("x_caci_cisco_bcs.retention.period"),
+            "authRec": gs.getProperty("x_caci_cisco_bcs.Authentication.Record") + '',
+			"vendor": gs.getProperty("x_caci_cisco_bcs.core_company")
+        };
+    },
+    checkForContractVendor: function() {
+        try {
+            var gr = new GlideRecord("core_company");
+            gr.addQuery('name', 'Cisco');
+            gr.query();
+            if (gr.next()) {
+				gs.setProperty("x_caci_cisco_bcs.core_company", gr.sys_id);
+			}else{
+				gr.initialize();
+                gr.name = "Cisco";
+                gs.setProperty("x_caci_cisco_bcs.core_company", gr.insert());
+			}
+        } catch (e) {
+			this.logger.error("Exception inside checkForContractVendor: " + e);
+        }
+    },
+    assetCalculatedFields: function(contract, target) {
+        var grContract = new GlideRecord('x_caci_cisco_bcs_cisco_contract_lifecycle');
+        if (grContract.get(contract + "")) {
+
+            // expired_status
+            if (grContract.covered_product_line_end_date == "")
+                target.expired_status = '';
+            else if (grContract.covered_product_line_end_date > gs.endOfToday())
+                target.expired_status = 'Not expired';
+            else if (grContract.covered_product_line_end_date < gs.endOfToday())
+                target.expired_status = 'Expired';
+
+            // warranty_status
+            if (grContract.warranty_end_date == "")
+                target.warranty_status = '';
+            else if (grContract.warranty_end_date > gs.endOfToday())
+                target.warranty_status = 'Under warranty';
+            else if (grContract.warranty_end_date < gs.endOfToday())
+                target.warranty_status = 'Out of warranty';
+
+            //contract_status
+            if (grContract.is_covered == "YES")
+                target.contract_status = 'Under contract';
+            else if (grContract.is_covered == "NO")
+                target.contract_status = 'Not under contract';
+
+            //cisco_support_eligible
+            if (grContract.is_covered + "" == "YES" || grContract.warranty_end_date > gs.endOfToday())
+                target.cisco_support_eligible = 'YES';
+            else
+                target.cisco_support_eligible = 'NO';
+
+            target.update();
+        }
+    },
+
+    insertInAssetCovered: function(selfRef, targetFieldName, serialNumber, targetTable, isContract) {
+        try {
+
+            var targetRef = "";
+            try {
+                this.logger.info("Inside Cisco_DAOScript.insertInAssetCovered gettting asset and contract no");
+
+                var assetContract = new GlideRecord(this.table[targetTable]);
+                assetContract.addQuery(targetFieldName, serialNumber + "");
+                assetContract.query();
+                if (assetContract.next())
+                    targetRef = assetContract.sys_id + "";
+                else {
+                    return;
+                }
+
+            } catch (e) {
+                this.logger.error("Inside Cisco_DAOScript.insertInAssetCovered: " + e);
+            }
+
+            try {
+                var assetCovered = new GlideRecord("clm_m2m_contract_asset");
+                if (isContract) {
+                    if (selfRef.contract_bulletin == "")
+                        return;
+					
+                    assetCovered.addQuery("asset", targetRef);
+                    assetCovered.addQuery("contract", selfRef.contract_bulletin + "");
+                } else {
+                    var target = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+                    if (target.get(targetRef)) {
+                        if (target.contract_bulletin == "")
+                            return;
+
+                        assetCovered.addQuery("contract", target.contract_bulletin + "");
+                        //                     insertAssetCovered.contract = target.contract_bulletin;
+                    }
+                    //                 assetCovered.addQuery("contract",targetRef.contract_bulletin);
+
+                    assetCovered.addQuery("asset", selfRef.sys_id);
+
+                }
+
+                assetCovered.query();
+                if (!assetCovered.next()) {
+
+
+                    var insertAssetCovered = new GlideRecord("clm_m2m_contract_asset");
+                    insertAssetCovered.initialize();
+                    if (isContract) {
+
+                        insertAssetCovered.asset = targetRef;
+                        insertAssetCovered.contract = selfRef.contract_bulletin;
+                    } else {
+                        var target = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+                        if (target.get(targetRef)) {
+                            insertAssetCovered.contract = target.contract_bulletin;
+                        }
+
+                        insertAssetCovered.asset = selfRef.sys_id;
+                    }
+
+                    insertAssetCovered.added = new GlideDate();
+                    insertAssetCovered.insert();
+                }
+            } catch (e) {
+                this.logger.error("Inside Cisco_DAOScript.insertInAssetCovered:" + e);
+            }
+
+
+
+        } catch (e) {
+            this.logger.error("Exception Inside Cisco_DAOScript.insertInAssetCovered() gettting asset and contract no" + e);
+        }
+    },
+	 createContractBulletin: function(lifecycleRef) {
+        try {
+            this.logger.debug("Inside Cisco_DAOScript.createContractBulletin creating new Contract Bulletin records");
+            var bulletin = new GlideRecord("x_caci_cisco_bcs_cisco_contract_bulletin");
+
+            if (lifecycleRef.service_contract_number != "") {
+
+                bulletin.addQuery("service_contract_number", lifecycleRef.service_contract_number + "");
+                bulletin.query();
+                if (!bulletin.next()) {
+
+                    var createBulletin = new GlideRecord("x_caci_cisco_bcs_cisco_contract_bulletin");
+                    createBulletin.initialize();
+                    createBulletin.service_contract_number = lifecycleRef.service_contract_number + "";
+
+					createBulletin.vendor = this.property.vendor;
+                    createBulletin.vendor_contract = lifecycleRef.service_contract_number + "";
+                    createBulletin.contract_site_customer_name = lifecycleRef.contract_site_customer_name;
+                    createBulletin.contract_site_address_1 = lifecycleRef.contract_site_address_1;
+                    createBulletin.contract_site_city = lifecycleRef.contract_site_city;
+                    createBulletin.contract_site_state_province = lifecycleRef.contract_site_state_province;
+                    createBulletin.contract_site_country = lifecycleRef.contract_site_country;
+                    createBulletin.covered_product_line_end_date = lifecycleRef.covered_product_line_end_date;
+                    //  createBulletin.ends = lifecycleRef.covered_product_line_end_date;
+                    createBulletin.is_covered = lifecycleRef.is_covered;
+                    if (lifecycleRef.is_covered + "" == "YES")
+                        createBulletin.active = true;
+                    else
+                        createBulletin.active = false;
+                    createBulletin.description = lifecycleRef.service_line_descr;
+                    lifecycleRef.contract_bulletin = createBulletin.insert();
+                    lifecycleRef.update();
+                } else {
+
+					bulletin.vendor = this.property.vendor;
+                    bulletin.vendor_contract = lifecycleRef.service_contract_number + "";
+                    bulletin.contract_site_customer_name = lifecycleRef.contract_site_customer_name;
+                    bulletin.contract_site_address_1 = lifecycleRef.contract_site_address_1;
+                    bulletin.contract_site_city = lifecycleRef.contract_site_city;
+                    bulletin.contract_site_state_province = lifecycleRef.contract_site_state_province;
+                    bulletin.contract_site_country = lifecycleRef.contract_site_country;
+                    bulletin.covered_product_line_end_date = lifecycleRef.covered_product_line_end_date;
+                    //  bulletin.ends = lifecycleRef.covered_product_line_end_date;
+                    bulletin.is_covered = lifecycleRef.is_covered;
+                    if (lifecycleRef.is_covered + "" == "YES")
+                        bulletin.active = true;
+                    else
+                        bulletin.active = false;
+                    bulletin.description = lifecycleRef.service_line_descr;
+            
+					lifecycleRef.contract_bulletin =  bulletin.update();
+                    lifecycleRef.update();
+				}
+            }
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_DAOScript.createContractBulletin . Error :- " + e);
+        }
+    },
+    getOptionsCurrentMilestoneHardwareLifecycle: function() {
+        var output = {};
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+        ga.addAggregate('COUNT', 'current_milestone');
+        ga.query();
+        var result = [];
+        while (ga.next()) {
+            if (ga.current_milestone + "")
+                result.push(ga.current_milestone + "");
+        }
+        output["milestone"] = result;
+        result = [];
+        ga = new GlideAggregate('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+        ga.addAggregate('COUNT', 'physical_type');
+        ga.query();
+        var result = [];
+        while (ga.next()) {
+            if (ga.physical_type + "")
+                result.push(ga.physical_type + "");
+        }
+        output["hardwareType"] = result;
+        return JSON.stringify(output);
+    },
+
+    getOptionsNextMilestoneHardwareLifecycle: function() {
+        var output = {};
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+        ga.addAggregate('COUNT', 'next_milestone');
+        ga.query();
+        var result = [];
+        while (ga.next()) {
+            if (ga.next_milestone + "")
+                result.push(ga.next_milestone + "");
+        }
+        output["milestone"] = result;
+        result = [];
+        ga = new GlideAggregate('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+        ga.addAggregate('COUNT', 'physical_type');
+        ga.query();
+        var result = [];
+        while (ga.next()) {
+            if (ga.physical_type + "")
+                result.push(ga.physical_type + "");
+        }
+        output["hardwareType"] = result;
+        return JSON.stringify(output);
+    },
+
+    getOptionsNextMilestoneSoftwareLifecycle: function() {
+        var output = {};
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_lifecycle');
+        ga.addAggregate('COUNT', 'next_milestone');
+        ga.query();
+        var result = [];
+        while (ga.next()) {
+            if (ga.next_milestone + "")
+                result.push(ga.next_milestone + "");
+        }
+        output["milestone"] = result;
+        result = [];
+        ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_lifecycle');
+        ga.addAggregate('COUNT', 'sw_type');
+        ga.query();
+        var result = [];
+        while (ga.next()) {
+            if (ga.sw_type + "")
+                result.push(ga.sw_type + "");
+        }
+        output["hardwareType"] = result;
+        return JSON.stringify(output);
+    },
+
+    insertIntoQueue: function(topic, parameter, payload, bcs_account) {
+        try {
+
+            this.logger.debug("Inside Cisco_DAOScript.insertIntoQueue performing insertion into queue.");
+            var gr = new GlideRecord(this.table.processQueue);
+            gr.initialize();
+            gr.topic = topic + '';
+            gr.parameter = parameter + '';
+            gr.payload = payload + '';
+            gr.state = "ready";
+            gr.bcs = bcs_account + '';
+            gr.insert();
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_DAOScript.insertIntoQueue while insert data into Queue table. Error :- " + e);
+        }
+    },
+
+    createReferences: function(selfFieldValue, targetField, targetSelfReference, target_sys_id, targetTable, updateTarget) {
+
+        try {
+            var grReferencedTable = new GlideRecord(targetTable);
+            grReferencedTable.addQuery(targetField, selfFieldValue + "");
+            grReferencedTable.query();
+            var refSysId = "";
+            while (grReferencedTable.next()) {
+                refSysId = grReferencedTable.sys_id + "";
+                if (updateTarget) {
+                    grReferencedTable[targetSelfReference] = target_sys_id;
+                    grReferencedTable.update();
+                }
+                //return refSysId;
+            }
+
+            return refSysId;
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_DAOScript.createReferences. Error :- " + e);
+        }
+    },
+    //calculateField("x_caci_cisco_bcs_cisco_field_notices","field_notice_id","match_confidence=Vulnerable^device_id" + target.device_id + "",true);
+    calculateField: function(targetTableName, groupByField, query, fromSource) {
+        var i = 0;
+        var grFN = new GlideAggregate(targetTableName); //call(TargettableName,"groupByField",Query,fromSource)
+        if (groupByField)
+            grFN.addAggregate('COUNT', groupByField);
+        grFN.addEncodedQuery(query);
+        grFN.query();
+        while (grFN.next())
+            i++;
+        return i;
+    },
+
+    //updateCaluclatedField("x_caci_cisco_bcs_cisco_devices","device_id="+target.device_id+"","vulnerable_field_notices");
+
+    updateCalculatedField: function(tableName, query, calculatedFieldName, calculatedFieldValue) {
+        var gr = new GlideRecord(tableName);
+        gr.addEncodedQuery(query);
+        gr.query();
+        if (gr.next()) {
+            gr[calculatedFieldName] = calculatedFieldValue;
+            gr.update();
+        }
+    },
+
+    getTargetTableName: function(tableName) {
+        var dump_target_relation = {
+            "devicesDump": this.table.devices,
+            "softwareLifecycleBulletinsDump": this.table.softwareLifecycleBulletin,
+            "hardwareLifecycleBulletinDump": this.table.hardwareLifecycleBulletin,
+            "securityAdvisoriesbulletinDump": this.table.securityAdvisoryBulletins,
+            "fiedlNoticesBulletinDump": this.table.fieldNoticesBulletin,
+            "assetsDump": this.table.assets,
+            "cbpRulesDump": this.table.cbpRules,
+            "securityAdvisoriesDump": this.table.securityAdvisories,
+            "hardwareLifecycleDump": this.table.hardwareLifecycle,
+            "softwareLifecycleDump": this.table.softwareLifecycle,
+            "cbpSummaryDump": this.table.cbpSummary,
+            "contractLifecycleDump": this.table.contractLifecycle,
+            "fieldNoticesDump": this.table.fieldNotices,
+            "cbpDetailsDump": this.table.cbpDetails,
+            "cbpRulesReferencesDump": this.table.cbpRulesReferences
+        };
+        return dump_target_relation[tableName] + "";
+    },
+
+    setDeletedFlag: function() {
+
+        try {
+            var target_table = "";
+
+            var dump_target_relation = {
+                "devicesDump": this.table.devices,
+                "softwareLifecycleBulletinsDump": this.table.softwareLifecycleBulletin,
+                "hardwareLifecycleBulletinDump": this.table.hardwareLifecycleBulletin,
+                "securityAdvisoriesbulletinDump": this.table.securityAdvisoryBulletins,
+                "fiedlNoticesBulletinDump": this.table.fieldNoticesBulletin,
+                "assetsDump": this.table.assets,
+                "cbpRulesDump": this.table.cbpRules,
+                "securityAdvisoriesDump": this.table.securityAdvisories,
+                "hardwareLifecycleDump": this.table.hardwareLifecycle,
+                "softwareLifecycleDump": this.table.softwareLifecycle,
+                "cbpSummaryDump": this.table.cbpSummary,
+                "contractLifecycleDump": this.table.contractLifecycle,
+                "fieldNoticesDump": this.table.fieldNotices,
+                "cbpDetailsDump": this.table.cbpDetails,
+                "cbpRulesReferencesDump": this.table.cbpRulesReferences
+            };
+
+            for (var table in dump_target_relation) {
+                var grDelete = new GlideRecord(dump_target_relation[table]);
+                grDelete.query();
+                while (grDelete.next()) {
+                    grDelete.isdeleted = true;
+                    grDelete.update();
+                }
+            }
+
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_DAOScript.setDeletedFlag . Error :- " + e);
+        }
+    },
+
+    setDeleteFlagTrueForNegativeSync: function(tableName) {
+        var grDelete = new GlideRecord(this.table[tableName]);
+        grDelete.query();
+        while (grDelete.next()) {
+            grDelete.isdeleted = true;
+            grDelete.update();
+        }
+    },
+
+    deleteRecords: function() {
+        var dump_target_relation = {
+            "devicesDump": this.table.devices,
+            "softwareLifecycleBulletinsDump": this.table.softwareLifecycleBulletin,
+            "hardwareLifecycleBulletinDump": this.table.hardwareLifecycleBulletin,
+            "securityAdvisoriesbulletinDump": this.table.securityAdvisoryBulletins,
+            "fiedlNoticesBulletinDump": this.table.fieldNoticesBulletin,
+            "assetsDump": this.table.assets,
+            "cbpRulesDump": this.table.cbpRules,
+            "securityAdvisoriesDump": this.table.securityAdvisories,
+            "hardwareLifecycleDump": this.table.hardwareLifecycle,
+            "softwareLifecycleDump": this.table.softwareLifecycle,
+            "cbpSummaryDump": this.table.cbpSummary,
+            "contractLifecycleDump": this.table.contractLifecycle,
+            "fieldNoticesDump": this.table.fieldNotices,
+            "cbpDetailsDump": this.table.cbpDetails,
+            "cbpRulesReferencesDump": this.table.cbpRulesReferences
+        };
+
+        for (var table in dump_target_relation) {
+            try {
+                var grDelete = new GlideRecord(dump_target_relation[table]);
+                grDelete.addQuery("isdeleted", true);
+                grDelete.query();
+//                 if (table == "devicesDump" || table == "assetsDump") {
+//                     while (grDelete.next()) {
+//                         grDelete.install_status = "7";
+//                         grDelete.update();
+//                     }
+//                 } else {
+//                     this.logger.info("Inside Cisco_DAOScript.deleteRecords performing deletion into " + dump_target_relation[table] + " deleted records.");
+                    grDelete.deleteMultiple();
+
+               // }
+            } catch (e) {
+                this.logger.info("Inside Cisco_DAOScript.deleteRecords performing deletion Error found - " + e);
+            }
+        }
+    },
+
+    insertIntoIntermediateDump: function(tableName, response) {
+        try {
+
+            //this.setDeletedFlag(tableName);
+            this.logger.debug("Inside Cisco_DAOScript.insertIntoIntermediateDump performing insertion into " + this.table[tableName]);
+            var jsonParse = JSON.parse(response);
+            for (var i = 0; i < jsonParse.length; i++) {
+                var field = '';
+                var gr = new GlideRecord(this.table[tableName]);
+                gr.initialize();
+                for (var key in jsonParse[i]) {
+                    field = jsonParse[i][key];
+                    if (field || field == 0) {
+                        gr[key.toLowerCase()] = (field.constructor === Object || field.constructor === Array) ? JSON.stringify(field) : field + '';
+                    }
+                }
+                gr.insert();
+            }
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_DAOScript.insertIntoIntermediateDump while inserting data into intermediate dump table. Error :- " + e);
+        }
+    },
+    checkWhetherAnyScheduleJobIsRunningOrNot: function() {
+        var grQueue = new GlideRecord("x_caci_cisco_bcs_cisco_import_queue");
+        grQueue.addQuery("state", "processing");
+        grQueue.query();
+        if (grQueue.next())
+            return true;
+        else
+            return false;
+    },
+    clearApplicationData: function() {
+        try {
+            this.logger.debug("Inside Cisco_DAOScript.clearApplicationData deleting application data.");
+            gs.setProperty("x_caci_cisco_bcs.start.import", false);
+			gs.setProperty("x_caci_cisco_bcs.core_company","");
+            var checkScheduleJob = this.checkWhetherAnyScheduleJobIsRunningOrNot();
+            if (!checkScheduleJob) {
+                var applicationTables = ["processQueue", "hardwareLifecycle", "softwareLifecycle", "fieldNotices", "securityAdvisories", "cbpDetails", "cbpRules", "cbpSummary", "hardwareLifecycleBulletin", "softwareLifecycleBulletin", "securityAdvisoryBulletins", "fieldNoticesBulletin", "contractLifecycle", "cbpRulesReferences","assets", "devices"];
+                for (var i in applicationTables) {
+                    var gr = new GlideRecord(this.table[applicationTables[i]]);
+                    gr.deleteMultiple();
+                }
+
+//                 var cmdb_tables = ["assets", "devices"];
+//                 for (var j in cmdb_tables) {
+//                     var gr = new GlideRecord(this.table[cmdb_tables[j]]);
+//                     gr.query();
+//                     while (gr.next()) {
+//                         gr.install_status = 7;
+//                         gr.update();
+//                     }
+//                 }
+                var authRec = new GlideRecord(this.table.authentication);
+                if (authRec.get(this.property.authRec)) {
+                    authRec.name = "";
+                    authRec.host_name = "";
+                    authRec.customer_id = "";
+                    authRec.api_key = "";
+                    authRec.update();
+                }
+				
+                return true;
+            } else
+                return false;
+
+
+        } catch (e) {
+            this.logger.error("Exception Inside Cisco_DAOScript.clearApplicationData() deleting application data." + e);
+        }
+    },
+
+    deleteProcessQueue: function() {
+        try {
+            this.logger.debug("Inside Cisco_DAOScript.deleteProcessQueue Deleting data in process queue older than yesterday.");
+
+            var queueObj = new GlideRecord(this.table.processQueue);
+            queueObj.addEncodedQuery("sys_created_on<=javascript:gs.endOfYesterday()");
+            queueObj.deleteMultiple();
+
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_DAOScript.deleteProcessQueue while Deleting data in process queue older than yesterday. Error :- " + e);
+        }
+
+    },
+
+    getReferenceMapping: function(table_name, field_name, target_data) {
+        try {
+            this.logger.debug("Inside Cisco_DAOScript.getReferenceMapping mapping reference of tables");
+            var grRef = new GlideRecord(this.table[table_name]);
+            grRef.addQuery(field_name, target_data);
+            grRef.query();
+            if (grRef.next())
+                return grRef.sys_id;
+
+            this.logger.warn("Inside Cisco_DAOScript.getReferenceMapping Could not find record for " + field_name + " in table " + table_name);
+            return "";
+
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_DAOScript.getReferenceMapping while mapping tables. Error :- " + e);
+        }
+    },
+
+    getDataOfCalculatedFields: function(tableName, reference, matchConfidence, fieldName, groupBy) {
+        try {
+            this.logger.debug("Inside Cisco_DAOScript.getDataOfCalculatedFields calculating vulnerable and potentially vulnerable count");
+            var count = 0;
+            var fn_arr = [];
+            var arrayUtil = new global.ArrayUtil();
+            var calculateData = new GlideRecord(this.table[tableName]);
+            calculateData.addQuery(fieldName, reference[fieldName]);
+            calculateData.addQuery("match_confidence", matchConfidence);
+            calculateData.query();
+            while (calculateData.next()) {
+                if (!arrayUtil.contains(fn_arr, calculateData[groupBy])) {
+                    fn_arr.push(calculateData[groupBy] + "");
+                    count = count + 1;
+                }
+            }
+
+            return count;
+
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_DAOScript.getDataOfCalculatedFields while calculating vulnerable and potentially vulnerable count. Error :- " + e);
+        }
+
+
+    },
+
+    // 	getDataOfCalculatedSecurityAdvisories: function(tableName, reference, matchConfidence,fieldName ) {
+    // 		try {
+    // 			this.logger.debug("Inside Cisco_DAOScript.getDataOfCalculatedSecurityAdvisories calculating vulnerable and potentially vulnerable count");
+    // 			var count = 0;
+    // 			var fn_arr = [];
+    // 			var arrayUtil = new global.ArrayUtil();
+    // 			var calculateData = new GlideRecord(this.table[tableName]);
+    // 			calculateData.addQuery(fieldName, reference[fieldName]);
+    // 			calculateData.addQuery("match_confidence", matchConfidence);
+    // 			calculateData.query();
+    // 			while (calculateData.next()) {
+    // 				if(!arrayUtil.contains(fn_arr , calculateData[groupBy]+""))
+    // 					fn_arr.push(calculateData[groupBy]+"");
+    // 			}
+    // 			//    count = count + 1;
+    // 			gs.info("fn_arr "+fn_arr);
+    // 			return fn_arr.length;
+
+    // 		} catch (e) {
+    // 			this.logger.error("Exception caught inside Cisco_DAOScript.getDataOfCalculatedSecurityAdvisories while calculating vulnerable and potentially vulnerable count. Error :- " + e);
+    // 		}
+    // 	},
+
+    getConfigurationGuideline: function(reference) {
+        var ga = new GlideAggregate("x_caci_cisco_bcs_cisco_cbp_details");
+        ga.addQuery("device_id", reference.device_id);
+        ga.addAggregate("COUNT", "device_id");
+        ga.query();
+        if (ga.next()) {
+            return (ga.getAggregate("COUNT", "device_id"));
+        }
+    },
+
+    getDataOfFeedbackForm: function(response) {
+        try {
+
+            var feedbackResponse = JSON.parse(response);
+            var rating = feedbackResponse[0];
+            var comment = feedbackResponse[2];
+            var view = feedbackResponse[1];
+            var ratingView = feedbackResponse[3];
+            if (gs.getUser().getEmail())
+                var username = gs.getUser().getEmail();
+            else
+                var username = "unknown@unknown.com";
+            var gr = new GlideRecord("x_caci_cisco_bcs_cisco_bcs_feedback_form");
+            gr.initialize();
+            gr.setValue("rating", rating);
+            gr.setValue("overall_feedback", comment);
+            gr.setValue("drilldown_view", view);
+            gr.setValue("username", username);
+            gr.setValue("feedback_view", ratingView);
+            gr.setValue("user_name", gs.getUserName() + "");
+            gr.insert();
+            return true;
+
+
+
+        } catch (e) {
+            this.logger.error("Exception caught inside Cisco_DAOScript.getDataOfFeedbackForm.Error : " + e);
+        }
+    },
+    getContractDrillDown: function(tab) {
+        var result = [];
+        if (tab == "Warranty") {
+            var warrantyDates = {};
+            var count_out = 0;
+
+            var aggContract = new GlideRecord('x_caci_cisco_bcs_cisco_contract_lifecycle');
+            aggContract.addEncodedQuery("warranty_end_date<javascript:gs.beginningOfToday()");
+            aggContract.query();
+            while (aggContract.next()) {
+                count_out++;
+            }
+            (count_out + "" == "0") ? "" : (warrantyDates["Out of warranty"] = count_out);
+
+            var count_in = 0;
+            aggContract = new GlideRecord('x_caci_cisco_bcs_cisco_contract_lifecycle');
+            aggContract.addEncodedQuery("warranty_end_date>javascript:gs.endOfToday()");
+            aggContract.query();
+            while (aggContract.next()) {
+                count_in++;
+            }
+            (count_in + "" == "0") ? "" : (warrantyDates["Under warranty"] = count_in);
+            result[0] = warrantyDates;
+            return JSON.stringify(result);
+        } else {
+            var contractDates = {};
+            var count_out = 0;
+
+            var aggContract = new GlideRecord('x_caci_cisco_bcs_cisco_contract_lifecycle');
+            aggContract.addQuery('is_covered', 'NO');
+            aggContract.query();
+            while (aggContract.next()) {
+                count_out++;
+            }
+            (count_out + "" == "0") ? "" : (contractDates["Expired contract"] = count_out);
+
+            var count_in = 0;
+            aggContract = new GlideRecord('x_caci_cisco_bcs_cisco_contract_lifecycle');
+            aggContract.addQuery('is_covered', 'YES');
+            aggContract.query();
+            while (aggContract.next()) {
+                count_in++;
+            }
+            (count_in + "" == "0") ? "" : (contractDates["Under contract"] = count_in);
+            result[0] = contractDates;
+            return JSON.stringify(result);
+        }
+    },
+    gettingOptionsForConfigurationDrillDown: function() {
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
+        ga.addAggregate('COUNT', 'sw_type');
+        ga.setGroup(true);
+        ga.query();
+        var arr = [];
+        while (ga.next()) {
+            arr.push(ga.sw_type + "");
+        }
+        return JSON.stringify(arr);
+    },
+    gettingDataForConfigurationsButton2: function(param) {
+        if (param == "All")
+            param = "ANYTHING"
+        else
+            param = "=" + param;
+        var gr = new GlideRecord("x_caci_cisco_bcs_cisco_cbp_summary");
+        gr.addEncodedQuery("sw_type" + param);
+        gr.query();
+        var count = 0;
+        while (gr.next()) {
+            count = count + parseInt(gr.total_devices);
+        }
+        return count;
+    },
+    gettingDataForConfigurationsButton1: function(param, param1) {
+
+        if (param == "All")
+            param = "ANYTHING"
+        else
+            param = "=" + param;
+        if (param1 == "All")
+            param1 = "ANYTHING"
+        else
+            param1 = "=" + param1;
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
+        ga.addAggregate('COUNT', 'bp_rule_id');
+        ga.addEncodedQuery('sw_type' + param);
+        ga.addEncodedQuery('bp_risk' + param1);
+        ga.setGroup(true);
+        ga.query();
+        var count = 0;
+        while (ga.next()) {
+            count++;
+        }
+        return count;
+    },
+    configurationSecondGraph: function(param, param1) {
+
+        if (param == "All")
+            param = "ANYTHING";
+        else
+            param = "=" + param;
+        if (param1 == "All")
+            param1 = "ANYTHING";
+        else
+            param1 = "=" + param1;
+        /*var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
+        ga.addAggregate('COUNT', 'bp_primary_technology');
+        ga.addEncodedQuery("sw_type" + param);
+        ga.setGroup(true);
+        ga.query();
+        var count = 0;
+        var data = [];
+        var json = {};
+        while (ga.next()) {
+        	json = {};
+        	var records = 0;
+        	var gr = new GlideRecord("x_caci_cisco_bcs_cisco_cbp_summary");
+        	gr.addQuery("bp_primary_technology", ga.bp_primary_technology);
+        	gr.addEncodedQuery('sw_type' + param);
+        	gr.query();
+        	while (gr.next()) {
+        		records = records+ parseInt(gr.total_devices);
+        	}
+        	json.key = ga.bp_primary_technology+"";
+        	json.count = records;
+        	data.push(json);
+        }
+        data.sort(function(a, b) {
+        	var x = a.count;
+        	var y = b.count;
+        	if (y < x) {
+        		return -1;
+        	}
+        	if (y > x) {
+        		return 1;
+        	}
+        	return 0;
+        });
+        var range = data.length;
+        if (range > 10)
+        	range = 10;
+        var result = {};
+        for (var i = 0; i < range; i++) {
+        	var obj = data[i];
+        	result[obj.key] = obj.count;
+        }
+        return JSON.stringify(result);*/
+
+        var final_answer = [];
+        //var result = [];
+        var output = {};
+        var button_arr = [];
+        var count = 0;
+        var i = 0;
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
+        ga.addAggregate('COUNT', 'bp_primary_technology');
+        ga.addEncodedQuery("sw_type" + param);
+        ga.addEncodedQuery("bp_risk" + param1);
+        ga.setGroup(true);
+        ga.query();
+        while (ga.next()) {
+            var id = (ga.bp_primary_technology + "");
+            var getId = new GlideRecord('x_caci_cisco_bcs_cisco_cbp_summary');
+            getId.addQuery('bp_primary_technology', id);
+            getId.addEncodedQuery("sw_type" + param);
+            getId.addEncodedQuery("bp_risk" + param1);
+            //ga.setGroup(true);
+            getId.query();
+            var result = [];
+            while (getId.next()) {
+                var gr = new GlideRecord("x_caci_cisco_bcs_cisco_cbp_details");
+                gr.addQuery('bp_rule_id', getId.bp_rule_id);
+                gr.query();
+                while (gr.next()) {
+                    if (result.indexOf(gr.device_id + "") < 0)
+                        result.push(gr.device_id + "");
+                    if (button_arr.indexOf(gr.device_id + "") < 0)
+                        button_arr.push(gr.device_id + "");
+                }
+            }
+            output[id] = result.length + "";
+        }
+        var data = [];
+        for (var i in output) {
+            var json = {};
+            json.key = i + "";
+            json.count = parseInt(output[i] + "");
+            data.push(json);
+        }
+
+        data.sort(function(a, b) {
+            var x = a.count;
+            var y = b.count;
+            if (y < x) {
+                return -1;
+            }
+            if (y > x) {
+                return 1;
+            }
+            return 0;
+        });
+
+        var range = data.length;
+        if (range > 10)
+            range = 10;
+        var result1 = {};
+        for (var i = 0; i < range; i++) {
+            var obj = data[i];
+            result1[obj.key] = obj.count;
+        }
+        final_answer[0] = result1;
+        final_answer[1] = button_arr.length;
+        return JSON.stringify(final_answer);
+
+    },
+
+    configurationFirstGraph: function(param, param1) {
+        if (param == "All")
+            param = "ANYTHING";
+        else
+            param = "=" + param;
+        if (param1 == "All")
+            param1 = "ANYTHING";
+        else
+            param1 = "=" + param1;
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
+        ga.addAggregate('COUNT', 'bp_primary_technology');
+        ga.orderByAggregate('COUNT', 'bp_primary_technology');
+        ga.addEncodedQuery("sw_type" + param);
+        ga.addEncodedQuery("bp_risk" + param1);
+        ga.setGroup(true);
+        ga.query();
+        var count = 0;
+        var data = {};
+        while (ga.next() && count < 10) {
+            data[ga.bp_primary_technology] = ga.getAggregate('COUNT', 'bp_primary_technology');
+            count++;
+        }
+        return JSON.stringify([data]);
+    },
+    type: 'Cisco_DAOScript'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-15 13:48:31</sys_created_on>
+        <sys_id>8319a1b62f7310108956ea5ef699b6e4</sys_id>
+        <sys_mod_count>216</sys_mod_count>
+        <sys_name>Cisco_DAOScript</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_script_include_8319a1b62f7310108956ea5ef699b6e4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-02-26 07:27:42</sys_updated_on>
+    </sys_script_include>
+</record_update>

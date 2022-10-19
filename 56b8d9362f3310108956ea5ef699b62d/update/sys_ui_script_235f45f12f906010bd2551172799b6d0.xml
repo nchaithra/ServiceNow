@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>x_caci_cisco_bcs.Cisco_RenderGraph</name>
+        <script><![CDATA[var x_caci_cisco_bcs = x_caci_cisco_bcs || {};
+
+x_caci_cisco_bcs.Cisco_RenderGraph = (function() {
+	"use strict";
+	return {
+		renderBarChart: function(reportID, titleData, seriesData, graphType, xaxis, yAxis) {
+			Highcharts.setOptions({
+					lang: {
+						thousandsSep: ""
+					}
+				});
+				Highcharts.chart(reportID, {
+					chart: {
+						type: graphType,
+						renderTo: reportID,
+						reflow: true
+					},
+					title: {
+						text: titleData
+					},
+					credits: {
+						enabled: false
+					},
+
+					xAxis: xaxis,
+					yAxis: {
+						min: 0,
+						title: {
+							text: yAxis
+						}
+					},
+					/*tooltip: {
+                		pointFormat: '<b>{point.percentage:.1f}%</b>'
+                	},*/
+
+					tooltip: {
+						headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+						pointFormat: '<tr><td style="color:{series.color};padding:0"></td>' +
+						'<td style="padding:0"><b>{point.y}</b></td></tr>',
+						//footerFormat: '</table>',
+						shared: true,
+						useHTML: true
+					},
+					plotOptions: {
+						column: {
+							showInLegend: false,
+							pointPadding: 0,
+							borderWidth: 0,
+							groupPadding: 0,
+							shadow: false,
+							stacking: 'normal',
+							pointWidth: 25,
+							dataLabels: {
+								enabled: true,
+								color: '#FFFFFF'
+							}
+						}
+					},
+					exporting: {
+						enabled: false
+					},
+					series: seriesData
+
+				});
+			
+
+		},
+		renderPieChart: function(reportID, titleText, seriesData, graphType, xAxis) {
+
+			Highcharts.chart(reportID, {
+				chart: {
+					plotBackgroundColor: null,
+					plotBorderWidth: null,
+					plotShadow: false,
+					type: graphType
+				},
+				title: {
+					text: titleText
+					/*,
+                    	verticalAlign: "middle",
+                    	floating: true*/
+				},
+
+				tooltip: {
+					pointFormat: '<b>{point.percentage:.1f}%</b>'
+				},
+				accessibility: {
+					point: {
+						valueSuffix: '%'
+					}
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: false
+						},
+						showInLegend: true
+					}
+				},
+
+				legend: {
+					layout: 'horizontal',
+					align: 'center',
+					verticalAlign: 'bottom',
+					floating: false,
+					maxHeight: 60,
+					width: 225,
+					y: 15,
+					navigation: {
+						activeColor: '#3E576F',
+						animation: true,
+						arrowSize: 12,
+						inactiveColor: '#CCC',
+						style: {
+							fontWeight: 'bold',
+							color: '#333',
+							fontSize: '12px'
+						}
+					},
+					accessibility: {
+						enabled: false
+					}
+				},
+
+				credits: {
+					enabled: false
+				},
+				exporting: {
+					enabled: false
+				},
+				//colors: ['#EDAC41', '#51B8E4', '#3379A9', '#F0F0F0'],
+
+				series: [{
+					colorByPoint: true,
+
+					data: seriesData
+				}]
+
+			});
+
+			return "";
+		},
+
+		renderBarChartOnWidget: function(reportID, titleText, seriesData, graphType, xAxis, yAxis) {
+
+			Highcharts.setOptions({
+				lang: {
+					thousandsSep: ""
+				}
+			});
+
+			var chart = Highcharts.chart(reportID, {
+				chart: {
+					type: graphType
+				},
+				title: {
+
+					text: titleText
+				},
+				credits: {
+					enabled: false
+				},
+				exporting: {
+					enabled: false
+				},
+				xAxis: {
+					text: xAxis
+				},
+				yAxis: {
+					min: 0,
+					title: {
+						text: yAxis
+					},
+
+				},
+				tooltip: {
+					headerFormat: '<span style="font-size:10px"></span><table>',
+					pointFormat: '<tr><td style="color:{series.color};padding:0"> </td>' +
+					'<td style="padding:0"><b>{point.y} </b></td></tr>',
+					footerFormat: '</table>',
+					shared: true,
+					useHTML: true
+				},
+				plotOptions: {
+					series: {
+						dataLabels: {
+							enabled: true,
+							align: 'right',
+							color: '#FFFFFF',
+							x: -10
+						},
+						pointPadding: 0.1,
+						groupPadding: 0,
+						pointWidth: 25
+					}
+				},
+
+				series: [{
+					data: seriesData,
+					color: '#1E4E71',
+					showInLegend: false
+				}]
+
+			});
+		},
+
+		renderDonutChart: function(reportID, titleText, seriesData, color_array) {
+			Highcharts.chart(reportID, {
+					chart: {
+						plotBackgroundColor: null,
+						plotBorderWidth: 0,
+						plotShadow: false
+					},
+					title: {
+						text: titleText,
+						align: 'center',
+						verticalAlign: 'middle',
+						y: -15
+					},
+					tooltip: {
+						pointFormat: '<b>{point.percentage:.1f}%</b>'
+					},
+					accessibility: {
+						point: {
+							valueSuffix: '%'
+						}
+					},
+					credits: {
+						enabled: false
+					},
+					exporting: {
+						enabled: false
+					},
+					//colors: color_array,
+					plotOptions: {
+						pie: {
+							dataLabels: {
+								enabled: false,
+								distance: -50,
+								style: {
+									fontWeight: 'bold',
+									color: 'white'
+								}
+							},
+							showInLegend: true
+						}
+					},
+					series: seriesData
+				});
+
+		},
+
+		type: "Cisco_RenderGraph"
+	};
+})();]]></script>
+        <script_name>Cisco_RenderGraph</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-06 06:51:46</sys_created_on>
+        <sys_id>235f45f12f906010bd2551172799b6d0</sys_id>
+        <sys_mod_count>129</sys_mod_count>
+        <sys_name>x_caci_cisco_bcs.Cisco_RenderGraph</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_script_235f45f12f906010bd2551172799b6d0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 06:01:50</sys_updated_on>
+        <ui_type>0</ui_type>
+        <use_scoped_format>true</use_scoped_format>
+    </sys_ui_script>
+</record_update>

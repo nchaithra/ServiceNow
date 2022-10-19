@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="INSERT_OR_UPDATE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>x_caci_cisco_bcs_cisco_hardware_lifecycle</basic_apply_to>
+        <basic_query_from>x_caci_cisco_bcs_cisco_assets</basic_query_from>
+        <insert_callback/>
+        <name>Cisco Assets</name>
+        <query_from/>
+        <query_with><![CDATA[(function refineQuery(current, parent) {
+
+	var query = "";
+	var assets = new GlideRecord("x_caci_cisco_bcs_cisco_hardware_lifecycle");
+	assets.addQuery("hw_id",parent.hw_id);
+	assets.query();
+	while(assets.next())
+		query = query + "physical_element_id="+assets.physical_element_id+"^OR";
+	query = query.substring(0, query.length-3);
+	if(query == "")
+		query = null;
+	current.addEncodedQuery(query);
+
+})(current, parent);]]></query_with>
+        <reference_field>assigned_to</reference_field>
+        <related_list/>
+        <simple_reference>false</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-12-07 14:51:30</sys_created_on>
+        <sys_id>c9a3bab32fb42010a7d1d5f62799b61e</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Cisco Assets</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_relationship_c9a3bab32fb42010a7d1d5f62799b61e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 05:52:08</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="delete_multiple" query="documentkey=c9a3bab32fb42010a7d1d5f62799b61e"/>
+</record_update>
