@@ -5,38 +5,84 @@
 $j('#myframe1').load(function() {
     $j("#myframe1").contents().find("a").attr("target", "_parent");
 });
-setInterval(function(){ $j("#myframe1").contents().find("a").attr("target","_parent");}, 1500);
-Current('All','All',true);
-function renderGraphWithparams(){
-	var len = $j("#TabList").children().length;
-	for (var i = 0; i < len; i++) {
-		var val = $j("#TabList").children()[i].className;
-		if (val == "active") {
-			val = $j("#TabList").children()[i].innerHTML;
-			if(val == "Current Milestone"){
-				this.Current($j("#milestone").val(),$j("#hardwareType").val(),false)
-			}
-			else{
-				this.Next($j("#milestone").val(),$j("#hardwareType").val(),false);
-			}
-		}
-	}
+setInterval(function() {
+    $j("#myframe1").contents().find("a").attr("target", "_parent");
+}, 1500);
+
+var parm1 = 'All';
+var parm2 = 'All';
+$j("#hardwareType").val(parm2);
+$j("#milestone").val(parm1);
+var select = document.getElementById("milestone");
+var length = select.options.length;
+for (i = length - 1; i >= 0; i--) {
+    select.options[i] = null;
+}
+var select = document.getElementById("hardwareType");
+var length = select.options.length;
+for (i = length - 1; i >= 0; i--) {
+    select.options[i] = null;
+}
+var ClientidVal = new GlideAjax("Cisco_ClientServerBridge");
+ClientidVal.addParam('sysparm_name', 'getOptionsCurrentMilestoneHardwareLifecycle');
+ClientidVal.getXML(gettingOptions)
+
+function gettingOptions(response) {
+    var answer = response.responseXML.documentElement.getAttribute("answer");
+    answer = JSON.parse(answer);
+    for (var k in answer) {
+        var select = document.getElementById(k);
+        var option = document.createElement("option");
+        option.text = 'All';
+        select.add(option);
+        for (var i = 0; i < answer[k].length; i++) {
+            var option = document.createElement("option");
+            option.text = answer[k][i];
+            select.add(option);
+        }
+    }
+}
+renderFirstGraph("currentmilestone", "#add8e6", parm1, parm2, "No. of Assets per Time Period");
+renderSecondGraph("current", parm1, parm2, "No. of Assets per Product-ID");
+
+var id;
+var ClientidValule = new GlideAjax("Cisco_ClientServerBridge");
+ClientidValule.addParam("sysparm_name", "getclientid");
+var response = ClientidValule.getXMLAnswer(callbackMethod);
+
+function callbackMethod(response) {
+    id = 'customer_id=' + response + '^';
+}
+
+function renderGraphWithparams() {
+    var len = $j("#TabList").children().length;
+    for (var i = 0; i < len; i++) {
+        var val = $j("#TabList").children()[i].className;
+        if (val == "active") {
+            val = $j("#TabList").children()[i].innerHTML;
+            if (val == "Current Milestone") {
+                this.Current($j("#milestone").val(), $j("#hardwareType").val(), false)
+            } else {
+                this.Next($j("#milestone").val(), $j("#hardwareType").val(), false);
+            }
+        }
+    }
 }
 
 
 function myFunction(a) {
-	var arr = [];
-	arr.push(a);
-	arr.push("Hardware Tracking");
-	arr.push("Individual View");
-	var loadingDialog = new GlideModal("x_caci_cisco_bcs_My_Feedback_Form",true, 'modal-lg');
-	loadingDialog.setTitle('Comments for Hardware Tracking'); 
-	loadingDialog.setPreference("sysparm_message", JSON.stringify(arr));
-	loadingDialog.render(); 
+    var arr = [];
+    arr.push(a);
+    arr.push("Hardware Tracking");
+    arr.push("Individual View");
+    var loadingDialog = new GlideModal("x_caci_cisco_bcs_My_Feedback_Form", true, 'modal-lg');
+    loadingDialog.setTitle('Comments for Hardware Tracking');
+    loadingDialog.setPreference("sysparm_message", JSON.stringify(arr));
+    loadingDialog.render();
 }
 
-function Current(parm1,parm2,flag){
-	if (flag == true) {
+function Current(parm1, parm2, flag) {
+    if (flag == true) {
         var select = document.getElementById("milestone");
         var length = select.options.length;
         for (i = length - 1; i >= 0; i--) {
@@ -67,34 +113,34 @@ function Current(parm1,parm2,flag){
             }
         }
     }
-	$j("#hardwareType").val(parm2);
-	$j("#milestone").val(parm1);
-	$j("#current").addClass("active");
-	$j("#next").removeClass("active");
-	var filter1 = "";
+    $j("#hardwareType").val(parm2);
+    $j("#milestone").val(parm1);
+    $j("#current").addClass("active");
+    $j("#next").removeClass("active");
+    var filter1 = "";
     var filter2 = "";
-    if (parm1 == "All" && parm2 != "All"){
-       // filter1 = "ANYTHING";
-		filter2 = "=" + parm2;
-	}
-    else if (parm2 == "All" && parm1 != "All"){
+    if (parm1 == "All" && parm2 != "All") {
+        // filter1 = "ANYTHING";
+        filter2 = "=" + parm2;
+    } else if (parm2 == "All" && parm1 != "All") {
         //filter2 = "ANYTHING";
-		filter1 = "=" + parm1;
-	}
-    else if (parm1 == "All" && parm2 == "All") {
-       // filter1 = "ANYTHING";
+        filter1 = "=" + parm1;
+    } else if (parm1 == "All" && parm2 == "All") {
+        //$j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_hardware_lifecycle_list.do?sysparm_fixed_query="+id);
+        // filter1 = "ANYTHING";
         //filter2 = "ANYTHING";
     } else {
-        filter1 = "="+ parm1;
-        filter2 = "="+ parm2;
+        filter1 = "=" + parm1;
+        filter2 = "=" + parm2;
     }
-	$j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_hardware_lifecycle_list.do?sysparm_fixed_query=current_milestone"+ filter1 + "^physical_type" + filter2);
-	//current_milestone=EoVSS^physical_type=Power Supply
-	renderFirstGraph("currentmilestone","#add8e6",parm1,parm2,"No. of Assets per Time Period");
-	renderSecondGraph("current",parm1,parm2,"No. of Assets per Product-ID");
+    $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_hardware_lifecycle_list.do?sysparm_fixed_query=" + id + "current_milestone" + filter1 + "^physical_type" + filter2);
+    //current_milestone=EoVSS^physical_type=Power Supply
+    renderFirstGraph("currentmilestone", "#add8e6", parm1, parm2, "No. of Assets per Time Period");
+    renderSecondGraph("current", parm1, parm2, "No. of Assets per Product-ID");
 }
-function Next(parm1,parm2,flag){
-	if (flag == true) {
+
+function Next(parm1, parm2, flag) {
+    if (flag == true) {
         var select = document.getElementById("milestone");
         var length = select.options.length;
         for (i = length - 1; i >= 0; i--) {
@@ -125,142 +171,183 @@ function Next(parm1,parm2,flag){
             }
         }
     }
-	$j("#hardwareType").val(parm2);
-	$j("#milestone").val(parm1);
-	$j("#next").addClass("active");
-	$j("#current").removeClass("active");
-	var filter1 = "";
+    $j("#hardwareType").val(parm2);
+    $j("#milestone").val(parm1);
+    $j("#next").addClass("active");
+    $j("#current").removeClass("active");
+    var filter1 = "";
     var filter2 = "";
-    if (parm1 == "All" && parm2 != "All"){
+    if (parm1 == "All" && parm2 != "All") {
         //filter1 = "ANYTHING";
-		filter2 = "=" + parm2;
-	}
-    else if (parm2 == "All" && parm1 != "All"){
-       // filter2 = "ANYTHING";
-		filter1 = "=" + parm1;
-	}
-    else if (parm1 == "All" && parm2 == "All") {
-      //  filter1 = "ANYTHING";
-       // filter2 = "ANYTHING";
+        filter2 = "=" + parm2;
+    } else if (parm2 == "All" && parm1 != "All") {
+        // filter2 = "ANYTHING";
+        filter1 = "=" + parm1;
+    } else if (parm1 == "All" && parm2 == "All") {
+        //  filter1 = "ANYTHING";
+        // filter2 = "ANYTHING";
     } else {
-        filter1 = "="+ parm1;
-        filter2 = "="+ parm2;
+        filter1 = "=" + parm1;
+        filter2 = "=" + parm2;
     }
-	$j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_hardware_lifecycle_list.do?sysparm_fixed_query=next_milestone"+ filter1 + "^physical_type" + filter2);
-	
-	renderFirstGraph("Nextmilestone","#add8e6",parm1,parm2,"No. of Assets per Time Period");
-	renderSecondGraph("next",parm1,parm2,"No. of Assets Impacted by Bulletin");
+    $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_hardware_lifecycle_list.do?sysparm_fixed_query=" + id + "next_milestone" + filter1 + "^physical_type" + filter2);
+
+    renderFirstGraph("Nextmilestone", "#add8e6", parm1, parm2, "No. of Assets per Time Period");
+    renderSecondGraph("next", parm1, parm2, "No. of Assets Impacted by Bulletin");
 }
 
-function renderSecondGraph(tab,param1,param2,title){
-	
-	var ga = new GlideAjax("Cisco_ClientServerBridge");
-	ga.addParam('sysparm_name', 'deviceDrillDownViewForDistintElementID');
-	ga.addParam('sysparm_param1', param1);
-	ga.addParam('sysparm_param2', param2);
-	ga.addParam('sysparm_tab', tab);
-	ga.getXML(HardwareLifecycleData1);
-	function HardwareLifecycleData1(response) {
-		var answer = response.responseXML.documentElement.getAttribute("answer");
-		var result=JSON.parse(answer);
-		var resultArr = [];
-		var categories = [];
-		var xAxis = {};
-		var c = 0;
-		for(var k in result){
-			var obj = {};
-			obj.name = k;
-			categories.push(k);
-			obj.data = [{x : c , y: parseInt(result[k]) , color:"#00008B"}]
-			c++;
-			resultArr.push(obj);
-			
-		}
-		xAxis.categories = categories;
-			renderGraph("report2",title,resultArr,"column",xAxis,"Assets Count");
-	}
+function renderSecondGraph(tab, param1, param2, title) {
+
+    var ga = new GlideAjax("Cisco_ClientServerBridge");
+    ga.addParam('sysparm_name', 'deviceDrillDownViewForDistintElementID');
+    ga.addParam('sysparm_param1', param1);
+    ga.addParam('sysparm_param2', param2);
+    ga.addParam('sysparm_tab', tab);
+    ga.getXML(HardwareLifecycleData1);
+
+    function HardwareLifecycleData1(response) {
+        var answer = response.responseXML.documentElement.getAttribute("answer");
+        var result = JSON.parse(answer);
+        var resultArr = [];
+        var categories = [];
+        var xAxis = {};
+        var c = 0;
+        for (var k in result) {
+            var obj = {};
+            obj.name = k;
+            categories.push(k);
+            obj.data = [{
+                x: c,
+                y: parseInt(result[k]),
+                color: "#00008B"
+            }]
+            c++;
+            resultArr.push(obj);
+
+        }
+        //xAxis.categories = categories;
+        xAxis = categories;
+        renderGraph("report2", title, resultArr, "column", xAxis, "Assets Count");
+    }
 }
-function renderFirstGraph(tab,color,parm1,parm2,title){
-	var ga = new GlideAjax("Cisco_ClientServerBridge");
-	ga.addParam('sysparm_name', 'hardwareLifecycleDrilldown');
-	ga.addParam('sysparm_milestone',parm1);
-	ga.addParam('sysparm_type',parm2);
-	ga.addParam('sysparm_tab', tab);
-	ga.getXML(HardwareLifecycleData);
-	function HardwareLifecycleData(response) {
-		var answer = response.responseXML.documentElement.getAttribute("answer");
-		var categories = [];
-		var result= JSON.parse(answer);
-		var arr = [];
-		result.forEach(function callback(value, index) {
-		var obj = {};
-		switch(index) {
-  				case 0:{
-					obj.data = [{x:0 , y:result[0], color:color}];
-					obj.name = "Past";
-					categories.push("Past");
-					arr.push(obj);
-					break;
-				}
- 		    	case 1:{
-				 	obj.data = [{x:1 , y:result[1],color:color}];
-				 	obj.name = "0-1y";
-			 	 	categories.push("0-1y");
-				 	arr.push(obj);
-    			 	break;
-				}
-  				case 2:{
-				 	obj.data = [{x:2 , y:result[2],color: color}];
-				 	obj.name = "1-2y";
-				 	categories.push("1-3y");
-				 	arr.push(obj);
-    			 	break;
-				}
-    			case 3:{
-				 	obj.data = [{x:3 , y:result[3],color: color}];
-				 	obj.name = "2-3y";
-				 	categories.push("2-3y");
-				 	arr.push(obj);
-    			 	break;
-				}
-				case 4:{
-				 	obj.data = [{x:4 , y:result[4],color: color}];
-				 	obj.name = ">3y";
-				 	categories.push(">3y");
-				 	arr.push(obj);
-    			 	break;
-				}
-				case 5:{
-				 	obj.data = [{x:5 , y:result[5],color: color}];
-				 	obj.name = "Not Announced";
-				 	categories.push("Not Announced");
-				 	arr.push(obj);
-    			 	break;
-				}
-			}
-		});
-		var xAxis = {};
-		xAxis.categories = categories;
-		renderGraph("report1",title,arr,"column",xAxis,"Hardware Count");
-	}
+
+function renderFirstGraph(tab, color, parm1, parm2, title) {
+    var ga = new GlideAjax("Cisco_ClientServerBridge");
+    ga.addParam('sysparm_name', 'hardwareLifecycleDrilldown');
+    ga.addParam('sysparm_milestone', parm1);
+    ga.addParam('sysparm_type', parm2);
+    ga.addParam('sysparm_tab', tab);
+    ga.getXML(HardwareLifecycleData);
+
+    function HardwareLifecycleData(response) {
+        var answer = response.responseXML.documentElement.getAttribute("answer");
+        var categories = [];
+        var result = JSON.parse(answer);
+        var arr = [];
+        result.forEach(function callback(value, index) {
+            var obj = {};
+            switch (index) {
+                case 0:
+                    {
+                        obj.data = [{
+                            x: 0,
+                            y: result[0],
+                            color: color
+                        }];
+                        obj.name = "Past";
+                        categories.push("Past");
+                        arr.push(obj);
+                        break;
+                    }
+                case 1:
+                    {
+                        obj.data = [{
+                            x: 1,
+                            y: result[1],
+                            color: color
+                        }];
+                        obj.name = "0-1y";
+                        categories.push("0-1y");
+                        arr.push(obj);
+                        break;
+                    }
+                case 2:
+                    {
+                        obj.data = [{
+                            x: 2,
+                            y: result[2],
+                            color: color
+                        }];
+                        obj.name = "1-2y";
+                        categories.push("1-3y");
+                        arr.push(obj);
+                        break;
+                    }
+                case 3:
+                    {
+                        obj.data = [{
+                            x: 3,
+                            y: result[3],
+                            color: color
+                        }];
+                        obj.name = "2-3y";
+                        categories.push("2-3y");
+                        arr.push(obj);
+                        break;
+                    }
+                case 4:
+                    {
+                        obj.data = [{
+                            x: 4,
+                            y: result[4],
+                            color: color
+                        }];
+                        obj.name = ">3y";
+                        categories.push(">3y");
+                        arr.push(obj);
+                        break;
+                    }
+                case 5:
+                    {
+                        obj.data = [{
+                            x: 5,
+                            y: result[5],
+                            color: color
+                        }];
+                        obj.name = "Not Announced";
+                        categories.push("Not Announced");
+                        arr.push(obj);
+                        break;
+                    }
+            }
+        });
+        var xAxis = {};
+        //xAxis.categories = categories;
+        xAxis = categories;
+        renderGraph("report1", title, arr, "column", xAxis, "Hardware Count");
+    }
 }
-function renderGraph(div,title,output,graphType,xAxis,yaxis){
-	ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
-			x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(div, title, output, graphType, xAxis,yaxis);
-		});
+function renderGraph(div, title, output, graphType, xAxis, yaxis) {
+    ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+        x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(div, title, output, graphType, xAxis, yaxis);
+    });
 }]]></client_script>
         <description/>
         <direct>false</direct>
         <endpoint>x_caci_cisco_bcs_Hardware_Lifecycle_drilldown.do</endpoint>
         <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<g:evaluate var="jvar_urlLink" object="true" jelly="true">		
+	var id = new Cisco_ClientServerBridge().getclientid();
+	id;	
+	</g:evaluate>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>	
 	<g:inline template="reporting_includes.xml" />
 	<div class="rowHead" >
 		<div class="row">
 			<div class="col-xs-9">
 				<div class="row">
-					<div class="col-xs-12"><h1 >Hardware Tracking</h1></div>
+					<div class="col-xs-12"><h1 >Hardware Lifecycle</h1></div>
 					<div class="col-xs-12">
 					<div>
 					<ul role="tablist" id="TabList" el-type="li" class="button-group nav nav-segmented accessible-menu">
@@ -271,9 +358,9 @@ function renderGraph(div,title,output,graphType,xAxis,yaxis){
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-3">
+		<!-- 	<div class="col-xs-3">
 				<div class="stars"  style="float:right;">
-				<h4>Please provide your feedback for Hardware Tracking</h4>
+				<h4>Please provide your feedback for Hardware Lifecycle</h4>
 				<div class="outer_stars">
 				<input class="star star-5" id="star-5" type="radio" name="star" value="5" onclick="myFunction(5)" />
     			<label class="star star-5" for="star-5"></label> 
@@ -287,7 +374,7 @@ function renderGraph(div,title,output,graphType,xAxis,yaxis){
 				<label class="star star-1" for="star-1"></label>
 				</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	
 		<div class="col-xs-2">
@@ -319,7 +406,9 @@ function renderGraph(div,title,output,graphType,xAxis,yaxis){
 	</div>
 	<br></br>
 	<div class="row">
-	     <iframe id="myframe1" src="/x_caci_cisco_bcs_cisco_hardware_lifecycle_list.do" width="100%" height="450" style="border:none;"></iframe>
+		<!-- <iframe id="myframe1" src="${jvar_urlLink}" width="100%" height="450" style="border:none;">  -->
+	     <iframe id="myframe1" src="/x_caci_cisco_bcs_cisco_hardware_lifecycle_list.do?sysparm_fixed_query=customer_id=${jvar_urlLink}" width="100%" height="450" style="border:none;"> 
+			</iframe>
 	</div>
 	<style>
 	.outer_stars{
@@ -374,13 +463,13 @@ font-family: FontAwesome;
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-28 12:55:01</sys_created_on>
         <sys_id>cf39dcc32f046410bd2551172799b64a</sys_id>
-        <sys_mod_count>121</sys_mod_count>
+        <sys_mod_count>140</sys_mod_count>
         <sys_name>Hardware_Lifecycle_drilldown</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_page_cf39dcc32f046410bd2551172799b64a</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-01-14 11:59:44</sys_updated_on>
+        <sys_updated_on>2022-10-14 09:56:41</sys_updated_on>
     </sys_ui_page>
 </record_update>

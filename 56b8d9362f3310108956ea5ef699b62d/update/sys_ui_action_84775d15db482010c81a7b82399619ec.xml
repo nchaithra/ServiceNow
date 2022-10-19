@@ -31,38 +31,109 @@
         <order>100</order>
         <script><![CDATA[var logger = new Cisco_BCS_SNLogger();
 try {
-	if(new Cisco_DAOScript().checkWhetherAnyScheduleJobIsRunningOrNot() + "" == "true") {
-		gs.addInfoMessage("Inventory sync job is running in the background.Please re-try after some time.");
-		action.setRedirectURL('x_caci_cisco_bcs_cisco_import_queue_list.do?sysparm_query=state!%3Dcompleted');
-	}
-	else {
-	//new Cisco_DAOScript().checkForContractVendor();
-	
-	current.host_name = current.host_name.trim();
-    current.api_key = current.api_key.trim();
-    current.customer_id = current.customer_id.trim();
-	var appUtil = new Cisco_AppUtil();
-    var jsonResp = appUtil.makeApiCall('GET', '/productAlerts/fieldNotices?page=1&per_page=1', '', current);
-    var httpstatus = jsonResp.getStatusCode();
-    if (httpstatus == 200) {
-        gs.addInfoMessage('Validated the configurations successfully.');
-		gs.setProperty("x_caci_cisco_bcs.bcs_log_verbosity", current.log_level);
-		gs.setProperty("x_caci_cisco_bcs.start.import",true);
-        current.update();
+    if (new Cisco_DAOScript().checkWhetherAnyScheduleJobIsRunningOrNot() + "" == "true") {
+        gs.addInfoMessage("Inventory sync job is running in the background.Please re-try after some time.");
         action.setRedirectURL('x_caci_cisco_bcs_cisco_import_queue_list.do?sysparm_query=state!%3Dcompleted');
-        var daoScrpt = new Cisco_DAOScript();
-        daoScrpt.insertIntoQueue('Start Import', '', '', current.sys_id + '');
     } else {
-        if (httpstatus == 403) {
-            gs.addErrorMessage('Configuration validation failed. Please provide valid data.');
-        } else if (httpstatus == 0 || httpstatus == 404) {
-            gs.addErrorMessage('There is some problem reaching out to the server. Please check the logs for more information.');
+        //new Cisco_DAOScript().checkForContractVendor();
+
+        current.host_name = current.host_name.trim();
+		//current.customer_id = current.customer_id.trim();
+        current.api_key = current.api_key.trim();
+
+        var cl_id = current.customer_id.trim();
+        //   var cl_id = current.customer_id;//.getDecryptedValue();customer_id
+        var cl_secret = current.api_key.getDecryptedValue();
+
+        var body = {
+            "grantType": "client_credentials",
+            "clientId": cl_id,
+            "secret": cl_secret,
+            "scope": "api.bcs.manage"
+        };
+        var request = new sn_ws.RESTMessageV2();
+        request.setHttpMethod('POST');
+        request.setEndpoint('https://api-cx.cisco.com/torii-auth/v1/token');//  https://api-cx-stg.cisco.com/torii-auth/v1/token
+        request.setRequestBody(JSON.stringify(body));
+
+        request.setRequestHeader("Content-Type", 'Application/json');
+        //request.setMIDServer("Mid_Server_demo");
+        // request.setRequestHeader('Host','');
+        // request.setRequestHeader('Content-Length','');
+
+        var response = request.execute();
+        var httpResponseStatus = response.getStatusCode();
+        var httpResponsebody = response.getBody();
+
+        gs.info("http response body new: " + httpResponseStatus + ': ' + httpResponsebody);
+        if (httpResponseStatus == 200) {
+            var parsedResponse = JSON.parse(httpResponsebody);
+
+            var token_type = parsedResponse.tokenType;
+            var access_token = parsedResponse.accessToken;
+
+            gs.info("token: : " + token_type + ': ' + access_token);
+            current.access_token = access_token;
+            current.update();
+            var appUtil = new Cisco_AppUtil();
+            var jsonResp = appUtil.makeApiCall('GET', '/productAlerts/fieldNotices?offset=0', '', current);
+            var httpstatus = jsonResp.getStatusCode();
+            if (httpstatus == 200) {
+                gs.addInfoMessage('Validated the configurations successfully.');
+                gs.setProperty("x_caci_cisco_bcs.bcs_log_verbosity", current.log_level);
+                gs.setProperty("x_caci_cisco_bcs.start.import", true);
+				current.updated=current.sys_updated_on;
+                current.update();
+                action.setRedirectURL('x_caci_cisco_bcs_cisco_import_queue_list.do?sysparm_query=state!%3Dcompleted');
+                var daoScrpt = new Cisco_DAOScript();
+                daoScrpt.insertIntoQueue('Start Import', '', '',cl_id,current.sys_id + '');
+            }
+
         } else {
-            gs.addErrorMessage('Unknown error, please check logs for more information.');
+            if (httpResponseStatus == 403 || httpResponseStatus == 401 || httpResponseStatus == 400 || httpResponseStatus == 404) {
+                gs.addErrorMessage('Configuration validation failed. Please provide valid data.');
+            } else if (httpResponseStatus == 0 ) {
+                gs.addErrorMessage('There is some problem reaching out to the server. Please check the logs for more information.');
+            }else {
+				gs.addErrorMessage('Unknown error, please check logs for more information.');
+            }
+            action.setRedirectURL(current);
+			
         }
-		action.setRedirectURL(current);
+        //         var Encrypter = new GlideEncrypter();
+        //         var cl_id_encrypt = Encrypter.encrypt(cl_id);
+        //         var cl_secret_encrypt = Encrypter.encrypt(cl_secret);
+        //         gs.info("cisco decrypted: " + cl_id_decrypt + ': ' + cl_secret_decrypt);
+        //         current.customer_id = cl_id_encrypt;
+        //         current.api_key = cl_secret_encrypt;
+        // current.update();
+
+        /*var appUtil = new Cisco_AppUtil();
+        var jsonResp = appUtil.makeApiCall('GET', '/productAlerts/fieldNotices?offset=0', '', current);
+        var httpstatus = jsonResp.getStatusCode();
+        if (httpstatus == 200) {
+            gs.addInfoMessage('Validated the configurations successfully.');
+            gs.setProperty("x_caci_cisco_bcs.bcs_log_verbosity", current.log_level);
+            gs.setProperty("x_caci_cisco_bcs.start.import", true);
+
+            current.update();
+            action.setRedirectURL('x_caci_cisco_bcs_cisco_import_queue_list.do?sysparm_query=state!%3Dcompleted');
+            var daoScrpt = new Cisco_DAOScript();
+            daoScrpt.insertIntoQueue('Start Import', '', '', current.sys_id + '');
+        } else {
+			gs.info("Inside else");
+            if (httpstatus == 403 || httpstatus == 401) {
+                gs.addErrorMessage('Configuration validation failed. Please provide valid data.');
+            } else if (httpstatus == 0 || httpstatus == 404) {
+                gs.addErrorMessage('There is some problem reaching out to the server. Please check the logs for more information.');
+            } else {
+				gs.info("Vrushali");
+                gs.addErrorMessage('Unknown error, please check logs for more information.');
+            } 
+            action.setRedirectURL(current);
+        }
+		*/
     }
-	}
 } catch (e) {
     logger.error("Exception caught inside Save & Import UI Action while starting import. Error :- " + e);
 }]]></script>
@@ -76,7 +147,7 @@ try {
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>84775d15db482010c81a7b82399619ec</sys_id>
-        <sys_mod_count>50</sys_mod_count>
+        <sys_mod_count>131</sys_mod_count>
         <sys_name>Save &amp; Import</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -84,7 +155,7 @@ try {
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_action_84775d15db482010c81a7b82399619ec</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-05-12 14:57:32</sys_updated_on>
+        <sys_updated_on>2022-10-11 08:51:35</sys_updated_on>
         <table>x_caci_cisco_bcs_configuration</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>

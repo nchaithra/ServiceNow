@@ -9,7 +9,8 @@
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
  <g:evaluate var="jvar_not" object="true">
          
-         var supURL = gs.getProperty('x_caci_cisco_bcs.userGuideURL');
+        <!--  var supURL = gs.getProperty('x_caci_cisco_bcs.userGuideURL'); -->
+	 var supURL = gs.getProperty('x_caci_cisco_bcs.ol-API_support');
          supURL;
          
     </g:evaluate>
@@ -33,7 +34,7 @@
         text-decoration: underline;
   }
     .details {
-      width: 60%;
+      width: 70%;
       padding: 10px 10px 20px 10px;
       margin: 20px;
       border: 1px solid #BFBFBF;
@@ -93,13 +94,16 @@
 <div class="">
     <div class="heading line-divider">Cisco BCS Support</div>
     <div class="summary">
-		<p>Contact our technical support team for any incident at the following email address</p>
+		<p>For OI-API related support, see &#160;<a href="${JS,HTML:jvar_not}" target="_blank" rel="noopener noreferrer nofollow">${JS,HTML:jvar_not}</a></p>
+		<p>The BCS Operation Insights SNOW plugin is supported on best-effort basis. Please email feedback and questions to </p>
 		<p><a href="mailto: ${JS,HTML:jvar_not1}" target="_blank" rel="noopener noreferrer nofollow" >${JS,HTML:jvar_not1}</a></p>
         
     </div>
 </div>
 
+<!--  "For OI-API related support, see https://developer.cisco.com/docs/bcs-operational-insights/#!developer-support
  
+The BCS Operation Insights SNOW plugin is supported on best-effort basis. Please email feedback and questions to bcs-operational-insights-snow-plugin@cisco.com -->
 
 </div>
 </body>
@@ -110,13 +114,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-22 14:54:28</sys_created_on>
         <sys_id>324b7901db402010c81a7b82399619f4</sys_id>
-        <sys_mod_count>53</sys_mod_count>
+        <sys_mod_count>64</sys_mod_count>
         <sys_name>Cisco_BCS_Support_And_Contact</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_page_324b7901db402010c81a7b82399619f4</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-02-11 08:27:58</sys_updated_on>
+        <sys_updated_on>2022-10-11 08:41:46</sys_updated_on>
     </sys_ui_page>
 </record_update>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="content_block_programmatic">
+    <content_block_programmatic action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <condition/>
+        <conditional>false</conditional>
+        <frame/>
+        <logged_on>false</logged_on>
+        <name>Customer Name</name>
+        <programmatic_content><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<!-- <div class="form-group" style="height:2px width:0px;align:leff;margin-top:0px;overflow: hidden;"> -->
+	<g:evaluate var="jvar_tasktypes" object="true" jelly="true">
+		var objs = [];
+		var user = gs.getUserID(); 
+		var userid= new GlideRecord('x_caci_cisco_bcs_configuration');
+		 if(user!='6816f79cc0a8016401c5a33be04be441'){ 
+		userid.addQuery('users_list',user);
+		 }
+		userid.orderByDesc('updated');
+		userid.query();
+		while(userid.next()){
+		objs.push({'customer_id': userid.getValue('customer_id'),'name':userid.getDisplayValue('name')});
+		}
+		objs;
+	</g:evaluate>
+		
+				<select id='filter_task_type' class='select2-search form-control' onchange='filterTaskType()'> 
+					<j:forEach var="jvar_tasktype" items="${jvar_tasktypes}">
+						<option value="${jvar_tasktype.customer_id}" >${jvar_tasktype.name}</option> 
+						
+					</j:forEach>
+				</select>  
+	<!-- </div> -->
+	
+<script>
+
+		function filterTaskType(a){
+			 var Client_id =$j("#filter_task_type").val();
+		    var ga = new GlideAjax('Cisco_ClientServerBridge');
+			ga.addParam('sysparm_name', 'getclientdata');
+			ga.addParam('sysparm_Client_id', Client_id);
+			ga.getXML(callback);
+			
+			function callback(response) {
+			  var result = response.responseXML.documentElement.getAttribute("answer");
+		            window.location.reload(); 
+			}
+
+		}
+	</script>
+
+</j:jelly>]]></programmatic_content>
+        <sys_class_name>content_block_programmatic</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-12 13:41:29</sys_created_on>
+        <sys_id>de207f0f2f64111036df837cf699b646</sys_id>
+        <sys_mod_count>111</sys_mod_count>
+        <sys_name>Customer Name</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>protected</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>content_block_programmatic_de207f0f2f64111036df837cf699b646</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-11 08:59:33</sys_updated_on>
+        <two_phase>false</two_phase>
+    </content_block_programmatic>
+</record_update>

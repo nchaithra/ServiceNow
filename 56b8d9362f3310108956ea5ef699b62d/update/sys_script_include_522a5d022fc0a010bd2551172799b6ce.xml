@@ -9,1407 +9,2239 @@
         <name>Cisco_ClientServerBridge</name>
         <script><![CDATA[var Cisco_ClientServerBridge = Class.create();
 Cisco_ClientServerBridge.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
-	getOptionsCurrentMilestoneHardwareLifecycle:function(){
-		var dao = new Cisco_DAOScript();
-		return dao.getOptionsCurrentMilestoneHardwareLifecycle();
-	},
+    getOptionsCurrentMilestoneHardwareLifecycle: function() {
+        var dao = new Cisco_DAOScript();
+        return dao.getOptionsCurrentMilestoneHardwareLifecycle();
+    },
 
-	getOptionsNextMilestoneHardwareLifecycle:function(){
+    getOptionsNextMilestoneHardwareLifecycle: function() {
 
-		var dao = new Cisco_DAOScript();
-		return dao.getOptionsNextMilestoneHardwareLifecycle();
+        var dao = new Cisco_DAOScript();
+        return dao.getOptionsNextMilestoneHardwareLifecycle();
 
-	},
+    },
 
-	getOptionsNextMilestoneSoftwareLifecycle:function(){
+    getOptionsNextMilestoneSoftwareLifecycle: function() {
 
-		var dao = new Cisco_DAOScript();
-		return dao.getOptionsNextMilestoneSoftwareLifecycle();
+        var dao = new Cisco_DAOScript();
+        return dao.getOptionsNextMilestoneSoftwareLifecycle();
 
-	},
+    },
 
-	getOptionsCurrentMilestoneSoftwareLifecycle:function(){
-		var output = {};
-		var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_lifecycle');
-		ga.addAggregate('COUNT', 'current_milestone');
-		ga.query();
-		var result = [];
-		while(ga.next()){
-			if(ga.current_milestone + "")
-				result.push(ga.current_milestone + "");
+    getOptionsCurrentMilestoneSoftwareLifecycle: function() {
+        var id = this.getclientid();
+        var output = {};
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_lifecycle');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('COUNT', 'current_milestone');
+        ga.query();
+        var result = [];
+        while (ga.next()) {
+            if (ga.current_milestone + "")
+                result.push(ga.current_milestone + "");
+        }
+        output["milestone"] = result;
+        result = [];
+        ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_lifecycle');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('COUNT', 'sw_type');
+        ga.query();
+        var result = [];
+        while (ga.next()) {
+            if (ga.sw_type + "")
+                result.push(ga.sw_type + "");
+        }
+        output["hardwareType"] = result;
+        return JSON.stringify(output);
+    },
+    getContractsExpiryData: function() {
+        var logger = new Cisco_BCS_SNLogger();
+        try {
+            logger.debug("Inside Cisco_ClientServerBridge.getContractsExpiryData() getting data from asset drilldowm.");
+            var tab = this.getParameter("sysparm_tab");
+            var daoScipt = new Cisco_DAOScript();
+            var result = daoScipt.getContractDrillDown(tab);
+            return result;
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.getContractsExpiryData() while getting data for assets drilldown third graph. Error :- " + e);
+        }
+    },
+    gettingConfigurationWidgetData: function() {
+        var id = this.getclientid();
+        var result = {};
+        var output = [];
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('COUNT', 'bp_risk');
+        ga.query();
+        while (ga.next()) {
+            result[ga.bp_risk] = ga.getAggregate('COUNT', 'bp_risk');
+        }
+        output.push(result);
+        ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('COUNT', 'bp_rule_id');
+        ga.query();
+        var count = 0;
+        while (ga.next()) {
+            count++;
+        }
+        output.push(count);
+
+        ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_details');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('COUNT', 'device_id');
+        ga.query();
+        count = 0;
+        while (ga.next()) {
+            count++;
+        }
+        output.push(count);
+        gs.info('CBP json out: ' + JSON.stringify(output));
+        return JSON.stringify(output);
+    },
+
+    gettingsyslogWidgetData: function() {
+        var result = {};
+        var output = [];
+        var id = this.getclientid();
+        var syslogseverity = new GlideAggregate('x_caci_cisco_bcs_cisco_syslog_daily');
+        syslogseverity.addQuery('customer_id', id);
+        syslogseverity.addAggregate('COUNT', 'syslogeventseverity');
+        syslogseverity.query();
+        while (syslogseverity.next()) {
+            result['Severity: ' + syslogseverity.syslogeventseverity] = syslogseverity.getAggregate('COUNT', 'syslogeventseverity') + ' events';
+            // result['Devices with severity ' + ga.syslogeventseverity]= ga.getAggregate('COUNT', 'syslogeventseverity') + ' events';
+        }
+		output[0]=result;
+        //output.push(result);
+        var tot3 = 0;
+        var result_t = 0;
+        var syslogmsg = new GlideAggregate('x_caci_cisco_bcs_cisco_syslog_daily');
+        syslogmsg.addQuery('customer_id', id);
+        syslogmsg.groupBy('messagetype');
+        syslogmsg.addAggregate('COUNT(DISTINCT', 'messagetype');
+        // gr.addAggregate('COUNT', 'messagetype');
+        syslogmsg.query();
+        while (syslogmsg.next()) {
+            tot3 = parseInt(tot3) + parseInt(syslogmsg.getAggregate('COUNT(DISTINCT', 'messagetype'));
+            result_t = tot3;
+        }
+		output[1]=result_t;
+		//output.push(result_t);
+		var num=0;
+		var severity = new GlideAggregate('x_caci_cisco_bcs_cisco_syslog_daily');
+        severity.addQuery('customer_id', id);
+        severity.addQuery("syslogeventseverity",'=','1');
+       // severity.addAggregate('COUNT','syslogeventseverity');
+        // gr.addAggregate('COUNT', 'messagetype');
+        severity.query();
+        while (severity.next()) {
+			num++;
 		}
-		output["milestone"] = result;
-		result = [];
-		ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_lifecycle');
-		ga.addAggregate('COUNT', 'sw_type');
-		ga.query();
-		var result = [];
-		while(ga.next()){
-			if(ga.sw_type + "")
-				result.push(ga.sw_type + "");
-		}
-		output["hardwareType"] = result;
-		return JSON.stringify(output);
-	},
-	getContractsExpiryData:function(){
-		var logger = new Cisco_BCS_SNLogger();
-		try{
-			logger.debug("Inside Cisco_ClientServerBridge.getContractsExpiryData() getting data from asset drilldowm.");
-			var tab = this.getParameter("sysparm_tab");
-			var daoScipt = new Cisco_DAOScript();
-			var result = daoScipt.getContractDrillDown(tab);
-			return result;
-		}catch(e){
-			logger.error("Exception caught inside Cisco_ClientServerBridge.getContractsExpiryData() while getting data for assets drilldown third graph. Error :- " + e);	
-		}
-	},
-	gettingConfigurationWidgetData:function(){
-		var result = {};
-		var output = [];
-		var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
-		ga.addAggregate('COUNT', 'bp_risk');
-		ga.query();
-		while (ga.next()) {
-			result[ga.bp_risk] = ga.getAggregate('COUNT','bp_risk');
-		}
-		output.push(result);
-		ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
-		ga.addAggregate('COUNT', 'bp_rule_id');
-		ga.query();
-		var count = 0;
-		while(ga.next()){
-			count ++;
-		}
-		output.push(count);
-
-		ga = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_details');
-		ga.addAggregate('COUNT', 'device_id');
-		ga.query();
-		count = 0;
-		while(ga.next()){
-			count ++;
-		}
-		output.push(count);
-		return JSON.stringify(output);
-	},
-	gettingDataFromDeleteButton: function() {
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.gettingDataFromDeleteButton() getting data from delete button.");
-			var daoScrpt = new Cisco_DAOScript();
-			var result = daoScrpt.clearApplicationData();
-			return result;
-		} catch (e) {
-			logger.error("Exception caught inside Cisco_ClientServerBridge.gettingDataFromDeleteButton() while getting data from delete button. Error :- " + e);
-		}
-	},
-	gettingOptionsForConfiguration: function() {
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.gettingOptionsForConfiguration() getting options data for Configuration drill down view.");
-			var daoScript = new Cisco_DAOScript();
-			var result = daoScript.gettingOptionsForConfigurationDrillDown();
-			return result;
-		}catch(e){
-			logger.error("Exception caught inside Cisco_ClientServerBridge.gettingOptionsForConfiguration() while getting options for Configuration drilldown. Error :- " + e);
-		}
-	},
-	gettingDataForConfigurationSecondBox: function() {
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.gettingOptionsForConfiguration() getting data for button 2.");
-			var param = this.getParameter("sysparm_param");
-			var dao = new Cisco_DAOScript();
-			var result = dao.gettingDataForConfigurationsButton2(param);
-			return result;
-		}catch(e){
-			logger.error("Exception caught inside Cisco_ClientServerBridge.gettingDataForConfigurationSecondBox() while getting data for button 2. Error :- " + e);
-		}
-	},
-	gettingDataForConfigurationFirstBox: function() {
-		var param = this.getParameter("sysparm_param");
-		var param1 = this.getParameter("sysparm_param1");
-		var dao = new Cisco_DAOScript();
-		var result = dao.gettingDataForConfigurationsButton1(param, param1);
-		return result;
-	},
-	checkWhetherAnyScheduleJobIsRunningOrNot: function() {
-
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.checkWhetherAnyScheduleJobIsRunningOrNot().");
-			var daoScrpt = new Cisco_DAOScript();
-			var result = daoScrpt.checkWhetherAnyScheduleJobIsRunningOrNot();
-			return result;
-		} catch (e) {
-			logger.error("Exception caught inside Cisco_ClientServerBridge.checkWhetherAnyScheduleJobIsRunningOrNot(). Error :- " + e);
-		}
-	},
-
-	getdata: function() {
-		try {
-
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.gettingDataFromDeleteButton() getting data from delete button.");
-			var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_field_notices');
-			ga.addAggregate('COUNT', 'field_notice_id');
-			ga.setGroup(true);
-			ga.groupBy("field_notice_id");
-			ga.query();
-			var count = 0;
-			while (ga.next()) {
-				count++;
-			}
-
-			var sec_adv = 0;
-			var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_security_advisories');
-			ga.addAggregate('COUNT', 'psirt_cold_id');
-			ga.setGroup(true);
-			ga.groupBy("psirt_cold_id");
-			ga.query();
-			while (ga.next()) {
-				sec_adv++;
-			}
-			return count + "," + sec_adv;
-		} catch (e) {
-			logger.error("Exception caught inside Cisco_ClientServerBridge.gettingDataFromDeleteButton() while getting data from delete button. Error :- " + e);
-		}
-	},
-
-	configurationSecondGraph: function() {
-		var param = this.getParameter("sysparm_param");
-		var param1 = this.getParameter("sysparm_param1");
-		var dao = new Cisco_DAOScript();
-		var result = dao.configurationSecondGraph(param, param1);
-		return result;
-	},
-	configurationFirstGraph: function() {
-		var param = this.getParameter("sysparm_param");
-		var param1 = this.getParameter("sysparm_param1");
-		var dao = new Cisco_DAOScript();
-		var result = dao.configurationFirstGraph(param, param1);
-		return result;
-
-	},
-	hardwareLifecycleWidget: function() {
-		try {
-
-			var asset_type = "=" + this.getParameter('sysparm_hw_value');
-			if (asset_type == "=All")
-				asset_type = "ANYTHING";
-
-			var logger = new Cisco_BCS_SNLogger();
-			var gdt = new GlideDateTime();
-			gdt.addYearsLocalTime(1);
-			var d1 = gdt + "";
-			gdt.addYearsLocalTime(2);
-			var d2 = gdt + "";
-
-			var query = ["current_milestone=LDoS^current_milestone_date<javascript:gs.beginningOfToday()^physical_type" + asset_type, "current_milestone=LDoS^current_milestone_dateBETWEENjavascript:gs.beginningOfToday()@javascript:gs.endOfNextYear()^physical_type" + asset_type, "current_milestone=LDoS^physical_type" + asset_type + "^current_milestone_dateBETWEEN" + d1 + "@" + d2, "current_milestone=LDoS^physical_type" + asset_type + "^current_milestone_date>=" + d2];
-
-			var result = [];
-			for (var i = 0; i < query.length; i++) {
-				var k = 0;
-				var hardwareGr = new GlideAggregate("x_caci_cisco_bcs_cisco_hardware_lifecycle");
-				hardwareGr.addAggregate('COUNT','hw_id');
-				hardwareGr.addEncodedQuery(query[i]);
-				hardwareGr.query();
-				while(hardwareGr.next())
-					k++;
-				result[i] = k;
-			}
-			return JSON.stringify(result);
-
-		} catch (e) {
-			logger.error("Exception caught inside Cisco_ClientServerBridge.getHardwareLifecycle(). Error :- " + e);
-		}
-	},
-
-	hardwareLifecycleDrilldown: function() {
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			var milestone = "=" + this.getParameter('sysparm_milestone');
-			var type = "=" + this.getParameter('sysparm_type');
-			var tab = this.getParameter('sysparm_tab');
-			var data = [];
-			var date;
-			var filter = "";
-			var globalFilter;
-			var count = 0;
-			if (tab == "currentmilestone") {
-				globalFilter = "current_milestone";
-				date = "current_milestone_date";
-			} else {
-				globalFilter = "next_milestone";
-				date = "next_milestone_date";
-			}
-
-			var gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
-			if (milestone == "=All" && type != "=All")
-				milestone = "ANYTHING";
-			else if (type == "=All" && milestone != "=All")
-				type = "ANYTHING";
-			else if (milestone == "=All" && type == "=All") {
-				type = "ANYTHING";
-				milestone = "ANYTHING";
-			}
-			gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
-			gr.addEncodedQuery(date + "<javascript:gs.beginningOfToday()");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			var d1 = new GlideDateTime();
-			var d2 = new GlideDateTime();
-			d2.addYearsLocalTime(1);
-			count = 0;
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
-			gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			var d1 = new GlideDateTime();
-			var d2 = new GlideDateTime();
-			d1.addYearsLocalTime(1);
-			d2.addYearsLocalTime(3);
-			count = 0;
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
-			gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			var d1 = new GlideDateTime();
-			var d2 = new GlideDateTime();
-			d1.addYearsLocalTime(2);
-			d2.addYearsLocalTime(3);
-			count = 0;
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
-			gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			var d1 = new GlideDateTime();
-			d1.addYearsLocalTime(3);
-			count = 0;
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
-			gr.addEncodedQuery(date + ">javascript:gs.dateGenerate('" + d1 + "')");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
-			gr.addEncodedQuery(date + 'ISEMPTY');
-			gr.query();
-			count = 0;
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			return JSON.stringify(data);
-		} catch (e) {
-			logger.error("Exception caught inside Cisco_ClientServerBridge.getHardwareLifecycle(). Error :- " + e);
-		}
-
-	},
-	softwareDrillDownViewForDistintElementID: function() {
-		var data = {};
-		var arr = [];
-		var count = 0;
-		var filter;
-		var milestone = "=" + this.getParameter("sysparm_param1");
-		var type = "=" + this.getParameter("sysparm_param2");
-		var tab = this.getParameter("sysparm_tab");
-		var filter;
-		if (milestone == "=All" && type == "=All") {
-			type = "ANYTHING";
-			milestone = "ANYTHING";
-		} else if (milestone != "=All" && type == "=All")
-			type = "ANYTHING";
-		else if (milestone == "=All" && type != "=All")
-			milestone = "ANYTHING";
-		if (tab == "current")
-			filter = "current_milestone";
-		else
-			filter = "next_milestone";
-		var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_lifecycle');
-		ga.addEncodedQuery(filter + milestone + "^sw_type" + type);
-		ga.addAggregate('COUNT', 'sw_version');
-		ga.orderByAggregate('COUNT', 'sw_version');
-		ga.query();
-		while (ga.next()) {
-			var sw_arr = [];
-			data = {};
-			var sw = new GlideRecord("x_caci_cisco_bcs_cisco_software_lifecycle");
-			sw.addQuery("sw_version",ga.sw_version+"");
-			sw.query();
-			while(sw.next()) {
-				if(sw_arr.indexOf(sw.device_id + "") < 0)
-					sw_arr.push(sw.device_id +"");
-			}
-			//data[ga.sw_version] = sw_arr.length;
-			//data[ga.sw_version] = ga.getAggregate('COUNT', 'sw_version');
-			//count++;
-			data.key = ga.sw_version+"";
-			data.count = parseInt(sw_arr.length+"");
-			arr.push(data);
-
-			arr.sort(function(a, b) {
-				var x = a.count;
-				var y = b.count;
-				if (y < x) {
-					return -1;
-				}
-				if (y > x) {
-					return 1;
-				}
-				return 0;
-			});
-			var range = arr.length;
-			if (range > 10)
-				range = 10;
-			var result = {};
-			for (var i = 0; i < range; i++) {
-				var obj = arr[i];
-				result[obj.key] = obj.count;
-			}
-
-		}
-		return JSON.stringify(result);
-	},
-	deviceDrillDownViewForDistintElementID: function() {
-		var data = {};
-		var count = 0;
-		var filter;
-		var hw_arr = [];
-		var arr = [];
-		var milestone = "=" + this.getParameter("sysparm_param1");
-		var type = "=" + this.getParameter("sysparm_param2");
-		var tab = this.getParameter("sysparm_tab");
-		var filter;
-		if (milestone == "=All" && type == "=All") {
-			type = "ANYTHING";
-			milestone = "ANYTHING";
-		} else if (milestone != "=All" && type == "=All")
-			type = "ANYTHING";
-		else if (milestone == "=All" && type != "=All")
-			milestone = "ANYTHING";
-		if (tab == "current")
-			filter = "current_milestone";
-		else
-			filter = "next_milestone";
-		var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_hardware_lifecycle');
-		ga.addEncodedQuery(filter + milestone + "^physical_type" + type);
-		ga.addAggregate('COUNT', 'product_id');
-		//ga.orderByAggregate('COUNT', 'product_id');
-		ga.query();
-		while (ga.next()) {
-			var elements = 0;
-			hw_arr = [];
-			data = {};
-			var hw = new GlideRecord("x_caci_cisco_bcs_cisco_hardware_lifecycle");
-			hw.addQuery("product_id", ga.product_id+"");
-			hw.query();
-			while(hw.next()){
-
-				if(hw_arr.indexOf(hw.physical_element_id + "") < 0) {
-					hw_arr.push(hw.physical_element_id +"");
-
-				}
-			}
-			//data[ga.product_id] = hw_arr.length;
-			//count++;
-
-			data.key = ga.product_id+"";
-			data.count = parseInt(hw_arr.length+"");
-			arr.push(data);
-		}
-
-
-		arr.sort(function(a, b) {
-			var x = a.count;
-			var y = b.count;
-			if (y < x) {
-				return -1;
-			}
-			if (y > x) {
-				return 1;
-			}
-			return 0;
-		});
-		var range = arr.length;
-		if (range > 10)
-			range = 10;
-		var result = {};
-		for (var i = 0; i < range; i++) {
-			var obj = arr[i];
-			result[obj.key] = obj.count;
-		}
-
-		return JSON.stringify(result);
-	},
-
-	softwareLifecycleWidget: function() {
-
-		try {
-
-			var logger = new Cisco_BCS_SNLogger();
-			var gdt = new GlideDateTime();
-			gdt.addYearsLocalTime(1);
-			var d1 = gdt + "";
-			gdt.addYearsLocalTime(2);
-			var d2 = gdt + "";
-
-			var query = ["current_milestone_date<javascript:gs.beginningOfToday()", "current_milestone_dateBETWEENjavascript:gs.beginningOfToday()@javascript:gs.endOfNextYear()", "current_milestone_dateBETWEEN" + d1 + "@" + d2, "current_milestone_date>=" + d2];
-
-			var result = [];
-			for (var i = 0; i < query.length; i++) {
-				var k = 0;
-				var softwareGr = new GlideAggregate("x_caci_cisco_bcs_cisco_software_lifecycle");
-				softwareGr.addAggregate("COUNT","sw_id");
-				softwareGr.addEncodedQuery(query[i]);
-				softwareGr.addQuery('current_milestone', 'LDoS');
-				softwareGr.query();
-				while(softwareGr.next())
-					k++;
-				result[i] = k;
-			}
-			return JSON.stringify(result);
-
-		} catch (e) {
-			logger.error("Exception caught inside Cisco_ClientServerBridge.getSoftwareLifecycleData(). Error :- " + e);
-		}
-	},
-
-	softwareLifecycleDrilldown: function() {
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			var milestone = "=" + this.getParameter('sysparm_milestone');
-			var type = "=" + this.getParameter('sysparm_type');
-			var tab = this.getParameter('sysparm_tab');
-			var data = [];
-			var date;
-			var filter = "";
-			var globalFilter;
-			var count = 0;
-			if (tab == "currentmilestone") {
-				globalFilter = "current_milestone";
-				date = "current_milestone_date";
-			} else {
-				globalFilter = "next_milestone";
-				date = "next_milestone_date";
-			}
-
-			var gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
-			if (milestone == "=All" && type != "=All")
-				milestone = "ANYTHING";
-			else if (type == "=All" && milestone != "=All")
-				type = "ANYTHING";
-			else if (milestone == "=All" && type == "=All") {
-				type = "ANYTHING";
-				milestone = "ANYTHING";
-			}
-			gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
-			gr.addEncodedQuery(date + "<javascript:gs.beginningOfToday()");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			var d1 = new GlideDateTime();
-			var d2 = new GlideDateTime();
-			d2.addYearsLocalTime(1);
-			count = 0;
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
-			gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			var d1 = new GlideDateTime();
-			var d2 = new GlideDateTime();
-			d1.addYearsLocalTime(1);
-			d2.addYearsLocalTime(3);
-			count = 0;
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
-			gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			var d1 = new GlideDateTime();
-			var d2 = new GlideDateTime();
-			d1.addYearsLocalTime(2);
-			d2.addYearsLocalTime(3);
-			count = 0;
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
-			gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			var d1 = new GlideDateTime();
-			d1.addYearsLocalTime(3);
-			count = 0;
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
-			gr.addEncodedQuery(date + ">javascript:gs.dateGenerate('" + d1 + "')");
-			gr.query();
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
-			gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
-			gr.addEncodedQuery(date + 'ISEMPTY');
-			gr.query();
-			count = 0;
-			while (gr.next())
-				count++;
-			data.push(count);
-
-			return JSON.stringify(data);
-
-		} catch (e) {
-			logger.error("Exception caught inside Cisco_ClientServerBridge.getSoftwareLifecycleData(). Error :- " + e);
-		}
-	},
-
-	getAssets: function() {
-
-		var result = [];
-		var k = 0;
-		var assetGr = new GlideRecord("x_caci_cisco_bcs_cisco_assets");
-		//assetGr.addQuery("install_status", "!=", "7");
-		assetGr.query();
-		while(assetGr.next())
-			k++;
-		result[0] = k;
-		k = 0;
-		assetGr.addEncodedQuery("serial_number_status=INVALID");
-		assetGr.query();
-		while(assetGr.next())
-			k++;
-		result[1] = k;
-		result[2] = Math.round((result[1] / result[0]) * 100);
-
-		return JSON.stringify(result);
-
-	},
-
-	getDevices: function() {
-		try {
-			var device = [];
-			var count = 0;
-			var gr = new GlideRecord("x_caci_cisco_bcs_cisco_devices");
-			gr.addQuery("config_status", "!=", "NotAvailable");
-			//gr.addQuery("install_status", "!=", "7");
-			gr.query();
-			while (gr.next()) {
-				count++;
-			}
-			device[0] = count;
-			var count1 = 0;
-			var gr = new GlideRecord("x_caci_cisco_bcs_cisco_devices");
-			gr.addQuery("device_status", "DEVICE NOT REACHABLE");
-			//gr.addQuery("install_status", "!=", "7");
-			gr.query();
-			while (gr.next()) {
-				count1++;
-			}
-			device[1] = count1;
-			var count2 = 0;
-			var gr = new GlideRecord("x_caci_cisco_bcs_cisco_devices");
-			//gr.addQuery("install_status", "!=", "7");
-			gr.query();
-			while(gr.next())
-				count2++;
-			device[2] = count2;
-			return JSON.stringify(device);
-		} catch (e) {}
-	},
-
-	getFeedbackForm: function() {
-
-		var dataArray1 = this.getParameter('sysparm_array');
-		var dataArray = JSON.parse(dataArray1);
-		for (var k in dataArray) {
-			var gr = new GlideRecord("x_caci_cisco_bcs_cisco_bcs_feedback_form");
-			gr.initialize();
-			gr.rating = (dataArray[k].rating);
-			gr.drilldown_view = (dataArray[k].view) + "";
-			gr.feedback_view = "Global View";
-			if (dataArray[k].feedback + "" != "-")
-				gr.overall_feedback = (dataArray[k].feedback) + "";
-			else
-				gr.overall_feedback = " ";
-			if(gs.getUser().getEmail())
-				gr.username = gs.getUser().getEmail() + "";
-			else
-				gr.username = "unknown@unknown.com";
-			gr.user_name = gs.getUserName() + "";
-			gr.insert();
-		}
-		return true;
-
-	},
-
-	getVulnerabilityData: function() {
-
-		var tableName = this.getParameter('sysparm_tableName');
-		var result = [];
-		var count = 0;
-
-		var tableGr = new GlideRecord(tableName);
-		tableGr.addQuery("match_confidence", "Vulnerable");
-		tableGr.query();
-		while(tableGr.next())
-			count++;
-		result[0] = count;
-		count = 0;
-		tableGr.initialize();
-		tableGr.addQuery("match_confidence", "Potentially Vulnerable");
-		tableGr.query();
-		while(tableGr.next())
-			count++;
-		result[1] = count;
-		count = 0;
-		tableGr.initialize();
-		tableGr.addQuery("match_confidence", "Not Vulnerable");
-		tableGr.query();
-		while(tableGr.next())
-			count++;
-		result[2] = count;
-		return JSON.stringify(result);
-	},
-	graphOfMatchConfidenceForVurlneabilitiesDrillDown: function() {
-		var logger = new Cisco_BCS_SNLogger();
-		try {
-			logger.debug("Inside Cisco_ClientServerBridge.getGroupdata getting group data for graphs.");
-			var json = {};
-			var result = [];
-			var tableName = this.getParameter('sysparm_table_name');
-			var groupBy = this.getParameter('sysparm_group_by');
-			var timeScale = this.getParameter('sysparm_time_scale');
-
-
-			var psirt_arr = [];
-			var arrayUtil = new global.ArrayUtil();
-			var groupAgg = new GlideAggregate(tableName);
-			groupAgg.addAggregate('COUNT', groupBy + "");//field
-			if (tableName == "x_caci_cisco_bcs_cisco_security_advisories_bulletins") {
-				switch (timeScale) {
-					case "3":
-					case "6":
-					case "9":
-					case "12":
-						var date = this.gettingDateForFilter(-1*timeScale);
-						groupAgg.addEncodedQuery("bulletin_first_published>=" +  date );
-						result.push(date);
-						break;
-					case "12plus":
-						var date = this.gettingDateForFilter(-12);
-						groupAgg.addEncodedQuery("bulletin_first_published<="+ date );
-						result.push(date);
-						break;
-					case "all":
-						//groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable");
-						result.push(0);
-						break;
-				}
-			} else {
-				switch (timeScale) {
-					case "3":
-					case "6":
-					case "9":
-					case "12":
-						var date = this.gettingDateForFilter(-1*timeScale);
-						//groupAgg.addEncodedQuery("bulletin_first_published>=" + date);// + "^match_confidence!=Not Vulnerable");
-						groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published>=" + date + "^match_confidence!=Not Vulnerable");
-						result.push(date);
-						break;
-					case "12plus":
-						var date = this.gettingDateForFilter(-12);
-						//groupAgg.addEncodedQuery("bulletin_first_published<="+ date);// + "^match_confidence!=Not Vulnerable");
-						groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published<="+ date + "^match_confidence!=Not Vulnerable");
-						result.push(date);
-						break;
-					case "all":
-						groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable");
-						result.push(0);
-						break;
-				}
-			}
-			groupAgg.query();
-			while (groupAgg.next()) {
-
-				if (tableName == "x_caci_cisco_bcs_cisco_security_advisories_bulletins") {
-
-					var psirt_id = groupAgg.getValue([groupBy]);
-					if (!arrayUtil.contains(psirt_arr, psirt_id)) {
-						psirt_arr.push(psirt_id);
-						var match_confidence = groupAgg.getValue("sir");
-						if(match_confidence == "")
-							match_confidence = "No_SIR";
-						var match_confidence_arr = match_confidence.split(" ");
-						match_confidence = "";
-						for (var i in match_confidence_arr)
-							match_confidence = match_confidence + match_confidence_arr[i];
-						json[match_confidence] = groupAgg.getAggregate('COUNT', "sir");
-					}
-				} else {
-					var match_confidence = groupAgg.getValue(groupBy);
-					var match_confidence_arr = match_confidence.split(" ");
-					match_confidence = "";
-					for(var i in match_confidence_arr)
-						match_confidence = match_confidence + match_confidence_arr[i];
-					json[match_confidence] = groupAgg.getAggregate('COUNT', groupBy);
-
-				}
-			}
-			result.push(json);
-
-			return JSON.stringify(result);
-
-		} catch (e) {
-			logger.error("Inside Cisco_ClientServerBridge.getGroupdata, error getting group data for graphs " + e);
-		}
-	},
-
-	graphOfFieldNoticeDeviceIdDrilldown: function() {
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown getting group data for graphs.");
-			var json = {};
-			var fn_array = [];
-			var tableName = this.getParameter('sysparm_table_name') + "";
-			var groupBy = this.getParameter('sysparm_group_by') + "";
-			var timeScale = this.getParameter('sysparm_time_scale') + "";
-			
-			var groupAgg = new GlideAggregate(tableName);
-			groupAgg.addAggregate('COUNT', groupBy);
-
-			groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable"); //psirt_cold_id_ref.bulletin_first_published<javascript:gs.beginningOfLast6Months()
-			if (tableName == "x_caci_cisco_bcs_cisco_security_advisories") {
-
-				switch (timeScale) {
-					case "3":
-					case "6":
-					case "9":
-					case "12":
-						var date =  this.gettingDateForFilter(-1 * timeScale);
-						groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_published>="+ date +"^match_confidence!=Not Vulnerable");
-						fn_array.push(date);
-						//groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_publishedBETWEENjavascript:gs.dateGenerate('" + date +"')@javascript:gs.endOfToday()^match_confidence!=Not Vulnerable");
-						break;
-					case "12plus":
-						var date =  this.gettingDateForFilter(-12);
-						groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_published<="+ date +"^match_confidence!=Not Vulnerable");
-						fn_array.push(date);
-						break;
-					case "all":
-						break;
-				}
-			}
-			//groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_published>=javascript:gs.beginningOfLast" + timeScale + "Months()");
-			else {
-				switch (timeScale) {
-					case "3":
-					case "6":
-					case "9":
-					case "12":
-						var date = this.gettingDateForFilter(-1*timeScale);
-						groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published>="+ date + "^match_confidence!=Not Vulnerable");
-						fn_array.push(date);
-
-						//	groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_publishedBETWEENjavascript:gs.dateGenerate('" + date +"')@javascript:gs.endOfToday()^match_confidence!=Not Vulnerable");
-						break;
-					case "12plus":
-						var date = this.gettingDateForFilter(-12);
-						groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published<="+ date +"^match_confidence!=Not Vulnerable");
-						fn_array.push(date);
-						break;
-					case "all":
-						break;
-				}
-			}
-			
-			groupAgg.orderByAggregate('COUNT', groupBy);
-			groupAgg.query();
-			var count = 0;
-			while (groupAgg.next() && count < 10) {
-				count++;
-				var group = groupAgg[groupBy] + "";
-
-				if (groupBy == "psirt_cold_id") {
-					var gr = new GlideRecord("x_caci_cisco_bcs_cisco_security_advisories_bulletins");
-					gr.addQuery('psirt_cold_id', groupAgg[groupBy]);
-					gr.query();
-					if (gr.next()) {
-						group = gr.psirt_advisory_id;
-					}
-				} else if (groupBy == "field_notice_id")
-					group = "fn" + group;
-
-				else
-					group = group + "A";
-				json[group] = groupAgg.getAggregate('COUNT', groupBy);
-			}
-			fn_array.push(json);
-			return JSON.stringify(json);
-
-		} catch (e) {
-			logger.error("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown, error getting group data for graphs " + e);
-		}
-	},
-
-	gettingDateForFilter:function(month){
-		var d2 = new GlideDateTime();
-		//d2.addMonthsUTC(month);
-		d2.addMonthsLocalTime(month);
-		return (d2+"");
-	},
-
-	graphOfFieldNoticeDeviceCount: function() {
-		try {
-
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown getting group data for graphs.");
-			var fn_array = [];
-			//var result1 = [];
-			var tableName = this.getParameter('sysparm_table_name') + "";
-			var groupBy = this.getParameter('sysparm_group_by') + "";
-			var timeScale = this.getParameter('sysparm_time_scale') + "";
-
-			var json = [];
-			var groupAgg = new GlideAggregate("x_caci_cisco_bcs_cisco_field_notices");
-			groupAgg.addAggregate('COUNT', "field_notice_id");
-
-			switch (timeScale) {
-				case "3":
-				case "6":
-				case "9":
-				case "12":
-					var date = this.gettingDateForFilter(-1*timeScale);
-					groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published>="+ date  +"^match_confidence!=Not Vulnerable");
-					//result1.push(date);
-					break;
-				case "12plus":
-					var date = this.gettingDateForFilter(-12);
-					groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published<=" + date + "^match_confidence!=Not Vulnerable");
-					//result1.push(date);
-					break;
-				case "all":
-					break;
-			}
-			groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable");
-			groupAgg.orderByAggregate('COUNT', "field_notice_id");
-			groupAgg.query();
-			while (groupAgg.next()) {
-				var group = "fn" + groupAgg["field_notice_id"];
-				var groupAgg1 = new GlideAggregate("x_caci_cisco_bcs_cisco_field_notices");
-				groupAgg1.addAggregate('COUNT', "device_id");
-				groupAgg1.addQuery("field_notice_id", groupAgg["field_notice_id"]);
-				groupAgg1.addQuery("match_confidence", "!=", "Not Vulnerable");
-				groupAgg.orderByAggregate('COUNT', "device_id");
-				groupAgg1.query();
-				var count = 0;
-				var record = {};
-				record.fn_id = groupAgg["field_notice_id"] + '';
-				while (groupAgg1.next())
-					count++;
-				record.dev_count = count;
-				json.push(record);
-			}
-			json.sort(function(a, b) {
-				var x = a.dev_count;
-				var y = b.dev_count;
-				if (y < x) {
-					return -1;
-				}
-				if (y > x) {
-					return 1;
-				}
-				return 0;
-			});
-			var range = json.length;
-			if (range > 10)
-				range = 10;
-			var result = {};
-			for (var i = 0; i < range; i++) {
-				var obj = json[i];
-				result["fn" + obj.fn_id] = obj.dev_count;
-			}
-			return JSON.stringify(result);
-		} catch (e) {
-			logger.error("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceCount, error getting group data for graphs " + e);
-		}
-	},
-
-	graphOfFieldNoticeDeviceIdDrilldownFromDevices: function() {
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown getting group data for graphs.");
-			var json = {};
-
-			var tableName = this.getParameter('sysparm_table_name') + "";
-			var groupBy = this.getParameter('sysparm_group_by') + "";
-			//var timeScale = this.getParameter('sysparm_time_scale') + "";
-
-			var groupAgg = new GlideAggregate(tableName);
-			groupAgg.addAggregate('COUNT', groupBy);
-
-			groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable"); //psirt_cold_id_ref.bulletin_first_published<javascript:gs.beginningOfLast6Months()
-			// 			if (tableName == "x_caci_cisco_bcs_cisco_security_advisories")
-			// 				groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_published>=javascript:gs.beginningOfLast" + timeScale + "Months()");
-			// 			else
-			// 				groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published>=javascript:gs.beginningOfLast" + timeScale + "Months()");
-			groupAgg.orderByAggregate('COUNT', groupBy);
-			groupAgg.query();
-			var count = 0;
-			while (groupAgg.next() && count < 10) {
-				count++;
-				var group = groupAgg[groupBy] + "";
-
-				if (groupBy == "psirt_cold_id") {
-					var gr = new GlideRecord("x_caci_cisco_bcs_cisco_security_advisories_bulletins");
-					gr.addQuery('psirt_cold_id', groupAgg[groupBy]);
-					gr.query();
-					if (gr.next()) {
-						group = gr.psirt_advisory_id;
-					}
-				} else if (groupBy == "field_notice_id") {
-					group = "fn" + group;
-				}
-
-				//	else
-				//group = group + "A";
-				json[group] = groupAgg.getAggregate('COUNT', groupBy);
-			}
-			return JSON.stringify(json);
-
-		} catch (e) {
-			logger.error("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown, error getting group data for graphs " + e);
-		}
-	},
-
-	graphOfFieldNoticeDeviceIdDrilldownForDevices: function() {
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown getting group data for graphs.");
-
-			var arr = [];
-			var tableName = this.getParameter('sysparm_table_name') + "";
-			var uniqueBy = this.getParameter('sysparm_group_by') + "";
-			//var timeScale = this.getParameter('sysparm_time_scale') + "";
-
-			var groupAgg = new GlideAggregate(tableName);
-			groupAgg.addAggregate('COUNT', "device_id");
-			//groupAgg.orderByAggregate('COUNT', groupBy);
-			groupAgg.addQuery("match_confidence", "!=", "Not Vulnerable");
-			groupAgg.query();
-			//var count = 0;
-			while (groupAgg.next()) {
-				var jsonObj = {};
-				var gr = new GlideRecord(tableName);
-				gr.addQuery("device_id" , groupAgg.device_id+"");
-				gr.addQuery("match_confidence", "!=", "Not Vulnerable");
-				gr.query();
-				var unique_arr = [];
-				while (gr.next()) {
-					if(unique_arr.indexOf(gr[uniqueBy]+"") < 0) 
-						unique_arr.push(gr[uniqueBy]+"");
-				}
-				jsonObj.key = gr.deviceid_ref.name+"";
-				jsonObj.count = unique_arr.length;
-
-				arr.push(jsonObj);	
-			}
-			arr.sort(function(a, b) {
-				var x = a.count;
-				var y = b.count;
-				if (y < x) {
-					return -1;
-				}
-				if (y > x) {
-					return 1;
-				}
-				return 0;
-			});
-			var range = arr.length;
-			if (range > 10)
-				range = 10;
-			var result = {};
-			for (var i = 0; i < range; i++) {
-				var obj = arr[i];
-				result[obj.key] = obj.count;
-			}
-			return JSON.stringify(result);
-
-		} catch (e) {
-			logger.error("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown, error getting group data for graphs " + e);
-		}
-	},
-
-	getAssetDrilldownInfo: function() {
-
-		var result = [];
-		var physical_type = {};
-		var aggPhysicalType = new GlideAggregate('x_caci_cisco_bcs_cisco_assets');
-		aggPhysicalType.addAggregate('COUNT', 'physical_type');
-		//aggPhysicalType.addQuery("install_status", "!=", "7");
-		aggPhysicalType.query();
-		while (aggPhysicalType.next())
-			physical_type[aggPhysicalType.physical_type] = aggPhysicalType.getAggregate('COUNT', 'physical_type');
-		result[0] = physical_type;
-
-		// 		var serial_number_status = {};
-		// 		var aggSerialNumber = new GlideAggregate('x_caci_cisco_bcs_cisco_assets');
-		// 		aggSerialNumber.addAggregate('COUNT', 'serial_number_status');
-		// 		aggSerialNumber.addQuery("install_status", "!=", "7");
-		// 		aggSerialNumber.query();
-		// 		while (aggSerialNumber.next())
-		// 			serial_number_status[aggSerialNumber.serial_number_status] = aggSerialNumber.getAggregate('COUNT', 'serial_number_status');
-		// 		result[1] = serial_number_status;
-
-		// 		var warrantyDates = {};
-		// 		var count_out = 0;
-		// 		var aggContract = new GlideRecord('x_caci_cisco_bcs_cisco_contract_lifecycle');
-		// 		aggContract.addEncodedQuery("warranty_end_date<javascript:gs.beginningOfToday()");
-		// 		aggContract.query();
-		// 		while(aggContract.next()){
-		// 			count_out++;
-		// 		}
-		// 		(count_out + "" == "0") ? "" : (warrantyDates["Out of warranty"] = count_out);
-
-		// 		var count_in = 0;
-		// 		aggContract = new GlideRecord('x_caci_cisco_bcs_cisco_contract_lifecycle');
-		// 		aggContract.addEncodedQuery("warranty_end_date>javascript:gs.endOfToday()");
-		// 		aggContract.query();
-		// 		while(aggContract.next()){
-		// 			count_in++;
-		// 		}
-		// 		(count_in + "" == "0") ? "" : (warrantyDates["Under warranty"] = count_in);
-		// 		result[2] = warrantyDates;
-
-
-		var result_arr = [];
-		var grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("service_contract_numberISEMPTY^warranty_end_date<javascript:gs.beginningOfToday()");
-		grContract.query();
-		var expired = 0;
-		while (grContract.next()) {
-			expired++;
-		}
-		result_arr.push(expired);
-
-		var d1 = new GlideDateTime();
-		var d2 = new GlideDateTime();
-		d2.addMonthsUTC(3);
-		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("service_contract_numberISEMPTY^warranty_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-		grContract.query();
-		var zeroTOThreeMonths = 0;
-		while (grContract.next()) {
-			zeroTOThreeMonths++;
-		}
-		result_arr.push(zeroTOThreeMonths);
-		d1.addMonthsUTC(3);
-		d2.addMonthsUTC(9);
-		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("service_contract_numberISEMPTY^warranty_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-		grContract.query();
-		var threeMonthsToOneYear = 0;
-		while (grContract.next()) {
-			threeMonthsToOneYear++;
-		}
-		result_arr.push(threeMonthsToOneYear);
-
-		var d2 = new GlideDateTime();
-		d2.addYearsLocalTime(1);
-		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("service_contract_numberISEMPTY^warranty_end_date>javascript:gs.dateGenerate('" + d2 + "')");
-		grContract.query();
-		var moreThanOneYear = 0;
-		while (grContract.next()) {
-			moreThanOneYear++;
-		}
-		result_arr.push(moreThanOneYear);
-
-
-
-		var product_family = {};
-		var limit = 0;
-		var aggProductFamily = new GlideAggregate('x_caci_cisco_bcs_cisco_assets');
-		aggProductFamily.addAggregate('COUNT', 'product_family');
-		aggProductFamily.orderByAggregate('COUNT', 'product_family');
-		//aggProductFamily.addQuery("install_status", "!=", "7");
-		aggProductFamily.query();
-		while (aggProductFamily.next() && limit < 10) {
-			product_family[aggProductFamily.product_family] = aggProductFamily.getAggregate('COUNT', 'product_family');
-			limit++;
-		}
-		result[1] = product_family;
-		result[2] = result_arr;
-
-		var result_arr = [];
-		var grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("service_contract_numberISNOTEMPTY^covered_product_line_end_date<javascript:gs.beginningOfToday()");
-		grContract.query();
-		var expired = 0;
-		while (grContract.next()) {
-			expired++;
-		}
-		result_arr.push(expired);
-
-		var d1 = new GlideDateTime();
-		var d2 = new GlideDateTime();
-		d2.addMonthsUTC(3);
-		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("service_contract_numberISNOTEMPTY^covered_product_line_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-		grContract.query();
-		var zeroTOThreeMonths = 0;
-		while (grContract.next()) {
-			zeroTOThreeMonths++;
-		}
-		result_arr.push(zeroTOThreeMonths);
-		d1.addMonthsUTC(3);
-		d2.addMonthsUTC(9);
-		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("service_contract_numberISNOTEMPTY^covered_product_line_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-		grContract.query();
-		var threeMonthsToOneYear = 0;
-		while (grContract.next()) {
-			threeMonthsToOneYear++;
-		}
-		result_arr.push(threeMonthsToOneYear);
-
-		var d2 = new GlideDateTime();
-		d2.addYearsLocalTime(1);
-		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("service_contract_numberISNOTEMPTY^covered_product_line_end_date>javascript:gs.dateGenerate('" + d2 + "')");
-		grContract.query();
-		var moreThanOneYear = 0;
-		while (grContract.next()) {
-			moreThanOneYear++;
-		}
-		result_arr.push(moreThanOneYear);
-		result[3] = result_arr;
-
-
-		return JSON.stringify(result);
-	},
-
-	getDeviceDrilldownInfo: function() {
-		try {
-			var logger = new Cisco_BCS_SNLogger();
-			logger.debug("Inside Cisco_ClientServerBridge.getDeviceDrilldownInfo getting group data for graphs.");
-			var json = {};
-			var tableName = this.getParameter('sysparm_table_name') + "";
-			var groupBy = this.getParameter('sysparm_group_by') + "";
-			var graphType = this.getParameter('sysparm_graph_type') + "";
-
-			if (graphType == "column") {
-				var arrayUtil = new global.ArrayUtil();
-				var device_array = [];
-
-				var swVersion = new GlideAggregate(tableName);
-				swVersion.addAggregate('COUNT', groupBy);
-				swVersion.groupBy(groupBy);
-				//swVersion.addQuery("install_status", "!=", "7");
-				swVersion.query();
-				while (swVersion.next()) {
-					device_array.push(swVersion[groupBy] + '');
-				}
-
-
-				var arr = [];
-				for (var i in device_array) {
-					var count = 0;
-					var device = new GlideRecord(tableName);
-					device.addQuery(groupBy, device_array[i]);
-					//device.addQuery("install_status", "!=", "7");
-					device.query();
-					while (device.next()) {
-						var version = device.sw_version + "";
-						if (!arrayUtil.contains(arr, version)) {
-							arr.push(version);
-							count++;
-						}
-					}
-					json[device_array[i]] = count;
-				}
-
-
-			} else {
-				var deviceAgg = new GlideAggregate(tableName);
-				deviceAgg.addAggregate('COUNT', groupBy);
-				deviceAgg.orderByAggregate('COUNT', groupBy);
-				//deviceAgg.addQuery("install_status", "!=", "7");
-				deviceAgg.query();
-				while (deviceAgg.next()) {
-					var group = deviceAgg[groupBy] + "";
-					var group_arr = group.split(" ");
-					group = "";
-					for (var i in group_arr)
-						group = group + group_arr[i];
-					json[group] = deviceAgg.getAggregate('COUNT', groupBy);
-				}
-			}
-			return JSON.stringify(json);
-
-		} catch (e) {
-			logger.error("Inside Cisco_ClientServerBridge.getDeviceDrilldownInfo, error getting group data for graphs " + e);
-		}
-	},
-	gettingDetailsOfContractLifecycle: function() {
-		var logger = new Cisco_BCS_SNLogger();
-		logger.debug("Inside Cisco_ClientServerBridge.gettingDetailsOfContractLifecycle.");
-		var result_arr = [];
-		var grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("warranty_end_date>=javascript:gs.endOfToday()^is_covered=NO");
-		grContract.query();
-		var warranty_count = 0;
-		while (grContract.next()) {
-			warranty_count++;
-		}
-		result_arr.push(warranty_count);
-		var contract_count = 0;
-		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("is_covered=YES");
-		grContract.query();
-		while (grContract.next()) {
-			contract_count++;
-		}
-		result_arr.push(contract_count);
-
-		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		grContract.addEncodedQuery("warranty_end_date<javascript:gs.beginningOfToday()^is_covered=NO");
-		grContract.query();
-		var past = 0;
-		while (grContract.next()) {
-			past++;
-		}
-		result_arr.push(past);
-
-		// 		var d1 = new GlideDateTime();
-		// 		var d2 = new GlideDateTime();
-		// 		d2.addMonthsUTC(3);
-		// 		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		// 		grContract.addEncodedQuery("covered_product_line_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-		// 		grContract.query();
-		// 		var zeroTOThreeMonths = 0;
-		// 		while (grContract.next()) {
-		// 			zeroTOThreeMonths++;
-		// 		}
-		// 		result_arr.push(zeroTOThreeMonths);
-		// 		d1.addMonthsUTC(3);
-		// 		d2.addMonthsUTC(9);
-		// 		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		// 		grContract.addEncodedQuery("covered_product_line_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
-		// 		grContract.query();
-		// 		var threeMonthsToOneYear = 0;
-		// 		while (grContract.next()) {
-		// 			threeMonthsToOneYear++;
-		// 		}
-		// 		result_arr.push(threeMonthsToOneYear);
-
-		// 		var d2 = new GlideDateTime();
-		// 		d2.addYearsLocalTime(1);
-		// 		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
-		// 		grContract.addEncodedQuery("covered_product_line_end_date>javascript:gs.dateGenerate('" + d2 + "')");
-		// 		grContract.query();
-		// 		var moreThanOneYear = 0;
-		// 		while (grContract.next()) {
-		// 			moreThanOneYear++;
-		// 		}
-		// 		result_arr.push(moreThanOneYear);
-
-		return result_arr.join();
-	},
-
-	configurationWidgetData: function() {
-
-		var result = [];
-		var rule_id_count = 0;
-		var aggBpRuleId = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
-		aggBpRuleId.addAggregate('COUNT', 'bp_rule_id');
-		aggBpRuleId.query();
-		while (aggBpRuleId.next())
-			rule_id_count++;
-		result[0] = rule_id_count;
-
-		var cbp_device_id_count = 0;
-		var aggCbpDeviceId = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_details');
-		aggCbpDeviceId.addAggregate('COUNT', 'device_id');
-		aggCbpDeviceId.query();
-		while (aggCbpDeviceId.next())
-			cbp_device_id_count++;
-		result[1] = cbp_device_id_count;
-
-		var devices = 0;
-		var aggdDeviceId = new GlideRecord('x_caci_cisco_bcs_cisco_cbp_details');
-		aggdDeviceId.query();
-		while (aggdDeviceId.next())
-			devices++;
-		result[2] = parseInt(devices / result[1]);
-
-		return JSON.stringify(result);
-
-	},
-	submitFeedback: function() {
-		var feedback = this.getParameter('sysparm_feedback');
-		var dao = new Cisco_DAOScript();
-		var response = dao.getDataOfFeedbackForm(feedback);
-		return response;
-	},
-
-	getVulnerabilityAffectingDevicesCount: function() {
-		var tableName = this.getParameter('sysparm_tableName') + "";
-		var count = 0;
-		var vulnerabilities = new GlideAggregate(tableName);
-		vulnerabilities.addAggregate('COUNT', "device_id");
-		vulnerabilities.addEncodedQuery("match_confidence!=Not Vulnerable");
-		vulnerabilities.query();
-		while(vulnerabilities.next()) {
-			count++;
-
-		}
-		return count;
-
-	},
-
-	type: 'Cisco_ClientServerBridge'
+		output[2]=num;
+      
+        gs.info('Syslog json out: ' + JSON.stringify(output));
+        return JSON.stringify(output);
+    },
+    gettingDataFromDeleteButton: function() {
+        try {
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.gettingDataFromDeleteButton() getting data from delete button.");
+            var config_id = this.getParameter("sysparm_id");
+			var clientid=this.getParameter("sysparm_clientid");
+            gs.setProperty("x_caci_cisco_bcs.Authentication.Record", config_id);
+           
+            var daoScrpt = new Cisco_DAOScript();
+            var result = daoScrpt.clearApplicationData(clientid);
+            return result;
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.gettingDataFromDeleteButton() while getting data from delete button. Error :- " + e);
+        }
+    },
+    gettingOptionsForConfiguration: function() {
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.gettingOptionsForConfiguration() getting options data for Configuration drill down view.");
+            var daoScript = new Cisco_DAOScript();
+            var result = daoScript.gettingOptionsForConfigurationDrillDown();
+            return result;
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.gettingOptionsForConfiguration() while getting options for Configuration drilldown. Error :- " + e);
+        }
+    },
+    gettingDataForConfigurationSecondBox: function() {
+        try {
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.gettingOptionsForConfiguration() getting data for button 2.");
+            var param = this.getParameter("sysparm_param");
+            var dao = new Cisco_DAOScript();
+            var result = dao.gettingDataForConfigurationsButton2(param);
+            return result;
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.gettingDataForConfigurationSecondBox() while getting data for button 2. Error :- " + e);
+        }
+    },
+    gettingDataForConfigurationFirstBox: function() {
+        var param = this.getParameter("sysparm_param");
+        var param1 = this.getParameter("sysparm_param1");
+        var dao = new Cisco_DAOScript();
+        var result = dao.gettingDataForConfigurationsButton1(param, param1);
+        return result;
+    },
+
+    getSeverityOnChangeOfSyslog: function() {
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown getting group data for graphs.");
+            // 			var count1 = 0;
+            // 			var result = 0;
+            var x_axis = [];
+            var json = {};
+            var output = [];
+            var y_axis = {};
+            var output1 = [];
+            var y_axis1 = {};
+            var output2 = [];
+            var y_axis2 = {};
+            var output_final = [];
+            var severity = this.getParameter('sysparm_severity');
+            var fromDt = this.getParameter('sysparm_from_date');
+            var toDt = this.getParameter('sysparm_to_date');
+            var tab = this.getParameter('sysparm_tablist_val');
+
+            // if(severity == 0){
+            var syslogseverity = new GlideAggregate('x_caci_cisco_bcs_cisco_syslog_daily');
+            syslogseverity.addQuery('customer_id', id);
+            if (severity != "0") {
+                syslogseverity.addQuery(tab, severity);
+            }
+            if (fromDt && toDt)
+                syslogseverity.addEncodedQuery("date>=javascript:gs.dateGenerate(" + "'" + fromDt + "','00:00:00')" + "^date<=javascript:gs.dateGenerate(" + "'" + toDt + "','23:59:59')");
+            syslogseverity.groupBy('messagetype');
+            syslogseverity.addAggregate('SUM', 'totaleventcount');
+            syslogseverity.query();
+            while (syslogseverity.next()) {
+                var totalcount = syslogseverity.getAggregate('SUM', 'totaleventcount');
+                y_axis = {
+                    "key": syslogseverity.messagetype + "",
+                    "value": totalcount
+                };
+                output.push(y_axis);
+            }
+
+            var deviceseverity = new GlideAggregate('x_caci_cisco_bcs_device_name');
+            deviceseverity.addQuery('customer_id', id);
+            if (severity != "0") {
+                deviceseverity.addQuery(tab, severity);
+            }
+            if (fromDt && toDt)
+                deviceseverity.addEncodedQuery("date>=javascript:gs.dateGenerate(" + "'" + fromDt + "','00:00:00')" + "^date<=javascript:gs.dateGenerate(" + "'" + toDt + "','23:59:59')");
+            deviceseverity.groupBy('messagetype');
+            deviceseverity.addAggregate('COUNT', 'deviceid');
+            deviceseverity.query();
+            while (deviceseverity.next()) {
+                var count = deviceseverity.getAggregate('COUNT', 'deviceid');
+                y_axis1 = {
+                    "key": deviceseverity.messagetype + "",
+                    "value": count
+                };
+                output1.push(y_axis1);
+            }
+
+            var deviceseverity1 = new GlideAggregate('x_caci_cisco_bcs_device_name');
+            deviceseverity1.addQuery('customer_id', id);
+            if (severity != "0") {
+                deviceseverity1.addQuery(tab, severity);
+            }
+            if (fromDt && toDt)
+                deviceseverity1.addEncodedQuery("date>=javascript:gs.dateGenerate(" + "'" + fromDt + "','00:00:00')" + "^date<=javascript:gs.dateGenerate(" + "'" + toDt + "','23:59:59')");
+            deviceseverity1.groupBy('devicename');
+            deviceseverity1.addAggregate('SUM', 'eventcount');
+            deviceseverity1.query();
+
+            while (deviceseverity1.next()) {
+                var count1 = 0;
+                var result = 0;
+                count1 = parseInt(count1) + parseInt(deviceseverity1.getAggregate('SUM', 'eventcount'));
+                result = count1;
+                y_axis2 = {
+                    "key": deviceseverity1.devicename + "",
+                    "value": result
+                };
+
+                output2.push(y_axis2);
+            }
+
+
+            //json = output + output1;
+            output_final.push(output);
+            output_final.push(output1);
+            output_final.push(output2);
+
+            gs.info("demo json " + JSON.stringify(output_final));
+
+            return JSON.stringify(output_final);
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.getSeverity, error getting group data for graphs " + e);
+        }
+    },
+
+    gettingDataForReloadCrashdataBox: function() {
+        var id = this.getclientid();
+        var timscale = this.getParameter('sysparm_time_scale') + "";
+        gs.info('Created time: ' + timscale);
+        var filter1;
+        filter1 = this.gettingDateForFilter(-1 * timscale);
+        //filter1 = this.gettingDateForFilter(-1 * 6);
+        gs.info('Local Time: ' + filter1);
+        var output = [];
+        var count1 = 0;
+        var count2 = 0;
+        var resetdata = new GlideRecord("x_caci_cisco_bcs_cisco_device_reset_history");
+        resetdata.addQuery('customer_id', id);
+        resetdata.query();
+        while (resetdata.next()) {
+            var parsedData = JSON.parse(resetdata.resetdetails);
+            var length = parsedData.length;
+            //gs.info(length);
+            var resetType = [];
+            var resetTime = [];
+            for (var i = 0; i < parsedData.length; i++) {
+                gs.info('Reset Time: ' + parsedData[i].resetTimestamp);
+                // var rese_tm = parsedData[i].resetTimestamp.toString();
+                var reset_tm1 = new GlideDateTime(parsedData[i].resetTimestamp);
+                var reset_tm = reset_tm1.getDisplayValue();
+                gs.info('Reset parsed Time: ' + reset_tm);
+                var reset_t = parsedData[i].resetType.toString();
+            }
+            if (reset_t == 'reload' && reset_tm >= filter1) {
+                count1 = count1 + length;
+            } else if (reset_t == 'crash' && reset_tm >= filter1)
+                count2 = count2 + length;
+        }
+        gs.info('Reset count: ' + count1 + '\n' + count2);
+        output.push(count2); //+ 'Crashes'
+        output.push(count1); //+ 'Reloads'
+        gs.info('Reset out: ' + output);
+        return JSON.stringify(output);
+    },
+    checkWhetherAnyScheduleJobIsRunningOrNot: function() {
+
+        try {
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.checkWhetherAnyScheduleJobIsRunningOrNot().");
+            var daoScrpt = new Cisco_DAOScript();
+            var result = daoScrpt.checkWhetherAnyScheduleJobIsRunningOrNot();
+            return result;
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.checkWhetherAnyScheduleJobIsRunningOrNot(). Error :- " + e);
+        }
+    },
+
+    getdata: function() {
+        try {
+
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.gettingDataFromDeleteButton() getting data from delete button.");
+            var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_field_notices');
+            ga.addAggregate('COUNT', 'field_notice_id');
+            ga.setGroup(true);
+            ga.groupBy("field_notice_id");
+            ga.query();
+            var count = 0;
+            while (ga.next()) {
+                count++;
+            }
+
+            var sec_adv = 0;
+            var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_security_advisories');
+            ga.addAggregate('COUNT', 'psirt_cold_id');
+            ga.setGroup(true);
+            ga.groupBy("psirt_cold_id");
+            ga.query();
+            while (ga.next()) {
+                sec_adv++;
+            }
+            return count + "," + sec_adv;
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.gettingDataFromDeleteButton() while getting data from delete button. Error :- " + e);
+        }
+    },
+
+    configurationSecondGraph: function() {
+        var param = this.getParameter("sysparm_param");
+        var param1 = this.getParameter("sysparm_param1");
+        var dao = new Cisco_DAOScript();
+        var result = dao.configurationSecondGraph(param, param1);
+        return result;
+    },
+    configurationFirstGraph: function() {
+        var param = this.getParameter("sysparm_param");
+        var param1 = this.getParameter("sysparm_param1");
+        var dao = new Cisco_DAOScript();
+        var result = dao.configurationFirstGraph(param, param1);
+        return result;
+
+    },
+    hardwareLifecycleWidget: function() {
+        try {
+            var id = this.getclientid();
+            var asset_type = "=" + this.getParameter('sysparm_hw_value');
+            if (asset_type == "=All")
+                asset_type = "ANYTHING";
+
+            var logger = new Cisco_BCS_SNLogger();
+            var gdt = new GlideDateTime();
+            gdt.addYearsLocalTime(1);
+            var d1 = gdt + "";
+            gdt.addYearsLocalTime(2);
+            var d2 = gdt + "";
+
+            var query = ["current_milestone=LDoS^current_milestone_date<javascript:gs.beginningOfToday()^physical_type" + asset_type, "current_milestone=LDoS^current_milestone_dateBETWEENjavascript:gs.beginningOfToday()@javascript:gs.endOfNextYear()^physical_type" + asset_type, "current_milestone=LDoS^physical_type" + asset_type + "^current_milestone_dateBETWEEN" + d1 + "@" + d2, "current_milestone=LDoS^physical_type" + asset_type + "^current_milestone_date>=" + d2];
+
+            var result = [];
+            for (var i = 0; i < query.length; i++) {
+                var k = 0;
+                var hardwareGr = new GlideAggregate("x_caci_cisco_bcs_cisco_hardware_lifecycle");
+                hardwareGr.addQuery('customer_id', id);
+                hardwareGr.addAggregate('COUNT', 'hw_id');
+                hardwareGr.addEncodedQuery(query[i]);
+                hardwareGr.query();
+                while (hardwareGr.next())
+                    k++;
+                result[i] = k;
+            }
+            return JSON.stringify(result);
+
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.getHardwareLifecycle(). Error :- " + e);
+        }
+    },
+
+    hardwareLifecycleDrilldown: function() {
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            var milestone = "=" + this.getParameter('sysparm_milestone');
+            var type = "=" + this.getParameter('sysparm_type');
+            var tab = this.getParameter('sysparm_tab');
+            var data = [];
+            var date;
+            var filter = "";
+            var globalFilter;
+            var count = 0;
+            if (tab == "currentmilestone") {
+                globalFilter = "current_milestone";
+                date = "current_milestone_date";
+            } else {
+                globalFilter = "next_milestone";
+                date = "next_milestone_date";
+            }
+
+            var gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+            if (milestone == "=All" && type != "=All")
+                milestone = "ANYTHING";
+            else if (type == "=All" && milestone != "=All")
+                type = "ANYTHING";
+            else if (milestone == "=All" && type == "=All") {
+                type = "ANYTHING";
+                milestone = "ANYTHING";
+            }
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
+            gr.addEncodedQuery(date + "<javascript:gs.beginningOfToday()");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            var d1 = new GlideDateTime();
+            var d2 = new GlideDateTime();
+            d2.addYearsLocalTime(1);
+            count = 0;
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
+            gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            var d1 = new GlideDateTime();
+            var d2 = new GlideDateTime();
+            d1.addYearsLocalTime(1);
+            d2.addYearsLocalTime(3);
+            count = 0;
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
+            gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            var d1 = new GlideDateTime();
+            var d2 = new GlideDateTime();
+            d1.addYearsLocalTime(2);
+            d2.addYearsLocalTime(3);
+            count = 0;
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
+            gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            var d1 = new GlideDateTime();
+            d1.addYearsLocalTime(3);
+            count = 0;
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
+            gr.addEncodedQuery(date + ">javascript:gs.dateGenerate('" + d1 + "')");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^physical_type" + type);
+            gr.addEncodedQuery(date + 'ISEMPTY');
+            gr.query();
+            count = 0;
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            return JSON.stringify(data);
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.getHardwareLifecycle(). Error :- " + e);
+        }
+
+    },
+    softwareDrillDownViewForDistintElementID: function() {
+        var data = {};
+        var arr = [];
+        var count = 0;
+        var filter;
+        var id = this.getclientid();
+        var milestone = "=" + this.getParameter("sysparm_param1");
+        var type = "=" + this.getParameter("sysparm_param2");
+        var tab = this.getParameter("sysparm_tab");
+        var filter;
+        if (milestone == "=All" && type == "=All") {
+            type = "ANYTHING";
+            milestone = "ANYTHING";
+        } else if (milestone != "=All" && type == "=All")
+            type = "ANYTHING";
+        else if (milestone == "=All" && type != "=All")
+            milestone = "ANYTHING";
+        if (tab == "current")
+            filter = "current_milestone";
+        else
+            filter = "next_milestone";
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_lifecycle');
+        ga.addQuery("customer_id", id);
+        ga.addEncodedQuery(filter + milestone + "^sw_type" + type);
+        ga.addAggregate('COUNT', 'sw_version');
+        ga.orderByAggregate('COUNT', 'sw_version');
+        ga.query();
+        while (ga.next()) {
+            var sw_arr = [];
+            data = {};
+            var sw = new GlideRecord("x_caci_cisco_bcs_cisco_software_lifecycle");
+            ga.addQuery("customer_id", id);
+            sw.addQuery("sw_version", ga.sw_version + "");
+            sw.query();
+            while (sw.next()) {
+                if (sw_arr.indexOf(sw.device_id + "") < 0)
+                    sw_arr.push(sw.device_id + "");
+            }
+            //data[ga.sw_version] = sw_arr.length;
+            //data[ga.sw_version] = ga.getAggregate('COUNT', 'sw_version');
+            //count++;
+            data.key = ga.sw_version + "";
+            data.count = parseInt(sw_arr.length + "");
+            arr.push(data);
+
+            arr.sort(function(a, b) {
+                var x = a.count;
+                var y = b.count;
+                if (y < x) {
+                    return -1;
+                }
+                if (y > x) {
+                    return 1;
+                }
+                return 0;
+            });
+            var range = arr.length;
+            if (range > 10)
+                range = 10;
+            var result = {};
+            for (var i = 0; i < range; i++) {
+                var obj = arr[i];
+                result[obj.key] = obj.count;
+            }
+
+        }
+        return JSON.stringify(result);
+    },
+    deviceDrillDownViewForDistintElementID: function() {
+        var data = {};
+        var count = 0;
+        var filter;
+        var hw_arr = [];
+        var arr = [];
+        var id = this.getclientid();
+        var milestone = "=" + this.getParameter("sysparm_param1");
+        var type = "=" + this.getParameter("sysparm_param2");
+        var tab = this.getParameter("sysparm_tab");
+        var filter;
+        if (milestone == "=All" && type == "=All") {
+            type = "ANYTHING";
+            milestone = "ANYTHING";
+        } else if (milestone != "=All" && type == "=All")
+            type = "ANYTHING";
+        else if (milestone == "=All" && type != "=All")
+            milestone = "ANYTHING";
+        if (tab == "current")
+            filter = "current_milestone";
+        else
+            filter = "next_milestone";
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_hardware_lifecycle');
+        ga.addQuery('customer_id', id);
+        ga.addEncodedQuery(filter + milestone + "^physical_type" + type);
+        ga.addAggregate('COUNT', 'product_id');
+        //ga.orderByAggregate('COUNT', 'product_id');
+        ga.query();
+        while (ga.next()) {
+            var elements = 0;
+            hw_arr = [];
+            data = {};
+            var hw = new GlideRecord("x_caci_cisco_bcs_cisco_hardware_lifecycle");
+            hw.addQuery('customer_id', id);
+            hw.addQuery("product_id", ga.product_id + "");
+            hw.query();
+            while (hw.next()) {
+
+                if (hw_arr.indexOf(hw.physical_element_id + "") < 0) {
+                    hw_arr.push(hw.physical_element_id + "");
+
+                }
+            }
+            //data[ga.product_id] = hw_arr.length;
+            //count++;
+
+            data.key = ga.product_id + "";
+            data.count = parseInt(hw_arr.length + "");
+            arr.push(data);
+        }
+
+
+        arr.sort(function(a, b) {
+            var x = a.count;
+            var y = b.count;
+            if (y < x) {
+                return -1;
+            }
+            if (y > x) {
+                return 1;
+            }
+            return 0;
+        });
+        var range = arr.length;
+        if (range > 10)
+            range = 10;
+        var result = {};
+        for (var i = 0; i < range; i++) {
+            var obj = arr[i];
+            result[obj.key] = obj.count;
+        }
+
+        return JSON.stringify(result);
+    },
+
+    softwareLifecycleWidget: function() {
+
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            var gdt = new GlideDateTime();
+            gdt.addYearsLocalTime(1);
+            var d1 = gdt + "";
+            gdt.addYearsLocalTime(2);
+            var d2 = gdt + "";
+
+            var query = ["current_milestone_date<javascript:gs.beginningOfToday()", "current_milestone_dateBETWEENjavascript:gs.beginningOfToday()@javascript:gs.endOfNextYear()", "current_milestone_dateBETWEEN" + d1 + "@" + d2, "current_milestone_date>=" + d2];
+
+            var result = [];
+            for (var i = 0; i < query.length; i++) {
+                var k = 0;
+                var softwareGr = new GlideAggregate("x_caci_cisco_bcs_cisco_software_lifecycle");
+                softwareGr.addQuery('customer_id', id);
+                softwareGr.addAggregate("COUNT", "sw_id");
+                softwareGr.addEncodedQuery(query[i]);
+                softwareGr.addQuery('current_milestone', 'LDoS');
+                softwareGr.query();
+                while (softwareGr.next())
+                    k++;
+                result[i] = k;
+            }
+            return JSON.stringify(result);
+
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.getSoftwareLifecycleData(). Error :- " + e);
+        }
+    },
+
+    softwareLifecycleDrilldown: function() {
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            var milestone = "=" + this.getParameter('sysparm_milestone');
+            var type = "=" + this.getParameter('sysparm_type');
+            var tab = this.getParameter('sysparm_tab');
+            var data = [];
+            var date;
+            var filter = "";
+            var globalFilter;
+            var count = 0;
+            if (tab == "currentmilestone") {
+                globalFilter = "current_milestone";
+                date = "current_milestone_date";
+            } else {
+                globalFilter = "next_milestone";
+                date = "next_milestone_date";
+            }
+
+            var gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
+            if (milestone == "=All" && type != "=All")
+                milestone = "ANYTHING";
+            else if (type == "=All" && milestone != "=All")
+                type = "ANYTHING";
+            else if (milestone == "=All" && type == "=All") {
+                type = "ANYTHING";
+                milestone = "ANYTHING";
+            }
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
+            gr.addEncodedQuery(date + "<javascript:gs.beginningOfToday()");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            var d1 = new GlideDateTime();
+            var d2 = new GlideDateTime();
+            d2.addYearsLocalTime(1);
+            count = 0;
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
+            gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            var d1 = new GlideDateTime();
+            var d2 = new GlideDateTime();
+            d1.addYearsLocalTime(1);
+            d2.addYearsLocalTime(3);
+            count = 0;
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
+            gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            var d1 = new GlideDateTime();
+            var d2 = new GlideDateTime();
+            d1.addYearsLocalTime(2);
+            d2.addYearsLocalTime(3);
+            count = 0;
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
+            gr.addEncodedQuery(date + "BETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            var d1 = new GlideDateTime();
+            d1.addYearsLocalTime(3);
+            count = 0;
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
+            gr.addEncodedQuery(date + ">javascript:gs.dateGenerate('" + d1 + "')");
+            gr.query();
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            gr = new GlideRecord('x_caci_cisco_bcs_cisco_software_lifecycle');
+            gr.addQuery('customer_id', id);
+            gr.addEncodedQuery(globalFilter + milestone + "^sw_type" + type);
+            gr.addEncodedQuery(date + 'ISEMPTY');
+            gr.query();
+            count = 0;
+            while (gr.next())
+                count++;
+            data.push(count);
+
+            return JSON.stringify(data);
+
+        } catch (e) {
+            logger.error("Exception caught inside Cisco_ClientServerBridge.getSoftwareLifecycleData(). Error :- " + e);
+        }
+    },
+
+    getAssets: function() {
+        var result = [];
+        var k = 0;
+        var id = this.getclientid();
+        var assetGr = new GlideRecord("x_caci_cisco_bcs_cisco_assets");
+        assetGr.addQuery('customer_id', id);
+        //assetGr.addQuery("install_status", "!=", "7");
+        assetGr.query();
+        while (assetGr.next())
+            k++;
+        result[0] = k;
+        k = 0;
+        assetGr.addEncodedQuery("serial_number_status=INVALID");
+        assetGr.query();
+        while (assetGr.next())
+            k++;
+        result[1] = k;
+        result[2] = Math.round((result[1] / result[0]) * 100);
+
+        return JSON.stringify(result);
+
+    },
+    getDevices: function() {
+        try {
+            var device = [];
+            var count = 0;
+            var id = this.getclientid();
+            var gr = new GlideRecord("x_caci_cisco_bcs_cisco_devices");
+
+            gr.addQuery('customer_id', id);
+            //gr.addQuery('customer_id', gs.getProperty("x_caci_cisco_bcs.customer_id"));
+            gr.addQuery("config_status", "!=", "NotAvailable");
+            //gr.addQuery("install_status", "!=", "7");
+            gr.query();
+            while (gr.next()) {
+
+                count++;
+            }
+
+            device[0] = count;
+            var count1 = 0;
+            var gr = new GlideRecord("x_caci_cisco_bcs_cisco_devices");
+            gr.addQuery('customer_id', id);
+            //gr.addQuery('customer_id', gs.getProperty("x_caci_cisco_bcs.customer_id"));
+            gr.addQuery("device_status", "DEVICE NOT REACHABLE");
+            //gr.addQuery("install_status", "!=", "7");
+            gr.query();
+            while (gr.next()) {
+                count1++;
+            }
+
+            device[1] = count1;
+            var count2 = 0;
+            var gr = new GlideRecord("x_caci_cisco_bcs_cisco_devices");
+            gr.addQuery('customer_id', id);
+            //gr.addQuery('customer_id', gs.getProperty("x_caci_cisco_bcs.customer_id"));
+            //gr.addQuery("install_status", "!=", "7");
+            gr.query();
+            while (gr.next()) {
+                count2++;
+            }
+            device[2] = count2;
+            //             var count3 = 0;
+            //             var unidentified = new GlideAggregate('x_caci_cisco_bcs_unidentified_inventory_details');
+            //             unidentified.addQuery('customer_id', id);
+            //             unidentified.addAggregate('COUNT', 'unidentifieddeviceipaddress');
+            //             unidentified.groupBy('unidentifieddeviceipaddress');
+            //             unidentified.addNotNullQuery("unidentifieddeviceipaddress");
+            //             unidentified.query();
+            //             while (unidentified.next()) {
+            //                 count3++;
+            //             }
+            //             device[3] = count3;
+            return JSON.stringify(device);
+        } catch (e) {}
+    },
+
+    getDevicesatRisk: function() {
+        var id = this.getclientid();
+        var result = 0;
+        var result1 = 0;
+        var result2 = 0;
+        var result3 = 0;
+        var tot1 = 0;
+        var tot2 = 0;
+        var tot3 = 0;
+        var output = [];
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_risk_mitigation_summary');
+        var x_axis = {};
+        ga.addQuery('customer_id', id);
+        //ga.groupBy('highriskdevicecount');
+        ga.addAggregate('SUM', 'highriskdevicecount');
+        ga.query();
+        while (ga.next()) {
+            //result[ga.highriskdevicecount] = ga.getAggregate('SUM','highriskdevicecount');
+            tot1 = parseInt(tot1) + parseInt(ga.getAggregate('SUM', 'highriskdevicecount'));
+            //tot1 = parseInt(tot1) + parseInt(ga.highriskdevicecount);
+            result1 = tot1;
+
+        }
+        x_axis['High'] = '' + result1;
+        //output.push(high);
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_risk_mitigation_summary');
+        //var low = {};
+        //ga.groupBy('lowriskdevicecount');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('SUM', 'lowriskdevicecount');
+        ga.query();
+        while (ga.next()) {
+            //result[ga.lowriskdevicecount] = ga.getAggregate('SUM','lowriskdevicecount');
+            tot2 = parseInt(tot2) + parseInt(ga.getAggregate('SUM', 'lowriskdevicecount'));
+            //tot2 = parseInt(tot2) + parseInt(ga.lowriskdevicecount);
+            result2 = tot2;
+
+        }
+        x_axis['Low'] = '' + result2;
+
+        // output.push(low);
+
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_risk_mitigation_summary');
+        //var medium = {};
+        //ga.groupBy('mediumriskdevicecount');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('SUM', 'mediumriskdevicecount');
+        ga.query();
+        while (ga.next()) {
+            //result[ga.mediumriskdevicecount] = ga.getAggregate('SUM','mediumriskdevicecount');
+            tot3 = parseInt(tot3) + parseInt(ga.getAggregate('SUM', 'mediumriskdevicecount'));
+            //  tot3 = parseInt(tot3) + parseInt(ga.mediumriskdevicecount);
+            result3 = tot3;
+        }
+        x_axis['Medium'] = '' + result3;
+        result = result1 + result2 + result3;
+        output.push(x_axis);
+        output.push(result);
+        return JSON.stringify(output);
+    },
+
+    getSWcompliance: function() {
+        var id = this.getclientid();
+        var result = 0;
+        var result_t = 0;
+        var count = 0;
+        var tot1 = 0;
+        var tot2 = 0;
+        var tot3 = 0;
+        var tot4 = 0;
+        var output = [];
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_track_summary');
+        //var medium = {};
+        //ga.groupBy('mediumriskdevicecount');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('SUM', 'softwaretracktotaldevicecount');
+        ga.query();
+        while (ga.next()) {
+            //result[ga.mediumriskdevicecount] = ga.getAggregate('SUM','mediumriskdevicecount');
+            tot3 = parseInt(tot3) + parseInt(ga.getAggregate('SUM', 'softwaretracktotaldevicecount'));
+            //  tot3 = parseInt(tot3) + parseInt(ga.mediumriskdevicecount);
+            result_t = tot3;
+        }
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_track_summary');
+        var x_axis = {};
+        //ga.groupBy('highriskdevicecount');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('SUM', 'softwaretrackcompliantdevicecount');
+        ga.query();
+        while (ga.next()) {
+            //result[ga.highriskdevicecount] = ga.getAggregate('SUM','highriskdevicecount');
+            tot1 = parseInt(tot1) + parseInt(ga.getAggregate('SUM', 'softwaretrackcompliantdevicecount'));
+            //tot1 = parseInt(tot1) + parseInt(ga.highriskdevicecount);
+            result = tot1;
+
+        }
+
+        x_axis['Compliant'] = '' + result;
+
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_track_summary');
+        //var low = {};
+        //ga.groupBy('lowriskdevicecount');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('SUM', 'softwaretracknoncompliantdevicecount');
+        ga.query();
+        while (ga.next()) {
+            //result[ga.lowriskdevicecount] = ga.getAggregate('SUM','lowriskdevicecount');
+            tot2 = parseInt(tot2) + parseInt(ga.getAggregate('SUM', 'softwaretracknoncompliantdevicecount'));
+            //tot2 = parseInt(tot2) + parseInt(ga.lowriskdevicecount);
+            result = tot2;
+
+        }
+
+        x_axis['Non-Compliant'] = '' + result;
+        var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_track_summary');
+        ga.addQuery('customer_id', id);
+        ga.addAggregate('COUNT', 'softwaretrackid');
+        ga.query();
+        while (ga.next()) {
+            tot4 = parseInt(tot4) + parseInt(ga.getAggregate('COUNT', 'softwaretrackid'));
+            count = tot4;
+        }
+        output.push(x_axis);
+        output.push(result_t);
+        output.push(count);
+        return JSON.stringify(output);
+    },
+
+
+    getFeedbackForm: function() {
+
+        var dataArray1 = this.getParameter('sysparm_array');
+        var dataArray = JSON.parse(dataArray1);
+        for (var k in dataArray) {
+            var gr = new GlideRecord("x_caci_cisco_bcs_cisco_bcs_feedback_form");
+            gr.initialize();
+            gr.rating = (dataArray[k].rating);
+            gr.drilldown_view = (dataArray[k].view) + "";
+            gr.feedback_view = "Global View";
+            if (dataArray[k].feedback + "" != "-")
+                gr.overall_feedback = (dataArray[k].feedback) + "";
+            else
+                gr.overall_feedback = " ";
+            if (gs.getUser().getEmail())
+                gr.username = gs.getUser().getEmail() + "";
+            else
+                gr.username = "unknown@unknown.com";
+            gr.user_name = gs.getUserName() + "";
+            gr.insert();
+        }
+        return true;
+
+    },
+
+    getVulnerabilityData: function() {
+
+        var tableName = this.getParameter('sysparm_tableName');
+        var result = [];
+        var count = 0;
+        var id = this.getclientid();
+        var tableGr = new GlideRecord(tableName);
+        tableGr.addQuery('customer_id', id);
+        tableGr.addQuery("match_confidence", "Vulnerable");
+        tableGr.query();
+        while (tableGr.next())
+            count++;
+        result[0] = count;
+        count = 0;
+        tableGr.initialize();
+        tableGr.addQuery('customer_id', id);
+        tableGr.addQuery("match_confidence", "Potentially Vulnerable");
+        tableGr.query();
+        while (tableGr.next())
+            count++;
+        result[1] = count;
+        count = 0;
+        tableGr.initialize();
+        tableGr.addQuery('customer_id', id);
+        tableGr.addQuery("match_confidence", "Not Vulnerable");
+        tableGr.query();
+        while (tableGr.next())
+            count++;
+        result[2] = count;
+        return JSON.stringify(result);
+    },
+    graphOfMatchConfidenceForVurlneabilitiesDrillDown: function() {
+        var logger = new Cisco_BCS_SNLogger();
+        try {
+            var id = this.getclientid();
+            logger.debug("Inside Cisco_ClientServerBridge.getGroupdata getting group data for graphs.");
+            var json = {};
+            var result = [];
+            var tableName = this.getParameter('sysparm_table_name');
+            var groupBy = this.getParameter('sysparm_group_by');
+            var timeScale = this.getParameter('sysparm_time_scale');
+
+
+            var psirt_arr = [];
+            var arrayUtil = new global.ArrayUtil();
+            var groupAgg = new GlideAggregate(tableName);
+            groupAgg.addQuery('customer_id', id);
+            groupAgg.addAggregate('COUNT', groupBy + ""); //field
+            if (tableName == "x_caci_cisco_bcs_cisco_security_advisories_bulletins") {
+                switch (timeScale) {
+                    case "3":
+                    case "6":
+                    case "9":
+                    case "12":
+                        var date = this.gettingDateForFilter(-1 * timeScale);
+                        groupAgg.addEncodedQuery("bulletin_first_published>=" + date);
+                        result.push(date);
+                        break;
+                    case "12plus":
+                        var date = this.gettingDateForFilter(-12);
+                        groupAgg.addEncodedQuery("bulletin_first_published<=" + date);
+                        result.push(date);
+                        break;
+                    case "all":
+                        //groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable");
+                        result.push(0);
+                        break;
+                }
+            } else {
+                switch (timeScale) {
+                    case "3":
+                    case "6":
+                    case "9":
+                    case "12":
+                        var date = this.gettingDateForFilter(-1 * timeScale);
+                        //groupAgg.addEncodedQuery("bulletin_first_published>=" + date);// + "^match_confidence!=Not Vulnerable");
+                        groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published>=" + date + "^match_confidence!=Not Vulnerable");
+                        result.push(date);
+                        break;
+                    case "12plus":
+                        var date = this.gettingDateForFilter(-12);
+                        //groupAgg.addEncodedQuery("bulletin_first_published<="+ date);// + "^match_confidence!=Not Vulnerable");
+                        groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published<=" + date + "^match_confidence!=Not Vulnerable");
+                        result.push(date);
+                        break;
+                    case "all":
+                        groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable");
+                        result.push(0);
+                        break;
+                }
+            }
+            groupAgg.query();
+            while (groupAgg.next()) {
+
+                if (tableName == "x_caci_cisco_bcs_cisco_security_advisories_bulletins") {
+
+                    var psirt_id = groupAgg.getValue([groupBy]);
+                    if (!arrayUtil.contains(psirt_arr, psirt_id)) {
+                        psirt_arr.push(psirt_id);
+                        var match_confidence = groupAgg.getValue("sir");
+                        if (match_confidence == "")
+                            match_confidence = "No_SIR";
+                        var match_confidence_arr = match_confidence.split(" ");
+                        match_confidence = "";
+                        for (var i in match_confidence_arr)
+                            match_confidence = match_confidence + match_confidence_arr[i];
+                        json[match_confidence] = groupAgg.getAggregate('COUNT', "sir");
+                    }
+                } else {
+                    var match_confidence = groupAgg.getValue(groupBy);
+                    var match_confidence_arr = match_confidence.split(" ");
+                    match_confidence = "";
+                    for (var i in match_confidence_arr)
+                        match_confidence = match_confidence + match_confidence_arr[i];
+                    json[match_confidence] = groupAgg.getAggregate('COUNT', groupBy);
+
+                }
+            }
+            result.push(json);
+
+            return JSON.stringify(result);
+
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.getGroupdata, error getting group data for graphs " + e);
+        }
+    },
+
+    graphOfFieldNoticeDeviceIdDrilldown: function() {
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown getting group data for graphs.");
+            var json = {};
+            var fn_array = [];
+            var tableName = this.getParameter('sysparm_table_name') + "";
+            var groupBy = this.getParameter('sysparm_group_by') + "";
+            var timeScale = this.getParameter('sysparm_time_scale') + "";
+            gs.info('vulnerable time: ' + timeScale);
+            var groupAgg = new GlideAggregate(tableName);
+            groupAgg.addQuery('customer_id', id);
+            groupAgg.addAggregate('COUNT', groupBy);
+
+            groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable"); //psirt_cold_id_ref.bulletin_first_published<javascript:gs.beginningOfLast6Months()
+            if (tableName == "x_caci_cisco_bcs_cisco_security_advisories") {
+
+                switch (timeScale) {
+                    case "3":
+                    case "6":
+                    case "9":
+                    case "12":
+                        var date = this.gettingDateForFilter(-1 * timeScale);
+                        groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_published>=" + date + "^match_confidence!=Not Vulnerable");
+                        fn_array.push(date);
+                        //groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_publishedBETWEENjavascript:gs.dateGenerate('" + date +"')@javascript:gs.endOfToday()^match_confidence!=Not Vulnerable");
+                        break;
+                    case "12plus":
+                        var date = this.gettingDateForFilter(-12);
+                        groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_published<=" + date + "^match_confidence!=Not Vulnerable");
+                        fn_array.push(date);
+                        break;
+                    case "all":
+                        break;
+                }
+            }
+            //groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_published>=javascript:gs.beginningOfLast" + timeScale + "Months()");
+            else {
+                switch (timeScale) {
+                    case "3":
+                    case "6":
+                    case "9":
+                    case "12":
+                        var date = this.gettingDateForFilter(-1 * timeScale);
+                        groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published>=" + date + "^match_confidence!=Not Vulnerable");
+                        fn_array.push(date);
+
+                        //	groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_publishedBETWEENjavascript:gs.dateGenerate('" + date +"')@javascript:gs.endOfToday()^match_confidence!=Not Vulnerable");
+                        break;
+                    case "12plus":
+                        var date = this.gettingDateForFilter(-12);
+                        groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published<=" + date + "^match_confidence!=Not Vulnerable");
+                        fn_array.push(date);
+                        break;
+                    case "all":
+                        break;
+                }
+            }
+
+            groupAgg.orderByAggregate('COUNT', groupBy);
+            groupAgg.query();
+            var count = 0;
+            while (groupAgg.next() && count < 10) {
+                count++;
+                var group = groupAgg[groupBy] + "";
+
+                if (groupBy == "psirt_cold_id") {
+                    var gr = new GlideRecord("x_caci_cisco_bcs_cisco_security_advisories_bulletins");
+                    gr.addQuery('customer_id', id);
+                    gr.addQuery('psirt_cold_id', groupAgg[groupBy]);
+                    gr.query();
+                    if (gr.next()) {
+                        group = gr.psirt_advisory_id;
+                    }
+                } else if (groupBy == "field_notice_id")
+                    group = "fn" + group;
+
+                else
+                    group = group + "A";
+                json[group] = groupAgg.getAggregate('COUNT', groupBy);
+            }
+            fn_array.push(json);
+            return JSON.stringify(json);
+
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown, error getting group data for graphs " + e);
+        }
+    },
+
+    gettingDateForFilter: function(month) {
+        var d2 = new GlideDateTime();
+        //d2.addMonthsUTC(month);
+        d2.addMonthsLocalTime(month);
+        return (d2 + "");
+    },
+
+    graphOfFieldNoticeDeviceCount: function() {
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown getting group data for graphs.");
+            var fn_array = [];
+            // 			var result1 = [];
+            var tableName = this.getParameter('sysparm_table_name') + "";
+            var groupBy = this.getParameter('sysparm_group_by') + "";
+            var timeScale = this.getParameter('sysparm_time_scale') + "";
+
+            var json = [];
+            var groupAgg = new GlideAggregate("x_caci_cisco_bcs_cisco_field_notices");
+            groupAgg.addQuery('customer_id', id);
+            groupAgg.addAggregate('COUNT', "field_notice_id");
+
+            switch (timeScale) {
+                case "3":
+                case "6":
+                case "9":
+                case "12":
+                    var date = this.gettingDateForFilter(-1 * timeScale);
+                    groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published>=" + date + "^match_confidence!=Not Vulnerable");
+                    // 					result1.push(date);
+                    break;
+                case "12plus":
+                    var date = this.gettingDateForFilter(-12);
+                    groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published<=" + date + "^match_confidence!=Not Vulnerable");
+                    // 					result1.push(date);
+                    break;
+                case "all":
+                    break;
+            }
+            groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable");
+            groupAgg.orderByAggregate('COUNT', "field_notice_id");
+            groupAgg.query();
+            while (groupAgg.next()) {
+                var group = "fn" + groupAgg["field_notice_id"];
+                var groupAgg1 = new GlideAggregate("x_caci_cisco_bcs_cisco_field_notices");
+                groupAgg1.addQuery('customer_id', id);
+                groupAgg1.addAggregate('COUNT', "device_id");
+                groupAgg1.addQuery("field_notice_id", groupAgg["field_notice_id"]);
+                groupAgg1.addQuery("match_confidence", "!=", "Not Vulnerable");
+                groupAgg.orderByAggregate('COUNT', "device_id");
+                groupAgg1.query();
+                var count = 0;
+                var record = {};
+                record.fn_id = groupAgg["field_notice_id"] + '';
+                while (groupAgg1.next())
+                    count++;
+                record.dev_count = count;
+                json.push(record);
+            }
+            gs.info('Device Count fn1: ' + JSON.stringify(json));
+            json.sort(function(a, b) {
+                var x = a.dev_count;
+                var y = b.dev_count;
+                if (y < x) {
+                    return -1;
+                }
+                if (y > x) {
+                    return 1;
+                }
+                return 0;
+            });
+            var range = json.length;
+            if (range > 10)
+                range = 10;
+            var result = {};
+            for (var i = 0; i < range; i++) {
+                var obj = json[i];
+                result["fn" + obj.fn_id] = obj.dev_count;
+            }
+            gs.info('Device Count fn: ' + JSON.stringify(result));
+            return JSON.stringify(result);
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceCount, error getting group data for graphs " + e);
+        }
+    },
+
+    graphOfFieldNoticeDeviceIdDrilldownFromDevices: function() {
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown getting group data for graphs.");
+            var json = {};
+
+            var tableName = this.getParameter('sysparm_table_name') + "";
+            var groupBy = this.getParameter('sysparm_group_by') + "";
+            //var timeScale = this.getParameter('sysparm_time_scale') + "";
+
+            var groupAgg = new GlideAggregate(tableName);
+            groupAgg.addQuery('customer_id', id);
+            groupAgg.addAggregate('COUNT', groupBy);
+
+            groupAgg.addEncodedQuery("match_confidence!=Not Vulnerable"); //psirt_cold_id_ref.bulletin_first_published<javascript:gs.beginningOfLast6Months()
+            // 			if (tableName == "x_caci_cisco_bcs_cisco_security_advisories")
+            // 				groupAgg.addEncodedQuery("psirt_cold_id_ref.bulletin_first_published>=javascript:gs.beginningOfLast" + timeScale + "Months()");
+            // 			else
+            // 				groupAgg.addEncodedQuery("fieldnoticeid.bulletin_first_published>=javascript:gs.beginningOfLast" + timeScale + "Months()");
+            groupAgg.orderByAggregate('COUNT', groupBy);
+            groupAgg.query();
+            var count = 0;
+            while (groupAgg.next() && count < 10) {
+                count++;
+                var group = groupAgg[groupBy] + "";
+
+                if (groupBy == "psirt_cold_id") {
+                    var gr = new GlideRecord("x_caci_cisco_bcs_cisco_security_advisories_bulletins");
+                    gr.addQuery('customer_id', id);
+                    gr.addQuery('psirt_cold_id', groupAgg[groupBy]);
+                    gr.query();
+                    if (gr.next()) {
+                        group = gr.psirt_advisory_id;
+                    }
+                } else if (groupBy == "field_notice_id") {
+                    group = "fn" + group;
+                }
+
+                //	else
+                //group = group + "A";
+                json[group] = groupAgg.getAggregate('COUNT', groupBy);
+            }
+            return JSON.stringify(json);
+
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown, error getting group data for graphs " + e);
+        }
+    },
+
+    graphOfFieldNoticeDeviceIdDrilldownForDevices: function() {
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown getting group data for graphs.");
+
+            var arr = [];
+            var tableName = this.getParameter('sysparm_table_name') + "";
+            var uniqueBy = this.getParameter('sysparm_group_by') + "";
+            //var timeScale = this.getParameter('sysparm_time_scale') + "";
+
+            var groupAgg = new GlideAggregate(tableName);
+            groupAgg.addQuery('customer_id', id);
+            groupAgg.addAggregate('COUNT', "device_id");
+            //groupAgg.orderByAggregate('COUNT', groupBy);
+            groupAgg.addQuery("match_confidence", "!=", "Not Vulnerable");
+            groupAgg.query();
+            //var count = 0;
+            while (groupAgg.next()) {
+                var jsonObj = {};
+                var gr = new GlideRecord(tableName);
+                gr.addQuery('customer_id', id);
+                gr.addQuery("device_id", groupAgg.device_id + "");
+                gr.addQuery("match_confidence", "!=", "Not Vulnerable");
+                gr.query();
+                var unique_arr = [];
+                while (gr.next()) {
+                    if (unique_arr.indexOf(gr[uniqueBy] + "") < 0)
+                        unique_arr.push(gr[uniqueBy] + "");
+                }
+                jsonObj.key = gr.deviceid_ref.name + "";
+                jsonObj.count = unique_arr.length;
+
+                arr.push(jsonObj);
+            }
+            arr.sort(function(a, b) {
+                var x = a.count;
+                var y = b.count;
+                if (y < x) {
+                    return -1;
+                }
+                if (y > x) {
+                    return 1;
+                }
+                return 0;
+            });
+            var range = arr.length;
+            if (range > 10)
+                range = 10;
+            var result = {};
+            for (var i = 0; i < range; i++) {
+                var obj = arr[i];
+                result[obj.key] = obj.count;
+            }
+            return JSON.stringify(result);
+
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.graphOfFieldNoticeDeviceIdDrilldown, error getting group data for graphs " + e);
+        }
+    },
+
+    getAssetDrilldownInfo: function() {
+        var id = this.getclientid();
+        var result = [];
+        var physical_type = {};
+        var aggPhysicalType = new GlideAggregate('x_caci_cisco_bcs_cisco_assets');
+        aggPhysicalType.addQuery('customer_id', id);
+        aggPhysicalType.addAggregate('COUNT', 'physical_type');
+        //aggPhysicalType.addQuery("install_status", "!=", "7");
+        aggPhysicalType.query();
+        while (aggPhysicalType.next())
+            physical_type[aggPhysicalType.physical_type] = aggPhysicalType.getAggregate('COUNT', 'physical_type');
+        result[0] = physical_type;
+
+        // 		var serial_number_status = {};
+        // 		var aggSerialNumber = new GlideAggregate('x_caci_cisco_bcs_cisco_assets');
+        // 		aggSerialNumber.addAggregate('COUNT', 'serial_number_status');
+        // 		aggSerialNumber.addQuery("install_status", "!=", "7");
+        // 		aggSerialNumber.query();
+        // 		while (aggSerialNumber.next())
+        // 			serial_number_status[aggSerialNumber.serial_number_status] = aggSerialNumber.getAggregate('COUNT', 'serial_number_status');
+        // 		result[1] = serial_number_status;
+
+        // 		var warrantyDates = {};
+        // 		var count_out = 0;
+        // 		var aggContract = new GlideRecord('x_caci_cisco_bcs_cisco_contract_lifecycle');
+        // 		aggContract.addEncodedQuery("warranty_end_date<javascript:gs.beginningOfToday()");
+        // 		aggContract.query();
+        // 		while(aggContract.next()){
+        // 			count_out++;
+        // 		}
+        // 		(count_out + "" == "0") ? "" : (warrantyDates["Out of warranty"] = count_out);
+
+        // 		var count_in = 0;
+        // 		aggContract = new GlideRecord('x_caci_cisco_bcs_cisco_contract_lifecycle');
+        // 		aggContract.addEncodedQuery("warranty_end_date>javascript:gs.endOfToday()");
+        // 		aggContract.query();
+        // 		while(aggContract.next()){
+        // 			count_in++;
+        // 		}
+        // 		(count_in + "" == "0") ? "" : (warrantyDates["Under warranty"] = count_in);
+        // 		result[2] = warrantyDates;
+
+
+        var result_arr = [];
+        var grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addQuery('customer_id', id);
+        grContract.addEncodedQuery("service_contract_numberISEMPTY^warranty_end_date<javascript:gs.beginningOfToday()");
+        grContract.query();
+        var expired = 0;
+        while (grContract.next()) {
+            expired++;
+        }
+        result_arr.push(expired);
+
+
+        var d1 = new GlideDateTime();
+        var d2 = new GlideDateTime();
+        d2.addMonthsUTC(3);
+        grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addQuery('customer_id', id);
+        grContract.addEncodedQuery("service_contract_numberISEMPTY^warranty_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+        grContract.query();
+        var zeroTOThreeMonths = 0;
+        while (grContract.next()) {
+            zeroTOThreeMonths++;
+        }
+        result_arr.push(zeroTOThreeMonths);
+        d1.addMonthsUTC(3);
+        d2.addMonthsUTC(9);
+        grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addQuery('customer_id', id);
+        grContract.addEncodedQuery("service_contract_numberISEMPTY^warranty_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+        grContract.query();
+        var threeMonthsToOneYear = 0;
+        while (grContract.next()) {
+            threeMonthsToOneYear++;
+        }
+        result_arr.push(threeMonthsToOneYear);
+
+
+        var d2 = new GlideDateTime();
+        d2.addYearsLocalTime(1);
+        grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addQuery('customer_id', id);
+        grContract.addEncodedQuery("service_contract_numberISEMPTY^warranty_end_date>javascript:gs.dateGenerate('" + d2 + "')");
+        grContract.query();
+        var moreThanOneYear = 0;
+        while (grContract.next()) {
+            moreThanOneYear++;
+        }
+        result_arr.push(moreThanOneYear);
+
+
+        var product_family = {};
+        var limit = 0;
+        var aggProductFamily = new GlideAggregate('x_caci_cisco_bcs_cisco_assets');
+        aggProductFamily.addQuery('customer_id', id);
+        aggProductFamily.addAggregate('COUNT', 'product_family');
+        aggProductFamily.orderByAggregate('COUNT', 'product_family');
+        //aggProductFamily.addQuery("install_status", "!=", "7");
+        aggProductFamily.query();
+        while (aggProductFamily.next() && limit < 10) {
+            product_family[aggProductFamily.product_family] = aggProductFamily.getAggregate('COUNT', 'product_family');
+            limit++;
+        }
+        result[1] = product_family;
+        result[2] = result_arr;
+
+        var result_arr = [];
+        var grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addQuery('customer_id', id);
+        grContract.addEncodedQuery("service_contract_numberISNOTEMPTY^covered_product_line_end_date<javascript:gs.beginningOfToday()");
+        grContract.query();
+        var expired = 0;
+        while (grContract.next()) {
+            expired++;
+        }
+        result_arr.push(expired);
+        var d1 = new GlideDateTime();
+        var d2 = new GlideDateTime();
+        d2.addMonthsUTC(3);
+        grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addQuery('customer_id', id);
+        grContract.addEncodedQuery("service_contract_numberISNOTEMPTY^covered_product_line_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+        grContract.query();
+        var zeroTOThreeMonths = 0;
+        while (grContract.next()) {
+            zeroTOThreeMonths++;
+        }
+        result_arr.push(zeroTOThreeMonths);
+        d1.addMonthsUTC(3);
+        d2.addMonthsUTC(9);
+        grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addQuery('customer_id', id);
+        grContract.addEncodedQuery("service_contract_numberISNOTEMPTY^covered_product_line_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+        grContract.query();
+        var threeMonthsToOneYear = 0;
+        while (grContract.next()) {
+            threeMonthsToOneYear++;
+        }
+        result_arr.push(threeMonthsToOneYear);
+        var d2 = new GlideDateTime();
+        d2.addYearsLocalTime(1);
+        grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addQuery('customer_id', id);
+        grContract.addEncodedQuery("service_contract_numberISNOTEMPTY^covered_product_line_end_date>javascript:gs.dateGenerate('" + d2 + "')");
+        grContract.query();
+        var moreThanOneYear = 0;
+        while (grContract.next()) {
+            moreThanOneYear++;
+        }
+        result_arr.push(moreThanOneYear);
+        result[3] = result_arr;
+
+        return JSON.stringify(result);
+    },
+
+    crashinsightDrilldown: function() {
+        try {
+            var id = this.getclientid();
+            var output = [];
+            var summation = 0;
+            var gr = new GlideAggregate('x_caci_cisco_bcs_cisco_risk_mitigation_summary');
+            gr.addQuery('customer_id', id);
+            // gr.addAggregate("COUNT");
+            //gr.groupBy("productfamily");
+            gr.query();
+
+            while (gr.next()) {
+                var output1 = [];
+                var tot1 = 0;
+                var tot2 = 0;
+                var tot3 = 0;
+                var result = 0;
+                var y_axis = {};
+                var x_axis = {};
+                summation = gr.lowriskdevicecount + gr.highriskdevicecount + gr.mediumriskdevicecount;
+                var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_risk_mitigation_summary');
+                ga.addQuery('customer_id', id);
+
+
+                ga.addQuery('productfamily', gr.productfamily);
+                ga.addAggregate('SUM', 'highriskdevicecount');
+                ga.query();
+
+                while (ga.next()) {
+                    //tot1[ga.highriskdevicecount] = ga.getAggregate('SUM','highriskdevicecount');
+                    tot1 = parseInt(tot1) + parseInt(ga.getAggregate('SUM', 'highriskdevicecount'));
+                    result = tot1;
+                    //total
+                }
+
+                x_axis['High'] = '' + result;
+                ga = new GlideAggregate('x_caci_cisco_bcs_cisco_risk_mitigation_summary');
+                ga.addQuery('customer_id', id);
+
+
+                ga.addQuery('productfamily', gr.productfamily);
+                ga.addAggregate('SUM', 'lowriskdevicecount');
+                ga.query();
+                while (ga.next()) {
+                    //tot2[ga.lowriskdevicecount] = ga.getAggregate('SUM','lowriskdevicecount');
+                    tot2 = parseInt(tot2) + parseInt(ga.getAggregate('SUM', 'lowriskdevicecount'));
+                    result = tot2;
+                }
+
+                x_axis['Low'] = '' + result;
+                var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_risk_mitigation_summary');
+                ga.addQuery('customer_id', id);
+
+
+                ga.addQuery('productfamily', gr.productfamily);
+                ga.addAggregate('SUM', 'mediumriskdevicecount');
+                ga.query();
+                while (ga.next()) {
+                    //tot3[ga.mediumriskdevicecount] = ga.getAggregate('SUM','mediumriskdevicecount');
+                    tot3 = parseInt(tot3) + parseInt(ga.getAggregate('SUM', 'mediumriskdevicecount'));
+                    result = tot3;
+                }
+
+                x_axis['Medium'] = '' + result;
+                y_axis = {
+                    "key": gr.productfamily + "",
+                    "value": x_axis,
+                    "total": summation,
+                };
+                output.push(y_axis);
+            }
+            gs.info("Output result :" + JSON.stringify(output));
+            var output1 = output.slice(0);
+            output1.sort(function(a, b) {
+                return a.total - b.total;
+            });
+            //gs.info('Risk Drilldown: ' + JSON.stringify(byDate));
+            var reverse = output1.reverse();
+            gs.info('Risk Drilldown: ' + JSON.stringify(reverse));
+            var topten = reverse.slice(0, 10);
+            return JSON.stringify(topten);
+
+
+
+
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.getDeviceDrilldownInfo, error getting group data for graphs " + e);
+        }
+    },
+
+    getSWComplianceDrilldownInfo: function() {
+        try {
+            var result_arr_final = [];
+            var result_arr = [];
+            var result_arr1 = [];
+            var id = this.getclientid();
+            var gr = new GlideAggregate('x_caci_cisco_bcs_cisco_software_track_summary');
+            gr.addQuery('customer_id', id);
+            gr.query();
+            while (gr.next()) {
+                var tot1 = 0;
+                var tot2 = 0;
+                var result = 0;
+                var str = '';
+                var str1 = '';
+                var flex;
+                var com;
+                var y_axis = {};
+                var x_axis = {};
+                var y_axis1 = {};
+                var x_axis1 = {};
+                summation = gr.softwaretrackcompliantdevicecount + gr.softwaretracknoncompliantdevicecount;
+                var summation1 = gr.softwaretrackflexiblecompliancepercent + gr.softwaretrackcompliancepercent;
+                var ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_track_summary');
+                ga.addQuery('customer_id', id);
+                ga.addQuery('softwaretrackname', gr.softwaretrackname);
+                ga.addAggregate('SUM', 'softwaretrackcompliantdevicecount');
+                ga.query();
+                if (ga.next()) {
+                    tot1 = parseInt(tot1) + parseInt(ga.getAggregate('SUM', 'softwaretrackcompliantdevicecount'));
+                    result = tot1;
+                    str = gr.softwaretrackname + ' - ' + gr.softwaretrackstandardversion;
+                    flex = gr.softwaretrackflexiblecompliancepercent;
+                    str1 = gr.softwaretrackname;
+                    //total
+                }
+                x_axis['Compliant'] = '' + result;
+                x_axis1['flex'] = '' + flex;
+                ga = new GlideAggregate('x_caci_cisco_bcs_cisco_software_track_summary');
+                ga.addQuery('customer_id', id);
+                ga.addQuery('softwaretrackname', gr.softwaretrackname);
+                ga.addAggregate('SUM', 'softwaretracknoncompliantdevicecount');
+                ga.query();
+                if (ga.next()) {
+                    tot2 = parseInt(tot2) + parseInt(ga.getAggregate('SUM', 'softwaretracknoncompliantdevicecount'));
+                    result = tot2;
+                    str = gr.softwaretrackname + ' - ' + gr.softwaretrackstandardversion;
+                    com = gr.softwaretrackcompliancepercent;
+                    str1 = gr.softwaretrackname;
+                }
+                x_axis['NonCompliant'] = '' + result;
+                x_axis1['track'] = '' + com;
+                y_axis = {
+                    "key": str + "",
+                    "value": x_axis,
+                    "total": summation,
+                };
+                y_axis1 = {
+                    "key": str1 + "",
+                    "value": x_axis1,
+                    "total": summation1,
+                };
+                result_arr1.push(y_axis1);
+                result_arr.push(y_axis);
+            }
+            var output1 = result_arr.slice(0);
+            output1.sort(function(a, b) {
+                return a.total - b.total;
+            });
+            var output2 = result_arr1.slice(0);
+            output2.sort(function(a, b) {
+                return a.total - b.total;
+            });
+            //gs.info('Risk Drilldown: ' + JSON.stringify(byDate));
+            var reverse = output1.reverse();
+            var reverse1 = output2.reverse();
+            gs.info('Risk Drilldown: ' + JSON.stringify(reverse));
+            var topten = reverse.slice(0, 10);
+            result_arr_final.push(topten);
+            var topten1 = reverse1.slice(0, 5);
+            result_arr_final.push(topten1);
+            var sw_ratings = {};
+            //var result_arr_1 = [];
+            var gr_ratings = new GlideAggregate('x_caci_cisco_bcs_cisco_software_track_summary');
+            gr_ratings.addQuery('customer_id', id);
+            gr_ratings.addAggregate('COUNT', 'softwaretrackrating');
+            gr_ratings.query();
+            while (gr_ratings.next()) {
+                sw_ratings[gr_ratings.softwaretrackrating] = gr_ratings.getAggregate('COUNT', 'softwaretrackrating');
+                //result_arr_1.push(sw_ratings);
+            }
+            result_arr_final.push(sw_ratings);
+            gs.info('SWCompliance Drilldown: ' + JSON.stringify(result_arr_final));
+            return JSON.stringify(result_arr_final);
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.getDeviceDrilldownInfo, error getting group data for graphs " + e);
+        }
+    },
+
+
+    getDeviceDrilldownInfo: function() {
+        try {
+            var id = this.getclientid();
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.getDeviceDrilldownInfo getting group data for graphs.");
+            var json = {};
+            var tableName = this.getParameter('sysparm_table_name') + "";
+            var groupBy = this.getParameter('sysparm_group_by') + "";
+            var graphType = this.getParameter('sysparm_graph_type') + "";
+
+            if (graphType == "column") {
+                var arrayUtil = new global.ArrayUtil();
+                var device_array = [];
+
+                var swVersion = new GlideAggregate(tableName);
+                swVersion.addQuery('customer_id', id);
+                swVersion.addAggregate('COUNT', groupBy);
+                swVersion.groupBy(groupBy);
+                swVersion.addNotNullQuery(groupBy);
+                //swVersion.addQuery("install_status", "!=", "7");
+                swVersion.query();
+                while (swVersion.next()) {
+                    device_array.push(swVersion[groupBy] + '');
+                }
+
+                gs.info("version1" + device_array);
+                var arr = [];
+                for (var i in device_array) {
+                    var count = 0;
+                    var device = new GlideRecord(tableName);
+                    device.addQuery('customer_id', id);
+                    device.addQuery(groupBy, device_array[i]);
+                    //device.addQuery("install_status", "!=", "7");
+                    device.query();
+                    while (device.next()) {
+                        var version = device.sw_version + "";
+                        if (!arrayUtil.contains(arr, version)) {
+                            arr.push(version);
+                            count++;
+                        }
+                    }
+                    json[device_array[i]] = count;
+                }
+                gs.info("version2" + json[device_array[i]]);
+
+            } else {
+                var deviceAgg = new GlideAggregate(tableName);
+                deviceAgg.addQuery('customer_id', id);
+                deviceAgg.addAggregate('COUNT', groupBy);
+                deviceAgg.orderByAggregate('COUNT', groupBy);
+                //deviceAgg.addQuery("install_status", "!=", "7");
+                deviceAgg.query();
+                while (deviceAgg.next()) {
+                    var group = deviceAgg[groupBy] + "";
+                    var group_arr = group.split(" ");
+                    group = "";
+                    for (var i in group_arr)
+                        group = group + group_arr[i];
+                    json[group] = deviceAgg.getAggregate('COUNT', groupBy);
+                }
+            }
+            gs.info("version3" + JSON.stringify(json));
+            return JSON.stringify(json);
+
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.getDeviceDrilldownInfo, error getting group data for graphs " + e);
+        }
+    },
+    gettingDetailsOfContractLifecycle: function() {
+        var id = this.getclientid();
+        var logger = new Cisco_BCS_SNLogger();
+        logger.debug("Inside Cisco_ClientServerBridge.gettingDetailsOfContractLifecycle.");
+        var result_arr = [];
+        var grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addEncodedQuery("warranty_end_date>=javascript:gs.endOfToday()^is_covered=false");
+        grContract.addQuery('customer_id', id);
+        grContract.query();
+        var warranty_count = 0;
+        while (grContract.next()) {
+            warranty_count++;
+        }
+        result_arr.push(warranty_count);
+        var contract_count = 0;
+        grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addQuery('customer_id', id);
+        grContract.addEncodedQuery("is_covered=true");
+        grContract.query();
+        while (grContract.next()) {
+            contract_count++;
+        }
+        result_arr.push(contract_count);
+
+        grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        grContract.addEncodedQuery("warranty_end_date<javascript:gs.beginningOfToday()^is_covered=false");
+        grContract.addQuery('customer_id', id);
+        grContract.query();
+        var past = 0;
+        while (grContract.next()) {
+            past++;
+        }
+        result_arr.push(past);
+
+        // 		var d1 = new GlideDateTime();
+        // 		var d2 = new GlideDateTime();
+        // 		d2.addMonthsUTC(3);
+        // 		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        // 		grContract.addEncodedQuery("covered_product_line_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+        // 		grContract.query();
+        // 		var zeroTOThreeMonths = 0;
+        // 		while (grContract.next()) {
+        // 			zeroTOThreeMonths++;
+        // 		}
+        // 		result_arr.push(zeroTOThreeMonths);
+        // 		d1.addMonthsUTC(3);
+        // 		d2.addMonthsUTC(9);
+        // 		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        // 		grContract.addEncodedQuery("covered_product_line_end_dateBETWEENjavascript:gs.dateGenerate('" + d1 + "')@javascript:gs.dateGenerate('" + d2 + "')");
+        // 		grContract.query();
+        // 		var threeMonthsToOneYear = 0;
+        // 		while (grContract.next()) {
+        // 			threeMonthsToOneYear++;
+        // 		}
+        // 		result_arr.push(threeMonthsToOneYear);
+
+        // 		var d2 = new GlideDateTime();
+        // 		d2.addYearsLocalTime(1);
+        // 		grContract = new GlideRecord("x_caci_cisco_bcs_cisco_contract_lifecycle");
+        // 		grContract.addEncodedQuery("covered_product_line_end_date>javascript:gs.dateGenerate('" + d2 + "')");
+        // 		grContract.query();
+        // 		var moreThanOneYear = 0;
+        // 		while (grContract.next()) {
+        // 			moreThanOneYear++;
+        // 		}
+        // 		result_arr.push(moreThanOneYear);
+
+        return result_arr.join();
+    },
+
+    configurationWidgetData: function() {
+
+        var result = [];
+        var rule_id_count = 0;
+        var aggBpRuleId = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_summary');
+        aggBpRuleId.addAggregate('COUNT', 'bp_rule_id');
+        aggBpRuleId.query();
+        while (aggBpRuleId.next())
+            rule_id_count++;
+        result[0] = rule_id_count;
+
+        var cbp_device_id_count = 0;
+        var aggCbpDeviceId = new GlideAggregate('x_caci_cisco_bcs_cisco_cbp_details');
+        aggCbpDeviceId.addAggregate('COUNT', 'device_id');
+        aggCbpDeviceId.query();
+        while (aggCbpDeviceId.next())
+            cbp_device_id_count++;
+        result[1] = cbp_device_id_count;
+
+        var devices = 0;
+        var aggdDeviceId = new GlideRecord('x_caci_cisco_bcs_cisco_cbp_details');
+        aggdDeviceId.query();
+        while (aggdDeviceId.next())
+            devices++;
+        result[2] = parseInt(devices / result[1]);
+
+        return JSON.stringify(result);
+
+    },
+    submitFeedback: function() {
+        var feedback = this.getParameter('sysparm_feedback');
+        var dao = new Cisco_DAOScript();
+        var response = dao.getDataOfFeedbackForm(feedback);
+        return response;
+    },
+
+    getVulnerabilityAffectingDevicesCount: function() {
+        var id = this.getclientid();
+        var tableName = this.getParameter('sysparm_tableName') + "";
+        var count = 0;
+        var vulnerabilities = new GlideAggregate(tableName);
+        vulnerabilities.addQuery('customer_id', id);
+        vulnerabilities.addAggregate('COUNT', "device_id");
+        vulnerabilities.addEncodedQuery("match_confidence!=Not Vulnerable");
+        vulnerabilities.query();
+        while (vulnerabilities.next()) {
+            count++;
+
+        }
+        return count;
+
+    },
+    getclientdata: function() {
+        var Client_id = this.getParameter('sysparm_Client_id');
+        var BCS = new GlideRecord('x_caci_cisco_bcs_configuration');
+        BCS.addQuery('customer_id', Client_id);
+        BCS.query();
+        if (BCS.next()) {
+            //gr.system_properties_value=current.value;
+            BCS.updated = new GlideDateTime();
+            BCS.update();
+            return Client_id;
+        }
+    },
+    getclientid: function() {
+        var user = gs.getUserID();
+        var id;
+        var bcs = new GlideRecord("x_caci_cisco_bcs_configuration");
+        if (gs.getUserID() != '6816f79cc0a8016401c5a33be04be441') {
+            bcs.addQuery('users_list', user);
+        }
+        bcs.orderByDesc('updated');
+        bcs.setLimit(1);
+        bcs.query();
+        while (bcs.next()) {
+            //gs.info("customer_id" + bcs.customer_id);
+            id = bcs.customer_id;
+        }
+        return id;
+    },
+    gettingUIRWidgetData: function() {
+        var id = this.getclientid();
+        //var UIRresult=0;
+        var result = [];
+        var num = 0;
+        var unidentified = new GlideAggregate('x_caci_cisco_bcs_unidentified_inventory_details');
+        unidentified.addQuery('customer_id', id);
+       // unidentified.addAggregate('COUNT', 'collectorname');
+        unidentified.addNotNullQuery("collectorname");
+      //  unidentified.groupBy('collectorname');
+        unidentified.query();
+        while (unidentified.next()) {
+            num++;
+        }
+        result[0] = num;
+        //UIRresult = num;
+        var collector = {};
+        var URIcollector = new GlideAggregate('x_caci_cisco_bcs_unidentified_inventory_details');
+        URIcollector.addQuery('customer_id', id);
+        URIcollector.addAggregate('COUNT', 'collectorname');
+        URIcollector.groupBy('collectorname');
+        URIcollector.addNotNullQuery('collectorname');
+        URIcollector.query();
+        while (URIcollector.next()) {
+            //device_array.push(swVersion['unidentifieddevicescore'] + '');
+            var group = URIcollector['collectorname'] + "";
+            var group_arr = group.split(" ");
+            group = "";
+            for (var i in group_arr)
+                group = group + group_arr[i];
+            collector[group] = URIcollector.getAggregate('COUNT', 'collectorname');
+
+        }
+        result[1] = collector;
+        return JSON.stringify(result);
+    },
+    getUIRDrilldownInfo: function() {
+        try {
+            var id = this.getclientid();
+            var resultUIR = [];
+            var logger = new Cisco_BCS_SNLogger();
+            logger.debug("Inside Cisco_ClientServerBridge.getUIRDrilldownInfo getting group data for graphs.");
+            var json = {};
+            var device_array = [];
+            var count = 0;
+            var unidentifiedCore = new GlideAggregate('x_caci_cisco_bcs_unidentified_inventory_details');
+            unidentifiedCore.addQuery('customer_id', id);
+            unidentifiedCore.addAggregate('COUNT', 'unidentifieddeviceplatform');
+            unidentifiedCore.groupBy('unidentifieddeviceplatform');
+            unidentifiedCore.addNotNullQuery('unidentifieddeviceplatform');
+            unidentifiedCore.orderByAggregate('count', 'unidentifieddeviceplatform');
+            unidentifiedCore.setLimit(9);
+            unidentifiedCore.query();
+            while (unidentifiedCore.next()) {
+                var group = unidentifiedCore['unidentifieddeviceplatform'] + "";
+                var group_arr = group.split(" ");
+                group = "";
+                for (var i in group_arr)
+                    group = group + group_arr[i];
+                json[group] = unidentifiedCore.getAggregate('COUNT', 'unidentifieddeviceplatform');
+
+            }
+            resultUIR.push(json);
+            var result = {};
+            var unidentifiedcollector = new GlideAggregate('x_caci_cisco_bcs_unidentified_inventory_details');
+            unidentifiedcollector.addQuery('customer_id', id);
+            unidentifiedcollector.addAggregate('COUNT', 'collectorname');
+            unidentifiedcollector.groupBy('collectorname');
+            unidentifiedcollector.addNotNullQuery('collectorname');
+            unidentifiedcollector.query();
+            while (unidentifiedcollector.next()) {
+                //device_array.push(swVersion['unidentifieddevicescore'] + '');
+                var group1 = unidentifiedcollector['collectorname'] + "";
+                var group_arr1 = group1.split(" ");
+                group1 = "";
+                for (var j in group_arr1)
+                    group1 = group1 + group_arr1[j];
+                result[group1] = unidentifiedcollector.getAggregate('COUNT', 'collectorname');
+
+            }
+            resultUIR.push(result);
+            var result1 = {};
+            var unidentifieddevice = new GlideAggregate('x_caci_cisco_bcs_unidentified_inventory_details');
+            unidentifieddevice.addQuery('customer_id', id);
+            unidentifieddevice.addAggregate('COUNT', 'unidentifieddevicesource');
+            unidentifieddevice.groupBy('unidentifieddevicesource');
+            unidentifieddevice.addNotNullQuery('unidentifieddevicesource');
+            unidentifieddevice.query();
+            while (unidentifieddevice.next()) {
+                var group2 = unidentifieddevice['unidentifieddevicesource'] + "";
+                var group_arr2 = group2.split(" ");
+                group2 = "";
+                for (var k in group_arr2)
+                    group2 = group2 + group_arr2[k];
+                result1[group2] = unidentifieddevice.getAggregate('COUNT', 'unidentifieddevicesource');
+
+            }
+            resultUIR.push(result1);
+            return JSON.stringify(resultUIR);
+
+        } catch (e) {
+            logger.error("Inside Cisco_ClientServerBridge.getUIRDrilldownInfo, error getting group data for graphs " + e);
+        }
+    },
+    createIncident: function() {
+        var url = '';
+        var list = [];
+
+        var recordId = this.getParameter('sysparm_recrod_id').toString();
+        var tableName = this.getParameter('sysparm_table_name');
+        // gs.info("recordId" + recordId + tableName);
+        var newIncident = new GlideRecord('incident');
+        newIncident.initialize();
+        newIncident.setValue('caller_id', gs.getUserID());
+        newIncident.setValue('short_description', 'Create new device record');
+        newIncident.setValue("correlation_display", tableName);
+        newIncident.insert();
+
+
+        var myArray = recordId.split(',');
+        for (var i = 0; i < myArray.length; i++) {
+            var listObj = {};
+            var updateDeviceData = new GlideRecord(tableName);
+            updateDeviceData.addQuery('sys_id', myArray[i].toString());
+            // updateDeviceData.addQuery('incident_reference=NULL');
+            updateDeviceData.query();
+            while (updateDeviceData.next()) {
+
+                for (var property in updateDeviceData) {
+                    if (!property.startsWith("sys_")) {
+
+                        listObj[updateDeviceData[property].getLabel()] = updateDeviceData.getDisplayValue(property);
+
+                    }
+                }
+                newIncident.setValue("correlation_id", updateDeviceData.customer_id);
+                newIncident.update();
+                //updateDeviceData.setValue(incident_reference, newIncident.sys_id.toString());
+                var incidentID = updateDeviceData.incident_reference + ''; // add new lines
+                //updateDeviceData.incident_reference = newIncident.sys_id.toString();
+                updateDeviceData.incident_reference = updateDeviceData.incident_reference + "," + newIncident.sys_id.toString(); //add new lines
+                updateDeviceData.update();
+            }
+            list.push(listObj);
+        }
+
+        var newIncidentRealltionship = new GlideRecord('x_caci_cisco_bcs_incident_device_relationship');
+        newIncidentRealltionship.initialize();
+        newIncidentRealltionship.setValue('incident_reference', newIncident.sys_id.toString());
+        newIncidentRealltionship.setValue('list_of_devices', JSON.stringify(list, 0, 4));
+        newIncidentRealltionship.insert();
+
+        url = gs.getProperty('glide.servlet.uri') + 'incident.do?sysparm_stack=incident.do&sys_id=' + newIncident.sys_id;
+        return url;
+    },
+    Updateciscorecord: function() {
+        var list = [];
+        var recordId = this.getParameter('sysparm_recrod_id1');
+        var tableName = this.getParameter('sysparm_table_name1');
+        var increcord = this.getParameter('sysparm_incidents');
+        var myArray = recordId.split(',');
+        for (var i = 0; i < myArray.length; i++) {
+            var incdata = increcord.split(',');
+            var listObj = {};
+            for (var k = 0; k < incdata.length; k++) {
+                var updateDevice = new GlideRecord(tableName);
+                updateDevice.addQuery('sys_id', myArray[i].toString());
+                updateDevice.addEncodedQuery("incident_referenceNOT LIKE" + incdata[k] + "^ORincident_referenceISEMPTY");
+                updateDevice.query();
+                while (updateDevice.next()) {
+
+                    var incidentID = updateDevice.incident_reference + ''; // add new lines
+                    updateDevice.incident_reference = incidentID + "," + incdata[k];
+                    updateDevice.update();
+                    for (var property in updateDevice) {
+                        if (!property.startsWith("sys_")) {
+                            listObj[updateDevice[property].getLabel()] = updateDevice.getDisplayValue(property);
+
+                        }
+                    }
+                    list.push(listObj);
+
+
+                }
+            }
+        }
+        if (JSON.stringify(list, 0, 4) != "") {
+
+            var recjson = JSON.stringify(list, 0, 4);
+            var recdetails;
+            var concattedjson = [];
+            var rec = increcord.toString();
+            var inrec = rec.split(',');
+            for (var j = 0; j < inrec.length; j++) {
+                var IncidentRealltionship = new GlideRecord('x_caci_cisco_bcs_incident_device_relationship');
+                IncidentRealltionship.addQuery('incident_reference', inrec[j].toString());
+                IncidentRealltionship.query();
+                while (IncidentRealltionship.next()) {
+                    recdetails = IncidentRealltionship.list_of_devices;
+                    concattedjson = JSON.stringify(JSON.parse(recdetails).concat(JSON.parse(recjson)), 0, 4);
+                    IncidentRealltionship.list_of_devices = concattedjson;
+                    IncidentRealltionship.update();
+                }
+            }
+
+        } else
+            return false;
+    },
+    type: 'Cisco_ClientServerBridge'
 });]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-25 15:02:47</sys_created_on>
         <sys_id>522a5d022fc0a010bd2551172799b6ce</sys_id>
-        <sys_mod_count>407</sys_mod_count>
+        <sys_mod_count>849</sys_mod_count>
         <sys_name>Cisco_ClientServerBridge</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_include_522a5d022fc0a010bd2551172799b6ce</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-02-26 07:20:20</sys_updated_on>
+        <sys_updated_on>2022-10-17 06:52:45</sys_updated_on>
     </sys_script_include>
 </record_update>
