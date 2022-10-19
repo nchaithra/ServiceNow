@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_rl_action">
+    <sys_ui_policy_rl_action action="INSERT_OR_UPDATE">
+        <list>REL:ce9b61bd2fb9911036e5136a2799b6cf</list>
+        <sys_class_name>sys_ui_policy_rl_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-12 05:54:47</sys_created_on>
+        <sys_id>01f8194f2f7d511036e5136a2799b66e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>REL:ce9b61bd2fb9911036e5136a2799b6cf</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_policy_rl_action_01f8194f2f7d511036e5136a2799b66e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-12 05:54:47</sys_updated_on>
+        <ui_policy display_value="Hide Asset r">dcc8554f2f7d511036e5136a2799b66a</ui_policy>
+        <visible>false</visible>
+    </sys_ui_policy_rl_action>
+</record_update>

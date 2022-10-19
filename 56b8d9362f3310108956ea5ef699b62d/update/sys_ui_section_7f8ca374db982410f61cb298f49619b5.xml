@@ -4,13 +4,13 @@
             <element>x_caci_cisco_bcs_Cisco BCS logo.xml</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:28</sys_created_on>
-            <sys_id>54582cc72f05201070f4debcf699b6f5</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>a98c479797f1d110fa64f0f6f053afd3</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter display_value="Cisco_logo_HW_Eox">b42c5ade2f282010cab4d5072799b63d</sys_ui_formatter>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:28</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type>formatter</type>
         </sys_ui_element>
@@ -18,13 +18,13 @@
             <element>.begin_split</element>
             <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:28</sys_created_on>
-            <sys_id>98582cc72f05201070f4debcf699b6f5</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>ed8c479797f1d110fa64f0f6f053afd3</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:28</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type>.begin_split</type>
         </sys_ui_element>
@@ -32,13 +32,13 @@
             <element>bulletin_title</element>
             <position>2</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>1c582cc72f05201070f4debcf699b6f5</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>618c479797f1d110fa64f0f6f053afd4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -46,13 +46,13 @@
             <element>current_milestone</element>
             <position>3</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>9c582cc72f05201070f4debcf699b6f5</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>e18c479797f1d110fa64f0f6f053afd4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -60,13 +60,13 @@
             <element>next_milestone</element>
             <position>4</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>10582cc72f05201070f4debcf699b6f6</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>658c479797f1d110fa64f0f6f053afd4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -74,13 +74,13 @@
             <element>eonew_service_attach_date</element>
             <position>5</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>90582cc72f05201070f4debcf699b6f6</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>e58c479797f1d110fa64f0f6f053afd4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -88,13 +88,13 @@
             <element>last_ship_date</element>
             <position>6</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>14582cc72f05201070f4debcf699b6f6</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>698c479797f1d110fa64f0f6f053afd4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -102,13 +102,13 @@
             <element>type</element>
             <position>7</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>94582cc72f05201070f4debcf699b6f6</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>e98c479797f1d110fa64f0f6f053afd4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -116,13 +116,13 @@
             <element>eosale_date</element>
             <position>8</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>9058280b2f05201070f4debcf699b623</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>6d8c479797f1d110fa64f0f6f053afd4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -130,13 +130,13 @@
             <element>eosoftware_contract_renewal_date</element>
             <position>9</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>1458280b2f05201070f4debcf699b623</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>ed8c479797f1d110fa64f0f6f053afd4</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -144,13 +144,13 @@
             <element>.split</element>
             <position>10</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>9458280b2f05201070f4debcf699b623</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>618c479797f1d110fa64f0f6f053afd5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type>.split</type>
         </sys_ui_element>
@@ -158,13 +158,13 @@
             <element>product_id</element>
             <position>11</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>1858280b2f05201070f4debcf699b623</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>e18c479797f1d110fa64f0f6f053afd5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -172,13 +172,13 @@
             <element>current_milestone_date</element>
             <position>12</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>9858280b2f05201070f4debcf699b623</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>658c479797f1d110fa64f0f6f053afd5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -186,13 +186,13 @@
             <element>next_milestone_date</element>
             <position>13</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>1c58280b2f05201070f4debcf699b623</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>e58c479797f1d110fa64f0f6f053afd5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -200,13 +200,13 @@
             <element>eosw_maintenance_releases_date</element>
             <position>14</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>9c58280b2f05201070f4debcf699b623</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>698c479797f1d110fa64f0f6f053afd5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -214,13 +214,13 @@
             <element>last_date_of_support</element>
             <position>15</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>1058280b2f05201070f4debcf699b624</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>e98c479797f1d110fa64f0f6f053afd5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -228,13 +228,13 @@
             <element>eoroutine_failure_analysis_date</element>
             <position>16</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>9058280b2f05201070f4debcf699b624</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>6d8c479797f1d110fa64f0f6f053afd5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -242,13 +242,13 @@
             <element>eolife_announcement_date</element>
             <position>17</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>1458280b2f05201070f4debcf699b624</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>ed8c479797f1d110fa64f0f6f053afd5</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -256,13 +256,13 @@
             <element>eosecurity_vul_support_date</element>
             <position>18</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>9458280b2f05201070f4debcf699b624</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>618c479797f1d110fa64f0f6f053afd6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -270,13 +270,13 @@
             <element>.end_split</element>
             <position>19</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>1858280b2f05201070f4debcf699b624</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>e18c479797f1d110fa64f0f6f053afd6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type>.end_split</type>
         </sys_ui_element>
@@ -284,13 +284,13 @@
             <element>bulletin_url</element>
             <position>20</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>9858280b2f05201070f4debcf699b624</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>658c479797f1d110fa64f0f6f053afd6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -298,13 +298,13 @@
             <element>assets</element>
             <position>21</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>1c58280b2f05201070f4debcf699b624</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>e58c479797f1d110fa64f0f6f053afd6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -312,13 +312,13 @@
             <element>devices</element>
             <position>22</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 07:01:29</sys_created_on>
-            <sys_id>9c58280b2f05201070f4debcf699b624</sys_id>
+            <sys_created_on>2022-09-13 08:57:56</sys_created_on>
+            <sys_id>698c479797f1d110fa64f0f6f053afd6</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" sys_domain="global" view="Default view">7f8ca374db982410f61cb298f49619b5</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 07:01:29</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:57:56</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

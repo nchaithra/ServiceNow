@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[var $j = jQuery.noConflict();
+
+function myFunction(a) {
+    var arr = [];
+    arr.push(a);
+    arr.push("Unidentified Inventory");
+    arr.push("Individual View");
+    var loadingDialog = new GlideModal("x_caci_cisco_bcs_My_Feedback_Form", true, 'modal-lg');
+    loadingDialog.setTitle('Comments for Unidentified Inventory');
+    loadingDialog.setPreference("sysparm_message", JSON.stringify(arr));
+    loadingDialog.render();
+}
+
+$j('#myframe').load(function() {
+
+    $j("#myframe").contents().find("a").attr("target", "_parent");
+});
+
+setInterval(function() {
+    $j("#myframe").contents().find("a").attr("target", "_parent");
+}, 1500);
+
+getUIRInfo();
+function getUIRInfo() {
+    var bridgeAjax = new GlideAjax("Cisco_ClientServerBridge");
+    bridgeAjax.addParam('sysparm_name', "getUIRDrilldownInfo");
+    bridgeAjax.getXML(getUIRDrilldownInfoResponse);
+}
+
+function getUIRDrilldownInfoResponse(response) {
+    var answer = response.responseXML.documentElement.getAttribute("answer");
+    var result = JSON.parse(answer);
+
+    var title = ["Number of Devices by Platform (Top10)", "Number of Devices by Collector", "Number of Devices by Source"];
+
+
+    for (var j = 0; j < result.length; j++) {
+
+        var xAxis = {};
+        var categories = [];
+        var data_array = [];
+        var series_data = [];
+        var series_data2 = [];
+        var series_data3 = [];
+
+        if (j == 0) {
+            for (var i in result[j]) {
+                data_array.push({
+                    x: i + ' [' + result[j][i] + ']',
+                    y: parseInt(result[j][i])
+                });
+                series_data.push(parseInt(result[j][i]));
+                categories.push(i);
+            }
+        } else if (j == 1) {
+            for (var i in result[j]) {
+                data_array.push({
+                    x: i + ' [' + result[j][i] + ']',
+                    y: parseInt(result[j][i])
+                });
+                series_data2.push(parseInt(result[j][i]));
+                categories.push(i);
+
+            }
+        } else {
+            for (var i in result[j]) {
+                data_array.push({
+                    x: i + ' [' + result[j][i] + ']',
+                    y: parseInt(result[j][i])
+                });
+                series_data3.push(parseInt(result[j][i]));
+                categories.push(i);
+            }
+        }
+        xAxis = categories;
+        //xAxis.categories = categories;
+        if (j == 0) {
+            var series_obj = [{
+                "data": series_data,
+                "showInLegend": false
+            }];
+            x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart("report" + j, title[j], series_obj, "column", xAxis, "Device Count");
+        } else if (j == 1) {
+            var series_obj1 = [{
+                "data": series_data2,
+                "showInLegend": false
+            }];
+            x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart("report" + j, title[j], series_obj1, "column", xAxis, "Device Count");
+        } else {
+            var series_obj2 = [{
+                "data": series_data3,
+                "showInLegend": false
+            }];
+            x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart("report" + j, title[j], series_obj2, "column", xAxis, "Device Count");
+        }
+    }
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Unidentified Inventory.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<g:evaluate var="jvar_urlLink" object="true" jelly="true">
+		var id = new Cisco_ClientServerBridge().getclientid();
+	id;	
+	</g:evaluate>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>	
+	<g:inline template="reporting_includes.xml" />	
+	<body>
+
+		<div class="row">
+			<div class="col-xs-9 SoftwareType">
+				<h1 class="header" style="margin-left:20px" >Unidentified Inventory</h1>
+			</div>
+		
+<!-- 			<div class="col-xs-3">
+				<div class="stars"  style="float:right;">
+					<h4>Please provide your feedback for Unidentified Inventory</h4>
+					<div class="outer_stars">
+						<input class="star star-5" id="star-5" type="radio" name="star" value="5" onclick="myFunction(5)" />
+						<label class="star star-5" for="star-5"></label> 
+						<input class="star star-4" id="star-4" type="radio" name="star"  value="4" onclick="myFunction(4)"/>
+						<label class="star star-4" for="star-4"></label>
+						<input class="star star-3" id="star-3" type="radio" name="star"  value="3" onclick="myFunction(3)"/>
+						<label class="star star-3" for="star-3"></label>
+						<input class="star star-2" id="star-2" type="radio" name="star"  value="2" onclick="myFunction(2)"/>
+						<label class="star star-2" for="star-2"></label>
+						<input class="star star-1" id="star-1" type="radio" name="star"  value="1" onclick="myFunction(1)"/>
+						<label class="star star-1" for="star-1"></label></div>
+				</div>
+			</div> -->
+		</div>
+
+
+
+		<div class="wrapper container-fluid">
+			<div class="d-inline row">
+				<div class="col-xs-4" id="report0" ></div>
+				<div class="col-xs-4" id="report1"></div>
+				<div class="col-xs-4" id="report2"></div>
+			</div>
+		</div>
+		<div id="unidentified_inventory">
+			<iframe id="myframe" src="/x_caci_cisco_bcs_unidentified_inventory_details_list.do?sysparm_fixed_query=customer_id=${jvar_urlLink}" width="100%" height="450" style="border:none;">
+</iframe>
+			<style>
+
+				.StarsAlign{
+				margin-left:25%;
+				margin-top:0px;
+				}
+				
+				.outer_stars{
+				margin-right:40px;
+				}
+				div.stars {
+				width: 270px;
+				display: inline-block;
+				}
+				#submit{
+				float:right;
+				}
+				input.star { display: none; }
+				label.star {
+				float: right;
+				padding: 10px;
+				font-size: 28px;
+				color: #444;
+				transition: all .2s;
+				}
+				.head{
+				font-size: 2em;
+				}
+				input.star:checked ~ label.star:before {
+				content: '\f005';
+				color: #FD4;
+				transition: all .25s;
+				}
+				input.star-5:checked ~ label.star:before {
+				color: #FE7;
+				text-shadow: 0 0 15px #952;
+				}
+
+				#feedback{
+				padding-left:20px;
+				padding-top:15px;
+				}
+				input.star-1:checked ~ label.star:before { color: #F62; }
+				label.star:hover { transform: rotate(-15deg) scale(1.3); }
+				label.star:before {
+				content: '\f006';
+				font-family: FontAwesome;
+				}
+			</style>
+		</div>
+	</body>
+	<g:requires name="x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx" />
+</j:jelly>]]></html>
+        <name>Unidentified Inventory</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-26 13:05:27</sys_created_on>
+        <sys_id>50b0672f2fb4d51036df837cf699b6a6</sys_id>
+        <sys_mod_count>55</sys_mod_count>
+        <sys_name>Unidentified Inventory</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_50b0672f2fb4d51036df837cf699b6a6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 08:40:06</sys_updated_on>
+    </sys_ui_page>
+</record_update>

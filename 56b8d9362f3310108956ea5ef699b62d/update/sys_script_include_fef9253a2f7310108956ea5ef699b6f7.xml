@@ -13,64 +13,119 @@ Cisco_AppUtil.prototype = {
         this.logger = new Cisco_BCS_SNLogger();
         this.configuration = {
             "api": {
-                "hardwareLifecycle": "/productAlerts/hwEox",
-                "softwareLifecycle": "/productAlerts/swEox",
-                "securityAdvisories": "/productAlerts/psirt",
+                "hardwareLifecycle": "/productAlerts/hardwareEndOfLife",
+                "softwareLifecycle": "/productAlerts/softwareEndOfLife",
+                "securityAdvisories": "/productAlerts/securityAdvisories",
                 "fieldNotices": "/productAlerts/fieldNotices",
                 "assets": "/inventory/assets",
                 "devices": "/inventory/devices",
-                "fieldNoticesBullitens": "/productAlerts/fnBulletins",
-                "securityAdvisioriesBulletins": "/productAlerts/psirtBulletins",
-                "hardwareLifecycleBulletins": "/productAlerts/hwEoxBulletins",
-                "softwareLifecycleBulletins": "/productAlerts/swEoxBulletins",
-                "cbpDetails": "/cbp/details",
-                "cbpRules": "/cbp/rules",
-                "cbpSummary": "/cbp/summary",
+                "fieldNoticesBullitens": "/productAlerts/fieldNoticeBulletins",
+                "securityAdvisioriesBulletins": "/productAlerts/securityAdvisoryBulletins",
+                "hardwareLifecycleBulletins": "/productAlerts/hardwareEndOfLifeBulletins",
+                "softwareLifecycleBulletins": "/productAlerts/softwareEndOfLifeBulletins",
+                "cbpDetails": "/configBestPractices/details",
+                "cbpRules": "/configBestPractices/rules",
+                "cbpSummary": "/configBestPractices/summary",
                 "contractLifecycle": "/contract/serials",
-                "cbpRulesReferences": "/cbp/rulesReferences"
+                "riskMitigationDetails": "/riskMitigation/details",
+                "riskMitigationSummary": "/riskMitigation/summary",
+                "deviceResetLastResetDetails": "/deviceReset/lastResetDetails",
+                "deviceResetCount": "/deviceReset/resetCount",
+                "deviceResetHistory": "/deviceReset/resetHistory",
+                "cbpRulesReferences": "/configBestPractices/rulesReferences",
+                "softwareTrackmembers": "/softwareTrack/members",
+                "softwareTracksummary": "/softwareTrack/summary",
+                "softwareTrackCompliance": "/softwareTrack/softwareMaintenanceUpgradeCompliance",
+                "softwareTrackRecommendations": "/softwareTrack/softwareMaintenanceUpgradeRecommendations",
+                "syslogDaily": "/syslog/daily",
+                "placeInNetwork": "/placeInNetwork/details",
+                "unidentifiedInventoryDetails": "/unidentifiedInventory/details",
+                "unidentifiedInventorysummary": "/unidentifiedInventory/summary"
             },
             "property": {
                 "apiPrefix": gs.getProperty('x_caci_cisco_bcs.api.prefix') + '',
                 "authSysId": gs.getProperty('x_caci_cisco_bcs.Authentication.Record'),
-            }
+            },
         };
     },
+    generateApiToken: function(reference, body, endpoint) {
+        //this.makeApiCall();
+
+        var response = this.makeApiCall("POST", " ", body, reference);
+        //  var httpResponseStatus = response.getStatusCode();
+        var httpResponsebody = response.getBody();
+        var parsedResponse = JSON.parse(httpResponsebody);
+        var token_type = parsedResponse.tokenType;
+        var access_token = parsedResponse.accessToken;
+
+
+        reference.access_token = access_token;
+
+        reference.update();
+
+        //this.makeApiCall("GET", endpoint, " ", reference);
+    },
+
     makeApiCall: function(method, endpoint, body, bcsAccount) {
         try {
-			
-            this.logger.debug("Inside Cisco_AppUtil.makeApiCall() performing API call to endpoint " + endpoint);
-            var host = bcsAccount.host_name + '';
-            var customerId = bcsAccount.customer_id + '';
-            var apiKey = bcsAccount.api_key + '';
-            var prefix = this.configuration.property.apiPrefix + '';
-            var url = "https://" + host + "/" + prefix + "/" + customerId + endpoint;
-			
-			var request = new sn_ws.RESTMessageV2();
-            request.setEndpoint(url);
-            request.setHttpMethod(method);
-            if (method == 'POST') {
-                request.setRequestBody(body);
-				request.setRequestHeader("Accept","application/json");
-            	request.setRequestHeader("Content-Type","application/json");
+            gs.info("parameter" + method + endpoint + body + bcsAccount);
+            var ref_token = new GlideRecord('x_caci_cisco_bcs_configuration');
+            while (ref_token.get(bcsAccount.sys_id)) {
+                this.logger.debug("Inside Cisco_AppUtil.makeApiCall() performing API call to endpoint " + endpoint);
+                var host = ref_token.host_name + '';
+
+                var token = ref_token.access_token + '';
+
+                var prefix = this.configuration.property.apiPrefix + '';
+                if (host.indexOf("https://") == 0) {
+                    var url = host + endpoint;
+                } else {
+                    url = "https://" + host + endpoint;
+                }
+
+                gs.info('url_cisco make API : ' + url + ': ' + token + "datetime" + new GlideDateTime());
+                var request = new sn_ws.RESTMessageV2();
+                // 				   request.setEndpoint(url);
+                //                    request.setHttpMethod(method);
+                if (method == 'POST') {
+                    request.setEndpoint('https://api-cx.cisco.com/torii-auth/v1/token');
+                    request.setHttpMethod(method);
+                    // request.setRequestBody(body);
+                    request.setRequestBody(JSON.stringify(body));
+                    request.setRequestHeader("Accept", "application/json");
+                    request.setRequestHeader("Content-Type", "application/json");
+                    var response = request.execute();
+                } else {
+                    request.setEndpoint(url);
+                    request.setHttpMethod(method);
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                    request.setRequestHeader("Accept", "application/json");
+                    request.setRequestHeader("Host", "api-cx.cisco.com");
+                    var response = request.execute();
+                }
+
+                if (response.getStatusCode() + "" == "200" || response.getStatusCode() + "" == "201") {
+                    gs.info('resp_cisco : makeapi  ' + response.getStatusCode() + ': ' + response.getBody());
+                    return response;
+                } else {
+                    gs.error("status code   " + response.getErrorMessage() + " " + response.getStatusCode() + " " + token);
+                    if (response.getStatusCode() + "" == "403" || response.getStatusCode() + "" == "401") {
+
+                        this.logger.error("Status Code is -" + response.getStatusCode() + " Please check if the given customer id and API key is valid.");
+
+                    } else if (response.getStatusCode() + "" == "0")
+                        this.logger.error("Status Code is -" + response.getStatusCode() + " Could not connect to the host. Please check the host name and try again.  " + endpoint);
+                    else if (response.getStatusCode() > '500')
+                        this.logger.error("Status Code is -" + response.getStatusCode() + " Server error.  " + endpoint);
+
+                    return response;
+                }
             }
-            request.setRequestHeader("x-api-key", apiKey);
-      
-            var response = request.execute();
-            if (response.getStatusCode() + "" == "200" || response.getStatusCode() + "" == "201")
-                return response;
-            else{
-				if(response.getStatusCode() + "" == "403")
-					this.logger.error("Status Code is -" + response.getStatusCode()  + " Please check if the given customer id and API key is valid.");
-				else if(response.getStatusCode() + "" == "0")
-					this.logger.error("Status Code is -" + response.getStatusCode()  + " Could not connect to the host. Please check the host name and try again.");
-				else if(response.getStatusCode() > 500)
-					this.logger.error("Status Code is -" + response.getStatusCode()  + " Server error.");
-				return response;
-			}
         } catch (e) {
             this.logger.error("Exception caught inside Cisco_AppUtil.makeApiCall() while making API call to " + endpoint + ". Error :- " + e);
         }
     },
+
     parse: function(str) {
         if (str)
             return JSON.parse(str);
@@ -87,13 +142,13 @@ Cisco_AppUtil.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-15 13:51:40</sys_created_on>
         <sys_id>fef9253a2f7310108956ea5ef699b6f7</sys_id>
-        <sys_mod_count>33</sys_mod_count>
+        <sys_mod_count>123</sys_mod_count>
         <sys_name>Cisco_AppUtil</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_include_fef9253a2f7310108956ea5ef699b6f7</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-05-12 14:56:58</sys_updated_on>
+        <sys_updated_on>2022-09-23 06:56:18</sys_updated_on>
     </sys_script_include>
 </record_update>

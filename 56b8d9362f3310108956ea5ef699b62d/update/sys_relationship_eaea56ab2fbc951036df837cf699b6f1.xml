@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="INSERT_OR_UPDATE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>x_caci_cisco_bcs_unidentified_inventory_details</basic_apply_to>
+        <basic_query_from>x_caci_cisco_bcs_cisco_devices</basic_query_from>
+        <insert_callback/>
+        <name>Devices</name>
+        <query_from/>
+        <query_with><![CDATA[(function refineQuery(current, parent) {
+    var array = [];
+	var parents=parent.seenbymanageddevicename;
+	var str=(parents.replace(/ *\([^)]*\) */g, ""));
+	var msg_array = str.toString().split(',');
+    for (var i = 0; i < msg_array.length; i++) {
+        array.push(msg_array[i]);
+    }
+	current.addQuery('customer_id',parent.customer_id);
+	current.addQuery('name', array);
+	
+})(current, parent);]]></query_with>
+        <reference_field>device_asset_ref</reference_field>
+        <related_list/>
+        <simple_reference>false</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-07-26 08:31:38</sys_created_on>
+        <sys_id>eaea56ab2fbc951036df837cf699b6f1</sys_id>
+        <sys_mod_count>22</sys_mod_count>
+        <sys_name>Devices</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_relationship_eaea56ab2fbc951036df837cf699b6f1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 07:52:31</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="delete_multiple" query="documentkey=eaea56ab2fbc951036df837cf699b6f1"/>
+</record_update>

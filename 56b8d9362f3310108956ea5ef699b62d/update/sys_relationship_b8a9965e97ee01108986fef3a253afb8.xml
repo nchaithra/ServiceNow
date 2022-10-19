@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="INSERT_OR_UPDATE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>x_caci_cisco_bcs_cisco_devices</basic_apply_to>
+        <basic_query_from>x_caci_cisco_bcs_cisco_syslog_daily</basic_query_from>
+        <insert_callback/>
+        <name>Syslogs</name>
+        <query_from/>
+        <query_with><![CDATA[(function refineQuery(current, parent) {
+    var ms_type = [];
+    var array = [];
+    ms_type.push(parent.messagetype);
+    var msg_array = ms_type.toString().split(',');
+    for (var i = 0; i < msg_array.length; i++) {
+        gs.info('rel syslog: ' + msg_array[i] + ' :qwer: ' + msg_array.length);
+        array.push(msg_array[i]);
+    }
+	current.addQuery('customer_id',parent.customer_id);
+    current.addQuery("sys_id", array);
+})(current, parent);]]></query_with>
+        <reference_field/>
+        <related_list/>
+        <simple_reference>false</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-04-01 13:17:37</sys_created_on>
+        <sys_id>b8a9965e97ee01108986fef3a253afb8</sys_id>
+        <sys_mod_count>20</sys_mod_count>
+        <sys_name>Syslogs</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_relationship_b8a9965e97ee01108986fef3a253afb8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 08:04:55</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="delete_multiple" query="documentkey=b8a9965e97ee01108986fef3a253afb8"/>
+</record_update>

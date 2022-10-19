@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="cmdb_class" table="x_caci_cisco_bcs_align_cmdb" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>cmdb_class</element>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-02 11:14:48</sys_created_on>
+            <sys_id>dc511be307d501107f04f96d7c1ed0bb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>cmdb_class</sys_name>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_choice_x_caci_cisco_bcs_align_cmdb_cmdb_class</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-02 11:14:48</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb_class</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>All application scopes</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-02 11:14:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>54511be307d501107f04f96d7c1ed0bb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-02 11:14:48</sys_updated_on>
+            <value>public</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb_class</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>This application scope only</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-02 11:14:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d0511be307d501107f04f96d7c1ed0bd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-02 11:14:48</sys_updated_on>
+            <value>package_private</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

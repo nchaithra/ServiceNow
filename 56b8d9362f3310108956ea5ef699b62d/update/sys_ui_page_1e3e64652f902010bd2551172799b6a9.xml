@@ -8,8 +8,6 @@ $j('#myframe').load(function(){
 		$j("#myframe").contents().find("a").attr("target","_parent");
 	});
 setInterval(function(){ $j("#myframe").contents().find("a").attr("target","_parent");}, 1500);
-
-
 //$j(".devices_list").load("/x_caci_cisco_bcs_cisco_devices_list.do?sysparm_fixed_query=install_status!=7");
 /*$j(document).ready(function () {
         var data;
@@ -121,7 +119,8 @@ function device_drilldown(method,tablename,groupBy,reportID,title,graphType,colo
 				}
 		}
 		var xAxis = {};
-		xAxis.categories = categories;
+		//xAxis.categories = categories;
+		xAxis = categories;
 		renderUIScript(reportID,title,data_array,graphType,xAxis,yAxis);
 	}
 
@@ -139,7 +138,7 @@ function renderUIScript(reportID,title,data,graphType,xAxis,yAxis) {
 		ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
 			x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(reportID,title,data,graphType,xAxis,yAxis);
 		});
-	
+
 	}}
 ]]></client_script>
         <description/>
@@ -147,6 +146,10 @@ function renderUIScript(reportID,title,data,graphType,xAxis,yAxis) {
         <endpoint>x_caci_cisco_bcs_Devices_Drilldown_view.do</endpoint>
         <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:evaluate var="jvar_urlLink" object="true" jelly="true">
+		var id = new Cisco_ClientServerBridge().getclientid();
+	id;	
+	</g:evaluate>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>	
 	<g:inline template="reporting_includes.xml" />
 	<html>
@@ -154,7 +157,7 @@ function renderUIScript(reportID,title,data,graphType,xAxis,yAxis) {
 			<div class="col-xs-8 SoftwareType">
 				<h1 class="header" > Devices Inventory</h1>
 			</div>
-			<div class="col-xs-4 SoftwareType">
+<!-- 			<div class="col-xs-4 SoftwareType">
 				<div class="stars"  style="float:right;">
 					<h4>Please provide your feedback for Devices Inventory</h4>
 					<div class="outer_stars">
@@ -169,7 +172,7 @@ function renderUIScript(reportID,title,data,graphType,xAxis,yAxis) {
 						<input class="star star-1" id="star-1" type="radio" name="star"  value="1" onclick="myFunction(1)"/>
 						<label class="star star-1" for="star-1"></label></div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 
@@ -195,7 +198,10 @@ function renderUIScript(reportID,title,data,graphType,xAxis,yAxis) {
 		</div>
 		<br />
 		<div class="devices_list">
-			<iframe id="myframe" src="/x_caci_cisco_bcs_cisco_devices_list.do" width="100%" height="550" style="border:none;">
+			<!-- <iframe id="myframe" src="${jvar_urlLink}" width="100%" height="550" style="border:none;">  -->
+
+				<!-- <iframe id="myframe" src="/x_caci_cisco_bcs_cisco_devices_list.do?customer_id=${jvar_urlLink}" width="100%" height="550" style="border:none;"> -->
+			<iframe id="myframe" src="/x_caci_cisco_bcs_cisco_devices_list.do?sysparm_fixed_query=customer_id=${jvar_urlLink}" width="100%" height="550" style="border:none;">
 			</iframe>
 		</div>
 
@@ -264,13 +270,13 @@ function renderUIScript(reportID,title,data,graphType,xAxis,yAxis) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-11-05 09:16:15</sys_created_on>
         <sys_id>1e3e64652f902010bd2551172799b6a9</sys_id>
-        <sys_mod_count>387</sys_mod_count>
+        <sys_mod_count>451</sys_mod_count>
         <sys_name>Devices_Drilldown_view</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_page_1e3e64652f902010bd2551172799b6a9</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-02-08 10:09:30</sys_updated_on>
+        <sys_updated_on>2022-09-26 08:38:27</sys_updated_on>
     </sys_ui_page>
 </record_update>

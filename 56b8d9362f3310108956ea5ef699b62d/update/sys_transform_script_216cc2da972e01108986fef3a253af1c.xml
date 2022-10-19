@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="Cisco syslog daily TM">26540e0c972645108986fef3a253afca</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+    //     var gdt = new GlideDateTime(target.date).getDate();
+    //     gs.info('Del date: ' + "dateON" + gdt + "@javascript:gs.dateGenerate('" + gdt + "','start')@javascript:gs.dateGenerate('" + gdt + "','end')");
+    //     var gr = new GlideRecord("x_caci_cisco_bcs_device_name");
+    //     gr.addEncodedQuery("dateON" + gdt + "@javascript:gs.dateGenerate('" + gdt + "','start')@javascript:gs.dateGenerate('" + gdt + "','end')"); //messagetype=SECURITY-LOGIN-4-AUTHEN_FAILED^dateON2022-05-05@javascript:gs.dateGenerate('2022-05-05','start')@javascript:gs.dateGenerate('2022-05-05','end')////dateON2022-05-03@javascript:gs.dateGenerate('2022-05-03','start')@javascript:gs.dateGenerate('2022-05-03','end')^messagetype=CDP-4-DUPLEX_MISMATCH
+    //     gr.addQuery('messagetype', target.messagetype);
+    //     //gr.addQuery('syslog_id', target.sys_id);
+    //     gr.query();
+    //     gr.deleteMultiple();
+    var gdt = new GlideDateTime(target.date).getDate();
+    gs.info('Del date: ' + "dateON" + gdt + "@javascript:gs.dateGenerate('" + gdt + "','start')@javascript:gs.dateGenerate('" + gdt + "','end')");
+    var parsedData = JSON.parse(target.devices);
+
+    for (var i = 0; i < parsedData.length; i++) {
+
+                var dao = new Cisco_DAOScript();
+
+                // update msg_type in device table
+                var msg_type = dao.createsyslogReferences(parsedData[i].deviceId, "device_id", "messagetype", target.sys_id, "x_caci_cisco_bcs_cisco_devices", true,target.customer_id);
+
+        var rs = new GlideRecord("x_caci_cisco_bcs_device_name");
+        rs.addEncodedQuery("dateON" + gdt + "@javascript:gs.dateGenerate('" + gdt + "','start')@javascript:gs.dateGenerate('" + gdt + "','end')");
+        rs.addQuery('messagetype', target.messagetype);
+		rs.addQuery('customer_id',target.customer_id);
+		rs.addQuery('deviceid.device_id', parsedData[i].deviceId.toString());
+        rs.query();
+        if (!rs.next()) {
+            gs.info('syslog device tm: ' + parsedData[i].deviceId.toString());
+            rs.initialize();
+            rs.isdeleted = false;
+            rs.date = gdt;
+            rs.messagetype = target.messagetype.toString();
+            rs.reviewedseverity = target.reviewedseverity.toString();
+            rs.syslogeventseverity = target.syslogeventseverity.toString();
+            rs.recommendation = target.recommendation.toString();
+            rs.description = target.description.toString();
+			rs.customer_id=target.customer_id;
+            rs.syslog_id = target.sys_id.toString();
+            var gr_dev = new GlideRecord("x_caci_cisco_bcs_cisco_devices");
+            gr_dev.addQuery('device_id', parsedData[i].deviceId.toString());
+			gr_dev.addQuery('customer_id',target.customer_id);
+            gr_dev.query();
+            if (gr_dev.next()) {
+                rs.deviceid = gr_dev.sys_id;
+            }
+            rs.devicename = parsedData[i].deviceName.toString();
+            rs.eventcount = parsedData[i].eventCount.toString();
+
+            rs.insert();
+        }
+    }
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-04-01 12:29:13</sys_created_on>
+        <sys_id>216cc2da972e01108986fef3a253af1c</sys_id>
+        <sys_mod_count>43</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_transform_script_216cc2da972e01108986fef3a253af1c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 08:40:01</sys_updated_on>
+        <when>onAfter</when>
+    </sys_transform_script>
+</record_update>

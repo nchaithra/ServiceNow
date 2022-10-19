@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_view">
+    <sys_ui_view action="INSERT_OR_UPDATE">
+        <group/>
+        <hidden>false</hidden>
+        <name>Cisco_BCS_Dashboad</name>
+        <roles/>
+        <sys_class_name>sys_ui_view</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-13 09:16:15</sys_created_on>
+        <sys_id>ea60b10d47e2111057d39128436d434e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Cisco_bcs_dashboad</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_view_ea60b10d47e2111057d39128436d434e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-13 09:16:15</sys_updated_on>
+        <title>Cisco_bcs_dashboad</title>
+        <user/>
+    </sys_ui_view>
+</record_update>

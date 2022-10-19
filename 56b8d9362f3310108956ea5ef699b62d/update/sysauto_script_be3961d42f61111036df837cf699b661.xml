@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <business_calendar/>
+        <condition><![CDATA[var value=gs.getProperty('x_caci_cisco_bcs.cisco_threadactivatated');
+if(value=='true'){
+	answer=true;
+}]]></condition>
+        <conditional>true</conditional>
+        <entered_time/>
+        <name>Thread activate </name>
+        <offset/>
+        <offset_type>0</offset_type>
+        <run_as display_value="System Administrator">6816f79cc0a8016401c5a33be04be441</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period>1970-01-01 00:00:01</run_period>
+        <run_start>2022-08-22 07:46:39</run_start>
+        <run_time>1970-01-01 08:00:00</run_time>
+        <run_type>periodically</run_type>
+        <script><![CDATA[//gs.info("thread running");
+var threadUse = gs.getProperty('x_caci_cisco_bcs.thread_count');
+var gr_Ready = new GlideRecord('x_caci_cisco_bcs_cisco_import_queue');
+gr_Ready.addEncodedQuery('stateINwait,ready,processing,error');
+gr_Ready.orderBy('sys_created_on');
+gr_Ready.query();
+
+
+
+if (gr_Ready.hasNext()) {
+var ga_Process_Count = new GlideAggregate('x_caci_cisco_bcs_cisco_import_queue');
+ga_Process_Count.addEncodedQuery('state=processing');
+ga_Process_Count.addAggregate('COUNT');
+ga_Process_Count.query();
+var count = '';
+if (ga_Process_Count.next()) {
+count = ga_Process_Count.getAggregate('COUNT');
+}
+
+gr_Ready.addQuery('state=ready^ORstate=error^ORstate=wait');
+
+gr_Ready.orderBy('sys_created_on');
+gr_Ready.setLimit(threadUse - count);
+gr_Ready.query();
+while (gr_Ready.next()) {
+gr_Ready.state = "processing";
+gr_Ready.update();
+}
+
+
+}  else {
+var date = new GlideDateTime();
+var grOrg = new GlideRecord('x_caci_cisco_bcs_configuration');
+grOrg.query();
+var active = false;
+while (grOrg.next()) {
+if (grOrg.time_limit == '') {
+grOrg.time_limit = date;
+grOrg.setWorkflow(false);
+grOrg.update();
+} else {
+var old_time = new GlideDateTime(grOrg.time_limit);
+var new_time = new GlideDateTime();
+var diffSeconds = GlideDateTime.subtract(old_time, new_time);
+var min = (diffSeconds.getNumericValue() / 60000);
+if (min >= 5) {
+grOrg.time_limit = '';
+grOrg.setWorkflow(false);
+grOrg.update();
+active = true;
+}
+}
+}
+if (active == true) {
+gs.setProperty('x_caci_cisco_bcs.cisco_threadactivatated', 'false');
+}
+}
+
+
+
+]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-08-22 08:41:58</sys_created_on>
+        <sys_id>be3961d42f61111036df837cf699b661</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>Thread activate </sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sysauto_script_be3961d42f61111036df837cf699b661</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-08-26 05:59:18</sys_updated_on>
+        <time_zone/>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>

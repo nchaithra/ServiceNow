@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_caci_cisco_bcs_align_cmdb</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition table="x_caci_cisco_bcs_align_cmdb">mapped_dataISNOTEMPTY^mapped_dataVALCHANGES^EQ<item endquery="false" field="mapped_data" goto="false" newquery="false" operator="ISNOTEMPTY" or="false" value=""/>
+            <item endquery="false" field="mapped_data" goto="false" newquery="false" operator="VALCHANGES" or="false" value=""/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Cisco CMDB update</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/ ) {
+
+        var map_data = current.mapped_data;
+        gs.info('m_data: ' + map_data);
+
+        var objJSON = JSON.parse(map_data);
+        var arr1 = [];
+        var arr2 = [];
+        for (var i = 0; i < objJSON.device_asset.length; i++) {
+            arr1.push(objJSON.device_asset[i]);
+            arr2.push(objJSON.cmdb[i]);
+        }
+        gs.info('map_array ' + arr1 + '\n' + arr2);
+
+
+        if (current.ci_type == 'device') {
+            gs.info('filter_cisco: ' + current.device);
+            var up_dev = new GlideRecord("x_caci_cisco_bcs_cisco_devices");
+            up_dev.addEncodedQuery(current.device);
+            up_dev.query();
+            while (up_dev.next()) {
+                var cmdb_class = current.cmdb_class.name;
+                gs.info('cmdb_clss_cisco: ' + current.cmdb_class.name);
+                var gr_dev = new GlideRecord(cmdb_class);
+                // gr_dev.addQuery('name', parsed_map_source);
+                //             gr_dev.query();
+                //             if (!gr_dev.next()) {
+                gr_dev.initialize();
+                for (var l = 0; l < arr2.length; l++) {
+                    gr_dev[arr2[l]] = up_dev[arr1[l]];
+                }
+
+                gr_dev.insert();
+				up_dev.cmdb = gr_dev.sys_id;
+				up_dev.update();
+            }
+
+        } else {
+
+            var up_asset = new GlideRecord("x_caci_cisco_bcs_cisco_assets");
+            up_asset.addEncodedQuery(current.asset);
+            up_asset.query();
+            while (up_asset.next()) {
+                var cmdb_class_asset = current.cmdb_class.name;
+                var gr_asset = new GlideRecord(cmdb_class_asset);
+                //             gr_asset.addQuery('name', parsed_map_source);
+                //             gr_asset.query();
+                //             if (!gr_asset.next()) {
+                gr_asset.initialize();
+                for (var k = 0; k < arr1.length; k++) {
+                    gr_asset[arr2[k]] = up_asset[arr1[k]];
+
+                }
+                gr_asset.insert();
+				up_asset.cmdb = gr_asset.sys_id;
+				up_asset.update();
+            }
+
+        }
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-02-07 12:24:39</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>6cf0dd91976901108986fef3a253afea</sys_id>
+        <sys_mod_count>43</sys_mod_count>
+        <sys_name>Cisco CMDB update</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_script_6cf0dd91976901108986fef3a253afea</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-02-09 13:44:26</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=6cf0dd91976901108986fef3a253afea"/>
+</record_update>

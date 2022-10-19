@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="x_caci_cisco_bcs_cisco_hw_eox_bulletins" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>assets</element>
+            <list_id display_value="x_caci_cisco_bcs_cisco_hw_eox_bulletins" element="NULL" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">d89c079797f1d110fa64f0f6f053af94</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_id>949c079797f1d110fa64f0f6f053af95</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>bulletin_number</element>
+            <list_id display_value="x_caci_cisco_bcs_cisco_hw_eox_bulletins" element="NULL" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">d89c079797f1d110fa64f0f6f053af94</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_id>189c079797f1d110fa64f0f6f053af95</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>bulletin_title</element>
+            <list_id display_value="x_caci_cisco_bcs_cisco_hw_eox_bulletins" element="NULL" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">d89c079797f1d110fa64f0f6f053af94</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_id>989c079797f1d110fa64f0f6f053af95</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>bulletin_url</element>
+            <list_id display_value="x_caci_cisco_bcs_cisco_hw_eox_bulletins" element="NULL" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">d89c079797f1d110fa64f0f6f053af94</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_id>1c9c079797f1d110fa64f0f6f053af95</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>current_milestone</element>
+            <list_id display_value="x_caci_cisco_bcs_cisco_hw_eox_bulletins" element="NULL" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">d89c079797f1d110fa64f0f6f053af94</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_id>9c9c079797f1d110fa64f0f6f053af95</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>current_milestone_date</element>
+            <list_id display_value="x_caci_cisco_bcs_cisco_hw_eox_bulletins" element="NULL" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">d89c079797f1d110fa64f0f6f053af94</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>5</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_id>109c079797f1d110fa64f0f6f053af96</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>devices</element>
+            <list_id display_value="x_caci_cisco_bcs_cisco_hw_eox_bulletins" element="NULL" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">d89c079797f1d110fa64f0f6f053af94</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>6</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_id>909c079797f1d110fa64f0f6f053af96</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>eolife_announcement_date</element>
+            <list_id display_value="x_caci_cisco_bcs_cisco_hw_eox_bulletins" element="NULL" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">d89c079797f1d110fa64f0f6f053af94</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>7</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_id>149c079797f1d110fa64f0f6f053af96</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>eonew_service_attach_date</element>
+            <list_id display_value="x_caci_cisco_bcs_cisco_hw_eox_bulletins" element="NULL" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">d89c079797f1d110fa64f0f6f053af94</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>8</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_id>949c079797f1d110fa64f0f6f053af96</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>x_caci_cisco_bcs_cisco_hw_eox_bulletins</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-09-13 08:58:07</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d89c079797f1d110fa64f0f6f053af94</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_caci_cisco_bcs_cisco_hw_eox_bulletins</sys_name>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_ui_list_x_caci_cisco_bcs_cisco_hw_eox_bulletins_null</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-09-13 08:58:07</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

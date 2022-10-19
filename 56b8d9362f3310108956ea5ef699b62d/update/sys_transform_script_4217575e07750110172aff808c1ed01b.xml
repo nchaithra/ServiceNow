@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="Cisco CBP Summary TM V2">ded8372907b10110172aff808c1ed05b</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+    /*var logger = new Cisco_BCS_SNLogger();
+    var daoScript = new Cisco_DAOScript();
+    try {
+        logger.debug("Inside CBP Summary transform map.");
+        var sys_id = daoScript.getReferenceMapping("cbpRules", "bp_rule_id", target.bp_rule_id);
+        target.cbp_rule = sys_id;
+
+        target.update();
+    } catch (e) {
+        logger.error("Exception caught inside CBP Summary transform map. Error : - " + e);
+    }*/
+	
+	var dao = new Cisco_DAOScript();
+	
+	// CBP Rules 
+	var resultCbpRules = dao.createReferences(target.bp_rule_id, "bp_rule_id", "cbp_summary", target.sys_id, "x_caci_cisco_bcs_cisco_cbp_rules", true,target.customer_id);
+	if(resultCbpRules){
+		target.cbp_rule = resultCbpRules + "";
+		target.update();
+	}
+	
+	//for cbp summary calculated field
+	var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cbp_rules_references","","bp_rule_id=" + target.bp_rule_id + "",target.customer_id);
+	target.rule_references = calculatedFieldValue;
+	target.update();
+	
+	
+	
+// 	target.update();
+	
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-02-23 10:59:33</sys_created_on>
+        <sys_id>4217575e07750110172aff808c1ed01b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_transform_script_4217575e07750110172aff808c1ed01b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 04:10:11</sys_updated_on>
+        <when>onAfter</when>
+    </sys_transform_script>
+</record_update>

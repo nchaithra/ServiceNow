@@ -15,7 +15,7 @@
         <name/>
         <order>100</order>
         <override_menu_roles>false</override_menu_roles>
-        <query>/x_caci_cisco_bcs_configuration.do?sys_id=02b2c23a2fb310108956ea5ef699b60c&amp;sysparm_record_target=x_caci_cisco_bcs_configuration&amp;sysparm_record_row=1&amp;sysparm_record_rows=1&amp;sysparm_record_list=</query>
+        <query>/x_caci_cisco_bcs_configuration_list.do?</query>
         <report/>
         <roles>x_caci_cisco_bcs.cisco_bcs_admin</roles>
         <sys_class_name>sys_app_module</sys_class_name>
@@ -24,7 +24,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>757202f62fb310108956ea5ef699b640</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>BCS Configuration</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -32,7 +32,7 @@
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_app_module_757202f62fb310108956ea5ef699b640</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-01-12 06:06:51</sys_updated_on>
+        <sys_updated_on>2022-08-29 13:11:12</sys_updated_on>
         <timeline_page/>
         <title>BCS Configuration</title>
         <uncancelable>false</uncancelable>

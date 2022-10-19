@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="ci_type" table="x_caci_cisco_bcs_align_cmdb" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>ci_type</element>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 14:38:50</sys_created_on>
+            <sys_id>54105ec2075901107f04f96d7c1ed072</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>ci_type</sys_name>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_choice_x_caci_cisco_bcs_align_cmdb_ci_type</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 14:38:50</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>ci_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Device</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>10</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 14:38:50</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>300056c6075901107f04f96d7c1ed01b</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 14:39:03</sys_updated_on>
+            <value>device</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>ci_type</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Asset</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>20</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 14:39:12</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>24101a0a075901107f04f96d7c1ed0ea</sys_id>
+            <sys_mod_count>2</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 14:39:21</sys_updated_on>
+            <value>asset</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

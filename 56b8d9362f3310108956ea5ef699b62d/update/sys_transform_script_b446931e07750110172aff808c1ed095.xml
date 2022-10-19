@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="Cisco Devices TM V2">6b70c35a07350110172aff808c1ed0aa</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+    try {
+        // selfFieldValue, targetField, targetSelfReference, target_sys_id, targetTable
+        var dao = new Cisco_DAOScript();
+        // Assets
+        var resultAssets = dao.createReferences(target.device_id, "device_id", "deviceid_ref", target.sys_id, "x_caci_cisco_bcs_cisco_assets", true,target.customer_id);
+
+        //Security Advisory
+        var resultSecAdv = dao.createReferences(target.device_id, "device_id", "deviceid_ref", target.sys_id, "x_caci_cisco_bcs_cisco_security_advisories", true,target.customer_id);
+        // 	if(resultSecAdv) {
+        // 		target.psirt_cold_id = resultSecAdv + "";
+        // 		target.update();
+        // 	}
+
+        // Field Notices
+        var resultFieldNotices = dao.createReferences(target.device_id, "device_id", "deviceid_ref", target.sys_id, "x_caci_cisco_bcs_cisco_field_notices", true,target.customer_id);
+
+        // HW Eox
+        var resultHwEox = dao.createReferences(target.device_id, "device_id", "device_id_ref", target.sys_id, "x_caci_cisco_bcs_cisco_hardware_lifecycle", true,target.customer_id);
+
+        // SW Eox
+        var resultSwEox = dao.createReferences(target.device_id, "device_id", "device_id_ref", target.sys_id, "x_caci_cisco_bcs_cisco_software_lifecycle", true,target.customer_id);
+        if (resultSwEox) {
+            target.sweox = resultSwEox + "";
+            target.update();
+        }
+
+        // CBP Details
+        var resultCbp = dao.createReferences(target.device_id, "device_id", "device", target.sys_id, "x_caci_cisco_bcs_cisco_cbp_details", true,target.customer_id);
+		
+        //Risk Category
+        var risk_Category = dao.crashRiskCategory(target.device_id, "deviceid", "x_caci_cisco_bcs_cisco_risk_mitigation_details",target.customer_id);
+        target.riskcategory= risk_Category;
+        target.update();
+		
+        //total no. of events
+        var total_events = dao.totalOfEvents(target.sys_id, "deviceid", "x_caci_cisco_bcs_device_name",target.customer_id);
+        target.totaleventcount= total_events;
+        target.update();
+
+
+        var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices", "field_notice_id", "match_confidence=Vulnerable^device_id=" + target.device_id + "",target.customer_id);
+        target.vulnerable_field_notices = calculatedFieldValue;
+        target.update();
+
+        var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices", "field_notice_id", "match_confidence=Potentially Vulnerable^device_id=" + target.device_id + "",target.customer_id);
+        target.potentially_vulnerable_field_notices = calculatedFieldValue;
+        target.update();
+
+        var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_security_advisories", "", "match_confidence=Vulnerable^device_id=" + target.device_id + "",target.customer_id);
+        target.vulnerable_security_advisories = calculatedFieldValue;
+        target.update();
+
+        var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_security_advisories", "", "match_confidence=Potentially Vulnerable^device_id=" + target.device_id + "",target.customer_id);
+        target.potentially_vulnerable_security_advisories = calculatedFieldValue;
+        target.update();
+
+        var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_cbp_details", "", "device_id=" + target.device_id + ""+target.customer_id);
+        target.configuration_guidelines = calculatedFieldValue;
+        target.update();
+		
+		//PredictedRole
+var PredictedRole = dao.predictedroleDetails(target.device_id,"deviceid","x_caci_cisco_bcs_place_in_network",target.customer_id);
+		target.predictedrole =PredictedRole;
+		target.update();
+
+	// PredictedImportance
+	var PredictedImportance = dao.predictedimportanceDetails(target.device_id,"deviceid","x_caci_cisco_bcs_place_in_network",target.customer_id);
+		target.predictedimportance =PredictedImportance;
+		target.update();
+
+    } catch (e) {
+        gs.info(e);
+    }
+
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-02-23 10:55:48</sys_created_on>
+        <sys_id>b446931e07750110172aff808c1ed095</sys_id>
+        <sys_mod_count>10</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_transform_script_b446931e07750110172aff808c1ed095</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 04:30:39</sys_updated_on>
+        <when>onAfter</when>
+    </sys_transform_script>
+</record_update>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="INSERT_OR_UPDATE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>x_caci_cisco_bcs_device_reset_details</basic_apply_to>
+        <basic_query_from>x_caci_cisco_bcs_cisco_hardware_lifecycle</basic_query_from>
+        <insert_callback/>
+        <name>Hardware Lifcycle</name>
+        <query_from/>
+        <query_with><![CDATA[(function refineQuery(current, parent) {
+
+	var device_id = parent.deviceid;
+	gs.info('device_id reset: '+device_id);
+	//var dev_reset = current.deviceid.toString();
+	current.addQuery('customer_id',parent.customer_id);
+	current.addQuery("device_id",device_id);
+
+})(current, parent);]]></query_with>
+        <reference_field>physical_element_id_ref</reference_field>
+        <related_list/>
+        <simple_reference>false</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-04-04 13:46:38</sys_created_on>
+        <sys_id>070d7917976241108986fef3a253afcd</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Hardware Lifcycle</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_relationship_070d7917976241108986fef3a253afcd</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 07:56:19</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="delete_multiple" query="documentkey=070d7917976241108986fef3a253afcd"/>
+</record_update>

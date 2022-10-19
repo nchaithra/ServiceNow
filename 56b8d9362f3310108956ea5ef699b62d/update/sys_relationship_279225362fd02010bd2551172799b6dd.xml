@@ -5,7 +5,7 @@
         <basic_apply_to>x_caci_cisco_bcs_cisco_security_advisories_bulletins</basic_apply_to>
         <basic_query_from>x_caci_cisco_bcs_cisco_devices</basic_query_from>
         <insert_callback/>
-        <name>Cisco Devices</name>
+        <name>Devices</name>
         <query_from><![CDATA[answer='x_caci_cisco_bcs_cisco_devices';]]></query_from>
         <query_with><![CDATA[//current.addQuery('deviceid_ref', parent.sys_id);
 var deviceArr = [];
@@ -14,6 +14,7 @@ var id = parent.getValue("psirt_cold_id");
 var secAdv = new GlideRecord("x_caci_cisco_bcs_cisco_security_advisories");
 secAdv.addQuery("psirt_cold_id",id);
 secAdv.addQuery("match_confidence","!=","Not Vulnerable");
+secAdv.addQuery('customer_id',parent.customer_id);
 secAdv.query();
 while(secAdv.next())
 	query = query + "device_id="+secAdv.device_id+"^OR";
@@ -25,21 +26,21 @@ if(query == "")
 
 current.addEncodedQuery(query);
 ]]></query_with>
-        <reference_field>change_control</reference_field>
+        <reference_field>device_asset_ref</reference_field>
         <related_list/>
         <simple_reference>false</simple_reference>
         <sys_class_name>sys_relationship</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-11-09 09:55:06</sys_created_on>
         <sys_id>279225362fd02010bd2551172799b6dd</sys_id>
-        <sys_mod_count>49</sys_mod_count>
-        <sys_name>Cisco Devices</sys_name>
+        <sys_mod_count>51</sys_mod_count>
+        <sys_name>Devices</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_relationship_279225362fd02010bd2551172799b6dd</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-01-12 05:52:09</sys_updated_on>
+        <sys_updated_on>2022-09-20 07:34:19</sys_updated_on>
     </sys_relationship>
     <sys_translated_text action="delete_multiple" query="documentkey=279225362fd02010bd2551172799b6dd"/>
 </record_update>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_rl_action">
+    <sys_ui_policy_rl_action action="INSERT_OR_UPDATE">
+        <list>REL:8804a2362f61511036e5136a2799b641</list>
+        <sys_class_name>sys_ui_policy_rl_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-09-12 05:56:26</sys_created_on>
+        <sys_id>61599d4f2f7d511036e5136a2799b6a0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>REL:8804a2362f61511036e5136a2799b641</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_policy_rl_action_61599d4f2f7d511036e5136a2799b6a0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-12 05:56:26</sys_updated_on>
+        <ui_policy display_value="Hide device">1539d54f2f7d511036e5136a2799b6ce</ui_policy>
+        <visible>false</visible>
+    </sys_ui_policy_rl_action>
+</record_update>

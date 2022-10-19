@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="Cisco Security Advisories Bulletins TM V2">c06708a607390110172aff808c1ed090</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+	var dao = new Cisco_DAOScript();
+	var resultSecAdvBulletin = dao.createReferences(target.psirt_cold_id, "psirt_cold_id", "psirt_cold_id_ref", target.sys_id, "x_caci_cisco_bcs_cisco_security_advisories", true,target.customer_id);
+
+	var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_security_advisories","","match_confidence=Vulnerable^psirt_cold_id=" + target.psirt_cold_id + "",target.customer_id);
+	target.vulnerable_devices_count = calculatedFieldValue;
+	target.update();	
+	
+	var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_security_advisories","","match_confidence=Potentially Vulnerable^psirt_cold_id=" + target.psirt_cold_id + "",target.customer_id);
+	target.potentially_vulnerable_devices_count = calculatedFieldValue;
+	target.update();	
+
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-02-23 14:31:26</sys_created_on>
+        <sys_id>bea78c6607390110172aff808c1ed0ae</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_transform_script_bea78c6607390110172aff808c1ed0ae</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 04:47:43</sys_updated_on>
+        <when>onAfter</when>
+    </sys_transform_script>
+</record_update>

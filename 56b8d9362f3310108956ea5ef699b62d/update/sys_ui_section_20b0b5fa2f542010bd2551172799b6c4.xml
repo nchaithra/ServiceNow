@@ -4,13 +4,13 @@
             <element>x_caci_cisco_bcs_Cisco BCS logo.xml</element>
             <position>0</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>41481dcf2f49201070f4debcf699b6b0</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>bb65c71f97b1d110fa64f0f6f053afcc</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter display_value="Cisco BCS logo_CBP_summary">cadc24b72f3020109ff0f3ecf699b6ed</sys_ui_formatter>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type>formatter</type>
         </sys_ui_element>
@@ -18,13 +18,13 @@
             <element>.begin_split</element>
             <position>1</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>45481dcf2f49201070f4debcf699b6b0</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>bf65c71f97b1d110fa64f0f6f053afcc</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type>.begin_split</type>
         </sys_ui_element>
@@ -32,13 +32,13 @@
             <element>bp_risk</element>
             <position>2</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>c5481dcf2f49201070f4debcf699b6b0</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3365c71f97b1d110fa64f0f6f053afcd</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -46,13 +46,13 @@
             <element>sw_type</element>
             <position>3</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>49481dcf2f49201070f4debcf699b6b0</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>b365c71f97b1d110fa64f0f6f053afcd</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -60,13 +60,13 @@
             <element>bp_primary_technology</element>
             <position>4</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>c9481dcf2f49201070f4debcf699b6b0</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3765c71f97b1d110fa64f0f6f053afcd</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -74,13 +74,13 @@
             <element>rule_references</element>
             <position>5</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>4d481dcf2f49201070f4debcf699b6b0</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>b765c71f97b1d110fa64f0f6f053afcd</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -88,13 +88,13 @@
             <element>bp_title</element>
             <position>6</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>cd481dcf2f49201070f4debcf699b6b0</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3b65c71f97b1d110fa64f0f6f053afcd</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -102,13 +102,13 @@
             <element>total_devices</element>
             <position>7</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>51481dcf2f49201070f4debcf699b6b1</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>bb65c71f97b1d110fa64f0f6f053afcd</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -116,13 +116,13 @@
             <element>bp_secondary_technology</element>
             <position>8</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>d1481dcf2f49201070f4debcf699b6b1</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3f65c71f97b1d110fa64f0f6f053afcd</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -130,13 +130,13 @@
             <element>cbp_rule.bp_recommendation</element>
             <position>9</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>55481dcf2f49201070f4debcf699b6b1</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>bf65c71f97b1d110fa64f0f6f053afcd</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -144,13 +144,13 @@
             <element>cbp_rule.bp_caveat</element>
             <position>10</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>d5481dcf2f49201070f4debcf699b6b1</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3365c71f97b1d110fa64f0f6f053afce</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -158,13 +158,13 @@
             <element>cbp_rule.bp_corrective_action</element>
             <position>11</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>59481dcf2f49201070f4debcf699b6b1</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>b365c71f97b1d110fa64f0f6f053afce</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -172,13 +172,13 @@
             <element>cbp_rule.bp_primary_technology</element>
             <position>12</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>d9481dcf2f49201070f4debcf699b6b1</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3765c71f97b1d110fa64f0f6f053afce</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -186,13 +186,13 @@
             <element>.split</element>
             <position>13</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>5d481dcf2f49201070f4debcf699b6b1</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>b765c71f97b1d110fa64f0f6f053afce</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type>.split</type>
         </sys_ui_element>
@@ -200,13 +200,13 @@
             <element>cbp_rule.bp_secondary_technology</element>
             <position>14</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>dd481dcf2f49201070f4debcf699b6b1</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3b65c71f97b1d110fa64f0f6f053afce</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -214,13 +214,13 @@
             <element>cbp_rule.bp_risk</element>
             <position>15</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>51481dcf2f49201070f4debcf699b6b2</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>bb65c71f97b1d110fa64f0f6f053afce</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -228,13 +228,13 @@
             <element>cbp_rule.bp_description</element>
             <position>16</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>d1481dcf2f49201070f4debcf699b6b2</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3f65c71f97b1d110fa64f0f6f053afce</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -242,13 +242,13 @@
             <element>cbp_rule.bp_title</element>
             <position>17</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>55481dcf2f49201070f4debcf699b6b2</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>bf65c71f97b1d110fa64f0f6f053afce</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -256,13 +256,13 @@
             <element>cbp_rule.create_date</element>
             <position>18</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>d5481dcf2f49201070f4debcf699b6b2</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3365c71f97b1d110fa64f0f6f053afcf</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -270,13 +270,13 @@
             <element>cbp_rule.sw_type</element>
             <position>19</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>59481dcf2f49201070f4debcf699b6b2</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>b365c71f97b1d110fa64f0f6f053afcf</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -284,13 +284,13 @@
             <element>cbp_rule.update_date</element>
             <position>20</position>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2020-12-17 10:30:59</sys_created_on>
-            <sys_id>d9481dcf2f49201070f4debcf699b6b2</sys_id>
+            <sys_created_on>2022-09-13 08:26:57</sys_created_on>
+            <sys_id>3765c71f97b1d110fa64f0f6f053afcf</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_summary" sys_domain="global" view="Default view">20b0b5fa2f542010bd2551172799b6c4</sys_ui_section>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-12-17 10:30:59</sys_updated_on>
+            <sys_updated_on>2022-09-13 08:26:57</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>

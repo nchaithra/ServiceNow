@@ -35,7 +35,7 @@ function getAssetInfo() {
 function getAssetDrilldownInfoResponse(response) {
     var answer = response.responseXML.documentElement.getAttribute("answer");
     var result = JSON.parse(answer);
-    var title = ["Physical Type", "Platform Diversification (Top 10)", "Warranty Status", "Contract Status"];
+    var title = ["Physical Type", "Platform Diversification (Top 10)", "Warranty Status (not under contract)", "Contract Status"];
 
     for (var j = 0; j < result.length; j++) {
 
@@ -58,7 +58,7 @@ function getAssetDrilldownInfoResponse(response) {
                 switch (index) {
                     case 0:
                         {
-                           obj.data = [{
+                            obj.data = [{
                                 x: 0,
                                 y: result[j][0],
                                 color: "#FF8C00"
@@ -107,8 +107,9 @@ function getAssetDrilldownInfoResponse(response) {
                 }
             });
         }
-        xAxis.categories = categories;
-
+        //xAxis.categories = categories;
+        xAxis = categories;
+		
         if (j == 0)
             x_caci_cisco_bcs.Cisco_RenderGraph.renderPieChart("report" + j, title[j], data_array, "pie", xAxis);
         else if (j == 1) {
@@ -127,13 +128,17 @@ function getAssetDrilldownInfoResponse(response) {
         <endpoint>x_caci_cisco_bcs_Asset_Drilldown.do</endpoint>
         <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:evaluate var="jvar_urlLink" object="true" jelly="true">
+		var id = new Cisco_ClientServerBridge().getclientid();
+	id;	
+	</g:evaluate>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>	
 	<g:inline template="reporting_includes.xml" />	
 	<body>
 
 		<div class="row">
 			<div class="col-xs-9 SoftwareType">
-				<h1 class="header" style="margin-left:20px" > Assets and Contract Tracking</h1>
+				<h1 class="header" style="margin-left:20px" > Assets and Contracts</h1>
 			</div>
 		<!-- 	<div id="tabList" class="col-xs-2">
 				<div class="row">
@@ -146,9 +151,9 @@ function getAssetDrilldownInfoResponse(response) {
 				</ul>
 					</div></div>
 			</div> -->
-			<div class="col-xs-3">
+			<!-- <div class="col-xs-3">
 				<div class="stars"  style="float:right;">
-					<h4>Please provide your feedback for Assets and Contract Tracking</h4>
+					<h4>Please provide your feedback for Assets and Contracts</h4>
 					<div class="outer_stars">
 						<input class="star star-5" id="star-5" type="radio" name="star" value="5" onclick="myFunction(5)" />
 						<label class="star star-5" for="star-5"></label> 
@@ -161,7 +166,7 @@ function getAssetDrilldownInfoResponse(response) {
 						<input class="star star-1" id="star-1" type="radio" name="star"  value="1" onclick="myFunction(1)"/>
 						<label class="star star-1" for="star-1"></label></div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 
@@ -178,7 +183,10 @@ function getAssetDrilldownInfoResponse(response) {
 			</div>
 		</div>
 		<div id="asset_table">
-			<iframe id="myframe" src="/x_caci_cisco_bcs_cisco_assets_list.do" width="100%" height="450" style="border:none;"></iframe>
+					
+			<iframe id="myframe" src="/x_caci_cisco_bcs_cisco_assets_list.do?sysparm_fixed_query=customer_id=${jvar_urlLink}" width="100%" height="450" style="border:none;">
+						
+			</iframe>
 			<style>
 
 				.StarsAlign{
@@ -238,13 +246,13 @@ function getAssetDrilldownInfoResponse(response) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-11-05 07:10:53</sys_created_on>
         <sys_id>19a750652f502010bd2551172799b6ca</sys_id>
-        <sys_mod_count>271</sys_mod_count>
+        <sys_mod_count>301</sys_mod_count>
         <sys_name>Asset_Drilldown</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_page_19a750652f502010bd2551172799b6ca</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-02-08 10:09:09</sys_updated_on>
+        <sys_updated_on>2022-09-26 08:36:49</sys_updated_on>
     </sys_ui_page>
 </record_update>

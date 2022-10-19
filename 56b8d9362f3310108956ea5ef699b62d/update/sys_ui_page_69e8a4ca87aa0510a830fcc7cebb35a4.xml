@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function cid(id) {
+    var id1 = 'customer_id=' + id;
+    var tab = 'syslogeventseverity';
+    var sev = $j("#severity").val();
+    $j("#sysseverity").addClass("active");
+    $j("#reviewedseverity").removeClass("active");
+    renderGraph("column", tab, sev, "", "");
+    $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + id1);
+}
+var $j = jQuery.noConflict();
+//syslogSeverity($j("#severity").val());
+$j('#myframe1').load(function() {
+    $j("#myframe1").contents().find("a").attr("target", "_parent");
+});
+setInterval(function() {
+    $j("#myframe1").contents().find("a").attr("target", "_parent");
+}, 1500);
+$j('#myframe2').load(function() {
+    $j("#myframe2").contents().find("a").attr("target", "_parent");
+});
+setInterval(function() {
+    $j("#myframe2").contents().find("a").attr("target", "_parent");
+}, 1500);
+
+// var tab = 'syslogeventseverity';
+// //alert("tab: " + tab);
+// // var sev = $j("#severity").val();
+// //alert("sys sev: " + sev);
+// var toDate = $j("#toDate").val();
+// var fromDt = $j("#fromDate").val();
+// //alert("sys date: " + toDate + fromDt);
+// $j("#sysseverity").addClass("active");
+// $j("#reviewedseverity").removeClass("active");
+// syslogSeverity("All");
+
+
+var clientid;
+var ga = new GlideAjax("Cisco_ClientServerBridge");
+ga.addParam("sysparm_name", "getclientid");
+var response = ga.getXMLAnswer(callbackMethod);
+
+function callbackMethod(response) {
+    clientid = 'customer_id=' + response;
+}
+
+
+// var gUrl = new GlideURL();
+// gUrl.setFromCurrent();
+// if (gUrl.getParam("parm1") + "" == "secAdv") {
+//     setTimeout(function() {
+//         syslogSeverity($j("#severity").val());
+//     }, 500);
+// } else {
+//     setTimeout(function() {
+//         reviewedSeverity($j("#severity").val());
+//     }, 500);
+// }
+
+function myFunction(a) {
+    var arr = [];
+    arr.push(a);
+    arr.push("Syslog");
+    arr.push("Individual View");
+    var loadingDialog = new GlideModal("x_caci_cisco_bcs_My_Feedback_Form", true, 'modal-lg');
+    loadingDialog.setTitle('Comments for Syslog ');
+    loadingDialog.setPreference("sysparm_message", JSON.stringify(arr));
+    loadingDialog.render();
+}
+
+// function onLoad() {
+//     renderGraphWithParm();
+// }
+
+function renderGraphWithParm() {
+    var len = $j("#TabList").children().length;
+    for (var i = 0; i < len; i++) {
+        var val = $j("#TabList").children()[i].className;
+        if (val == "active") {
+            val = $j("#TabList").children()[i].innerHTML;
+            //alert("val " + val);
+            if (val != "Syslog Severity") {
+                //alert("if");
+                this.reviewedSeverity($j("#severity").val());
+
+            } else {
+                //alert("else");
+                this.syslogSeverity($j("#severity").val());
+
+            }
+        }
+    }
+}
+
+function syslogSeverity(severity) {
+    try {
+        //alert("syslog sev");
+        //var tab = $j("#TabList").children()[0].innerHTML;
+        var tab = 'syslogeventseverity';
+        //alert("tab: " + tab);
+        var sev = $j("#severity").val();
+        //alert("sys sev: " + sev);
+        var toDate = $j("#toDate").val();
+        var fromDt = $j("#fromDate").val();
+        //alert("sys date: " + toDate + fromDt);
+        $j("#sysseverity").addClass("active");
+        $j("#reviewedseverity").removeClass("active");
+
+        if ((toDate < fromDt)) { // || ((toDate =='')&&(fromDt ==''))
+            alert('From date cannont be greater than To date');
+            return false;
+
+        } else {
+            renderGraph("column", tab, sev, fromDt, toDate);
+        }
+    } catch (e) {
+        //alert("SyslogSeverity exception :"+e);
+    }
+}
+
+function reviewedSeverity() {
+    try {
+        //alert("reviwed sev");
+        var sev = $j("#severity").val();
+        var toDate = $j("#toDate").val();
+        var fromDate = $j("#fromDate").val();
+        //var tab = $j("#TabList").children()[1].innerHTML;
+        var tab = 'reviewedseverity';
+        //         alert("rev tab: " + tab);
+        //         alert("rev sev: " + sev);
+        //         alert("rev date: " + toDate + fromDate);
+        // alert(sev + " " + toDate + " " + fromDate);
+
+        $j("#reviewedseverity").addClass("active");
+        $j("#sysseverity").removeClass("active");
+
+        if (toDate > fromDate) {
+            renderGraph("column", tab, sev, fromDate, toDate);
+        } else {
+            alert('From date cannont be greater than To date');
+            return false;
+        }
+        //  renderGraph("report1", "Total Device Count by message type", "column", "", tab, sev, fromDt, toDate);
+    } catch (e) {
+        // alert("Exception" + e);
+    }
+
+}
+
+
+function renderGraph(graphType, tab, sev, fromDt, toDate) {
+    try {
+        var bridge = new GlideAjax("Cisco_ClientServerBridge");
+        bridge.addParam('sysparm_name', "getSeverityOnChangeOfSyslog");
+        bridge.addParam('sysparm_severity', sev);
+        bridge.addParam('sysparm_from_date', fromDt);
+        bridge.addParam('sysparm_to_date', toDate);
+        bridge.addParam('sysparm_tablist_val', tab);
+        bridge.getXML(sysSeverity);
+
+        function sysSeverity(response) {
+            try {
+                var answer = response.responseXML.documentElement.getAttribute("answer");
+
+                var title = ["Total Event Count by message type", "Total Device Count by message type", "Top devices generating Syslogs"];
+                var result = JSON.parse(answer);
+                if (tab == 'syslogeventseverity') {
+                    if (fromDt && toDate) {
+                        switch (sev) {
+                            case "0":
+                                var queryCondition = "dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                            case "1":
+                                var queryCondition = "syslogeventseverity=1^dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                            case "2":
+                                var queryCondition = "syslogeventseverity=2^dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                            case "3":
+                                var queryCondition = "syslogeventseverity=3^dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                            case "4":
+                                var queryCondition = "syslogeventseverity=4^dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                        }
+
+                    } else {
+                        switch (sev) {
+                            case "0":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid);
+                                break;
+                            case "1":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + "syslogeventseverity=1");
+                                break;
+                            case "2":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + "syslogeventseverity=2");
+                                break;
+                            case "3":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + "syslogeventseverity=3");
+                                break;
+                            case "4":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + "syslogeventseverity=4");
+                                break;
+                        }
+                    }
+                } else {
+                    if (fromDt && toDate) {
+                        switch (sev) {
+                            case "0":
+                                var queryCondition = "dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                            case "1":
+                                var queryCondition = "reviewedseverity=1^dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                            case "2":
+                                var queryCondition = "reviewedseverity=2^dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                            case "3":
+                                var queryCondition = "reviewedseverity=3^dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                            case "4":
+                                var queryCondition = "reviewedseverity=4^dateBETWEENjavascript:gs.dateGenerate('" + fromDt + "','00:00:00')@javascript:gs.dateGenerate('" + toDate + "','23:59:59')";
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + queryCondition);
+                                break;
+                        }
+
+                    } else {
+                        switch (sev) {
+                            case "0":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid);
+                                break;
+                            case "1":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + "reviewedseverity=1");
+                                break;
+                            case "2":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + "reviewedseverity=2");
+                                break;
+                            case "3":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + "reviewedseverity=3");
+                                break;
+                            case "4":
+                                $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=" + clientid + '^' + "reviewedseverity=4");
+                                break;
+                        }
+                    }
+
+                }
+                for (var j = 0; j < result.length; j++) {
+                    var xAxis = {};
+                    var categories = [];
+                    var output = [];
+                    var resultarr = [];
+                    //  alert('test resp');
+                    result[j].forEach(function callback(value, index) {
+                        categories.push(value.key);
+                        if (value.value) {
+                            resultarr.push(parseInt(value.value));
+                        }
+                    });
+                    //alert(resultarr);
+                    //  var output = [{
+                    // 	 name: 'severity'+'',
+                    //      data: resultarr
+                    //  }];
+                    var obj = {};
+                    //obj.name = 'severity';
+                    obj.data = resultarr;
+                    output.push(obj);
+                    xAxis = categories;
+                    //xAxis.categories = categories;
+                    // alert('qwert: ' + JSON.stringify(xAxis) + JSON.stringify(output));
+                    // alert("title :"+title[j]);
+                    //alert("xaxis :"+JSON.stringify(xAxis));
+                    renderLogGraph("report" + j, title[j], output, "column", xAxis, "");
+
+                    //             ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+                    // 				alert("Inside Script loader :"+JSON.stringify(output) +title[j]);
+                    //                 x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart("report" + j, title[j], output, "column", xAxis);
+                    //             });
+                }
+            } catch (e) {
+                //alert("Exception caught inside syslogseverity :"+e);
+            }
+        }
+    } catch (e) {
+        //alert("Exception caught inside renderGraph "+e);
+    }
+}
+
+function renderLogGraph(reportId, title, output, graphType, xAxis, yaxis) {
+    // alert("Inside Script loader :"+JSON.stringify(xAxis));
+    ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+        //alert("Inside Script loader :"+reportId+title+JSON.stringify(xAxis)+graphType+JSON.stringify(output));
+        x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(reportId, title, output, graphType, xAxis, yaxis);
+    });
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_syslog.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:evaluate var="jvar_urlLink" object="true" jelly="true">
+		var id = new Cisco_ClientServerBridge().getclientid();
+	id;	
+	</g:evaluate>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+<g:inline template="reporting_includes.xml" />
+<style>
+.outer_stars{
+margin-right:40px;
+margin-top:0px;
+}
+div.stars {
+width: 270px;
+display: inline-block;
+}
+#submit{
+float:right;
+}
+input.star { display: none; }
+label.star {
+float: right;
+padding: 10px;
+font-size: 28px;
+color: #444;
+transition: all .2s;
+}
+.head{
+font-size: 2em;
+}
+input.star:checked ~ label.star:before {
+content: '\f005';
+color: #FD4;
+transition: all .25s;
+}
+input.star-5:checked ~ label.star:before {
+color: #FE7;
+text-shadow: 0 0 15px #952;
+}
+
+#feedback{
+padding-left:20px;
+padding-top:15px;
+}
+input.star-1:checked ~ label.star:before { color: #F62; }
+label.star:hover { transform: rotate(-15deg) scale(1.3); }
+label.star:before {
+content: '\f006';
+font-family: FontAwesome;
+}
+</style>
+	<script>
+addLoadEvent(loadMe);
+function loadMe()
+{ 
+	var ga = new GlideAjax("Cisco_ClientServerBridge");
+    ga.addParam("sysparm_name", "getclientid");
+    var response = ga.getXMLAnswer(callbackMethod);
+    function callbackMethod(response) {
+  cid(response);
+     }
+}
+	</script>
+<div class="wrapper container-fluid">
+<div class="row">
+<div class="col-xs-3" ><h1>Syslogs</h1>
+<div >
+<ul role="tablist" id="TabList" el-type="li" class="button-group nav nav-segmented accessible-menu">
+<li style="width:46%" role="tab" tabindex="0" title="" aria-label="Reports created by me" class="active" onclick="syslogSeverity(0)" id="sysseverity">Syslog Severity</li>
+<li style="width:54%" role="tab" tabindex="0" title="" id="reviewedseverity" aria-label="Reports created by me" class="" onclick="reviewedSeverity(0)">Reviewed Severity</li>
+</ul>
+</div>
+<div>
+<select id="severity" onchange="renderGraphWithParm()" class="form-control" style="margin-top:10px;height:auto;width:120px" >
+
+<option value="0" >All</option>
+<option value="1" >1</option>
+<option value="2" >2</option>
+<option value="3" >3</option>
+<option value="4" >4</option>
+
+</select>
+</div>
+</div>
+
+<div class="col-xs-3" >
+<div >
+<label style="margin-top:70px" class="control-label"><strong>From date</strong></label>
+<input type="date" id="fromDate" onchange="renderGraphWithParm()" style="margin-left: 5px;margin-top:60;padding-top: 0px;padding-right: 20px;padding-bottom: 0px;padding-left: 20px;border-spacing:10px;" name="fromDate"></input>
+</div>
+</div>
+<div class="col-xs-3" >
+<div>
+<label style="margin-top:70px;" class="control-label"><strong>To date</strong></label>
+<input type="date" id="toDate" onchange="renderGraphWithParm()" style="margin-left: 5px;padding-top: 0px;padding-right: 20px;padding-bottom: 0px;padding-left: 20px;" name="toDate"></input>
+</div>
+</div>
+<div class="col-xs-3" ></div>
+<!-- <div class="col-xs-3" >
+<div class="row">
+<div class="stars" style="float:right;">
+<h4>Please provide your feedback for Syslogs</h4>
+<div class="outer_stars">
+<input class="star star-5" id="star-5" type="radio" name="star" value="5" onclick="myFunction(5)" />
+<label class="star star-5" for="star-5"></label>
+<input class="star star-4" id="star-4" type="radio" name="star" value="4" onclick="myFunction(4)"/>
+<label class="star star-4" for="star-4"></label>
+<input class="star star-3" id="star-3" type="radio" name="star" value="3" onclick="myFunction(3)"/>
+<label class="star star-3" for="star-3"></label>
+<input class="star star-2" id="star-2" type="radio" name="star" value="2" onclick="myFunction(2)"/>
+<label class="star star-2" for="star-2"></label>
+<input class="star star-1" id="star-1" type="radio" name="star" value="1" onclick="myFunction(1)"/>
+<label class="star star-1" for="star-1"></label></div>
+</div>
+</div>
+</div> -->
+</div>
+</div>
+<br/>
+<div class="wrapper container-fluid">
+<div class="d-inline row">
+<div class="col-xs-4" id="report0" ></div>
+<div class="col-xs-4" id="report1"></div>
+<div class="col-xs-4" id="report2"></div>
+</div>
+</div>
+<div id="security_table">
+<iframe id="myframe1" src="/x_caci_cisco_bcs_cisco_syslog_daily_list.do?sysparm_fixed_query=customer_id=${jvar_urlLink}" width="100%" height="450" style="border:none;"></iframe>
+</div>
+
+</j:jelly>]]></html>
+        <name>syslog</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-03-31 11:08:44</sys_created_on>
+        <sys_id>69e8a4ca87aa0510a830fcc7cebb35a4</sys_id>
+        <sys_mod_count>285</sys_mod_count>
+        <sys_name>syslog</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_69e8a4ca87aa0510a830fcc7cebb35a4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 08:39:48</sys_updated_on>
+    </sys_ui_page>
+</record_update>

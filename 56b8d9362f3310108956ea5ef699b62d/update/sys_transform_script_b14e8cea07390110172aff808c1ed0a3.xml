@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <map display_value="Cisco Security Advisories TM V2">4dfdc8ea07390110172aff808c1ed070</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+	/*var logger = new Cisco_BCS_SNLogger();
+    var daoScript = new Cisco_DAOScript();
+    try {
+        logger.debug("Inside security advisories transform map.");
+        var sys_id = daoScript.getReferenceMapping("securityAdvisoryBulletins", "psirt_cold_id", target.psirt_cold_id);
+        target.psirt_cold_id_ref = sys_id;
+
+        var sys_id_dev = daoScript.getReferenceMapping("devices", "device_id", target.device_id);
+        target.deviceid_ref = sys_id_dev;
+        target.update();
+    } catch (e) {
+        logger.error("Exception caught inside security advisories Transform map. Error : - " + e);
+    }*/
+
+	var dao = new Cisco_DAOScript();
+
+	// Devices B
+	var resultDevices = dao.createReferences(target.device_id, "device_id", "psirt_cold_id", target.sys_id, "x_caci_cisco_bcs_cisco_devices", true,target.customer_id);
+	if(resultDevices){
+		target.deviceid_ref = resultDevices + "";
+		target.update();
+	}
+
+	// PSirt Bulletin S
+	var resultSecAdvBulletin = dao.createReferences(target.psirt_cold_id, "psirt_cold_id", "", target.sys_id, "x_caci_cisco_bcs_cisco_security_advisories_bulletins", false,target.customer_id);
+	if(resultSecAdvBulletin){
+		target.psirt_cold_id_ref = resultSecAdvBulletin + "";
+		target.update();
+	}
+
+	var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_security_advisories","","match_confidence=Vulnerable^device_id=" + target.device_id + "",target.customer_id);
+	dao.updateCalculatedField("x_caci_cisco_bcs_cisco_devices","device_id="+target.device_id+"","vulnerable_security_advisories",calculatedFieldValue,target.customer_id);
+
+	calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_security_advisories","","match_confidence=Potentially Vulnerable^device_id=" + target.device_id + "",target.customer_id);
+	dao.updateCalculatedField("x_caci_cisco_bcs_cisco_devices","device_id="+target.device_id+"","potentially_vulnerable_security_advisories",calculatedFieldValue,target.customer_id);
+	
+	calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_security_advisories","","match_confidence=Vulnerable^psirt_cold_id=" + target.psirt_cold_id + "",target.customer_id);
+	dao.updateCalculatedField("x_caci_cisco_bcs_cisco_security_advisories_bulletins","psirt_cold_id="+target.psirt_cold_id+"","vulnerable_devices_count",calculatedFieldValue,target.customer_id);
+
+	calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_security_advisories","","match_confidence=Potentially Vulnerable^psirt_cold_id=" + target.psirt_cold_id + "",target.customer_id);
+	dao.updateCalculatedField("x_caci_cisco_bcs_cisco_security_advisories_bulletins","psirt_cold_id="+target.psirt_cold_id+"","potentially_vulnerable_devices_count",calculatedFieldValue,target.customer_id);
+
+	// 	target.update();
+
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-02-23 15:00:25</sys_created_on>
+        <sys_id>b14e8cea07390110172aff808c1ed0a3</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_transform_script_b14e8cea07390110172aff808c1ed0a3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 05:03:01</sys_updated_on>
+        <when>onAfter</when>
+    </sys_transform_script>
+</record_update>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[onLoad('1');
+
+
+var $j = jQuery.noConflict();
+
+function myFunction(a) {
+    var arr = [];
+    arr.push(a);
+    arr.push("Crash Insights Tracking");
+    arr.push("Individual View");
+    var loadingDialog = new GlideModal("x_caci_cisco_bcs_My_Feedback_Form", true, 'modal-lg');
+    loadingDialog.setTitle('Comments for Crash Insights Tracking');
+    loadingDialog.setPreference("sysparm_message", JSON.stringify(arr));
+    loadingDialog.render();
+}
+
+$j('#myframe').load(function() {
+
+    $j("#myframe").contents().find("a").attr("target", "_parent");
+});
+
+setInterval(function() {
+    $j("#myframe").contents().find("a").attr("target", "_parent");
+}, 1500);
+
+function onLoad(param) {
+    renderGraphWithtime(param);
+}
+
+
+getResetInfo();
+
+function getResetInfo() {
+
+    var bridgeAjax = new GlideAjax("Cisco_ClientServerBridge");
+    bridgeAjax.addParam('sysparm_name', "crashinsightDrilldown");
+    bridgeAjax.getXML(crashinsightDrilldownResponse);
+}
+
+function crashinsightDrilldownResponse(response) {
+    var answer = response.responseXML.documentElement.getAttribute("answer");
+
+    var result = JSON.parse(answer);
+    var title = ["Platform Risk Distribution(Top 10)"];
+
+    var high = [];
+    var low = [];
+    var med = [];
+    var categories = [];
+
+    result.forEach(function callback(value, index) {
+        categories.push(value.key);
+
+        if (value.value.High) {
+            high.push(parseInt(value.value.High));
+        }
+        if (value.value.Low) {
+            low.push(parseInt(value.value.Low));
+        }
+        if (value.value.Medium) {
+            med.push(parseInt(value.value.Medium));
+        }
+    });
+
+    var output = [{
+            name: 'High',
+            data: high
+        },
+        {
+            name: 'Medium',
+            data: med
+        },
+        {
+            name: 'Low',
+            data: low
+        }
+
+    ];
+    var xAxis = {};
+    // xAxis.categories = categories;
+    xAxis = categories;
+    renderGraph("report0", title, output, "column", xAxis, "Number of Devices at Risk");
+
+}
+
+function renderGraph(reportID, titleData, seriesData, graphType, xaxis, yAxis) {
+
+    Highcharts.setOptions({
+        lang: {
+            thousandsSep: ""
+        }
+    });
+    Highcharts.chart(reportID, {
+        chart: {
+            type: graphType,
+            renderTo: reportID,
+            reflow: true,
+            spacingBottom: 15,
+            spacingTop: 10,
+            spacingLeft: 10,
+            spacingRight: 10,
+
+        },
+        //colors: colors,
+        title: {
+            text: titleData
+        },
+        credits: {
+            enabled: false
+        },
+
+        //   xAxis: xaxis,
+
+        xAxis: {
+            categories: xaxis,
+            labels: {
+                formatter: function() {
+                    return this.value.substring(0, 8);
+                }
+            }
+        },
+
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+            }
+        },
+
+
+
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: yAxis
+            }
+        },
+        tooltip: {
+            headerFormat: '<b>{point.x}</b><br/>',
+            pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+        },
+
+        //                 tooltip: {
+        //                     headerFormat: '<b>{point.x}</b><br/>',
+        //                     pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}',
+        //                     formatter: function() {
+        //                         return '<b>' + this.x + '</b><br/>' +
+        //                             this.series.name + ': ' + this.y + '<br/>' +
+        //                             'Total: ' + this.point.stackTotal;
+        //                     }
+
+        //                 },
+        plotOptions: {
+            column: {
+                showInLegend: false,
+                pointPadding: 0,
+                borderWidth: 0,
+                groupPadding: 0,
+                shadow: false,
+                stacking: 'normal',
+                pointWidth: 25,
+                dataLabels: {
+                    enabled: true,
+                    color: '#FFFFFF'
+                }
+
+            }
+        },
+        exporting: {
+            enabled: false
+        },
+        series: seriesData
+
+
+
+    });
+
+}
+/*function renderGraph(div, title, output, graphType, xAxis, yaxis) {
+    ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+        x_caci_cisco_bcs.Cisco_RenderGraph.renderstackedGraph(div, title, output, graphType, xAxis, yaxis);
+    });
+}*/
+
+
+function renderGraphWithtime(timeScale) {
+    var timeScale = gel("timeScale").value;
+
+    gettingDataTimescale(timeScale, "gettingDataForReloadCrashdataBox", "Count");
+}
+
+function gettingDataTimescale(time, func, div) {
+    var ga = new GlideAjax("Cisco_ClientServerBridge");
+    ga.addParam('sysparm_name', func);
+    ga.addParam('sysparm_time_scale', time);
+    ga.getXML(gettingdata);
+
+    function gettingdata(response) {
+        var answer = response.responseXML.documentElement.getAttribute("answer");
+        var str = JSON.parse(answer);
+        document.getElementById(div).innerHTML = '<font size="10">' + str[0] + "&emsp;&ensp;" + str[1] + '</font>';
+
+    }
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Crash Insights.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<g:evaluate var="jvar_urlLink" object="true" jelly="true">
+		var id = new Cisco_ClientServerBridge().getclientid();
+	id;	
+	</g:evaluate>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>	
+	<g:inline template="reporting_includes.xml" />	
+	<body>
+		<div class="row">
+			<div class="col-xs-9 Crashinsight">
+				<h1 class="header" style="margin-left:20px" > Crash Insights </h1>
+			</div>
+		<!-- 	<div class="col-xs-3">
+				<div class="row">
+				<div class="stars"  style="float:right;">
+					<h4>Please provide your feedback for Crash Insights </h4>
+					<div class="outer_stars">
+						<input class="star star-5" id="star-5" type="radio" name="star" value="5" onclick="myFunction(5)" />
+						<label class="star star-5" for="star-5"></label> 
+						<input class="star star-4" id="star-4" type="radio" name="star"  value="4" onclick="myFunction(4)"/>
+						<label class="star star-4" for="star-4"></label>
+						<input class="star star-3" id="star-3" type="radio" name="star"  value="3" onclick="myFunction(3)"/>
+						<label class="star star-3" for="star-3"></label>
+						<input class="star star-2" id="star-2" type="radio" name="star"  value="2" onclick="myFunction(2)"/>
+						<label class="star star-2" for="star-2"></label>
+						<input class="star star-1" id="star-1" type="radio" name="star"  value="1" onclick="myFunction(1)"/>
+						<label class="star star-1" for="star-1"></label></div>
+				</div>
+			</div>
+		</div> -->
+		</div>	
+			<div class="wrapper container-fluid">
+			<div class="d-inline row">
+				<div class="col-xs-9" id="report0" style="width: 650px; height: 500px; margin-left: 0px; margin-top: 0px;" ></div> 
+				
+			
+			<div class="col-xs-3" >
+				<div >
+				
+					<label style="margin-top:15px; text-align: left;font-size:20px;"   class="control-label">Crashes and Reloads in Last n Months</label>
+					<select  id="timeScale" onchange="renderGraphWithtime()" class="form-control" style="height:auto;" >
+						<option value="1" >Last 1 Month</option>
+						<option value="3" >Last 3 Months</option>
+						<option value="6" >Last 6 Months</option>
+						<option value="12" >Last Year</option>
+					</select>
+				</div>
+				<br></br>
+				<div style="border:2px solid grey; text-align:center;font-size:18px">
+					<h1 id="Count"><b>-</b></h1>
+					<pre style="margin-top:30px;">Crashes    Reloads</pre>
+				</div>
+				</div> 
+			</div>
+			</div>
+
+
+		<br></br>
+		<div id="reset_table">
+			<iframe id="myframe" src="/x_caci_cisco_bcs_device_reset_details_list.do?sysparm_fixed_query=customer_id=${jvar_urlLink}" width="100%" height="450" style="border:none;"></iframe>
+			<style>
+
+				.StarsAlign{
+				margin-left:25%;
+				margin-top:0px;
+				}
+				
+				.outer_stars{
+				margin-right:40px;
+				}
+				div.stars {
+				width: 270px;
+				display: inline-block;
+				}
+				#submit{
+				float:right;
+				}
+				input.star { display: none; }
+				label.star {
+				float: right;
+				padding: 10px;
+				font-size: 28px;
+				color: #444;
+				transition: all .2s;
+				}
+				.head{
+				font-size: 2em;
+				}
+				input.star:checked ~ label.star:before {
+				content: '\f005';
+				color: #FD4;
+				transition: all .25s;
+				}
+				input.star-5:checked ~ label.star:before {
+				color: #FE7;
+				text-shadow: 0 0 15px #952;
+				}
+				pre {
+                font-size: 18px;
+                }
+				#feedback{
+				padding-left:20px;
+				padding-top:15px;
+				}
+				input.star-1:checked ~ label.star:before { color: #F62; }
+				label.star:hover { transform: rotate(-15deg) scale(1.3); }
+				label.star:before {
+				content: '\f006';
+				font-family: FontAwesome;
+				}
+			</style>
+		</div>
+	</body>
+	<g:requires name="x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx" />
+</j:jelly>]]></html>
+        <name>Crash Insights</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-03-09 14:10:31</sys_created_on>
+        <sys_id>67090047974a05108986fef3a253af8c</sys_id>
+        <sys_mod_count>295</sys_mod_count>
+        <sys_name>Crash Insights</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_67090047974a05108986fef3a253af8c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-26 08:38:05</sys_updated_on>
+    </sys_ui_page>
+</record_update>

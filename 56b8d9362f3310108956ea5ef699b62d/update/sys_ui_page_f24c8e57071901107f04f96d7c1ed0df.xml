@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function onSubmit() {
+    var source_field_array = source_fields_rightzone.getValues();
+    var target_field_array = target_fields_rightzone.getValues();
+
+    if (source_field_array.length == 0 || target_field_array.length == 0) {
+        cancel();
+        return true;
+    }
+
+    if (source_field_array.length != target_field_array.length) {
+        alert("Source field count does not match target field count");
+        return false;
+    }
+
+    var ss = source_field_array.join(',');
+
+    // set the selected list as a comma seperated string for server side
+    var el = gel('source_field_list');
+    el.value = ss;
+
+    ss = target_field_array.join(',');
+
+    // set the selected list as a comma seperated string for server side
+    el = gel('target_field_list');
+    el.value = ss;
+
+    return true;
+}
+
+function cancel() {
+  var el = gel('cancelled');
+  el.value = "true";
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_CMDB_map_assist.do</endpoint>
+        <html><![CDATA[<g:ui_form>
+<g:inline template="mapping_assist.xml"/>
+<br></br>
+	<!-- <button onsubmit="onSubmit()">Save</button> -->
+</g:ui_form>]]></html>
+        <name>CMDB_map_assist</name>
+        <processing_script><![CDATA[processRequest();
+response.sendRedirect("x_caci_cisco_bcs_align_cmdb.do?sys_id=" + sysparm_map_sys_id);
+
+function processRequest() {
+    if (cancelled == "true") {
+        gs.addInfoMessage("mapping assist cancelled");
+    } else {
+        var source_fields = source_field_list.split(',');
+        var target_fields = target_field_list.split(',');
+
+        var source_arr = [];
+        var target_arr = [];
+        for (var i = 0; i < source_fields.length; i++) {
+            source_arr.push(source_fields[i] + '');
+            target_arr.push(target_fields[i] + '');
+
+        }
+       // gs.addInfoMessage('array data: ' + source_arr + ':' + target_arr);
+        createMapEntry(source_arr, target_arr);
+    }
+}
+
+function createMapEntry(sourceField, targetField) {
+    var sourceTable = sysparm_source_table;
+    var targetTable = sysparm_target_table;
+    // gs.addInfoMessage('table data: ' + sourceTable + ':' + targetTable);
+
+    var obj = {};
+    var s_fld = [];
+    var t_fld = [];
+    for (var i = 0; i < sourceField.length; i++) {
+
+        s_fld.push(sourceField[i].toString());
+        t_fld.push(targetField[i].toString());
+
+    }
+
+   // gs.addInfoMessage('array data: ' + s_fld + t_fld);
+    obj.device_asset = s_fld;
+    obj.cmdb = t_fld;
+
+    var targetField_parsed = JSON.stringify(obj);
+  //  gs.addInfoMessage('Json data: ' + targetField_parsed);
+
+    var entryGR = new GlideRecord("x_caci_cisco_bcs_align_cmdb");
+    entryGR.addQuery("sys_id", sysparm_map_sys_id);
+    entryGR.query();
+    while (entryGR.next()) {
+        if ((entryGR.mapped_data == '' && entryGR.primary_key == '') || (entryGR.primary_key != '' && entryGR.mapped_data != '')) {
+            var obj1 = {};
+            if (entryGR.ci_type == 'asset' && entryGR.asset_ref == sourceTable && entryGR.cmdb_class.name == targetTable && targetField_parsed != '') {
+               // gs.addInfoMessage('array data: ' + s_fld + t_fld);
+
+                obj1.asset = s_fld;
+                obj1.cmdb = t_fld;
+                var targetField_parsed1 = JSON.stringify(obj1);
+                // gs.addInfoMessage('Json data: ' + targetField_parsed);
+
+                entryGR.primary_key = targetField_parsed1;
+                entryGR.update();
+            } else if (entryGR.ci_type == 'device' && entryGR.device_ref == sourceTable && entryGR.cmdb_class.name == targetTable && targetField_parsed != '') {
+                obj1.device = s_fld;
+                obj1.cmdb = t_fld;
+                var targetField_parsed2 = JSON.stringify(obj1);
+               // gs.addInfoMessage('Json data: ' + targetField_parsed);
+
+                entryGR.primary_key = targetField_parsed2;
+                entryGR.update();
+            }
+        } else if ((entryGR.primary_key != '' && entryGR.mapped_data == '') ) {
+            var obj1 = {};
+            if (entryGR.ci_type == 'asset' && entryGR.asset_ref == sourceTable && entryGR.cmdb_class.name == targetTable && targetField_parsed != '') {
+               // gs.addInfoMessage('array data: ' + s_fld + t_fld);
+
+                obj1.asset = s_fld;
+                obj1.cmdb = t_fld;
+                var targetField_parsed1 = JSON.stringify(obj1);
+                // gs.addInfoMessage('Json data: ' + targetField_parsed);
+
+                entryGR.mapped_data = targetField_parsed1;
+                entryGR.update();
+            } else if (entryGR.ci_type == 'device' && entryGR.device_ref == sourceTable && entryGR.cmdb_class.name == targetTable && targetField_parsed != '') {
+                obj1.device = s_fld;
+                obj1.cmdb = t_fld;
+                var targetField_parsed2 = JSON.stringify(obj1);
+                //gs.addInfoMessage('Json data: ' + targetField_parsed);
+
+                entryGR.mapped_data = targetField_parsed2;
+                entryGR.update();
+            }
+
+        }
+    }
+}]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-02-01 11:35:42</sys_created_on>
+        <sys_id>f24c8e57071901107f04f96d7c1ed0df</sys_id>
+        <sys_mod_count>79</sys_mod_count>
+        <sys_name>CMDB_map_assist</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_f24c8e57071901107f04f96d7c1ed0df</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-13 18:25:53</sys_updated_on>
+    </sys_ui_page>
+</record_update>

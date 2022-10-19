@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="cmdb" table="x_caci_cisco_bcs_align_cmdb" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>cmdb</element>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_id>93e0a64a079901107f04f96d7c1ed003</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>cmdb</sys_name>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_choice_x_caci_cisco_bcs_align_cmdb_cmdb</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>ACC-Visibility</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>0</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5be0a64a079901107f04f96d7c1ed002</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>ACC-Visibility</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>AgentClientCollector</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>1</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5fe0a64a079901107f04f96d7c1ed010</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>AgentClientCollector</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Altiris</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>2</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dfe0a64a079901107f04f96d7c1ed011</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>Altiris</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cloud Insights Billing</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>3</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>53e0a64a079901107f04f96d7c1ed013</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>Cloud Insights Billing</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>CredentiallessDiscovery</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>4</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d3e0a64a079901107f04f96d7c1ed014</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>CredentiallessDiscovery</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>EventManagement</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>5</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>57e0a64a079901107f04f96d7c1ed015</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>EventManagement</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>ImportSet</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>6</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d7e0a64a079901107f04f96d7c1ed016</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>ImportSet</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>LANDesk</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>7</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5be0a64a079901107f04f96d7c1ed017</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>LANDesk</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Manual Entry</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>8</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dbe0a64a079901107f04f96d7c1ed018</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>Manual Entry</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>MS SMS</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>9</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5fe0a64a079901107f04f96d7c1ed019</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>MS SMS</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>OpenView</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>10</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dfe0a64a079901107f04f96d7c1ed01a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>OpenView</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Other Automated</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>11</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>53e0a64a079901107f04f96d7c1ed01c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>Other Automated</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>PatternDesigner</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>12</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d3e0a64a079901107f04f96d7c1ed01d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>PatternDesigner</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>ServiceNow</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>13</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>57e0a64a079901107f04f96d7c1ed01e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>ServiceNow</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>ServiceWatch</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>14</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d7e0a64a079901107f04f96d7c1ed01f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>ServiceWatch</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>SNAssetManagement</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>15</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>5be0a64a079901107f04f96d7c1ed020</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>SNAssetManagement</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>cmdb</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Tivoli</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_align_cmdb</name>
+            <sequence>16</sequence>
+            <synonyms/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-01-28 15:52:29</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dbe0a64a079901107f04f96d7c1ed021</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-01-28 15:52:29</sys_updated_on>
+            <value>Tivoli</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

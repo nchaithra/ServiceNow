@@ -5,29 +5,48 @@
 // $j("#timeScale").val(3);
 //form-control select2-basic
 // class="form-control select2-basic"
+// function myCreateFunction(){
+//     alert($j("#myframe1").val());
+// }
+// //alert($j("#security_table").val());
+var id;
+var ga = new GlideAjax("Cisco_ClientServerBridge");
+ga.addParam("sysparm_name", "getclientid");
+var response = ga.getXMLAnswer(callbackMethod);
+
+function callbackMethod(response) {
+    id = 'customer_id=' + response + '^';
+}
 $j('#myframe1').load(function() {
     $j("#myframe1").contents().find("a").attr("target", "_parent");
 });
-setInterval(function(){ $j("#myframe1").contents().find("a").attr("target","_parent");}, 1500);
+setInterval(function() {
+    $j("#myframe1").contents().find("a").attr("target", "_parent");
+}, 1500);
 $j('#myframe2').load(function() {
     $j("#myframe2").contents().find("a").attr("target", "_parent");
 });
-setInterval(function(){ $j("#myframe2").contents().find("a").attr("target","_parent");}, 1500);
+setInterval(function() {
+    $j("#myframe2").contents().find("a").attr("target", "_parent");
+}, 1500);
 
 var gUrl = new GlideURL();
 gUrl.setFromCurrent();
-if(gUrl.getParam("parm1") + "" == "secAdv"){
-	setTimeout(function(){ security($j("#timeScale").val()); }, 500);
-}
-else{
-	setTimeout(function(){ field_ntices($j("#timeScale").val()); }, 500);
+if (gUrl.getParam("parm1") + "" == "secAdv") {
+    setTimeout(function() {
+        security($j("#timeScale").val());
+    }, 500);
+} else {
+    setTimeout(function() {
+        field_ntices($j("#timeScale").val());
+    }, 500);
 }
 
 function myFunction(a) {
     var arr = [];
     arr.push(a);
     arr.push("Vulnerabilities");
-	arr.push("Individual View");
+    arr.push("Individual View");
     var loadingDialog = new GlideModal("x_caci_cisco_bcs_My_Feedback_Form", true, 'modal-lg');
     loadingDialog.setTitle('Comments for Vulnerabilities ');
     loadingDialog.setPreference("sysparm_message", JSON.stringify(arr));
@@ -49,10 +68,10 @@ function renderGraphWithParm() {
 }
 
 function field_ntices(timeScale) {
-	//gUrl.setFromCurrent();
-	gUrl.params.parm1 = "fnAdv";
-	history.pushState({},'',gUrl.getURL());
-	
+    //gUrl.setFromCurrent();
+    gUrl.params.parm1 = "fnAdv";
+    history.pushState({}, '', gUrl.getURL());
+
     $j("#security_table").hide();
     $j("#FieldMaps_table").show();
     $j("#FieldNotice").addClass("active");
@@ -87,15 +106,15 @@ function field_ntices(timeScale) {
     renderGraph("x_caci_cisco_bcs_cisco_field_notices", "graphOfFieldNoticeDeviceCount", "field_notice_id", "report1", timeScale, "No. of Devices Affected by Field Notice ID (Top 10)", "#FF8C00", "Device Count", " ");
     renderGraph("x_caci_cisco_bcs_cisco_field_notices", "graphOfFieldNoticeDeviceIdDrilldown", "field_notice_id", "report2", timeScale, "No. of Assets Affected by Field Notice ID (Top 10)", "#1261A0", "Asset Count", " ");
     renderGraph("x_caci_cisco_bcs_cisco_field_notices", "graphOfMatchConfidenceForVurlneabilitiesDrillDown", "fieldnoticeid.fn_type", "report3", timeScale, "No. of Field Notices per Field Notice Type", "#1261A0", "Field Notices", " ");
- //renderGraph("x_caci_cisco_bcs_cisco_field_notices_bulletins", "graphOfMatchConfidenceForVurlneabilitiesDrillDown", "fn_type", "report3", timeScale, "No of devices per field notice type", "#1261A0", "Device Count", " ");
+    //renderGraph("x_caci_cisco_bcs_cisco_field_notices_bulletins", "graphOfMatchConfidenceForVurlneabilitiesDrillDown", "fn_type", "report3", timeScale, "No of devices per field notice type", "#1261A0", "Device Count", " ");
 }
 
 function security(timeScale) {
-	//gUrl.setFromCurrent();
-	gUrl.params.parm1 = "secAdv";
-	history.pushState({},'',gUrl.getURL());
-	
-	$j("#FieldMaps_table").hide();
+    //gUrl.setFromCurrent();
+    gUrl.params.parm1 = "secAdv";
+    history.pushState({}, '', gUrl.getURL());
+
+    $j("#FieldMaps_table").hide();
     $j("#security_table").show();
     $j("#securityAdv").addClass("active");
     $j("#FieldNotice").removeClass("active");
@@ -145,141 +164,147 @@ function renderGraph(tableName, method, groupby, div, timeScale, title, color, y
 
     function vulnerability(response) {
         var answer = response.responseXML.documentElement.getAttribute("answer");
-		answer = JSON.parse(answer);
+        answer = JSON.parse(answer);
         if (method == "graphOfMatchConfidenceForVurlneabilitiesDrillDown") {
             var date = answer[0];
             answer = answer[1];
             if (groupby == "sir") {
                 if (timeScale != "12plus" && timeScale != "all")
-                    $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_security_advisories_bulletins_list.do?sysparm_fixed_query=bulletin_first_published>=" + date);// + "^ORDERBYDESCbulletin_last_updated");
+
+                    $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_security_advisories_bulletins_list.do?sysparm_fixed_query=" + id + "bulletin_first_published>=" + date); // + "^ORDERBYDESCbulletin_last_updated");
                 else {
                     switch (timeScale) {
                         case "12plus":
-                            $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_security_advisories_bulletins_list.do?sysparm_fixed_query=bulletin_first_published<=" + date );//+ "^ORDERBYDESCbulletin_last_updated");
+                            $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_security_advisories_bulletins_list.do?sysparm_fixed_query=" + id + "bulletin_first_published<=" + date); //+ "^ORDERBYDESCbulletin_last_updated");
                             break;
                         case "all":
-                            $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_security_advisories_bulletins_list.do?sysparm_query=ORDERBYDESCbulletin_last_updated");
+                            $j('#myframe1').attr('src', "/x_caci_cisco_bcs_cisco_security_advisories_bulletins_list.do?sysparm_fixed_query=" + id + "ORDERBYDESCbulletin_last_updated");
                             break;
                     }
                 }
             } else if (groupby == "fieldnoticeid.fn_type") {
                 if (timeScale != "12plus" && timeScale != "all")
-                    $j('#myframe2').attr('src', "/x_caci_cisco_bcs_cisco_fn_bulletin_list.do?sysparm_fixed_query=bulletin_first_published>=" + date);// + "^ORDERBYDESCbulletin_last_updated");
+                    $j('#myframe2').attr('src', "/x_caci_cisco_bcs_cisco_fn_bulletin_list.do?sysparm_fixed_query=" + id + "bulletin_first_published>=" + date); // + "^ORDERBYDESCbulletin_last_updated");
                 else {
                     switch (timeScale) {
                         case "12plus":
-                            $j('#myframe2').attr('src', "/x_caci_cisco_bcs_cisco_fn_bulletin_list.do?sysparm_fixed_query=bulletin_first_published<=" + date);// + "^ORDERBYDESCbulletin_last_updated");
+                            $j('#myframe2').attr('src', "/x_caci_cisco_bcs_cisco_fn_bulletin_list.do?sysparm_fixed_query=" + id + "bulletin_first_published<=" + date); // + "^ORDERBYDESCbulletin_last_updated");
                             break;
                         case "all":
-                            $j('#myframe2').attr('src', "/x_caci_cisco_bcs_cisco_fn_bulletin_list.do?sysparm_query=ORDERBYDESCbulletin_last_updated");
+                            $j('#myframe2').attr('src', "/x_caci_cisco_bcs_cisco_fn_bulletin_list.do?sysparm_fixed_query=" + id + "ORDERBYDESCbulletin_last_updated");
                             break;
                     }
                 }
             }
-		}
-			var output = [];
-            var xAxis = {};
-            var categories = [];
-            var count = 0;
-            for (var i in answer) {
-                var j = i;
-                if (groupby == "device_id")
-                    j = j.replace('A', "");
-                categories.push(j);
-                var obj = {};
-                obj.name = j;
-                obj.data = [{
-                    x: count,
-                    y: parseInt(answer[i]),
-                    color: color
-                }];
-                output.push(obj);
-                count++;
-            }
-			xAxis.categories = categories;
-			ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
-                x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(div, title, output, "column", xAxis, yaxis);
-            });
-
         }
+        var output = [];
+        var xAxis = {};
+        var categories = [];
+        var count = 0;
+        for (var i in answer) {
+            var j = i;
+            if (groupby == "device_id")
+                j = j.replace('A', "");
+            categories.push(j);
+            var obj = {};
+            obj.name = j;
+            obj.data = [{
+                x: count,
+                y: parseInt(answer[i]),
+                color: color
+            }];
+            output.push(obj);
+            count++;
+        }
+        //xAxis.categories = categories;
+        xAxis = categories;
+        ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+            x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(div, title, output, "column", xAxis, yaxis);
+        });
+
     }
+}
+function renderDeviceGraph(tableName, method, groupby, div, timeScale, title, color, yaxis, sir) {
+    var bridge = new GlideAjax("Cisco_ClientServerBridge");
+    bridge.addParam('sysparm_name', method);
+    bridge.addParam('sysparm_table_name', tableName);
+    bridge.addParam('sysparm_group_by', groupby);
+    bridge.addParam('sysparm_time_scale', timeScale);
+    bridge.addParam('sysparm_sir', sir);
+    bridge.getXML(devices);
 
-    function renderDeviceGraph(tableName, method, groupby, div, timeScale, title, color, yaxis, sir) {
-        var bridge = new GlideAjax("Cisco_ClientServerBridge");
-        bridge.addParam('sysparm_name', method);
-        bridge.addParam('sysparm_table_name', tableName);
-        bridge.addParam('sysparm_group_by', groupby);
-        bridge.addParam('sysparm_time_scale', timeScale);
-        bridge.addParam('sysparm_sir', sir);
-        bridge.getXML(devices);
+    function devices(response) {
 
-        function devices(response) {
+        var answer = response.responseXML.documentElement.getAttribute("answer");
+        answer = JSON.parse(answer);
 
-            var answer = response.responseXML.documentElement.getAttribute("answer");
-            answer = JSON.parse(answer);
+        var output = [];
+        var xAxis = {};
+        var categories = [];
+        var count = 0;
+        for (var i in answer) {
+            var j = i;
+            if (groupby == "device_id")
+                j = j.replace('A', "");
+            categories.push(j);
+            var obj = {};
+            obj.name = j;
+            obj.data = [{
+                x: count,
+                y: parseInt(answer[i]),
+                color: color
+            }];
+            output.push(obj);
+            count++;
+        }
 
-            var output = [];
-            var xAxis = {};
-            var categories = [];
-            var count = 0;
-            for (var i in answer) {
-                var j = i;
-                if (groupby == "device_id")
-                    j = j.replace('A', "");
-                categories.push(j);
-                var obj = {};
-                obj.name = j;
-                obj.data = [{
-                    x: count,
-                    y: parseInt(answer[i]),
-                    color: color
-                }];
-                output.push(obj);
-                count++;
-            }
-
-            for (var l = 0; l < output.length; l++) {
-                for (var k = l + 1; k < output.length; k++) {
-                    if (output[l].data[0].y > output[k].data[0].y) {
-                        var temp = output[k];
-                        output[k] = output[l];
-                        output[l] = temp;
-                    }
+        for (var l = 0; l < output.length; l++) {
+            for (var k = l + 1; k < output.length; k++) {
+                if (output[l].data[0].y > output[k].data[0].y) {
+                    var temp = output[k];
+                    output[k] = output[l];
+                    output[l] = temp;
                 }
             }
-            output = output.reverse();
-            // 		var limit = 0;
-            // 		var data_array = [];
-            // 		for(var data in output){
-            // 			data_array[limit] = output[data];
-            // 			if(limit == 9)
-            // 				break;
-            // 			limit++;
-            // 		}
-            alert(JSON.stringify(output));
+        }
+        output = output.reverse();
+        // 		var limit = 0;
+        // 		var data_array = [];
+        // 		for(var data in output){
+        // 			data_array[limit] = output[data];
+        // 			if(limit == 9)
+        // 				break;
+        // 			limit++;
+        // 		}
+        alert(JSON.stringify(output));
 
-            var t = 0;
-            for (var n in data_array) {
-                data_array[n].data[0].x = parseInt(n);
-                categories.push(output[n].name + "");
-                t++;
-                if (t == 10)
-                    break;
-            }
-
-            xAxis.categories = categories;
-            ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
-                x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(div, title, output, "column", xAxis, yaxis);
-            });
-
+        var t = 0;
+        for (var n in data_array) {
+            data_array[n].data[0].x = parseInt(n);
+            categories.push(output[n].name + "");
+            t++;
+            if (t == 10)
+                break;
         }
 
-    }]]></client_script>
+        //  xAxis.categories = categories;
+        xAxis = categories;
+        ScriptLoader.getScripts('x_caci_cisco_bcs.Cisco_RenderGraph.jsdbx', function() {
+            x_caci_cisco_bcs.Cisco_RenderGraph.renderBarChart(div, title, output, "column", xAxis, yaxis);
+        });
+
+    }
+
+}]]></client_script>
         <description/>
         <direct>false</direct>
         <endpoint>x_caci_cisco_bcs_Vulnerabilities_Drill_Down.do</endpoint>
         <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<g:evaluate var="jvar_urlLink" object="true" jelly="true">
+		var id = new Cisco_ClientServerBridge().getclientid();
+	id;	
+	</g:evaluate>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>	
 <g:inline template="reporting_includes.xml" />
 	<style>
@@ -351,7 +376,7 @@ font-family: FontAwesome;
 				</div>
 			</div>
 			<div class="col-xs-3"  ></div>
-			<div class="col-xs-3" >
+<!-- 			<div class="col-xs-3" >
 			<div class="row">
 	<div class="stars"  style="float:right;">
 	<h4>Please provide your feedback for Vulnerabilities</h4>
@@ -368,7 +393,7 @@ font-family: FontAwesome;
 			<label class="star star-1" for="star-1"></label></div>
 	</div>
 	</div>
-			</div>
+			</div> -->
  		</div>
 	</div>
 	<br/>
@@ -380,10 +405,14 @@ font-family: FontAwesome;
   		</div>
 	</div>
 	<div id="security_table">
-		<iframe id="myframe1" src="/x_caci_cisco_bcs_cisco_security_advisories_bulletins_list.do"  width="100%" height="450" style="border:none;"></iframe>
+		<!-- <iframe id="myframe1" src="${jvar_urlLink}" width="100%" height="450" style="border:none;">  -->
+		<iframe id="myframe1" src="/x_caci_cisco_bcs_cisco_security_advisories_bulletins_list.do?sysparm_fixed_query=customer_id=${jvar_urlLink}"  width="100%" height="450" style="border:none;" onload='myCreateFunction()'>
+			</iframe>
 	</div>
 	<div id="FieldMaps_table">
-		<iframe id="myframe2" src="/x_caci_cisco_bcs_cisco_fn_bulletin_list.do?" width="100%" height="450" style="border:none;"></iframe>
+		<!-- <iframe id="myframe1" src="${jvar_urlLink1}" width="100%" height="450" style="border:none;">  -->
+		<iframe id="myframe2" src="/x_caci_cisco_bcs_cisco_fn_bulletin_list.do?sysparm_fixed_query=customer_id=${jvar_urlLink}" width="100%" height="450" style="border:none;">
+			</iframe>
 	</div>
 </j:jelly>]]></html>
         <name>Vulnerabilities_Drill_Down</name>
@@ -392,13 +421,13 @@ font-family: FontAwesome;
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-27 13:46:17</sys_created_on>
         <sys_id>5cdbd7ea2f082410bd2551172799b67b</sys_id>
-        <sys_mod_count>490</sys_mod_count>
+        <sys_mod_count>526</sys_mod_count>
         <sys_name>Vulnerabilities_Drill_Down</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_page_5cdbd7ea2f082410bd2551172799b67b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-02-15 10:31:54</sys_updated_on>
+        <sys_updated_on>2022-09-26 08:40:26</sys_updated_on>
     </sys_ui_page>
 </record_update>
