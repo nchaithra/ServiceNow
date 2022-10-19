@@ -7,7 +7,7 @@ function myFunction() {
 	var jsonData = {};
 	var jsonArr = [];
 	var submit_flag = [];
-	for (var j = 1; j <= 7; j++) {
+	for (var j = 1; j <= 11; j++) {
 		
 		var jsonData = {};
 		var value = document.getElementById("feedback" + j).getAttribute("value");
@@ -116,8 +116,8 @@ function myFunction() {
 			<form autocomplete="off">
 				<div class="modal-body row">
 					<div class="col-md-6">
-						<h4 ><span class="required-mark" style="color:red">*</span>Please provide your feedback for Assets and Contract Tracking</h4>
-						<div class="stars" id="feedback2" value="Assets and Contract Tracking">
+						<h4 ><span class="required-mark" style="color:red">*</span>Please provide your feedback for Assets and Contracts</h4>
+						<div class="stars" id="feedback2" value="Assets and Contracts">
 
 							<input class="star star-5" id="star-6" type="radio" name="star" value = "5" />
 
@@ -199,8 +199,8 @@ function myFunction() {
 			<form autocomplete="off">
 				<div class="modal-body row">
 					<div class="col-md-6">
-						<h4><span class="required-mark" style="color:red">*</span>Please provide your feedback for Software Tracking</h4>
-						<div class="stars" id="feedback4" value="Software Tracking">
+						<h4><span class="required-mark" style="color:red">*</span>Please provide your feedback for Software Lifecycle</h4>
+						<div class="stars" id="feedback4" value="Software Lifecycle">
 
 
 							<input class="star star-5" id="star-16" type="radio" name="star" value = "5"/>
@@ -240,8 +240,8 @@ function myFunction() {
 			<form autocomplete="off">
 				<div class="modal-body row">
 					<div class="col-md-6">
-						<h4><span class="required-mark" style="color:red">*</span>Please provide your feedback for Hardware Tracking</h4>
-						<div class="stars" id="feedback5" value="Hardware Tracking" >
+						<h4><span class="required-mark" style="color:red">*</span>Please provide your feedback for Hardware Lifecycle</h4>
+						<div class="stars" id="feedback5" value="Hardware Lifecycle" >
 
 
 							<input class="star star-5" id="star-21" type="radio" name="star" value = "5"/>
@@ -316,13 +316,55 @@ function myFunction() {
 						<div id="error_message6"></div>	
 					</div></div>
 			</form>
-
-
+			
 			<form autocomplete="off">
 				<div class="modal-body row">
 					<div class="col-md-6">
-						<h4><span class="required-mark" style="color:red">*</span>How likely are you to recommend BCS Operational Insights API</h4>
-						<div class="stars" id="feedback7" value="Recommend BCS">
+						<h4><span class="required-mark" style="color:red">*</span>Please provide your feedback for Crash Insights</h4>
+						<div class="stars" id="feedback7" value="Crash Insights" >
+
+
+							<input class="star star-5" id="star-31" type="radio" name="star" value = "5"/>
+
+							<label class="star star-5" for="star-31"></label>
+
+							<input class="star star-4" id="star-32" type="radio" name="star" value = "4"/>
+
+							<label class="star star-4" for="star-32"></label>
+
+							<input class="star star-3" id="star-33" type="radio" name="star" value = "3"/>
+
+							<label class="star star-3" for="star-33"></label>
+
+							<input class="star star-2" id="star-34" type="radio" name="star" value = "2"/>
+
+							<label class="star star-2" for="star-34"></label>
+
+							<input class="star star-1" id="star-35" type="radio" name="star" value = "1"/>
+
+							<label class="star star-1" for="star-35"></label>
+
+
+
+						</div>
+					</div>
+					<div class="col-md-6">
+
+						<div class="form-group">
+							<h4><label for="comment">Comment</label></h4>
+							<textarea class="form-control" rows="3" id="comment7"></textarea>
+						</div>	
+						<div id="error_message7"></div>		
+					</div></div>
+			</form>
+			<!-- <br > </br > -->
+
+<form autocomplete="off">
+				<div class="modal-body row">
+					<div class="col-md-6">
+						<h4><span class="required-mark" style="color:red">*</span>Please provide your feedback for Syslogs</h4>
+						<div class="stars" id="feedback8" value="Syslogs" >
+
 
 							<input class="star star-5" id="star-36" type="radio" name="star" value = "5"/>
 
@@ -336,7 +378,7 @@ function myFunction() {
 
 							<label class="star star-3" for="star-38"></label>
 
-							<input class="star star-2" id="star-39" type="radio" name="star" value = "2" />
+							<input class="star star-2" id="star-39" type="radio" name="star" value = "2"/>
 
 							<label class="star star-2" for="star-39"></label>
 
@@ -344,14 +386,136 @@ function myFunction() {
 
 							<label class="star star-1" for="star-40"></label>
 
+
+
+						</div>
+					</div>
+					<div class="col-md-6">
+
+						<div class="form-group">
+							<h4><label for="comment">Comment</label></h4>
+							<textarea class="form-control" rows="3" id="comment8"></textarea>
+						</div>	
+						<div id="error_message8"></div>		
+					</div></div>
+			</form>
+			<!-- <br > </br > -->
+<form autocomplete="off">
+				<div class="modal-body row">
+					<div class="col-md-6">
+						<h4><span class="required-mark" style="color:red">*</span>Please provide your feedback for Software Compliance</h4>
+						<div class="stars" id="feedback9" value="Software Compliance" >
+
+
+							<input class="star star-5" id="star-41" type="radio" name="star" value = "5"/>
+
+							<label class="star star-5" for="star-41"></label>
+
+							<input class="star star-4" id="star-42" type="radio" name="star" value = "4"/>
+
+							<label class="star star-4" for="star-42"></label>
+
+							<input class="star star-3" id="star-43" type="radio" name="star" value = "3"/>
+
+							<label class="star star-3" for="star-43"></label>
+
+							<input class="star star-2" id="star-44" type="radio" name="star" value = "2"/>
+
+							<label class="star star-2" for="star-44"></label>
+
+							<input class="star star-1" id="star-45" type="radio" name="star" value = "1"/>
+
+							<label class="star star-1" for="star-45"></label>
+
+
+
+						</div>
+					</div>
+					<div class="col-md-6">
+
+						<div class="form-group">
+							<h4><label for="comment">Comment</label></h4>
+							<textarea class="form-control" rows="3" id="comment9"></textarea>
+						</div>	
+						<div id="error_message9"></div>		
+					</div></div>
+			</form>
+			<!-- <br > </br > -->
+<form autocomplete="off">
+				<div class="modal-body row">
+					<div class="col-md-6">
+						<h4><span class="required-mark" style="color:red">*</span>Please provide your feedback for Unidentified Devices</h4>
+						<div class="stars" id="feedback10" value="Unidentified Devices" >
+
+
+							<input class="star star-5" id="star-46" type="radio" name="star" value = "5"/>
+
+							<label class="star star-5" for="star-46"></label>
+
+							<input class="star star-4" id="star-47" type="radio" name="star" value = "4"/>
+
+							<label class="star star-4" for="star-47"></label>
+
+							<input class="star star-3" id="star-48" type="radio" name="star" value = "3"/>
+
+							<label class="star star-3" for="star-48"></label>
+
+							<input class="star star-2" id="star-49" type="radio" name="star" value = "2"/>
+
+							<label class="star star-2" for="star-49"></label>
+
+							<input class="star star-1" id="star-50" type="radio" name="star" value = "1"/>
+
+							<label class="star star-1" for="star-50"></label>
+
+
+
+						</div>
+					</div>
+					<div class="col-md-6">
+
+						<div class="form-group">
+							<h4><label for="comment">Comment</label></h4>
+							<textarea class="form-control" rows="3" id="comment10"></textarea>
+						</div>	
+						<div id="error_message10"></div>		
+					</div></div>
+			</form>
+
+			<form autocomplete="off">
+				<div class="modal-body row">
+					<div class="col-md-6">
+						<h4><span class="required-mark" style="color:red">*</span>How likely are you to recommend BCS Operational Insights API</h4>
+						<div class="stars" id="feedback11" value="Recommend BCS">
+
+							<input class="star star-5" id="star-51" type="radio" name="star" value = "5"/>
+
+							<label class="star star-5" for="star-51"></label>
+
+							<input class="star star-4" id="star-52" type="radio" name="star" value = "4"/>
+
+							<label class="star star-4" for="star-52"></label>
+
+							<input class="star star-3" id="star-53" type="radio" name="star" value = "3"/>
+
+							<label class="star star-3" for="star-53"></label>
+
+							<input class="star star-2" id="star-54" type="radio" name="star" value = "2" />
+
+							<label class="star star-2" for="star-54"></label>
+
+							<input class="star star-1" id="star-55" type="radio" name="star" value = "1"/>
+
+							<label class="star star-1" for="star-55"></label>
+
 						</div> </div>
 					<div class="col-md-6">
 
 						<div class="form-group">
 							<h4><label for="comment">Comment</label></h4>
-							<textarea class="form-control" rows="3" id="comment7"></textarea>
+							<textarea class="form-control" rows="3" id="comment11"></textarea>
 						</div>	
-						<div id="error_message7"></div>	
+						<div id="error_message11"></div>	
 					</div></div>
 
 			</form>
@@ -472,13 +636,13 @@ function myFunction() {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-29 15:24:28</sys_created_on>
         <sys_id>1c85ca132fc8a410bd2551172799b60f</sys_id>
-        <sys_mod_count>266</sys_mod_count>
+        <sys_mod_count>273</sys_mod_count>
         <sys_name>Cisco_Feedback_Form</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_page_1c85ca132fc8a410bd2551172799b60f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-01-12 05:44:48</sys_updated_on>
+        <sys_updated_on>2022-08-24 11:31:15</sys_updated_on>
     </sys_ui_page>
 </record_update>

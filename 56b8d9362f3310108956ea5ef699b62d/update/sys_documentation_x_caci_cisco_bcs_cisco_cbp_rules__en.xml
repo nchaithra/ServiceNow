@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_documentation element="" label="Cisco CBP Rules" language="en" table="x_caci_cisco_bcs_cisco_cbp_rules">
+    <sys_documentation element="" label="CBP Rules" language="en" table="x_caci_cisco_bcs_cisco_cbp_rules">
         <sys_documentation action="INSERT_OR_UPDATE">
             <element/>
             <help/>
             <hint/>
-            <label>Cisco CBP Rules</label>
+            <label>CBP Rules</label>
             <language>en</language>
             <name>x_caci_cisco_bcs_cisco_cbp_rules</name>
-            <plural>Cisco CBP Rules</plural>
+            <plural>CBP Rules</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2020-11-05 06:31:23</sys_created_on>
             <sys_id>0eaec4292f1020100a8bd39df699b6be</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_name>Cisco CBP Rules</sys_name>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>CBP Rules</sys_name>
             <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
             <sys_policy/>
             <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
             <sys_update_name>sys_documentation_x_caci_cisco_bcs_cisco_cbp_rules__en</sys_update_name>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-11-05 06:31:23</sys_updated_on>
+            <sys_updated_on>2022-06-23 03:29:25</sys_updated_on>
             <url/>
             <url_target/>
         </sys_documentation>

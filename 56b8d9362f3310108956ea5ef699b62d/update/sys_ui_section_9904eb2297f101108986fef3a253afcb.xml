@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="9904eb2297f101108986fef3a253afcb" sys_domain="global" table="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bulletinnumber</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5904eb2297f101108986fef3a253afd1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bulletintitle</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>d904eb2297f101108986fef3a253afd1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bulletinurl</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5d04eb2297f101108986fef3a253afd1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>dd04eb2297f101108986fef3a253afd1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>endoflifeannouncementdate</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5104eb2297f101108986fef3a253afd2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>endofnewserviceattachmentdate</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>d104eb2297f101108986fef3a253afd2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>endofroutinefailureanalysisdate</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5104af2297f101108986fef3a253af59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>endofsaledate</element>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>d104af2297f101108986fef3a253af59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>8</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5504af2297f101108986fef3a253af59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>endofvulnerabilitysecuritysupportdate</element>
+            <position>9</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>d504af2297f101108986fef3a253af59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>endofservicecontractrenewaldate</element>
+            <position>10</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5904af2297f101108986fef3a253af59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>endofsoftwaremaintenancereleasesdate</element>
+            <position>11</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>d904af2297f101108986fef3a253af59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>12</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5d04af2297f101108986fef3a253af59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>hardwareendoflifeid</element>
+            <position>13</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>dd04af2297f101108986fef3a253af59</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>14</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5104af2297f101108986fef3a253af5a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>lastdayofsupportdate</element>
+            <position>15</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>d104af2297f101108986fef3a253af5a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>16</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5504af2297f101108986fef3a253af5a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>lastshipdate</element>
+            <position>17</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>d504af2297f101108986fef3a253af5a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>18</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>5904af2297f101108986fef3a253af5a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>productid</element>
+            <position>19</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_id>d904af2297f101108986fef3a253af5a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>customer_id</element>
+            <position>20</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-07-01 10:41:05</sys_created_on>
+            <sys_id>1f7e1ae31bd8d110925996c6b04bcb0f</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sys_domain="global" view="Default view">9904eb2297f101108986fef3a253afcb</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-07-01 10:41:05</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:34:00</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9904eb2297f101108986fef3a253afcb</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_ui_section_9904eb2297f101108986fef3a253afcb</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:34:00</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

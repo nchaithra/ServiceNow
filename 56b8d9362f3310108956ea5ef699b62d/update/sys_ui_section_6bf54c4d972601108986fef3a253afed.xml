@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="6bf54c4d972601108986fef3a253afed" sys_domain="global" table="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>devices</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>eff588cd972601108986fef3a253afac</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>deviceid</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>e7f588cd972601108986fef3a253afad</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>recommendation</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>6bf588cd972601108986fef3a253afad</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>date</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>ebf588cd972601108986fef3a253afad</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>eventcount</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>6ff588cd972601108986fef3a253afad</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>devicename</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>eff588cd972601108986fef3a253afad</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>description</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>63f588cd972601108986fef3a253afae</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>messagetype</element>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>e3f588cd972601108986fef3a253afae</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>timestamp</element>
+            <position>8</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>67f588cd972601108986fef3a253afae</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>syslogeventseverity</element>
+            <position>9</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>e7f588cd972601108986fef3a253afae</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>totaleventcount</element>
+            <position>10</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>6bf588cd972601108986fef3a253afae</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>reviewedseverity</element>
+            <position>11</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:09</sys_created_on>
+            <sys_id>ebf588cd972601108986fef3a253afae</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:09</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>customer_id</element>
+            <position>12</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-07-01 10:57:47</sys_created_on>
+            <sys_id>7742e2e71bd8d110925996c6b04bcbdd</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_syslog_daily_dump_v2" sys_domain="global" view="Default view">6bf54c4d972601108986fef3a253afed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-07-01 10:57:47</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_caci_cisco_bcs_cisco_syslog_daily_dump_v2</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 05:20:08</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>6bf54c4d972601108986fef3a253afed</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_caci_cisco_bcs_cisco_syslog_daily_dump_v2</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_ui_section_6bf54c4d972601108986fef3a253afed</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 05:20:08</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

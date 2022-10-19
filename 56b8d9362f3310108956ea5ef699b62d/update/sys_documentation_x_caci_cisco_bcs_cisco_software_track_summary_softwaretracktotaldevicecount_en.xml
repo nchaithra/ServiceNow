@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="softwaretracktotaldevicecount" label="Total Devices" language="en" table="x_caci_cisco_bcs_cisco_software_track_summary">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>softwaretracktotaldevicecount</element>
+            <help/>
+            <hint/>
+            <label>Total Devices</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_cisco_software_track_summary</name>
+            <plural>Total Devices</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-23 12:32:07</sys_created_on>
+            <sys_id>2ee8779797de01108986fef3a253afb6</sys_id>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>Total Devices</sys_name>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_documentation_x_caci_cisco_bcs_cisco_software_track_summary_softwaretracktotaldevicecount_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-05-03 13:04:44</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

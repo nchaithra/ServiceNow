@@ -9,7 +9,7 @@
         <filter_condition/>
         <filter_roles/>
         <hierarchical_lists>false</hierarchical_lists>
-        <label/>
+        <label>Devices</label>
         <link_condition/>
         <link_roles/>
         <list_edit_insert_row>false</list_edit_insert_row>
@@ -35,7 +35,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>16a93ce32fd8a010bd2551172799b64b</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>x_caci_cisco_bcs_cisco_fn_bulletin</sys_name>
         <sys_overrides display_value="">global</sys_overrides>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -43,6 +43,6 @@
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_list_control_16a93ce32fd8a010bd2551172799b64b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-01-12 07:50:42</sys_updated_on>
+        <sys_updated_on>2022-05-27 10:23:33</sys_updated_on>
     </sys_ui_list_control>
 </record_update>

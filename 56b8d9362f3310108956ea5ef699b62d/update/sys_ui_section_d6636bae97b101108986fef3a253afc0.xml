@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="d6636bae97b101108986fef3a253afc0" sys_domain="global" table="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticecaveat</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>9a63e32297f101108986fef3a253af3b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticecorrectiveaction</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>1e63e32297f101108986fef3a253af3b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticedescription</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>9e63e32297f101108986fef3a253af3b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticenuggetid</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>1263e32297f101108986fef3a253af3c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticeprimarytechnology</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>9263e32297f101108986fef3a253af3c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticerecommendation</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>1663e32297f101108986fef3a253af3c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticerisk</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>9663e32297f101108986fef3a253af3c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticeruleid</element>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>1a63e32297f101108986fef3a253af3c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticesecondarytechnology</element>
+            <position>8</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>9a63e32297f101108986fef3a253af3c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticetitle</element>
+            <position>9</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>1e63e32297f101108986fef3a253af3c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>createdtimestamp</element>
+            <position>10</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>9e63e32297f101108986fef3a253af3c</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretype</element>
+            <position>11</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>1263e32297f101108986fef3a253af3d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>bestpracticerulemodificationtimestamp</element>
+            <position>12</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_id>9263e32297f101108986fef3a253af3d</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>customer_id</element>
+            <position>13</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-07-01 10:20:50</sys_created_on>
+            <sys_id>ead9deaf1b98d110925996c6b04bcbe9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_cbp_rules_dump_v2" sys_domain="global" view="Default view">d6636bae97b101108986fef3a253afc0</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-07-01 10:20:50</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_caci_cisco_bcs_cisco_cbp_rules_dump_v2</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-24 06:31:20</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>d6636bae97b101108986fef3a253afc0</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_caci_cisco_bcs_cisco_cbp_rules_dump_v2</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_ui_section_d6636bae97b101108986fef3a253afc0</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-24 06:31:20</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

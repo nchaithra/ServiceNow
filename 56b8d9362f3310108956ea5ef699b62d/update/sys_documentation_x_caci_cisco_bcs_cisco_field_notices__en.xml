@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update>
-    <sys_documentation element="" label="Cisco Field Notices" language="en" table="x_caci_cisco_bcs_cisco_field_notices">
+    <sys_documentation element="" label="Field Notices" language="en" table="x_caci_cisco_bcs_cisco_field_notices">
         <sys_documentation action="INSERT_OR_UPDATE">
             <element/>
             <help/>
             <hint/>
-            <label>Cisco Field Notices</label>
+            <label>Field Notices</label>
             <language>en</language>
             <name>x_caci_cisco_bcs_cisco_field_notices</name>
-            <plural>Cisco Field Notices</plural>
+            <plural>Field Notices</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>admin</sys_created_by>
             <sys_created_on>2020-10-23 04:11:22</sys_created_on>
             <sys_id>d0f1b81ddbc42010c81a7b82399619ab</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_name>Cisco Field Notices</sys_name>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>Field Notices</sys_name>
             <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
             <sys_policy/>
             <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
             <sys_update_name>sys_documentation_x_caci_cisco_bcs_cisco_field_notices__en</sys_update_name>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2020-10-23 04:11:22</sys_updated_on>
+            <sys_updated_on>2022-06-23 03:30:08</sys_updated_on>
             <url/>
             <url_target/>
         </sys_documentation>

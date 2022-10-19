@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="bulletinmappingcaveat" label="bulletinMappingCaveat" language="en" table="x_caci_cisco_bcs_cisco_security_advisories_bulletins_dump_v2">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>bulletinmappingcaveat</element>
+            <help/>
+            <hint/>
+            <label>bulletinMappingCaveat</label>
+            <language>en</language>
+            <name>x_caci_cisco_bcs_cisco_security_advisories_bulletins_dump_v2</name>
+            <plural>bulletinMappingCaveats</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-02-23 14:16:13</sys_created_on>
+            <sys_id>263408e207390110172aff808c1ed029</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>bulletinMappingCaveat</sys_name>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_documentation_x_caci_cisco_bcs_cisco_security_advisories_bulletins_dump_v2_bulletinmappingcaveat_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-02-23 14:16:13</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

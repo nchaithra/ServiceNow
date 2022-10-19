@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="35fde98d976241108986fef3a253afc1" sys_domain="global" table="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackcomments</element>
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>7dfde98d976241108986fef3a253afc5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackcompliancepercent</element>
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>fdfde98d976241108986fef3a253afc5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackcandidateversion</element>
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>71fde98d976241108986fef3a253afc6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackcompliantdevicecount</element>
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>f1fde98d976241108986fef3a253afc6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackdescription</element>
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>75fde98d976241108986fef3a253afc6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackflexiblecompliancepercent</element>
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>f5fde98d976241108986fef3a253afc6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackid</element>
+            <position>6</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>79fde98d976241108986fef3a253afc6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretracklastmodifieddate</element>
+            <position>7</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>f9fde98d976241108986fef3a253afc6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackprevious1softwaremaintenanceupdatecriteria</element>
+            <position>8</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>7dfde98d976241108986fef3a253afc6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretracknoncompliantdevicecount</element>
+            <position>9</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>fdfde98d976241108986fef3a253afc6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackprevious1packageinstallationenvelopecriteria</element>
+            <position>10</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>71fde98d976241108986fef3a253afc7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackname</element>
+            <position>11</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>f1fde98d976241108986fef3a253afc7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackprevious2softwaremaintenanceupdatecriteria</element>
+            <position>12</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>75fde98d976241108986fef3a253afc7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackprevious2packageinstallationenvelopecriteria</element>
+            <position>13</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>f5fde98d976241108986fef3a253afc7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackpreviouscompliantdevicecount</element>
+            <position>14</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>79fde98d976241108986fef3a253afc7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackrecommendationdate</element>
+            <position>15</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>f9fde98d976241108986fef3a253afc7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackpreviousversion2</element>
+            <position>16</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>7dfde98d976241108986fef3a253afc7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackrating</element>
+            <position>17</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>fdfde98d976241108986fef3a253afc7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackpreviousversion1</element>
+            <position>18</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>71fde98d976241108986fef3a253afc8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackstandardversion</element>
+            <position>19</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>f1fde98d976241108986fef3a253afc8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackstandardsoftwaremaintenanceupdatecount</element>
+            <position>20</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>75fde98d976241108986fef3a253afc8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretracksoftwaremaintenanceupdatecompliancepercent</element>
+            <position>21</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>f5fde98d976241108986fef3a253afc8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackstatus</element>
+            <position>22</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>79fde98d976241108986fef3a253afc8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackstandardsoftwaremaintenanceupdatecriteria</element>
+            <position>23</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>f9fde98d976241108986fef3a253afc8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackstandardpackageinstallationenvelopecriteria</element>
+            <position>24</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>7dfde98d976241108986fef3a253afc8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretracktotaldevicecount</element>
+            <position>25</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>fdfde98d976241108986fef3a253afc8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretype</element>
+            <position>26</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>71fde98d976241108986fef3a253afc9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretracktotalversioncount</element>
+            <position>27</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>fdfda1cd976241108986fef3a253aff9</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>softwaretrackupgradereason</element>
+            <position>28</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_id>71fda1cd976241108986fef3a253affa</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>customer_id</element>
+            <position>29</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-07-01 10:52:38</sys_created_on>
+            <sys_id>542162a71bd8d110925996c6b04bcb27</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_caci_cisco_bcs_cisco_software_track_summary_dump_v2" sys_domain="global" view="Default view">35fde98d976241108986fef3a253afc1</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-07-01 10:52:38</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_caci_cisco_bcs_cisco_software_track_summary_dump_v2</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2022-03-28 12:54:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>35fde98d976241108986fef3a253afc1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_caci_cisco_bcs_cisco_software_track_summary_dump_v2</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+            <sys_update_name>sys_ui_section_35fde98d976241108986fef3a253afc1</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2022-03-28 12:54:25</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

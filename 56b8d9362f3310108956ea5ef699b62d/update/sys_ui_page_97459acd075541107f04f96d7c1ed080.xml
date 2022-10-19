@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[// var sourceField = $j('name1');
+// var targetField = $j('name2');
+
+// myFunction(setSelected);
+// var g_map_loading = false; 
+
+// function onMappingAssistLoad() {
+//   g_map_loading = true;
+//   // populate existing map fields
+//   var entryGR = new GlideRecord("sys_transform_entry");
+//   entryGR.addQuery("map",'${sysparm_map_sys_id}');
+//   entryGR.query();
+//   while (entryGR.next()) {
+//     // load the source fields
+//     var sourceField = entryGR.source_field;
+//     var targetField = entryGR.target_field;
+
+//     // skip system fields
+//     if (targetField.indexOf('sys_') == 0)
+//       continue;
+
+//     setSelected(sourceField, targetField);
+//   }
+//   g_map_loading = false;
+// }
+
+function myFunction (sourceField,targetField) {
+	
+    var source_field_array = source_fields_leftzone.getValues();
+    var target_field_array = target_fields_leftzone.getValues();
+
+    for(i = 0; i < source_field_array.length; i++) {
+      if (sourceField == "[Script]") {
+        source_fields_rightzone.add("[Script]", "[Script]");
+        break;
+      }
+
+      if (source_field_array[i] == sourceField) {
+        selectTableSource.copyOrMoveBetweenLists(source_fields_leftzone, i, source_fields_rightzone, -1);
+        break;
+      }
+    }
+
+    for(i = 0; i < target_field_array.length; i++) {
+      if (target_field_array[i] == targetField) {
+        selectTableTarget.copyOrMoveBetweenLists(target_fields_leftzone, i, target_fields_rightzone, -1);
+        break;
+      }
+    }
+
+    source_fields_rightzone.clearSelected();
+    target_fields_rightzone.clearSelected();
+}
+//   function onActionSelectMapped(sel) {
+//     var el = gel('show_mapped');
+//     if (sel.value == "mapped") {
+//       sourcepreview_fields = source_fields_rightzone.getValues().join(',');
+//       targetpreview_fields = target_fields_rightzone.getValues().join(',');
+//       el.value = "mapped";
+//     } else {
+//       sourcepreview_fields = "*";
+//       targetpreview_fields = "*";
+//       el.value = "all";
+//     }
+
+//     sourcepreview_showPreview();
+//     targetpreview_showPreview();
+//   }
+
+//   function showPreview() {
+//     if (g_map_loading) 
+//       return; 
+
+//     var el = gel('show_mapped');
+//     onActionSelectMapped(el);
+//   }
+function onSubmit() {
+  var source_field_array = source_fields_rightzone.getValues();
+  var target_field_array = target_fields_rightzone.getValues();
+
+  if (source_field_array.length == 0 || target_field_array.length == 0) {
+    cancel();
+    return true;
+  }
+
+  if (source_field_array.length != target_field_array.length) {
+    alert("Source field count does not match target field count");
+    return false;
+  }
+
+  var ss = source_field_array.join(',');
+
+  // set the selected list as a comma seperated string for server side
+  var el = gel('source_field_list'); 
+  el.value=ss;
+
+  ss = target_field_array.join(',');
+
+  // set the selected list as a comma seperated string for server side
+  el = gel('target_field_list'); 
+  el.value=ss;
+
+  return true;
+}
+
+// function cancel() {
+//   var el = gel('cancelled');
+//   el.value = "true";
+// }]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Create Mapping.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<p>Please select the CI:</p>
+  <input type="radio" id="name1" name="ci_type" value="1"></input>
+  <label for="name1">Device</label>
+  <input type="radio" id="name2" name="ci_type" value="2"></input>
+  <label for="name1">Asset</label> 
+	<br></br>
+	
+
+	<g:ui_element table="sys_script" field="collection" id="6bba30024f1002005c485535f310c792"></g:ui_element>
+
+<g:ui_element table="sys_script" field="filter_condition" id="efba30024f1002005c485535f310c796"></g:ui_element>
+
+
+<script>
+
+
+addLoadEvent( function() {
+
+
+document.getElementById("sys_script.collection").value = "x_caci_cisco_bcs_cisco_devices";
+
+
+document.getElementById("select2-chosen-1").innerHTML = "x_caci_cisco_bcs_cisco_devices [x_caci_cisco_bcs_cisco_devices]";
+
+
+document.getElementById("s2id_sys_script.collection").hide();
+
+
+loadFilterColumns('sys_script.filter_condition', 'collection');
+
+ 
+
+});
+
+
+</script>
+	
+	<br></br>
+	
+	<button onclick="myFunction()">Create Mapping</button><p id="test"></p>
+<br></br>
+	
+<g:ui_form>
+<g:inline template="mapping_assist_map_area.xml"/>
+</g:ui_form>
+</j:jelly>]]></html>
+        <name>Create Mapping</name>
+        <processing_script><![CDATA[processRequest();
+response.sendRedirect("sys_transform_map.do?sys_id=" + sysparm_map_sys_id);
+ 
+function processRequest() {   
+	if (cancelled == "true") {
+		gs.log("mapping assist cancelled");
+	} else {
+		var source_fields = source_field_list.split(',');
+		var target_fields = target_field_list.split(',');
+		
+		var preserve = "";
+		
+		for (var i = 0; i < source_fields.length; i++) {
+			var transformEntryGRSysId = handleFieldMapping(source_fields[i], target_fields[i]);
+			preserve += transformEntryGRSysId + ",";
+		}
+		deleteStaleTransformEntries(preserve);
+	}
+}	
+
+function handleFieldMapping(sourceField, targetField) {
+	var transformEntryGRSysId = "";
+	var transformEntryGR =  getTransformEntryGR(targetField);
+	
+	if(transformEntryGR.next()) {
+		//handle existing entry.
+		var oldTransEntrySourceField = transformEntryGR.getValue("source_field");
+		var newTransEntrySourceField = sourceField;
+		
+		//case: source_field changed, delete old entry and create new one.
+		if(newTransEntrySourceField !== oldTransEntrySourceField) {
+			deleteTransformMapEntry(transformEntryGR.sys_id);
+			transformEntryGRSysId = createTransformEntry(sourceField, targetField);
+		}else {
+			//case: no change, mark to avoid deletion.
+			transformEntryGRSysId = transformEntryGR.sys_id;
+		}
+	}else {
+		//case: new mapping.
+		transformEntryGRSysId = createTransformEntry(sourceField, targetField);
+	}
+	return transformEntryGRSysId;
+}
+
+function getTransformEntryGR(targetField) {
+	var sourceTable = sysparm_source_table;
+	var targetTable = sysparm_target_table;
+	
+	var entryGR = new GlideRecord("sys_transform_entry");
+	entryGR.addQuery("map",sysparm_map_sys_id);
+	entryGR.addQuery("source_table",sourceTable);
+	
+	entryGR.addQuery("target_table",targetTable);
+	entryGR.addQuery("target_field",targetField);
+	entryGR.query();
+	return entryGR;
+}
+
+function createTransformEntry(sourceField, targetField) {
+	var sysid = "";
+	var sourceTable = sysparm_source_table;
+	var targetTable = sysparm_target_table;
+	
+	var entryGR = new GlideRecord("sys_transform_entry");
+	
+	entryGR.initialize();
+	entryGR.map = sysparm_map_sys_id;
+	entryGR.source_table = sourceTable;
+	entryGR.source_field = sourceField;
+	entryGR.target_table = targetTable;
+	entryGR.target_field = targetField;
+	entryGR.insert();
+	
+	return entryGR.sys_id;
+}
+
+function deleteTransformMapEntry(transformEntrySysId) {
+	var targetTable = sysparm_target_table;
+	
+	var entryGR = new GlideRecord("sys_transform_entry");
+	entryGR.addQuery("sys_id",transformEntrySysId);
+	
+	entryGR.query();
+	if (entryGR.next()) {
+		entryGR.deleteRecord();
+	}
+}
+
+function deleteStaleTransformEntries(preserve) {
+	var entryGR = new GlideRecord("sys_transform_entry");
+	entryGR.addQuery("map",sysparm_map_sys_id);
+	entryGR.query();
+	while(entryGR.next()) {
+		if (preserve.indexOf(entryGR.sys_id.toString()) == -1) {
+			if (entryGR.target_field.toString().indexOf('sys_') != 0)
+				entryGR.deleteRecord();
+		}
+	}
+}]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-01-25 12:30:29</sys_created_on>
+        <sys_id>97459acd075541107f04f96d7c1ed080</sys_id>
+        <sys_mod_count>51</sys_mod_count>
+        <sys_name>Create Mapping</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_97459acd075541107f04f96d7c1ed080</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-01-31 13:23:07</sys_updated_on>
+    </sys_ui_page>
+</record_update>

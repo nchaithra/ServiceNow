@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_index">
+    <sys_index action="INSERT_OR_UPDATE">
+        <col_name_string>messagetype,date</col_name_string>
+        <index_col_name>067386c8972645108986fef3a253af0f,1b038a88972645108986fef3a253af0d</index_col_name>
+        <logical_table_name>x_caci_cisco_bcs_cisco_syslog_daily</logical_table_name>
+        <sys_class_name>sys_index</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2022-03-28 10:39:25</sys_created_on>
+        <sys_id>601f814d97ea01108986fef3a253af6d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_caci_cisco_bcs_cisco_syslog_daily</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_index_x_caci_cisco_bcs_cisco_syslog_daily_messagetype_date</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2022-03-28 10:39:25</sys_updated_on>
+        <table display_value="Cisco Syslog Daily" name="x_caci_cisco_bcs_cisco_syslog_daily">83d20a88972645108986fef3a253afa7</table>
+        <unique_index>false</unique_index>
+    </sys_index>
+</record_update>
