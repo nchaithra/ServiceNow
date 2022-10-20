@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_caci_cisco_bcs.CMDBscript</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CMDBscript</name>
+        <script><![CDATA[var CMDBscript = Class.create();
+CMDBscript.prototype = {
+    initialize: function() {},
+
+    cmdbnewgliderecorddevice: function(tableName) {
+        var parent = new GlideRecord('x_caci_cisco_bcs_align_cmdb'); //Aligin table
+        parent.addEncodedQuery("mapped_dataISNOTEMPTY^primary_keyISNOTEMPTY");
+        parent.addQuery("ci_type=device");
+        parent.query();
+        while (parent.next()) {
+            gs.info("total align records" + parent.getRowCount());
+            var listDeviceipAdd = [];
+            var getDeviceList = new GlideRecord('x_caci_cisco_bcs_cisco_devices'); //Device table
+            getDeviceList.addQuery(parent.device); // align Filter Query
+            getDeviceList.query();
+            gs.info("parent dada" + parent.primary_key + "  " + parent.cmdb_class.getDisplayValue());
+            //gs.info("total records  "+getDeviceList.getRowCount());
+            while (getDeviceList.next()) {
+                var obj = JSON.parse(parent.primary_key); //"device":["name,ip"],"cmdb":["name,ip"]};
+               // gs.info("data11" + JSON.stringify(obj));
+
+                var arrayQury = [];
+                for (var i = 0; i < obj.device.length; i++) {
+                    var cmdbfiled = obj.cmdb[i];
+                    var cmdbValure = getDeviceList.getValue(obj.device[i].toString());
+
+                    var cmdbQueryString = cmdbfiled + '=' + cmdbValure;
+                    arrayQury.push(cmdbQueryString);
+                }
+                var queryCmdb = arrayQury.join("^");
+                gs.info("query" + queryCmdb);
+                var cmdbData = new GlideRecord("cmdb_ci"); // CMDB data
+				cmdbData.addQuery('sys_class_name=' + parent.cmdb_class.name);
+                cmdbData.addQuery(queryCmdb);
+                cmdbData.query();
+				
+                //gs.info("cmdb record count  "+cmdbData.getRowCount());
+                while (cmdbData.next()) {
+                    gs.info("cmdbData" + cmdbData.name);
+                    var map_data = parent.mapped_data;
+                    //var cmdb_class_asset = parent.cmdb_class.name;
+                    var cmdb_class_asset = cmdbData.sys_class_name;
+
+                    gs.info('Class Name  devices: ' + cmdb_class_asset.toString() + map_data);
+
+                    var objMetaData = JSON.parse(map_data); //{"device_asset":["ip_address","name"],"cmdb":["ip_address","name"]};
+                    var demo = {};
+                  
+                    gs.info("metadata length   " + objMetaData.device.length);
+                    for (var j = 0; j < objMetaData.device.length; j++) {
+                        demo[objMetaData.cmdb[j].toString()] = getDeviceList.getValue(objMetaData.device[j].toString());
+                        gs.info("key value  " + objMetaData.device[j].toString());
+                      
+                    }
+
+                    gs.info("count  " + JSON.stringify(demo));
+
+                    var cmdbidentity = new GlideRecord("cmdb_identifier");
+                    cmdbidentity.addQuery("applies_to", cmdb_class_asset);
+                    cmdbidentity.addEncodedQuery("independent=false");
+                    cmdbidentity.query();
+                    /*--------------Dependent case -----*/
+                    if (cmdbidentity.next()) {
+                        gs.info("Testvalues456  device " + cmdbData.sys_id + "---------->" + cmdb_class_asset);
+                        var cmdb_sys_id_ci = cmdbData.sys_id.toString();
+                        var cmdb_class_name_ci = cmdb_class_asset.toString();
+
+                        var result = new CMDB_IRE().getDependentPayload(cmdb_sys_id_ci, cmdb_class_asset, demo);
+                        gs.info("finaly payload device" + JSON.stringify(result));
+                        var jsonUntil2 = new global.JSON();
+                        var input2 = jsonUntil2.encode(result);
+                        var output2 = sn_cmdb.IdentificationEngine.createOrUpdateCI('ServiceNow', input2);
+
+                    } else {
+                       
+
+                       // gs.info("demo" + JSON.stringify(demo));
+                        var objPayLoad = {};
+                        var payload = {};
+                        payload.items = [];
+
+                        objPayLoad.className = cmdb_class_asset.toString();
+                        objPayLoad.values = demo;
+                        objPayLoad.lookup = [];
+
+                        payload.items.push(objPayLoad);
+
+                        var jsonUntil1 = new global.JSON();
+                        var input1 = jsonUntil1.encode(payload);
+                       // gs.info("payload" + JSON.stringify(input1));
+                        var output1 = sn_cmdb.IdentificationEngine.createOrUpdateCI('ServiceNow', input1);
+                        gs.info("output" + JSON.stringify(output1, 0, 4));
+                    }
+                }
+            }
+        }
+    },
+
+    cmdbnewgliderecordasset: function(tableName) {
+        var parent = new GlideRecord('x_caci_cisco_bcs_align_cmdb');
+        parent.addEncodedQuery("mapped_dataISNOTEMPTY^primary_keyISNOTEMPTY");
+        parent.addQuery('ci_type=asset');
+        parent.query();
+        while (parent.next()) {
+
+            var listDeviceipAdd = [];
+            var getDeviceList = new GlideRecord('x_caci_cisco_bcs_cisco_assets');
+            getDeviceList.addQuery(parent.asset);
+            getDeviceList.query();
+            while (getDeviceList.next()) {
+                var obj = JSON.parse(parent.primary_key);
+                var arrayQury = [];
+                for (var i = 0; i < obj.asset.length; i++) {
+
+                    var cmdbfiled = obj.cmdb[i];
+                    var cmdbValure = getDeviceList.getValue(obj.asset[i].toString());
+
+                    var cmdbQueryString = cmdbfiled + '=' + cmdbValure;
+                    arrayQury.push(cmdbQueryString);
+                }
+                var queryCmdb = arrayQury.join("^");
+                var cmdbData = new GlideRecord("cmdb_ci");
+                cmdbData.addQuery(queryCmdb);
+                cmdbData.addQuery('sys_class_name=' + parent.cmdb_class.name);
+                cmdbData.query();
+                while (cmdbData.next()) {
+
+                    var map_data = parent.mapped_data;
+
+
+                    var cmdb_class_asset = cmdbData.sys_class_name;
+                    gs.info("asset" + cmdb_class_asset);
+                    var objMetaData = JSON.parse(map_data);
+                    var demo = {};
+                    var datafield = [];
+                    datafield.push(objMetaData.cmdb);
+                    gs.info("metadata length asset   " + objMetaData.asset.length);
+                    for (var j = 0; j < objMetaData.asset.length; j++) {
+                        if (getDeviceList.getValue(objMetaData.asset[j].toString())) {
+
+                            demo[objMetaData.cmdb[j].toString()] = getDeviceList.getValue(objMetaData.asset[j].toString());
+                            gs.info("key value  " + objMetaData.asset[j].toString());
+ 
+                        }
+
+                        var cmdbidentity = new GlideRecord("cmdb_identifier");
+                        cmdbidentity.addQuery("applies_to", cmdb_class_asset);
+                        cmdbidentity.addEncodedQuery("independent=false");
+                        cmdbidentity.query();
+                        if (cmdbidentity.next()) {
+                            gs.info("Testvalues456   " + cmdbData.sys_id + "---------->" + cmdb_class_asset);
+                            var cmdb_sys_id_ci = cmdbData.sys_id.toString();
+                            var cmdb_class_name_ci = cmdb_class_asset.toString();
+
+                            var result = new CMDB_IRE().getDependentPayload(cmdb_sys_id_ci, cmdb_class_asset, demo);
+                            gs.info("finaly payload asset " + JSON.stringify(result));
+                            var jsonUntil2 = new global.JSON();
+                            var input2 = jsonUntil2.encode(result);
+                            var output2 = sn_cmdb.IdentificationEngine.createOrUpdateCI('ServiceNow', input2);
+                        } else {
+
+                            gs.info("demo asset" + JSON.stringify(demo));
+                            var objPayLoad = {};
+                            var payload = {};
+                            payload.items = [];
+
+                            objPayLoad.className = cmdb_class_asset.toString();
+                            objPayLoad.values = demo;
+                            objPayLoad.lookup = [];
+
+                            payload.items.push(objPayLoad);
+
+                            var jsonUntil1 = new global.JSON();
+                            var input1 = jsonUntil1.encode(payload);
+                            gs.info("payload" + JSON.stringify(input1));
+                            var output1 = sn_cmdb.IdentificationEngine.createOrUpdateCI('ServiceNow', input1);
+                            gs.info("output" + JSON.stringify(output1, 0, 4));
+                        }
+                    }
+
+                }
+            }
+        }
+    },
+
+    type: 'CMDBscript'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-02 14:53:50</sys_created_on>
+        <sys_id>0811da652f5e511036e5136a2799b607</sys_id>
+        <sys_mod_count>110</sys_mod_count>
+        <sys_name>CMDBscript</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_script_include_0811da652f5e511036e5136a2799b607</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-20 10:20:33</sys_updated_on>
+    </sys_script_include>
+</record_update>
