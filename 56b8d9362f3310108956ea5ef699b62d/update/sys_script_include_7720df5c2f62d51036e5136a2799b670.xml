@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_caci_cisco_bcs.CMDB_IRE</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CMDB_IRE</name>
+        <script><![CDATA[var CMDB_IRE = Class.create();
+CMDB_IRE.prototype = {
+    initialize: function() {},
+    /*_________________________________________________________________
+       * Description:
+       * Parameters:
+       * Returns:
+       ________________________________________________________________*/
+    getDependentPayload: function(ci_sys_id, ci_class, demo) {
+
+        var finalobj = {};
+        var listOfCiObj = {};
+        var induvalRecordData = [];
+        var attributesArray = [];
+        var items = [];
+        var cmdb_ci_class = ci_class.toString();
+        var cmdb_ci_sysid = ci_sys_id.toString();
+
+        items.push(this.getParaentCI_Payload(cmdb_ci_sysid, cmdb_ci_class, demo));
+
+        var relations = [];
+        var i = 0;
+        var ci_idityfy_sys_id = cmdb_ci_sysid;
+        var ci_idityfy_class = cmdb_ci_class;
+        while (i >= 0) {
+            var cmdbIdenty = new GlideRecord('cmdb_identifier');
+            cmdbIdenty.addQuery('applies_to=' + ci_idityfy_class + '^independent=false');
+            cmdbIdenty.query();
+            if (cmdbIdenty.next()) {
+                i++;
+                //gs.info("test" + cmdbIdenty.independent);
+                var cmdbrel = new GlideRecord('cmdb_rel_ci');
+                cmdbrel.addQuery('parent=' + ci_idityfy_sys_id); //parent.name=10.201.23.118
+                cmdbrel.query();
+                if (cmdbrel.next()) {
+                    var obj = {};
+                    //gs.info(cmdbrel.child);
+                    obj.sys_id = cmdbrel.child.toString();
+                    obj.sys_class_name = cmdbrel.child.sys_class_name.toString();
+                    obj.type = cmdbrel.getDisplayValue('type');
+                    induvalRecordData.push(obj);
+                    //gs.info(cmdbrel.child.sys_class_name.toString());
+                    ci_idityfy_class = cmdbrel.child.sys_class_name.toString();
+                    ci_idityfy_sys_id = cmdbrel.child;
+                }
+            } else {
+                break;
+            }
+        }
+        //gs.info(JSON.stringify(induvalRecordData ,0,4));
+        for (var i = 0; i < induvalRecordData.length; i++) {
+            var objRelationPlayLoad = {};
+            var objectRelation = {};
+
+            var queryString = 'applies_to=' + induvalRecordData[i].sys_class_name;
+            var idenfy = new GlideRecord('cmdb_identifier');
+            idenfy.addQuery(queryString);
+            idenfy.query();
+            if (idenfy.next()) {
+                // gs.info(induvalRecordData[i].sys_class_name);
+                var identyfyEntry = new GlideRecord('cmdb_identifier_entry');
+                identyfyEntry.addQuery('table=' + induvalRecordData[i].sys_class_name);
+                identyfyEntry.query();
+                while (identyfyEntry.next()) {
+                    gs.info("values" + induvalRecordData[i].sys_id);
+                    attributesArray.push(identyfyEntry.attributes.toString());
+                }
+                //gs.info(attributesArray);
+                var attributesArrayString = attributesArray.toString();
+                var attributesArraySplit = attributesArrayString.split(',');
+                gs.info("attribute" + attributesArraySplit);
+                var values = {};
+                for (var j = 0; j < attributesArraySplit.length; j++) {
+                    //gs.info(attributesArraySplit[j].toString())
+                    //var test = attributesArraySplit[j].toString();
+                    gs.info("test" + attributesArraySplit[j]);
+                    var deviceattribute = new GlideRecord(induvalRecordData[i].sys_class_name);
+                    deviceattribute.addQuery("sys_id", induvalRecordData[i].sys_id);
+                    deviceattribute.query();
+                    if (deviceattribute.next()) {
+                        gs.info("record sys_id" + induvalRecordData[i].sys_id);
+                        if (deviceattribute.getValue(attributesArraySplit[j]) == null) {
+                            values[attributesArraySplit[j]] = '';
+                        } else {
+                            values[attributesArraySplit[j]] = deviceattribute.getValue(attributesArraySplit[j]);
+                        }
+                    }
+                } // gs.info(JSON.stringify(values ,0,4));
+                objRelationPlayLoad.className = induvalRecordData[i].sys_class_name;
+                objRelationPlayLoad.lookup = [];
+                objRelationPlayLoad.values = values;
+            } else {
+                var identyfyEntry1 = new GlideRecord('cmdb_identifier_entry');
+                identyfyEntry1.addQuery('table=cmdb_ci_hardware');
+                identyfyEntry1.query();
+                while (identyfyEntry1.next()) {
+                    gs.info("values" + induvalRecordData[i].sys_id);
+                    attributesArray.push(identyfyEntry1.attributes.toString());
+                }
+				
+                //gs.info(attributesArray);
+                var attributesArrayString1 = attributesArray.toString();
+                var attributesArraySplit1 = attributesArrayString1.split(',');
+                gs.info("attribute" + attributesArraySplit1);
+                var values = {};
+                for (var j = 0; j < attributesArraySplit1.length; j++) {
+                    //gs.info(attributesArraySplit[j].toString())
+                    //var test = attributesArraySplit[j].toString();
+                    gs.info("test" + attributesArraySplit1[j]);
+                    var deviceattribute1 = new GlideRecord(induvalRecordData[i].sys_class_name);
+                    deviceattribute1.addQuery("sys_id", induvalRecordData[i].sys_id);
+                    deviceattribute1.query();
+                    if (deviceattribute1.next()) {
+                        gs.info("record sys_id" + induvalRecordData[i].sys_id);
+                        if (deviceattribute1.getValue(attributesArraySplit1[j]) == null) {
+                            values[attributesArraySplit1[j]] = '';
+                        } else {
+                            values[attributesArraySplit1[j]] = deviceattribute1.getValue(attributesArraySplit1[j]);
+                        }
+                    }
+                } // gs.info(JSON.stringify(values ,0,4));
+                objRelationPlayLoad.className = induvalRecordData[i].sys_class_name;
+                objRelationPlayLoad.lookup = [];
+                objRelationPlayLoad.values = values;
+            }
+            items.push(objRelationPlayLoad);
+            objectRelation.type = induvalRecordData[i].type;
+            objectRelation.parent = i;
+            objectRelation.child = i + 1;
+            relations.push(objectRelation);
+        }
+        finalobj.items = items;
+        //finalobj.items.push(getParaentCI_Payload(ci_sys_id, ci_class));
+        finalobj.relations = relations;
+        gs.info("55final payload" + JSON.stringify(finalobj, 0, 4));
+        return finalobj;
+    },
+
+    getParaentCI_Payload: function(ciSysID, ciClass, demo) {
+        //         var currentCI_attributesArray = [];
+        //         var currentCI = new GlideRecord(ciClass);
+        //         currentCI.addQuery('sys_id', ciSysID);
+        //         currentCI.query();
+        //         if (currentCI.next()) {
+        //             var currentCI_Identifire = new GlideRecord('cmdb_identifier');
+        //             currentCI_Identifire.addQuery('applies_to=' + ciClass);
+        //             currentCI_Identifire.query();
+        //             if (currentCI_Identifire.next()) {
+
+        //                 var currentCI_identyfyEntry = new GlideRecord('cmdb_identifier_entry');
+        //                 currentCI_identyfyEntry.addQuery('identifier=' + currentCI_Identifire.sys_id.toString());
+        //                 currentCI_identyfyEntry.query();
+        //                 while (currentCI_identyfyEntry.next()) {
+        //                     currentCI_attributesArray.push(currentCI_identyfyEntry.attributes.toString());
+        //                 }
+        //             }
+        //             var attributesArrayString = currentCI_attributesArray.toString();
+        //             var currentCI_attributesArray = attributesArrayString.split(',');
+        //             var currentCiValues = {};
+        //             for (var j = 0; j < currentCI_attributesArray.length; j++) {
+
+
+
+        //                 var test = currentCI_attributesArray[j].toString();
+        //                 if (currentCI.getValue(test) == null) {
+        //                     currentCiValues[test] = '';
+        //                 } else {
+        //                     currentCiValues[test] = currentCI.getValue(test);
+        //                 }
+
+        //             }
+
+        var current_ci_obj_final = {};
+        current_ci_obj_final.className = ciClass.toString();
+        current_ci_obj_final.lookup = [];
+        //current_ci_obj_final.values = currentCiValues;
+        current_ci_obj_final.values = demo;
+        //gs.info(JSON.stringify(current_ci_obj_final ,0,4));
+        return current_ci_obj_final;
+        // }
+    },
+
+    type: 'CMDB_IRE'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-11 08:47:45</sys_created_on>
+        <sys_id>7720df5c2f62d51036e5136a2799b670</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_name>CMDB_IRE</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_script_include_7720df5c2f62d51036e5136a2799b670</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 12:41:33</sys_updated_on>
+    </sys_script_include>
+</record_update>
