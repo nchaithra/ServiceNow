@@ -115,7 +115,7 @@ function onSubmit() {
 // }]]></client_script>
         <description/>
         <direct>false</direct>
-        <endpoint>x_caci_cisco_bcs_Primary key Create Mapping.do</endpoint>
+        <endpoint>x_caci_cisco_bcs_Primary_key_Create_Mapping.do</endpoint>
         <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
 	<p>Please select the CI:</p>
@@ -167,13 +167,13 @@ loadFilterColumns('sys_script.filter_condition', 'collection');
 </g:ui_form>
 
 </j:jelly>]]></html>
-        <name>Primary key Create Mapping</name>
+        <name>Primary_key_Create_Mapping</name>
         <processing_script><![CDATA[processRequest();
 response.sendRedirect("sys_transform_map.do?sys_id=" + sysparm_map_sys_id);
  
 function processRequest() {   
 	if (cancelled == "true") {
-		gs.log("mapping assist cancelled");
+		gs.addInfoMessage("mapping assist cancelled");
 	} else {
 		var source_fields = source_field_list.split(',');
 		var target_fields = target_field_list.split(',');
@@ -271,13 +271,13 @@ function deleteStaleTransformEntries(preserve) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-08-29 11:50:50</sys_created_on>
         <sys_id>8c4426ee2f25111036e5136a2799b60c</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>Primary key Create Mapping</sys_name>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Primary_key_Create_Mapping</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy/>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_page_8c4426ee2f25111036e5136a2799b60c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-08-29 11:51:30</sys_updated_on>
+        <sys_updated_on>2022-11-08 07:25:33</sys_updated_on>
     </sys_ui_page>
 </record_update>

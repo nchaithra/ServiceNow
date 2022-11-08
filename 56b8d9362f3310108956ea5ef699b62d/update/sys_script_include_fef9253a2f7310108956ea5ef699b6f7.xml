@@ -70,7 +70,9 @@ Cisco_AppUtil.prototype = {
         try {
             gs.info("parameter" + method + endpoint + body + bcsAccount);
             var ref_token = new GlideRecord('x_caci_cisco_bcs_configuration');
-            while (ref_token.get(bcsAccount.sys_id)) {
+			ref_token.addQuery('sys_id',bcsAccount.sys_id);
+			ref_token.query();
+            while (ref_token.next()) {
                 this.logger.debug("Inside Cisco_AppUtil.makeApiCall() performing API call to endpoint " + endpoint);
                 var host = ref_token.host_name + '';
 
@@ -142,13 +144,13 @@ Cisco_AppUtil.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-15 13:51:40</sys_created_on>
         <sys_id>fef9253a2f7310108956ea5ef699b6f7</sys_id>
-        <sys_mod_count>123</sys_mod_count>
+        <sys_mod_count>124</sys_mod_count>
         <sys_name>Cisco_AppUtil</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_include_fef9253a2f7310108956ea5ef699b6f7</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-23 06:56:18</sys_updated_on>
+        <sys_updated_on>2022-11-08 06:03:06</sys_updated_on>
     </sys_script_include>
 </record_update>

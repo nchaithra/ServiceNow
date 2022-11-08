@@ -17,13 +17,13 @@ CMDBscript.prototype = {
         parent.addQuery("ci_type=device");
         parent.query();
         while (parent.next()) {
-            gs.info("total align records" + parent.getRowCount());
+            
             var listDeviceipAdd = [];
             var getDeviceList = new GlideRecord('x_caci_cisco_bcs_cisco_devices'); //Device table
             getDeviceList.addQuery(parent.device); // align Filter Query
             getDeviceList.query();
             gs.info("parent dada" + parent.primary_key + "  " + parent.cmdb_class.getDisplayValue());
-            //gs.info("total records  "+getDeviceList.getRowCount());
+            
             while (getDeviceList.next()) {
                 var obj = JSON.parse(parent.primary_key); //"device":["name,ip"],"cmdb":["name,ip"]};
                // gs.info("data11" + JSON.stringify(obj));
@@ -42,8 +42,7 @@ CMDBscript.prototype = {
 				cmdbData.addQuery('sys_class_name=' + parent.cmdb_class.name);
                 cmdbData.addQuery(queryCmdb);
                 cmdbData.query();
-				
-                //gs.info("cmdb record count  "+cmdbData.getRowCount());
+			
                 while (cmdbData.next()) {
                     gs.info("cmdbData" + cmdbData.name);
                     var map_data = parent.mapped_data;
@@ -55,7 +54,7 @@ CMDBscript.prototype = {
                     var objMetaData = JSON.parse(map_data); //{"device_asset":["ip_address","name"],"cmdb":["ip_address","name"]};
                     var demo = {};
                   
-                    gs.info("metadata length   " + objMetaData.device.length);
+                    gs.info("metadata length   " + objMetaData.device);
                     for (var j = 0; j < objMetaData.device.length; j++) {
                         demo[objMetaData.cmdb[j].toString()] = getDeviceList.getValue(objMetaData.device[j].toString());
                         gs.info("key value  " + objMetaData.device[j].toString());
@@ -198,13 +197,13 @@ CMDBscript.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-10-02 14:53:50</sys_created_on>
         <sys_id>0811da652f5e511036e5136a2799b607</sys_id>
-        <sys_mod_count>110</sys_mod_count>
+        <sys_mod_count>112</sys_mod_count>
         <sys_name>CMDBscript</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_include_0811da652f5e511036e5136a2799b607</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-10-20 10:20:33</sys_updated_on>
+        <sys_updated_on>2022-11-08 06:05:06</sys_updated_on>
     </sys_script_include>
 </record_update>
