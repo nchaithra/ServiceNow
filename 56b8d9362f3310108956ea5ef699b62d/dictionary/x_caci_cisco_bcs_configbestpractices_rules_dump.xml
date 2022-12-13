@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="ConfigBestPractices rules Dump V2" max_length="40" name="x_caci_cisco_bcs_configbestpractices_rules_dump" sizeclass="0" type="collection">
+        <element label="bestPracticeCaveat" max_length="500" name="bestpracticecaveat" type="string"/>
+        <element label="bestPracticeCorrectiveAction" max_length="20000" name="bestpracticecorrectiveaction" type="string"/>
+        <element label="bestPracticeDescription" max_length="20000" name="bestpracticedescription" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="bestPracticeNuggetId" max_length="20000" name="bestpracticenuggetid" type="integer"/>
+        <element label="bestPracticePrimaryTechnology" max_length="500" name="bestpracticeprimarytechnology" type="string"/>
+        <element label="bestPracticeRecommendation" max_length="25000" name="bestpracticerecommendation" type="string"/>
+        <element label="bestPracticeRisk" max_length="255" name="bestpracticerisk" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="bestPracticeRuleId" max_length="255" name="bestpracticeruleid" type="integer"/>
+        <element label="bestPracticeRuleModificationTimestamp" max_length="40" name="bestpracticerulemodificationtimestamp" type="glide_date_time"/>
+        <element label="bestPracticeSecondaryTechnology" max_length="500" name="bestpracticesecondarytechnology" type="string"/>
+        <element label="bestPracticeTitle" max_length="1000" name="bestpracticetitle" type="string"/>
+        <element label="createdTimestamp" max_length="40" name="createdtimestamp" type="glide_date_time"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="softwareType" max_length="255" name="softwaretype" type="string"/>
+    </element>
+</database>

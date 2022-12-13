@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Software track members Dump V2" max_length="40" name="x_caci_cisco_bcs_cisco_software_track_members_dump_v2" sizeclass="0" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="deviceId" max_length="255" name="deviceid" type="string"/>
+        <element label="isSoftwareTrackCompliant" max_length="40" name="issoftwaretrackcompliant" type="string"/>
+        <element label="isSoftwareTrackFlexibleCompliant" max_length="40" name="issoftwaretrackflexiblecompliant" type="string"/>
+        <element label="isSoftwareTrackPreviousCompliant" max_length="40" name="issoftwaretrackpreviouscompliant" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackId" max_length="500" name="softwaretrackid" type="string"/>
+        <element label="softwareTrackName" max_length="500" name="softwaretrackname" type="string"/>
+        <element label="softwareTrackPackageInstallationEnvelopeCompliance" max_length="1000" name="softwaretrackpackageinstallationenvelopecompliance" type="string"/>
+        <element label="softwareTrackSoftwareMaintenanceUpdateCompliance" max_length="1000" name="softwaretracksoftwaremaintenanceupdatecompliance" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackSoftwareMaintenanceUpdateCompliantCount" max_length="1000" name="softwaretracksoftwaremaintenanceupdatecompliantcount" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackSoftwareMaintenanceUpdateExtraCount" max_length="1000" name="softwaretracksoftwaremaintenanceupdateextracount" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackSoftwareMaintenanceUpdateMissingCount" max_length="1000" name="softwaretracksoftwaremaintenanceupdatemissingcount" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackStandardSoftwareMaintenanceUpdateCount" max_length="500" name="softwaretrackstandardsoftwaremaintenanceupdatecount" type="integer"/>
+    </element>
+</database>

@@ -128,7 +128,7 @@
             <name>x_caci_cisco_bcs_cisco_security_advisories</name>
             <parent>x_caci_cisco_bcs_device_reset_details</parent>
             <position/>
-            <relationship display_value="Cisco Security Advisories">9b5f1b37972a01108986fef3a253af12</relationship>
+            <relationship display_value="Security Advisories">9b5f1b37972a01108986fef3a253af12</relationship>
             <sum>false</sum>
             <sys_class_name>sys_ui_list</sys_class_name>
             <sys_created_by>admin</sys_created_by>

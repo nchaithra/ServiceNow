@@ -31,14 +31,15 @@
     var clientid = [];
     if (gs.getSession().isInteractive()) {
         var user = gs.getUserID();
-		if(gs.getUserID()!='6816f79cc0a8016401c5a33be04be441'){
-			current.addQuery('users_list', user);
+        var bcs = new GlideRecord("x_caci_cisco_bcs_configuration");
+		if(!gs.hasRole('admin')){
+			bcs.addQuery('users_list', user);
 		}
-        current.query();
-        while (current.next()) {
-            clientid.push(current.getValue('sys_id'));
+        bcs.query();
+        while (bcs.next()) {
+            clientid.push(bcs.getValue('customer_id'));
         }
-       current.addQuery('sys_id', clientid);
+       current.addQuery('customer_id', clientid);
     }
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
@@ -47,7 +48,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>6799437387611910a9c07f59dabb3561</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Cisco Bcs Record Restriction</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -55,7 +56,7 @@
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_6799437387611910a9c07f59dabb3561</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-02 12:16:50</sys_updated_on>
+        <sys_updated_on>2022-11-10 08:05:58</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>

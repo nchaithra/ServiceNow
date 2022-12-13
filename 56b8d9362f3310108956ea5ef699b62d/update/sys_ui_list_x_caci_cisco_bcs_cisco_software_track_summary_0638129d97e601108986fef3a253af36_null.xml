@@ -143,7 +143,7 @@
             <name>x_caci_cisco_bcs_cisco_software_track_members</name>
             <parent>x_caci_cisco_bcs_cisco_software_track_summary</parent>
             <position/>
-            <relationship display_value="Cisco Software Track Members">0638129d97e601108986fef3a253af36</relationship>
+            <relationship display_value="Software Track Members">0638129d97e601108986fef3a253af36</relationship>
             <sum>false</sum>
             <sys_class_name>sys_ui_list</sys_class_name>
             <sys_created_by>admin</sys_created_by>

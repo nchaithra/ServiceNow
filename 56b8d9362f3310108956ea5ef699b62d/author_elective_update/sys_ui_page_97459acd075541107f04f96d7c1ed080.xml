@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="DELETE">
+        <category>general</category>
+        <client_script><![CDATA[// var sourceField = $j('name1');
+// var targetField = $j('name2');
+
+// myFunction(setSelected);
+// var g_map_loading = false; 
+
+// function onMappingAssistLoad() {
+//   g_map_loading = true;
+//   // populate existing map fields
+//   var entryGR = new GlideRecord("sys_transform_entry");
+//   entryGR.addQuery("map",'${sysparm_map_sys_id}');
+//   entryGR.query();
+//   while (entryGR.next()) {
+//     // load the source fields
+//     var sourceField = entryGR.source_field;
+//     var targetField = entryGR.target_field;
+
+//     // skip system fields
+//     if (targetField.indexOf('sys_') == 0)
+//       continue;
+
+//     setSelected(sourceField, targetField);
+//   }
+//   g_map_loading = false;
+// }
+
+function myFunction (sourceField,targetField) {
+	
+    var source_field_array = source_fields_leftzone.getValues();
+    var target_field_array = target_fields_leftzone.getValues();
+
+    for(i = 0; i < source_field_array.length; i++) {
+      if (sourceField == "[Script]") {
+        source_fields_rightzone.add("[Script]", "[Script]");
+        break;
+      }
+
+      if (source_field_array[i] == sourceField) {
+        selectTableSource.copyOrMoveBetweenLists(source_fields_leftzone, i, source_fields_rightzone, -1);
+        break;
+      }
+    }
+
+    for(i = 0; i < target_field_array.length; i++) {
+      if (target_field_array[i] == targetField) {
+        selectTableTarget.copyOrMoveBetweenLists(target_fields_leftzone, i, target_fields_rightzone, -1);
+        break;
+      }
+    }
+
+    source_fields_rightzone.clearSelected();
+    target_fields_rightzone.clearSelected();
+}
+//   function onActionSelectMapped(sel) {
+//     var el = gel('show_mapped');
+//     if (sel.value == "mapped") {
+//       sourcepreview_fields = source_fields_rightzone.getValues().join(',');
+//       targetpreview_fields = target_fields_rightzone.getValues().join(',');
+//       el.value = "mapped";
+//     } else {
+//       sourcepreview_fields = "*";
+//       targetpreview_fields = "*";
+//       el.value = "all";
+//     }
+
+//     sourcepreview_showPreview();
+//     targetpreview_showPreview();
+//   }
+
+//   function showPreview() {
+//     if (g_map_loading) 
+//       return; 
+
+//     var el = gel('show_mapped');
+//     onActionSelectMapped(el);
+//   }
+function onSubmit() {
+  var source_field_array = source_fields_rightzone.getValues();
+  var target_field_array = target_fields_rightzone.getValues();
+
+  if (source_field_array.length == 0 || target_field_array.length == 0) {
+    cancel();
+    return true;
+  }
+
+  if (source_field_array.length != target_field_array.length) {
+    alert("Source field count does not match target field count");
+    return false;
+  }
+
+  var ss = source_field_array.join(',');
+
+  // set the selected list as a comma seperated string for server side
+  var el = gel('source_field_list'); 
+  el.value=ss;
+
+  ss = target_field_array.join(',');
+
+  // set the selected list as a comma seperated string for server side
+  el = gel('target_field_list'); 
+  el.value=ss;
+
+  return true;
+}
+
+// function cancel() {
+//   var el = gel('cancelled');
+//   el.value = "true";
+// }]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Create Mapping.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	<p>Please select the CI:</p>
+  <input type="radio" id="name1" name="ci_type" value="1"></input>
+  <label for="name1">Device</label>
+  <input type="radio" id="name2" name="ci_type" value="2"></input>
+  <label for="name1">Asset</label> 
+	<br></br>
+	
+
+	<g:ui_element table="sys_script" field="collection" id="6bba30024f1002005c485535f310c792"></g:ui_element>
+
+<g:ui_element table="sys_script" field="filter_condition" id="efba30024f1002005c485535f310c796"></g:ui_element>
+
+
+<script>
+
+
+addLoadEvent( function() {
+
+
+document.getElementById("sys_script.collection").value = "x_caci_cisco_bcs_cisco_devices";
+
+
+document.getElementById("select2-chosen-1").innerHTML = "x_caci_cisco_bcs_cisco_devices [x_caci_cisco_bcs_cisco_devices]";
+
+
+document.getElementById("s2id_sys_script.collection").hide();
+
+
+loadFilterColumns('sys_script.filter_condition', 'collection');
+
+ 
+
+});
+
+
+</script>
+	
+	<br></br>
+	
+	<button onclick="myFunction()">Create Mapping</button><p id="test"></p>
+<br></br>
+	
+<g:ui_form>
+<g:inline template="mapping_assist_map_area.xml"/>
+</g:ui_form>
+</j:jelly>]]></html>
+        <name>Create Mapping</name>
+        <processing_script><![CDATA[processRequest();
+response.sendRedirect("sys_transform_map.do?sys_id=" + sysparm_map_sys_id);
+ 
+function processRequest() {   
+	if (cancelled == "true") {
+		gs.log("mapping assist cancelled");
+	} else {
+		var source_fields = source_field_list.split(',');
+		var target_fields = target_field_list.split(',');
+		
+		var preserve = "";
+		
+		for (var i = 0; i < source_fields.length; i++) {
+			var transformEntryGRSysId = handleFieldMapping(source_fields[i], target_fields[i]);
+			preserve += transformEntryGRSysId + ",";
+		}
+		deleteStaleTransformEntries(preserve);
+	}
+}	
+
+function handleFieldMapping(sourceField, targetField) {
+	var transformEntryGRSysId = "";
+	var transformEntryGR =  getTransformEntryGR(targetField);
+	
+	if(transformEntryGR.next()) {
+		//handle existing entry.
+		var oldTransEntrySourceField = transformEntryGR.getValue("source_field");
+		var newTransEntrySourceField = sourceField;
+		
+		//case: source_field changed, delete old entry and create new one.
+		if(newTransEntrySourceField !== oldTransEntrySourceField) {
+			deleteTransformMapEntry(transformEntryGR.sys_id);
+			transformEntryGRSysId = createTransformEntry(sourceField, targetField);
+		}else {
+			//case: no change, mark to avoid deletion.
+			transformEntryGRSysId = transformEntryGR.sys_id;
+		}
+	}else {
+		//case: new mapping.
+		transformEntryGRSysId = createTransformEntry(sourceField, targetField);
+	}
+	return transformEntryGRSysId;
+}
+
+function getTransformEntryGR(targetField) {
+	var sourceTable = sysparm_source_table;
+	var targetTable = sysparm_target_table;
+	
+	var entryGR = new GlideRecord("sys_transform_entry");
+	entryGR.addQuery("map",sysparm_map_sys_id);
+	entryGR.addQuery("source_table",sourceTable);
+	
+	entryGR.addQuery("target_table",targetTable);
+	entryGR.addQuery("target_field",targetField);
+	entryGR.query();
+	return entryGR;
+}
+
+function createTransformEntry(sourceField, targetField) {
+	var sysid = "";
+	var sourceTable = sysparm_source_table;
+	var targetTable = sysparm_target_table;
+	
+	var entryGR = new GlideRecord("sys_transform_entry");
+	
+	entryGR.initialize();
+	entryGR.map = sysparm_map_sys_id;
+	entryGR.source_table = sourceTable;
+	entryGR.source_field = sourceField;
+	entryGR.target_table = targetTable;
+	entryGR.target_field = targetField;
+	entryGR.insert();
+	
+	return entryGR.sys_id;
+}
+
+function deleteTransformMapEntry(transformEntrySysId) {
+	var targetTable = sysparm_target_table;
+	
+	var entryGR = new GlideRecord("sys_transform_entry");
+	entryGR.addQuery("sys_id",transformEntrySysId);
+	
+	entryGR.query();
+	if (entryGR.next()) {
+		entryGR.deleteRecord();
+	}
+}
+
+function deleteStaleTransformEntries(preserve) {
+	var entryGR = new GlideRecord("sys_transform_entry");
+	entryGR.addQuery("map",sysparm_map_sys_id);
+	entryGR.query();
+	while(entryGR.next()) {
+		if (preserve.indexOf(entryGR.sys_id.toString()) == -1) {
+			if (entryGR.target_field.toString().indexOf('sys_') != 0)
+				entryGR.deleteRecord();
+		}
+	}
+}]]></processing_script>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-01-25 12:30:29</sys_created_on>
+        <sys_id>97459acd075541107f04f96d7c1ed080</sys_id>
+        <sys_mod_count>51</sys_mod_count>
+        <sys_name>Create Mapping</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_97459acd075541107f04f96d7c1ed080</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-01-31 13:23:07</sys_updated_on>
+    </sys_ui_page>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_ui_page_97459acd075541107f04f96d7c1ed080</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_ui_page"&gt;&lt;sys_ui_page action="INSERT_OR_UPDATE"&gt;&lt;category&gt;general&lt;/category&gt;&lt;client_script&gt;&lt;![CDATA[// var sourceField = $j('name1');
+// var targetField = $j('name2');
+
+// myFunction(setSelected);
+// var g_map_loading = false; 
+
+// function onMappingAssistLoad() {
+//   g_map_loading = true;
+//   // populate existing map fields
+//   var entryGR = new GlideRecord("sys_transform_entry");
+//   entryGR.addQuery("map",'${sysparm_map_sys_id}');
+//   entryGR.query();
+//   while (entryGR.next()) {
+//     // load the source fields
+//     var sourceField = entryGR.source_field;
+//     var targetField = entryGR.target_field;
+
+//     // skip system fields
+//     if (targetField.indexOf('sys_') == 0)
+//       continue;
+
+//     setSelected(sourceField, targetField);
+//   }
+//   g_map_loading = false;
+// }
+
+function myFunction (sourceField,targetField) {
+	
+    var source_field_array = source_fields_leftzone.getValues();
+    var target_field_array = target_fields_leftzone.getValues();
+
+    for(i = 0; i &lt; source_field_array.length; i++) {
+      if (sourceField == "[Script]") {
+        source_fields_rightzone.add("[Script]", "[Script]");
+        break;
+      }
+
+      if (source_field_array[i] == sourceField) {
+        selectTableSource.copyOrMoveBetweenLists(source_fields_leftzone, i, source_fields_rightzone, -1);
+        break;
+      }
+    }
+
+    for(i = 0; i &lt; target_field_array.length; i++) {
+      if (target_field_array[i] == targetField) {
+        selectTableTarget.copyOrMoveBetweenLists(target_fields_leftzone, i, target_fields_rightzone, -1);
+        break;
+      }
+    }
+
+    source_fields_rightzone.clearSelected();
+    target_fields_rightzone.clearSelected();
+}
+//   function onActionSelectMapped(sel) {
+//     var el = gel('show_mapped');
+//     if (sel.value == "mapped") {
+//       sourcepreview_fields = source_fields_rightzone.getValues().join(',');
+//       targetpreview_fields = target_fields_rightzone.getValues().join(',');
+//       el.value = "mapped";
+//     } else {
+//       sourcepreview_fields = "*";
+//       targetpreview_fields = "*";
+//       el.value = "all";
+//     }
+
+//     sourcepreview_showPreview();
+//     targetpreview_showPreview();
+//   }
+
+//   function showPreview() {
+//     if (g_map_loading) 
+//       return; 
+
+//     var el = gel('show_mapped');
+//     onActionSelectMapped(el);
+//   }
+function onSubmit() {
+  var source_field_array = source_fields_rightzone.getValues();
+  var target_field_array = target_fields_rightzone.getValues();
+
+  if (source_field_array.length == 0 || target_field_array.length == 0) {
+    cancel();
+    return true;
+  }
+
+  if (source_field_array.length != target_field_array.length) {
+    alert("Source field count does not match target field count");
+    return false;
+  }
+
+  var ss = source_field_array.join(',');
+
+  // set the selected list as a comma seperated string for server side
+  var el = gel('source_field_list'); 
+  el.value=ss;
+
+  ss = target_field_array.join(',');
+
+  // set the selected list as a comma seperated string for server side
+  el = gel('target_field_list'); 
+  el.value=ss;
+
+  return true;
+}
+
+// function cancel() {
+//   var el = gel('cancelled');
+//   el.value = "true";
+// }]]&gt;&lt;/client_script&gt;&lt;description/&gt;&lt;direct&gt;false&lt;/direct&gt;&lt;endpoint&gt;x_caci_cisco_bcs_Create Mapping.do&lt;/endpoint&gt;&lt;html&gt;&lt;![CDATA[&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null"&gt;
+	&lt;p&gt;Please select the CI:&lt;/p&gt;
+  &lt;input type="radio" id="name1" name="ci_type" value="1"&gt;&lt;/input&gt;
+  &lt;label for="name1"&gt;Device&lt;/label&gt;
+  &lt;input type="radio" id="name2" name="ci_type" value="2"&gt;&lt;/input&gt;
+  &lt;label for="name1"&gt;Asset&lt;/label&gt; 
+	&lt;br&gt;&lt;/br&gt;
+	
+
+	&lt;g:ui_element table="sys_script" field="collection" id="6bba30024f1002005c485535f310c792"&gt;&lt;/g:ui_element&gt;
+
+&lt;g:ui_element table="sys_script" field="filter_condition" id="efba30024f1002005c485535f310c796"&gt;&lt;/g:ui_element&gt;
+
+
+&lt;script&gt;
+
+
+addLoadEvent( function() {
+
+
+document.getElementById("sys_script.collection").value = "x_caci_cisco_bcs_cisco_devices";
+
+
+document.getElementById("select2-chosen-1").innerHTML = "x_caci_cisco_bcs_cisco_devices [x_caci_cisco_bcs_cisco_devices]";
+
+
+document.getElementById("s2id_sys_script.collection").hide();
+
+
+loadFilterColumns('sys_script.filter_condition', 'collection');
+
+ 
+
+});
+
+
+&lt;/script&gt;
+	
+	&lt;br&gt;&lt;/br&gt;
+	
+	&lt;button onclick="myFunction()"&gt;Create Mapping&lt;/button&gt;&lt;p id="test"&gt;&lt;/p&gt;
+&lt;br&gt;&lt;/br&gt;
+	
+&lt;g:ui_form&gt;
+&lt;g:inline template="mapping_assist_map_area.xml"/&gt;
+&lt;/g:ui_form&gt;
+&lt;/j:jelly&gt;]]&gt;&lt;/html&gt;&lt;name&gt;Create Mapping&lt;/name&gt;&lt;processing_script&gt;&lt;![CDATA[processRequest();
+response.sendRedirect("sys_transform_map.do?sys_id=" + sysparm_map_sys_id);
+ 
+function processRequest() {   
+	if (cancelled == "true") {
+		gs.log("mapping assist cancelled");
+	} else {
+		var source_fields = source_field_list.split(',');
+		var target_fields = target_field_list.split(',');
+		
+		var preserve = "";
+		
+		for (var i = 0; i &lt; source_fields.length; i++) {
+			var transformEntryGRSysId = handleFieldMapping(source_fields[i], target_fields[i]);
+			preserve += transformEntryGRSysId + ",";
+		}
+		deleteStaleTransformEntries(preserve);
+	}
+}	
+
+function handleFieldMapping(sourceField, targetField) {
+	var transformEntryGRSysId = "";
+	var transformEntryGR =  getTransformEntryGR(targetField);
+	
+	if(transformEntryGR.next()) {
+		//handle existing entry.
+		var oldTransEntrySourceField = transformEntryGR.getValue("source_field");
+		var newTransEntrySourceField = sourceField;
+		
+		//case: source_field changed, delete old entry and create new one.
+		if(newTransEntrySourceField !== oldTransEntrySourceField) {
+			deleteTransformMapEntry(transformEntryGR.sys_id);
+			transformEntryGRSysId = createTransformEntry(sourceField, targetField);
+		}else {
+			//case: no change, mark to avoid deletion.
+			transformEntryGRSysId = transformEntryGR.sys_id;
+		}
+	}else {
+		//case: new mapping.
+		transformEntryGRSysId = createTransformEntry(sourceField, targetField);
+	}
+	return transformEntryGRSysId;
+}
+
+function getTransformEntryGR(targetField) {
+	var sourceTable = sysparm_source_table;
+	var targetTable = sysparm_target_table;
+	
+	var entryGR = new GlideRecord("sys_transform_entry");
+	entryGR.addQuery("map",sysparm_map_sys_id);
+	entryGR.addQuery("source_table",sourceTable);
+	
+	entryGR.addQuery("target_table",targetTable);
+	entryGR.addQuery("target_field",targetField);
+	entryGR.query();
+	return entryGR;
+}
+
+function createTransformEntry(sourceField, targetField) {
+	var sysid = "";
+	var sourceTable = sysparm_source_table;
+	var targetTable = sysparm_target_table;
+	
+	var entryGR = new GlideRecord("sys_transform_entry");
+	
+	entryGR.initialize();
+	entryGR.map = sysparm_map_sys_id;
+	entryGR.source_table = sourceTable;
+	entryGR.source_field = sourceField;
+	entryGR.target_table = targetTable;
+	entryGR.target_field = targetField;
+	entryGR.insert();
+	
+	return entryGR.sys_id;
+}
+
+function deleteTransformMapEntry(transformEntrySysId) {
+	var targetTable = sysparm_target_table;
+	
+	var entryGR = new GlideRecord("sys_transform_entry");
+	entryGR.addQuery("sys_id",transformEntrySysId);
+	
+	entryGR.query();
+	if (entryGR.next()) {
+		entryGR.deleteRecord();
+	}
+}
+
+function deleteStaleTransformEntries(preserve) {
+	var entryGR = new GlideRecord("sys_transform_entry");
+	entryGR.addQuery("map",sysparm_map_sys_id);
+	entryGR.query();
+	while(entryGR.next()) {
+		if (preserve.indexOf(entryGR.sys_id.toString()) == -1) {
+			if (entryGR.target_field.toString().indexOf('sys_') != 0)
+				entryGR.deleteRecord();
+		}
+	}
+}]]&gt;&lt;/processing_script&gt;&lt;sys_class_name&gt;sys_ui_page&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-01-25 12:30:29&lt;/sys_created_on&gt;&lt;sys_id&gt;97459acd075541107f04f96d7c1ed080&lt;/sys_id&gt;&lt;sys_mod_count&gt;51&lt;/sys_mod_count&gt;&lt;sys_name&gt;Create Mapping&lt;/sys_name&gt;&lt;sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Cisco BCS Operational Insights"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_page_97459acd075541107f04f96d7c1ed080&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-01-31 13:23:07&lt;/sys_updated_on&gt;&lt;/sys_ui_page&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-646311733</payload_hash>
+        <record_name>Create Mapping</record_name>
+        <reverted_from/>
+        <source>0f3204772f2ad510660cbcb62799b65e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:44:22</sys_created_on>
+        <sys_id>d2bb27fa2f629110660cbcb62799b632</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_recorded_at>183ee8e8bb20000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 14:18:48</sys_updated_on>
+        <type>UI Page</type>
+        <update_guid>d48b59c73d5901107ed88a5ffd38b562</update_guid>
+        <update_guid_history>d48b59c73d5901107ed88a5ffd38b562:-646311733,eef91947065901109537ec08894f17c9:2009463699,2fc71d477a5901102ea79cc996cec1f2:-608512262,57fe394a291901105e8a5072ac575096:1309636254,0f7ef94abe1901101d7e63887cd5d57a:-1884182017,204e394a33190110ec23d3476bd91e08:-1136434250,2f1eb54a61190110bcdcb0d423674809:89823291,2cad710af41901103a4af8167169e5a8:719745587,697c310a83190110aab3311c9e815454:-1206559361,363f25429f9501102d185e6f2bdf04d7:1134303144,033e2d02fa9501100279acd76c86e761:-341451177,ee1ca9ca435501109d78a40f00dd204c:101585547,38ee683db0d1011080cf85d35f0f833b:-983664967,3dce283d63d101100fee728df7dbe8d9:394783315,c92de83dc1d10110c7d6628087bc0264:1735433499,34fca8b9e4d10110c5a0ed5a2c4dd1d2:-98577413,e8ca6879a4d1011026646d2b1a4c326c:679326812,16aaa479fdd1011058446005f9320ae7:-1132218926,ba53a0b95a91011049b52e8efbb35ddd:-1829205438,01232035fed10110660a602b8e9b4d2c:-1362397409,9792e4b11fd1011014c7bba86bf9437c:-1829205438,2bae90756f510110d5839b2e2af33f0f:846745705,857e10355b51011086c432005cbf3abb:2006148766,d24e1cf157510110d3e1c530d589265a:753358648,f05d5cf123510110ecbe04ffd62a6406:-500780463,33fc50f144510110dc34c3c2c819f083:539642631,c50b5471a8510110fba39c906077397b:-1429124309,607a187d8b1101105a9767de711ffd08:-508356179,4ba9dcfd08110110309cc76ecf086d5f:-1964995461,3c591031fc51011043570ae4aeeb21df:-2030906148,14d75cbd8f1101106393f51a44b22d18:1388429935,d297507dcd110110fe95fc701d5c857c:-984821428,3826d47d3211011044230c0b1111afcf:985479009,40a5507d931101109d291d76c47e0e4d:1122223847,7435d83ddd1101102aedfddd0733fa94:80613250,7b22587967110110ddbb9f20df6d5aa6:166783664,73c11c7946110110eeed8c9c5aa479b5:346607966,45b1907967110110c53b84861b069a2a:871941436,d37158790e11011078b22cb694df5561:1889637362,66a9f28d65d541100d3dee22372048d1:-1772030175,2819fe8df4954110cd445eced77d2fe8:1497775749,7088320de8d5411077f945c61340289f:-1676760207,b948fe09ead54110d79b240426f861eb:1802952799,53927a09f1d5411018fc523cc5b990e6:-1933579011,0b93aac99d95411036d726d91c4bc21d:1229103260,53926ac9b49541109d44f9da866ca057:-1024362067,e2622ac5189541100d9a96bcdbec2616:-628971859,fe52ae49dd9541101c771601ddf2bea5:-777973812,3c9edac51f95411093a1b10edecf1b0b:1106522069,5bccde0581954110ac628c6893f80667:1343503829,4f395ac1c1954110713407d1edb74097:1106522069,8be55601dc954110fbedd9760a32d49a:1329543144</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-08 07:39:59</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_page">sys_ui_page</sys_db_object>
+        <sys_id>1be27c26c9a54ffe80eb96dcd4ef28a4</sys_id>
+        <sys_metadata>97459acd075541107f04f96d7c1ed080</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Create Mapping</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_ui_page_97459acd075541107f04f96d7c1ed080</sys_update_name>
+        <sys_update_version display_value="sys_ui_page_97459acd075541107f04f96d7c1ed080">d2bb27fa2f629110660cbcb62799b632</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-08 07:39:59</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

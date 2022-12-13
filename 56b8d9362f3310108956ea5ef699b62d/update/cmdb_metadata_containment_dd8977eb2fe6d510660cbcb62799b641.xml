@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="cmdb_metadata_containment">
+    <cmdb_metadata_containment action="INSERT_OR_UPDATE">
+        <always_include>false</always_include>
+        <ci_type>cmdb_ci_switch</ci_type>
+        <is_reverse>true</is_reverse>
+        <parent_id display_value="cmdb_ci_network">8408230d0ba62200639be0d425673a9c</parent_id>
+        <rel_type display_value="Hosted on::Hosts">5f985e0ec0a8010e00a9714f2a172815</rel_type>
+        <sys_class_name>cmdb_metadata_containment</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-21 13:40:05</sys_created_on>
+        <sys_id>dd8977eb2fe6d510660cbcb62799b641</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>cmdb_ci_switch</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>cmdb_metadata_containment_dd8977eb2fe6d510660cbcb62799b641</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 13:40:05</sys_updated_on>
+    </cmdb_metadata_containment>
+</record_update>

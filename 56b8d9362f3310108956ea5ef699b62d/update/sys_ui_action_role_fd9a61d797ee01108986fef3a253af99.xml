@@ -9,7 +9,7 @@
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy/>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
-        <sys_ui_action display_value="">b09a211b97ee01108986fef3a253af13</sys_ui_action>
+        <sys_ui_action display_value="Export">b09a211b97ee01108986fef3a253af13</sys_ui_action>
         <sys_update_name>sys_ui_action_role_fd9a61d797ee01108986fef3a253af99</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2022-04-04 12:26:57</sys_updated_on>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="DELETE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_caci_cisco_bcs.CreateIncidentUitl</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CreateIncidentUitl</name>
+        <script><![CDATA[var CreateIncidentUitl = Class.create();
+CreateIncidentUitl.prototype = {
+    initialize: function() {},
+	
+	
+    /*_______________________
+	
+   * Description: baseed on select device create new  incident.
+   * Parameters:list of  records and  table .
+   * Returns: url of incident.
+   ______________________*/
+    createIncident: function(recordId, tableName,clientId) {
+        var url = '';
+        var list = [];
+
+        gs.info("recordId" + recordId + tableName);
+        var newIncident = new GlideRecord('incident');
+        newIncident.initialize();
+        newIncident.setValue('caller_id', gs.getUserID());
+        newIncident.setValue('short_description', 'Create new device record');
+		newIncident.setValue("correlation_display",tableName);
+		newIncident.setValue("correlation_id",clientId);
+        newIncident.insert();
+
+
+        var myArray = recordId.split(',');
+        for (var i = 0; i < myArray.length; i++) {
+            var listObj = {};
+            var updateDeviceData = new GlideRecord(tableName);
+            updateDeviceData.addQuery('sys_id', myArray[i].toString());
+            //updateDeviceData.addQuery('incident_reference=NULL');
+            updateDeviceData.query();
+            if (updateDeviceData.next()) {
+
+                for (var property in updateDeviceData) {
+                    if (!property.startsWith("sys_")) {
+                        
+                        listObj[updateDeviceData[property].getLabel()] = updateDeviceData.getDisplayValue(property);
+                        
+                    }
+                }
+				updateDeviceData.incident_reference =updateDeviceData.incident_reference+ ","+ newIncident.sys_id.toString();  //add new lines
+                updateDeviceData.update();
+//                 updateDeviceData.incident_reference = newIncident.sys_id.toString();
+//                 updateDeviceData.update();
+            }
+            list.push(listObj);
+        }
+
+        var newIncidentRealltionship = new GlideRecord('x_caci_cisco_bcs_incident_device_relationship');
+        newIncidentRealltionship.initialize();
+        newIncidentRealltionship.setValue('incident_reference', newIncident.sys_id.toString());
+        newIncidentRealltionship.setValue('list_of_devices', JSON.stringify(list, 0, 4));
+        newIncidentRealltionship.insert();
+
+
+        url = gs.getProperty('glide.servlet.uri') + 'incident.do?sysparm_stack=incident.do&sys_id=' + newIncident.sys_id;
+        gs.info('test_url: ' + url);
+      return url;
+    },
+    type: 'CreateIncidentUitl'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-08-04 17:50:35</sys_created_on>
+        <sys_id>b8640baa2f89111036e5136a2799b613</sys_id>
+        <sys_mod_count>54</sys_mod_count>
+        <sys_name>CreateIncidentUitl</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_script_include_b8640baa2f89111036e5136a2799b613</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-01 13:04:00</sys_updated_on>
+    </sys_script_include>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_script_include_b8640baa2f89111036e5136a2799b613</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_script_include"&gt;&lt;sys_script_include action="INSERT_OR_UPDATE"&gt;&lt;access&gt;public&lt;/access&gt;&lt;active&gt;true&lt;/active&gt;&lt;api_name&gt;x_caci_cisco_bcs.CreateIncidentUitl&lt;/api_name&gt;&lt;caller_access/&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;description/&gt;&lt;name&gt;CreateIncidentUitl&lt;/name&gt;&lt;script&gt;&lt;![CDATA[var CreateIncidentUitl = Class.create();
+CreateIncidentUitl.prototype = {
+    initialize: function() {},
+	
+	
+    /*_______________________
+	
+   * Description: baseed on select device create new  incident.
+   * Parameters:list of  records and  table .
+   * Returns: url of incident.
+   ______________________*/
+    createIncident: function(recordId, tableName,clientId) {
+        var url = '';
+        var list = [];
+
+        gs.info("recordId" + recordId + tableName);
+        var newIncident = new GlideRecord('incident');
+        newIncident.initialize();
+        newIncident.setValue('caller_id', gs.getUserID());
+        newIncident.setValue('short_description', 'Create new device record');
+		newIncident.setValue("correlation_display",tableName);
+		newIncident.setValue("correlation_id",clientId);
+        newIncident.insert();
+
+
+        var myArray = recordId.split(',');
+        for (var i = 0; i &lt; myArray.length; i++) {
+            var listObj = {};
+            var updateDeviceData = new GlideRecord(tableName);
+            updateDeviceData.addQuery('sys_id', myArray[i].toString());
+            //updateDeviceData.addQuery('incident_reference=NULL');
+            updateDeviceData.query();
+            if (updateDeviceData.next()) {
+
+                for (var property in updateDeviceData) {
+                    if (!property.startsWith("sys_")) {
+                        
+                        listObj[updateDeviceData[property].getLabel()] = updateDeviceData.getDisplayValue(property);
+                        
+                    }
+                }
+				updateDeviceData.incident_reference =updateDeviceData.incident_reference+ ","+ newIncident.sys_id.toString();  //add new lines
+                updateDeviceData.update();
+//                 updateDeviceData.incident_reference = newIncident.sys_id.toString();
+//                 updateDeviceData.update();
+            }
+            list.push(listObj);
+        }
+
+        var newIncidentRealltionship = new GlideRecord('x_caci_cisco_bcs_incident_device_relationship');
+        newIncidentRealltionship.initialize();
+        newIncidentRealltionship.setValue('incident_reference', newIncident.sys_id.toString());
+        newIncidentRealltionship.setValue('list_of_devices', JSON.stringify(list, 0, 4));
+        newIncidentRealltionship.insert();
+
+
+        url = gs.getProperty('glide.servlet.uri') + 'incident.do?sysparm_stack=incident.do&amp;sys_id=' + newIncident.sys_id;
+        gs.info('test_url: ' + url);
+      return url;
+    },
+    type: 'CreateIncidentUitl'
+};]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script_include&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-08-04 17:50:35&lt;/sys_created_on&gt;&lt;sys_id&gt;b8640baa2f89111036e5136a2799b613&lt;/sys_id&gt;&lt;sys_mod_count&gt;54&lt;/sys_mod_count&gt;&lt;sys_name&gt;CreateIncidentUitl&lt;/sys_name&gt;&lt;sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_scope display_value="Cisco BCS Operational Insights"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_include_b8640baa2f89111036e5136a2799b613&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-01 13:04:00&lt;/sys_updated_on&gt;&lt;/sys_script_include&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1094382233</payload_hash>
+        <record_name>CreateIncidentUitl</record_name>
+        <reverted_from/>
+        <source>0f3204772f2ad510660cbcb62799b65e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:43:38</sys_created_on>
+        <sys_id>278be7ba2f629110660cbcb62799b660</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_recorded_at>183ee8ddd240000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 14:18:18</sys_updated_on>
+        <type>Script Include</type>
+        <update_guid>8dc19a23faa595107c5474738ea3b2a8</update_guid>
+        <update_guid_history>8dc19a23faa595107c5474738ea3b2a8:1094382233,f49126a9d7ad951081a28545b2d6b27d:1413058049,013162a977ad9510dc584c5cedb3a985:2115899595,2a0162a974ad95101e9f0b731a8ff542:-1859196917,7fd0ee6942ad9510ea3e8c6942ca482d:1819911667,148f5ea5bfad9510c3dcc6a50103868b:338009346,c9cc96a5d4ad9510976706063ae9f550:24851701,904c5e25c6ad9510fcf5a3f467039455:1696416779,5b8a12e13cad95100a22f1c9093a72c2:-1458741669,75a816a1a9ad951087cb9e731a36e2e2:-372695717,6ef496edb86d951080ff4dcd079a22bd:-1458741669,b651da2dc86d95105c17f9a6a0ff0a71:-980847767,b25bc6a5db6d95102dc514a515c64ef7:-1139470408,8ff80a651a6d9510a5e5fd9a4a370d90:292419756,5b8882a5e76d9510f816516a9bd73a42:1236003745,0bb74265786d9510f8c5a33631fbbae7:657275072,6e878625c86d9510cc9034df83c1f7f2:-751484384,813b61ede7e9951078b7ff7681db7771:-2094732009,5968da9582a19510dadcf727db1c17d9:2068834223,6918da55dca1951033fb4c525b9f8fd8:1870903193,0e751ed1eda195101cf79edc40e347bd:2068834223,a304de5130a1951026f78490bdd40237:1934405007,acb39a917ba1951020c4e6d376a6365f:439178947,f4cc84d9f6e955102ed78c9e4d6637e5:-1847032526,1662e9cdaee155101152867a07e09be6:-1498768755,8421214d49e1551069d146808c7fbab9:-509478320,31a0a58dbae15510fd9493c56a8a85e3:-1133805092,cd4e110d57e15510adab718d8d7f344c:1555464477,99ac918948e15510f33295dda77d2c1e:-1880776617,f2eb1189ebe15510a93cef628ec14160:1633439579,30da9549fbe1551089c3551b1cedf8eb:1330224343,78c81585c0e15510ee54bc3aaa6c3df3:-548635497,6ca6dd45f9e155103cb8657a755fb8fa:1118611010,3c409dcd75a15510b8cff7d552aa4cb1:1709810407,927e784df6615510a64a0d55f669cb7e:-1946147517,13313bf072ad151079c62356d84733b7:-322933981,102496e4ceadd1101c3ff4421c5b7403:-437693085,296252a4cbadd11079e48c9a2c8520b5:1611926563,a4911e24b8add1101142d146bb5cbf93:1134061337,df8fcaa0b1add1103b389363dc3595cb:1773565351,778dca60f9add110aefab3978cce983d:1702491619,3e6d06602badd1109d546621246bcd40:1134061337,71e566051c5995102a8efa5a0a271312:1611926563,45054205a7559510c509c9cb8f5002d2:387151100,4a724ec12e559510e07a9a69727a14aa:1905096592,6ff659337c0511104e4c0abcb67ffdcb:-1705012316,309619ffd8c11110b03acf2b87a8eac1:-2128546463,eca4ddbbbcc11110ce222528c058f028:1014220081,a17ecdbb9bc11110bb6ae26c61e69705:-145757487,8698bc7b2f01111066666d484f8b6d15:1014220081,5c87f0733f011110f598f510fc4cc355:1950727883,47f1db263dc91110d9258529a0c09b0f:1014220081,ebb19f26fac91110655fe03a5cc2d9a2:383145832,08f05ba245c9111070ddd03bce2deba3:1322354264,ed2e872289c91110af1d3aff98791046:-211750538,d76b432246c911108117442e974d16e1:754572674,4089872e12891110f6175d2bce29b6d7:-1959803219,4a3947ae7a891110c9c9a1f77ac15ca7:309854820,2c270b6aab8911105993f184f6e2c8bb:1759484911,fdd6872e76891110d9c7458240c7fa8d:-360852622</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-10 08:38:48</sys_created_on>
+        <sys_db_object display_value="" name="sys_script_include">sys_script_include</sys_db_object>
+        <sys_id>1f986c763c9d4066a92f91461c122684</sys_id>
+        <sys_metadata>b8640baa2f89111036e5136a2799b613</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CreateIncidentUitl</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_script_include_b8640baa2f89111036e5136a2799b613</sys_update_name>
+        <sys_update_version display_value="sys_script_include_b8640baa2f89111036e5136a2799b613">278be7ba2f629110660cbcb62799b660</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-10 08:38:48</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

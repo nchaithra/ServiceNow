@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function save() {
+	var sys_ids = [];
+	$j("#checkedItems td input:checked").each(function(){
+		var _sysID = $j(this).attr('id')? $j(this).attr('id').toString().toLowerCase().replace('ni.', '') : undefined;
+		if (_sysID) {
+			sys_ids.push(_sysID);
+		}
+	});
+
+var del = new GlideDialogWindow.get();
+var sys_id = del.getPreference('sys_id');
+var tableName = del.getPreference('table_name');
+var updateINC = new GlideAjax('Cisco_ClientServerBridge');
+updateINC.addParam('sysparm_name', 'Updateciscorecord');
+updateINC.addParam('sysparm_recrod_id1', sys_id);
+updateINC.addParam('sysparm_table_name1', tableName);
+updateINC.addParam('sysparm_incidents', sys_ids);	
+updateINC.getXML(showPopup);
+
+	
+function showPopup(response) {
+var value = response.responseXML.documentElement.getAttribute("answer");
+	window.location.reload(); 
+}
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_caci_cisco_bcs_Incident_attach.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+    <g:evaluate var="jvar_gr" object="true" jelly="true">
+		var tableName = RP.getWindowProperties().table_name; 
+		var id = RP.getWindowProperties().sys_id;
+		      
+		var data;
+		var str=id.toString();
+	    var record =str.split(",")[0];
+		var clientid=new GlideRecord(tableName);
+		clientid.addQuery('sys_id',record);
+		clientid.query();
+		if(clientid.next()){
+		data=clientid.customer_id;
+		} 					
+        var incRec = new GlideRecord('incident');
+		 incRec.addQuery('correlation_id',data);
+         incRec.addEncodedQuery("active=true^stateNOT IN6,7,8");
+		 incRec.addQuery('correlation_display',tableName) 
+         incRec.query();
+         incRec;
+    </g:evaluate>
+	<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#table-scroll {
+  height:300px;
+  overflow:auto;  
+  margin-top:20px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+	<body>
+    <h3>Please Select the Incident</h3>
+		 <div id="table-scroll">
+<!--  <table id="customers"> -->
+		<table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+   <g:ui_form>
+        <div class="row">
+            <div class="col-md-12">
+				<tr>
+				   <th></th>
+	               <th>Number</th>
+				   <th>Category</th>
+	                <th>Short Description</th>
+					<th>Description</th>
+	             </tr>
+				<j:while test="${jvar_gr.next()}">
+                <tr style="list-style-type: none;" id="checkedItems">
+                    <td>
+                        <g:ui_checkbox name="${jvar_gr.getValue('sys_id')}" id="${jvar_gr.getValue('number')}" /> 
+					</td>
+					<td>${jvar_gr.getValue('number')} </td>
+					  <td> ${jvar_gr.getValue('category')}</td>
+					  <td>${jvar_gr.getValue('short_description')}</td>
+					   <td> ${jvar_gr.getValue('description')}</td>
+				</tr>
+                    </j:while>		
+            </div>
+        </div>
+    </g:ui_form>
+	</table>
+		</div>	
+</body>
+	<div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <g:dialog_buttons_ok_cancel ok="save()" ok_type="button" cancel_type="button" />
+                </div>
+
+            </div>
+        </div>
+</j:jelly>]]></html>
+        <name>Incident_attach</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-14 08:38:49</sys_created_on>
+        <sys_id>476a169f2fcb5550660cbcb62799b66f</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Incident_attach</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_page_476a169f2fcb5550660cbcb62799b66f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-14 10:46:05</sys_updated_on>
+    </sys_ui_page>
+</record_update>

@@ -2,7 +2,7 @@
     <sys_ui_related sys_domain="global" table="x_caci_cisco_bcs_device_reset_details" version="2" view="">
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Device Reset Details - Default view" name="x_caci_cisco_bcs_device_reset_details" related_list="NULL" sys_domain="global" view="Default view">8cd0abbf976a01108986fef3a253afba</list_id>
+            <list_id display_value="Device Reset Details - Default view" name="x_caci_cisco_bcs_device_reset_details" related_list="NULL" sys_domain="global" view="Default view">8cd0abbf976a01108986fef3a253afba</list_id>
             <order_by/>
             <position>0</position>
             <related_list>REL:e613e61d976a01108986fef3a253af0d</related_list>
@@ -16,7 +16,7 @@
         </sys_ui_related_list_entry>
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Device Reset Details - Default view" name="x_caci_cisco_bcs_device_reset_details" related_list="NULL" sys_domain="global" view="Default view">8cd0abbf976a01108986fef3a253afba</list_id>
+            <list_id display_value="Device Reset Details - Default view" name="x_caci_cisco_bcs_device_reset_details" related_list="NULL" sys_domain="global" view="Default view">8cd0abbf976a01108986fef3a253afba</list_id>
             <order_by/>
             <position>1</position>
             <related_list>REL:936d9e55976a01108986fef3a253afa2</related_list>
@@ -29,7 +29,7 @@
             <sys_updated_on>2022-05-26 04:48:46</sys_updated_on>
         </sys_ui_related_list_entry>
         <sys_ui_related_list action="INSERT_OR_UPDATE">
-            <calculated_name>Cisco Device Reset Details - Default view</calculated_name>
+            <calculated_name>Device Reset Details - Default view</calculated_name>
             <filter/>
             <name>x_caci_cisco_bcs_device_reset_details</name>
             <order_by/>

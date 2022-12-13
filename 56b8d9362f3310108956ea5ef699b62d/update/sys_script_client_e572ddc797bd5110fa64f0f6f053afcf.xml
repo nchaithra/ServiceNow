@@ -6,61 +6,60 @@
         <description/>
         <field>subcategory</field>
         <global>true</global>
-        <isolate_script>true</isolate_script>
+        <isolate_script>false</isolate_script>
         <messages/>
         <name>Populate incident fields</name>
         <order/>
         <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
-    if (isLoading || newValue === '') {
+    if (isLoading ) {//|| newValue === ''
         return;
     }
     var inccategory = g_form.getValue('category');
     var incsubcat = g_form.getValue('subcategory');
     if (inccategory == 'device_inventiry' && incsubcat == 'reachable') {
         g_form.setValue('description', 'Device information requires analysis of the reported data.');
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
 
     } else if (inccategory == 'device_inventiry' && incsubcat == 'unreachable') {
         g_form.setValue('description', 'Device unreachable reasons need to be identified and mitigated.');
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
+		
+ } else if (inccategory == 'device_inventiry' && incsubcat == 'unidentified') {
+        g_form.setValue('description', 'Unidentified device need to be investigated.');
 
     } else if (inccategory == 'assets_contracts' && incsubcat == 'out_of_warranty') {
         g_form.setValue('description', 'Devices warranty issues need to be investigated and resolved.');
         g_form.setValue('short_description', "Assets with no contract and expired warranty");
-        g_form.setValue('business_service', "d198353887b1d110a9c07f59dabb3545");
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
+        g_form.setValue('service_offering', g_scratchpad.asset_warranty);
 
     } else if (inccategory == 'assets_contracts' && incsubcat == 'contract_requires_renewal') {
         g_form.setValue('description', 'Devices contract issues need to be investigated and resolved');
         g_form.setValue('short_description', "Assets with expired contracts");
-        g_form.setValue('business_service', "5778353887b1d110a9c07f59dabb3542");
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
+        g_form.setValue('service_offering', g_scratchpad.asset_renewal);
 
     } else if (inccategory == 'software_lifecycle' && incsubcat == 'current_milestone') {
         g_form.setValue('description', 'The impact of unsupported software need to be investigated and resolved for each affected device.');
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
+      
 
     } else if (inccategory == 'software_lifecycle' && incsubcat == 'next_milestone') {
         g_form.setValue('description', 'The impact of software reaching end of support milestone need to be investigated and resolved for each affected device.');
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
+       
 
     } else if (inccategory == 'hardware_lifecycle' && incsubcat == 'current_milestone') {
         g_form.setValue('description', 'The impact of unsupported hardware need to be investigated and resolved for each affected device.');
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
+       
 
     } else if (inccategory == 'hardware_lifecycle' && incsubcat == 'next_milestone') {
         g_form.setValue('description', 'The impact of hardware reaching end of support milestone need to be investigated and resolved for each affected device.');
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
+     
 
     } else if (inccategory == 'syslogs' && incsubcat == 'syslog_severity') {
         g_form.setValue('description', 'The syslog analysis need to be performed to determine the impact to the devices identified with high severity syslogs.');
         g_form.setValue('short_description', "Devices with syslog severity concerns");
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
+ 
 
     } else if (inccategory == 'syslogs' && incsubcat == 'reviewed_syslog_severity') {
         g_form.setValue('description', 'The reviewed syslog need to be examined for the identified devices.');
         g_form.setValue('short_description', "Devices with reviewed syslog severity concerns");
-        g_form.setValue('service_offering', "50187db487b1d110a9c07f59dabb3543");
+      
     }
 }]]></script>
         <sys_class_name>sys_script_client</sys_class_name>
@@ -69,7 +68,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>e572ddc797bd5110fa64f0f6f053afcf</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>Populate incident fields</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -77,7 +76,7 @@
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_client_e572ddc797bd5110fa64f0f6f053afcf</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-12 10:33:04</sys_updated_on>
+        <sys_updated_on>2022-11-11 11:39:46</sys_updated_on>
         <table>incident</table>
         <type>onChange</type>
         <ui_type>10</ui_type>

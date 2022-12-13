@@ -2,7 +2,7 @@
     <sys_properties action="INSERT_OR_UPDATE">
         <choices/>
         <description>Retention period of data in queue table. Default set to 1 = 1 day.</description>
-        <ignore_cache>false</ignore_cache>
+        <ignore_cache>true</ignore_cache>
         <is_private>false</is_private>
         <name>x_caci_cisco_bcs.retention.period</name>
         <read_roles>x_caci_cisco_bcs.cisco_bcs_admin,admin,x_caci_cisco_bcs.cisco_bcs_user</read_roles>
@@ -11,14 +11,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-27 06:51:05</sys_created_on>
         <sys_id>5f8cb56adb882010083e29464896190f</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>x_caci_cisco_bcs.retention.period</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_properties_5f8cb56adb882010083e29464896190f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-02 14:03:07</sys_updated_on>
+        <sys_updated_on>2022-11-10 10:44:23</sys_updated_on>
         <type>integer</type>
         <value>1</value>
         <write_roles>x_caci_cisco_bcs.cisco_bcs_admin,admin,x_caci_cisco_bcs.cisco_bcs_user</write_roles>

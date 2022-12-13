@@ -2,7 +2,7 @@
     <sys_ui_related sys_domain="global" table="x_caci_cisco_bcs_cisco_sw_track_maintenance_upgrade_compliance" version="2" view="">
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco SW Track Maintenance Upgrade Compliance - Default view" name="x_caci_cisco_bcs_cisco_sw_track_maintenance_upgrade_compliance" related_list="NULL" sys_domain="global" view="Default view">64e6b197972241108986fef3a253af32</list_id>
+            <list_id display_value="SW Track Maintenance Upgrade Compliance - Default view" name="x_caci_cisco_bcs_cisco_sw_track_maintenance_upgrade_compliance" related_list="NULL" sys_domain="global" view="Default view">64e6b197972241108986fef3a253af32</list_id>
             <order_by/>
             <position>0</position>
             <related_list>REL:92567597972241108986fef3a253afd7</related_list>
@@ -15,7 +15,7 @@
             <sys_updated_on>2022-04-04 13:19:42</sys_updated_on>
         </sys_ui_related_list_entry>
         <sys_ui_related_list action="INSERT_OR_UPDATE">
-            <calculated_name>Cisco SW Track Maintenance Upgrade Compliance - Default view</calculated_name>
+            <calculated_name>SW Track Maintenance Upgrade Compliance - Default view</calculated_name>
             <filter/>
             <name>x_caci_cisco_bcs_cisco_sw_track_maintenance_upgrade_compliance</name>
             <order_by/>

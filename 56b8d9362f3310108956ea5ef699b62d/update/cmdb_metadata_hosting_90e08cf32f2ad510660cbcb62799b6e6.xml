@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="cmdb_metadata_hosting">
+    <cmdb_metadata_hosting action="INSERT_OR_UPDATE">
+        <child_type>cmdb_ci_ip_switch</child_type>
+        <is_reverse>false</is_reverse>
+        <parent_type>cmdb_ci_logical_datacenter</parent_type>
+        <rel_type display_value="Hosted on::Hosts">5f985e0ec0a8010e00a9714f2a172815</rel_type>
+        <sys_class_name>cmdb_metadata_hosting</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-21 14:12:15</sys_created_on>
+        <sys_id>90e08cf32f2ad510660cbcb62799b6e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>5f985e0ec0a8010e00a9714f2a172815</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>cmdb_metadata_hosting_90e08cf32f2ad510660cbcb62799b6e6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 14:12:15</sys_updated_on>
+    </cmdb_metadata_hosting>
+</record_update>

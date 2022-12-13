@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="CBP Rules" max_length="40" name="x_caci_cisco_bcs_cisco_cbp_rules" sizeclass="500" type="collection">
+        <element label="Caveat" max_length="500" name="bp_caveat" type="string"/>
+        <element label="Corrective Action" max_length="20000" name="bp_corrective_action" type="string"/>
+        <element label="Description" max_length="20000" name="bp_description" type="string"/>
+        <element label="Nugget ID" max_length="255" name="bp_nugget_id" type="string"/>
+        <element label="Primary Technology" max_length="500" name="bp_primary_technology" type="string"/>
+        <element label="Recommendation" max_length="25000" name="bp_recommendation" type="string"/>
+        <element label="Risk" max_length="255" name="bp_risk" type="string"/>
+        <element label="Rule ID" max_length="255" name="bp_rule_id" type="string"/>
+        <element label="Secondary Technology" max_length="500" name="bp_secondary_technology" type="string"/>
+        <element label="Title" max_length="1000" name="bp_title" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="CBP Summary" max_length="32" name="cbp_summary" reference="x_caci_cisco_bcs_cisco_cbp_summary" type="reference"/>
+        <element label="Create Date" max_length="255" name="create_date" type="string"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="255" name="isdeleted" type="boolean"/>
+        <element label="SW Type" max_length="255" name="sw_type" type="string"/>
+        <element label="Update Date" max_length="500" name="update_date" type="string"/>
+        <index name="index">
+            <element name="cbp_summary"/>
+        </index>
+    </element>
+</database>

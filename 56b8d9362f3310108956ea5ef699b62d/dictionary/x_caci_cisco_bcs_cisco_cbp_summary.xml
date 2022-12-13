@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Configuration Best Practices" max_length="40" name="x_caci_cisco_bcs_cisco_cbp_summary" sizeclass="500" type="collection">
+        <element label="Nugget ID" max_length="255" name="bp_nugget_id" type="string"/>
+        <element label="Primary Technology" max_length="500" name="bp_primary_technology" type="string"/>
+        <element label="Risk" max_length="500" name="bp_risk" type="string"/>
+        <element display="true" label="Rule ID" max_length="255" name="bp_rule_id" type="string"/>
+        <element label="Secondary Technology" max_length="500" name="bp_secondary_technology" type="string"/>
+        <element label="Title" max_length="1000" name="bp_title" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="CBP Rule" max_length="32" name="cbp_rule" reference="x_caci_cisco_bcs_cisco_cbp_rules" type="reference"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Incident Reference" max_length="4000" name="incident_reference" reference="incident" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="255" name="isdeleted" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;&#10;&#9;var count = 0;&#10;&#9;var ref = new GlideRecord(&quot;x_caci_cisco_bcs_cbp_rules_references&quot;);&#10;&#9;ref.addQuery(&quot;bp_rule_id&quot;,current.bp_rule_id);&#10;&#9;ref.query();&#10;&#9;while(ref.next())&#10;&#9;&#9;count++;&#10;&#9;&#10;&#9;return count;  // return the calculated value&#10;&#10;})(current);" label="# Cisco.com References" max_length="40" name="rule_references" type="integer"/>
+        <element label="SW Type" max_length="255" name="sw_type" type="string"/>
+        <element label="Total Devices" max_length="255" name="total_devices" type="string"/>
+        <index name="index">
+            <element name="cbp_rule"/>
+        </index>
+    </element>
+</database>

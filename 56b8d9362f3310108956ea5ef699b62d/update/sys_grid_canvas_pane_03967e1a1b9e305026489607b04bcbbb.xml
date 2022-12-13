@@ -2,7 +2,7 @@
     <sys_grid_canvas_pane action="INSERT_OR_UPDATE">
         <grid_canvas display_value="PA Cisco BCS Dashboard - New Tab">fa963a1a1b9e305026489607b04bcb90</grid_canvas>
         <height>15</height>
-        <portal_widget display_value="Created 2021-09-02 01:57:21">03967e1a1b9e305026489607b04bcbab</portal_widget>
+        <portal_widget display_value="">03967e1a1b9e305026489607b04bcbab</portal_widget>
         <posx>0</posx>
         <posy>0</posy>
         <sys_class_name>sys_grid_canvas_pane</sys_class_name>

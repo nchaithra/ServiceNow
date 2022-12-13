@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Contract Lifecycle Dump V2" max_length="40" name="x_caci_cisco_bcs_cisco_contract_lifecycle_dump_v2" sizeclass="0" type="collection">
+        <element label="baseProductId" max_length="255" name="baseproductid" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="baseProductIdList" max_length="20000" name="baseproductidlist" type="glide_list"/>
+        <element label="contractSiteAddress" max_length="500" name="contractsiteaddress" type="string"/>
+        <element label="contractSiteCity" max_length="500" name="contractsitecity" type="string"/>
+        <element label="contractSiteCountry" max_length="500" name="contractsitecountry" type="string"/>
+        <element label="contractSiteCustomerName" max_length="500" name="contractsitecustomername" type="string"/>
+        <element label="contractSiteStateProvince" max_length="500" name="contractsitestateprovince" type="string"/>
+        <element label="coveredProductLineEndDate" max_length="255" name="coveredproductlineenddate" type="glide_date"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="isCovered" max_length="40" name="iscovered" type="string"/>
+        <element label="itemDescription" max_length="255" name="itemdescription" type="string"/>
+        <element label="itemPosition" max_length="20000" name="itemposition" type="string"/>
+        <element label="itemType" max_length="255" name="itemtype" type="string"/>
+        <element label="orderableProductId" max_length="20000" name="orderableproductid" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="orderableProductIdList" max_length="20000" name="orderableproductidlist" type="glide_list"/>
+        <element label="parentSerialNumber" max_length="255" name="parentserialnumber" type="string"/>
+        <element label="pillarCode" max_length="255" name="pillarcode" type="string"/>
+        <element label="serialNumber" max_length="500" name="serialnumber" type="string"/>
+        <element label="serviceContractNumber" max_length="500" name="servicecontractnumber" type="string"/>
+        <element label="serviceLineDescription" max_length="1000" name="servicelinedescription" type="string"/>
+        <element label="warrantyEndDate" max_length="255" name="warrantyenddate" type="glide_date"/>
+        <element label="warrantyType" max_length="500" name="warrantytype" type="string"/>
+        <element label="warrantyTypeDescription" max_length="255" name="warrantytypedescription" type="string"/>
+    </element>
+</database>

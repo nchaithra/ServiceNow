@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Assets" max_length="40" name="x_caci_cisco_bcs_cisco_assets" sizeclass="1500" type="collection">
+        <element label="Chassis Name" max_length="40" name="chassis_name" type="string"/>
+        <element label="Cisco Support Eligible" max_length="255" name="cisco_support_eligible" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false,readonly_clickthrough=true" label="CMDB" max_length="32" name="cmdb" reference="cmdb_ci" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Contract" max_length="32" name="contract" reference="x_caci_cisco_bcs_cisco_contract_lifecycle" type="reference"/>
+        <element label="Contract End Date" max_length="255" name="contract_end_date" type="glide_date_time"/>
+        <element label="Contract Number" max_length="255" name="contract_number" type="string"/>
+        <element label="Contract Status" max_length="255" name="contract_status" type="string"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Device" max_length="32" name="deviceid_ref" reference="x_caci_cisco_bcs_cisco_devices" type="reference"/>
+        <element label="Device ID" max_length="255" name="device_id" type="string"/>
+        <element label="Device name" max_length="255" name="device_name" type="string"/>
+        <element label="Name" max_length="255" name="display_name" type="string"/>
+        <element label="Expired status" max_length="255" name="expired_status" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Field Notice" max_length="32" name="field_notice" reference="x_caci_cisco_bcs_cisco_field_notices" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Hardware Lifecycle" max_length="40" name="hweox" reference="x_caci_cisco_bcs_cisco_hardware_lifecycle" type="reference"/>
+        <element label="HW Rev" max_length="255" name="hw_rev" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Incident Reference" max_length="4000" name="incident_reference" reference="incident" type="glide_list"/>
+        <element label="Installed Flash" max_length="255" name="installed_flash" type="string"/>
+        <element label="Installed Memory" max_length="255" name="installed_memory" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="255" name="isdeleted" type="boolean"/>
+        <element label="PCB" max_length="255" name="pcb" type="string"/>
+        <element label="PCB REV" max_length="255" name="pcb_rev" type="string"/>
+        <element label="Physical Element ID" max_length="255" name="physical_element_id" type="string"/>
+        <element label="Physical Sub Type" max_length="255" name="physical_sub_type" type="string"/>
+        <element label="Physical Type" max_length="255" name="physical_type" type="string"/>
+        <element label="Product Family" max_length="255" name="product_family" type="string"/>
+        <element label="Product ID" max_length="255" name="product_id" type="string"/>
+        <element label="Product Type" max_length="255" name="product_type" type="string"/>
+        <element display="true" label="Serial number" max_length="255" name="serial_number" type="string"/>
+        <element label="Serial Number Status" max_length="255" name="serial_number_status" type="string"/>
+        <element label="Slot" max_length="255" name="slot" type="string"/>
+        <element label="SW Version" max_length="255" name="sw_version" type="string"/>
+        <element label="Tan" max_length="40" name="tan" type="string"/>
+        <element label="Tan REV" max_length="40" name="tan_rev" type="string"/>
+        <element label="Warranty Status" max_length="40" name="warranty_status" type="string"/>
+        <index name="index">
+            <element name="contract"/>
+        </index>
+        <index name="index2">
+            <element name="cmdb"/>
+        </index>
+        <index name="index3">
+            <element name="field_notice"/>
+        </index>
+        <index name="index4">
+            <element name="deviceid_ref"/>
+        </index>
+        <index name="index5">
+            <element name="hweox"/>
+        </index>
+    </element>
+</database>

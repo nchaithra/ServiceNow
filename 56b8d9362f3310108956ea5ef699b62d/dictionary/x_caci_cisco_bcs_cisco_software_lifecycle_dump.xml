@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Software Lifecycle Dump" max_length="40" name="x_caci_cisco_bcs_cisco_software_lifecycle_dump" sizeclass="0" type="collection">
+        <element label="Currenteoxmilestone" max_length="255" name="currenteoxmilestone" type="string"/>
+        <element label="currenteoxmilestonedate" max_length="255" name="currenteoxmilestonedate" type="glide_date_time"/>
+        <element label="deviceid" max_length="255" name="deviceid" type="string"/>
+        <element label="devicename" max_length="500" name="devicename" type="string"/>
+        <element label="nexteoxmilestone" max_length="500" name="nexteoxmilestone" type="string"/>
+        <element label="nexteoxmilestonedate" max_length="255" name="nexteoxmilestonedate" type="glide_date_time"/>
+        <element label="sweoxid" max_length="255" name="sweoxid" type="string"/>
+        <element label="swtype" max_length="255" name="swtype" type="string"/>
+        <element label="swversion" max_length="500" name="swversion" type="string"/>
+    </element>
+</database>

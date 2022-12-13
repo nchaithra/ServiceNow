@@ -53,7 +53,7 @@
             <name>x_caci_cisco_bcs_cisco_device_reset_history_rel</name>
             <parent>x_caci_cisco_bcs_device_reset_details</parent>
             <position/>
-            <relationship display_value="Cisco Risk reset History">936d9e55976a01108986fef3a253afa2</relationship>
+            <relationship display_value="Risk reset History">936d9e55976a01108986fef3a253afa2</relationship>
             <sum>false</sum>
             <sys_class_name>sys_ui_list</sys_class_name>
             <sys_created_by>admin</sys_created_by>

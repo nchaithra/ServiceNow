@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="DELETE">
+        <operation>execute</operation>
+        <source_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-16 08:34:33</sys_created_on>
+        <sys_id>d5dc28002fd35950660cbcb62799b63b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sys_choices</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_scope_privilege_d5dc28002fd35950660cbcb62799b63b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-16 08:34:33</sys_updated_on>
+        <target_name>sys_choices</target_name>
+        <target_scope display_value="Global">global</target_scope>
+        <target_type>scriptable</target_type>
+    </sys_scope_privilege>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_scope_privilege_d5dc28002fd35950660cbcb62799b63b</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege"><sys_scope_privilege action="INSERT_OR_UPDATE"><operation>execute</operation><source_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</source_scope><status>allowed</status><sys_class_name>sys_scope_privilege</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-11-16 08:34:33</sys_created_on><sys_id>d5dc28002fd35950660cbcb62799b63b</sys_id><sys_mod_count>0</sys_mod_count><sys_name>sys_choices</sys_name><sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package><sys_policy/><sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope><sys_update_name>sys_scope_privilege_d5dc28002fd35950660cbcb62799b63b</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-11-16 08:34:33</sys_updated_on><target_name>sys_choices</target_name><target_scope display_value="Global">global</target_scope><target_type>scriptable</target_type></sys_scope_privilege></record_update>]]></payload>
+        <payload_hash>-110091097</payload_hash>
+        <record_name>sys_choices</record_name>
+        <reverted_from/>
+        <source>e9a473322fa29110660cbcb62799b6d9</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-16 08:34:33</sys_created_on>
+        <sys_id>baec68cc2f935950660cbcb62799b6ff</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1847f9356610000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-16 08:34:33</sys_updated_on>
+        <type>Cross scope privilege</type>
+        <update_guid>b2ec68cc98935950f665589e727f3dff</update_guid>
+        <update_guid_history>b2ec68cc98935950f665589e727f3dff:-110091097</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-16 11:49:12</sys_created_on>
+        <sys_db_object display_value="" name="sys_scope_privilege">sys_scope_privilege</sys_db_object>
+        <sys_id>aa9fdc5439ca48cc89fe45fb651457d9</sys_id>
+        <sys_metadata>d5dc28002fd35950660cbcb62799b63b</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sys_choices</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_scope_privilege_d5dc28002fd35950660cbcb62799b63b</sys_update_name>
+        <sys_update_version display_value="sys_scope_privilege_d5dc28002fd35950660cbcb62799b63b">baec68cc2f935950660cbcb62799b6ff</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-16 11:49:12</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

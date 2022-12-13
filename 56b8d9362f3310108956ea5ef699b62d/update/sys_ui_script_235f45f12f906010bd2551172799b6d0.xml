@@ -3,6 +3,7 @@
         <active>true</active>
         <description/>
         <global>false</global>
+        <ignore_in_now_experience>false</ignore_in_now_experience>
         <name>x_caci_cisco_bcs.Cisco_RenderGraph</name>
         <script><![CDATA[var x_caci_cisco_bcs = x_caci_cisco_bcs || {};
 

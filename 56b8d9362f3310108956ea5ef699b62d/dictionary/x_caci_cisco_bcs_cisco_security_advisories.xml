@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Security Advisories" max_length="40" name="x_caci_cisco_bcs_cisco_security_advisories" sizeclass="10845" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Device" max_length="32" name="deviceid_ref" reference="x_caci_cisco_bcs_cisco_devices" type="reference"/>
+        <element label="Device ID" max_length="255" name="device_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="255" name="isdeleted" type="boolean"/>
+        <element label="Match Confidence" max_length="500" name="match_confidence" type="string"/>
+        <element label="Match Confidence Reason" max_length="2000" name="match_confidence_reason" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Potentially vulnerable devices" max_length="40" name="potentially_vulnerable_devices" type="integer"/>
+        <element display="true" label="Security Advisory ID" max_length="255" name="psirt_cold_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Security Advisory Bulletins" max_length="32" name="psirt_cold_id_ref" reference="x_caci_cisco_bcs_cisco_security_advisories_bulletins" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" label="Vulnerable devices" max_length="40" name="vulnerable_devices" type="integer"/>
+        <index name="index">
+            <element name="deviceid_ref"/>
+        </index>
+        <index name="index2">
+            <element name="psirt_cold_id_ref"/>
+        </index>
+    </element>
+</database>

@@ -128,7 +128,7 @@
             <name>x_caci_cisco_bcs_cisco_syslog_daily</name>
             <parent>x_caci_cisco_bcs_cisco_devices</parent>
             <position/>
-            <relationship display_value="Cisco Syslog">b8a9965e97ee01108986fef3a253afb8</relationship>
+            <relationship display_value="Syslogs">b8a9965e97ee01108986fef3a253afb8</relationship>
             <sum>false</sum>
             <sys_class_name>sys_ui_list</sys_class_name>
             <sys_created_by>admin</sys_created_by>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Assets Dump" max_length="40" name="x_caci_cisco_bcs_cisco_assets_dump" sizeclass="0" type="collection">
+        <element label="chassisname" max_length="255" name="chassisname" type="string"/>
+        <element label="deviceid" max_length="255" name="deviceid" type="string"/>
+        <element label="devicename" max_length="255" name="devicename" type="string"/>
+        <element label="hwrev" max_length="255" name="hwrev" type="string"/>
+        <element label="installedflash" max_length="255" name="installedflash" type="string"/>
+        <element label="installedmemory" max_length="255" name="installedmemory" type="string"/>
+        <element label="pcb" max_length="255" name="pcb" type="string"/>
+        <element label="pcbrev" max_length="255" name="pcbrev" type="string"/>
+        <element label="physicalelementid" max_length="255" name="physicalelementid" type="string"/>
+        <element label="physicalsubtype" max_length="500" name="physicalsubtype" type="string"/>
+        <element label="physicaltype" max_length="500" name="physicaltype" type="string"/>
+        <element label="productfamily" max_length="500" name="productfamily" type="string"/>
+        <element label="productid" max_length="255" name="productid" type="string"/>
+        <element label="producttype" max_length="500" name="producttype" type="string"/>
+        <element label="serialnumber" max_length="255" name="serialnumber" type="string"/>
+        <element label="serialnumberstatus" max_length="255" name="serialnumberstatus" type="string"/>
+        <element label="slot" max_length="255" name="slot" type="string"/>
+        <element label="swversion" max_length="500" name="swversion" type="string"/>
+        <element label="tan" max_length="255" name="tan" type="string"/>
+        <element label="tanrev" max_length="255" name="tanrev" type="string"/>
+    </element>
+</database>

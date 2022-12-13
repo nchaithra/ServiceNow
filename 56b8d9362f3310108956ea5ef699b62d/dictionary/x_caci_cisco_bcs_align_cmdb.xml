@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Align CMDB " max_length="40" name="x_caci_cisco_bcs_align_cmdb" sizeclass="5" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" dependent="asset_ref" dependent_on_field="asset_ref" label="Asset Filter" max_length="4000" name="asset" type="conditions" use_dependent_field="true">
+            <choice/>
+        </element>
+        <element attributes="base_start=true,edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;&#10;&#9;// Add your code here&#10;&#9;return 'x_caci_cisco_bcs_cisco_assets';  // return the calculated value&#10;&#10;})(current);" label="Asset_ref" max_length="80" name="asset_ref" type="table_name" virtual="true"/>
+        <element attributes="edge_encryption_enabled=true" choice="1" label="CI Type" mandatory="true" max_length="40" name="ci_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Device" sequence="10" value="device"/>
+                <element inactive_on_update="false" label="Asset" sequence="20" value="asset"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" calculation="(function calculatedFieldValue(current) {&#10;&#10;&#9;// Add your code here&#10;&#9;return 'sys_class_name';  // return the calculated value&#10;&#10;})(current);" choice="1" choice_field="access" choice_table="sys_db_object" default="07de56cfa9223010c0a065f439e6615e" label="CMDB Class" mandatory="true" max_length="80" name="cmdb_class" reference="sys_db_object" reference_qual="javascript: new global.Cisco_CMDBUTIL().getClass();" type="reference" use_reference_qualifier="advanced">
+            <choice>
+                <element inactive_on_update="false" label="All application scopes" sequence="0" value="public"/>
+                <element inactive_on_update="false" label="This application scope only" sequence="1" value="package_private"/>
+            </choice>
+        </element>
+        <element attributes="edge_encryption_enabled=true" choice="1" dependent="device_ref" dependent_on_field="device_ref" label="Device Filter" max_length="4000" name="device" type="conditions" use_dependent_field="true">
+            <choice/>
+        </element>
+        <element attributes="base_start=true,edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;&#10;&#9;// Add your code here&#10;&#9;return 'x_caci_cisco_bcs_cisco_devices';  // return the calculated value&#10;&#10;})(current);" label="Device_ref" max_length="80" name="device_ref" type="table_name" virtual="true"/>
+        <element label="Mapped Data" max_length="1000" name="mapped_data" type="string"/>
+        <element label="Primary Key" max_length="1000" name="primary_key" type="string"/>
+        <index name="index">
+            <element name="cmdb_class"/>
+        </index>
+    </element>
+</database>

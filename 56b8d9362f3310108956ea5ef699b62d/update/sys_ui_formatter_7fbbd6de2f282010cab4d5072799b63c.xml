@@ -4,6 +4,7 @@
         <angular_module/>
         <formatter>Cisco BCS logo</formatter>
         <name>Cisco_logo_Sw_Eox</name>
+        <seismic_component/>
         <sys_class_name>sys_ui_formatter</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-11-20 10:59:31</sys_created_on>

@@ -2,7 +2,7 @@
     <sys_ui_related sys_domain="global" table="x_caci_cisco_bcs_cisco_devices" version="2" view="">
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
+            <list_id display_value="Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
             <order_by/>
             <position>0</position>
             <related_list>x_caci_cisco_bcs_cisco_assets.deviceid_ref</related_list>
@@ -16,7 +16,7 @@
         </sys_ui_related_list_entry>
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
+            <list_id display_value="Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
             <order_by/>
             <position>1</position>
             <related_list>REL:c8633c7d2fa86010bd2551172799b6d9</related_list>
@@ -30,7 +30,7 @@
         </sys_ui_related_list_entry>
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
+            <list_id display_value="Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
             <order_by/>
             <position>2</position>
             <related_list>REL:e7386cb12f686010bd2551172799b675</related_list>
@@ -44,7 +44,7 @@
         </sys_ui_related_list_entry>
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
+            <list_id display_value="Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
             <order_by/>
             <position>3</position>
             <related_list>REL:38dca5e20734e4102001f1e08c1ed017</related_list>
@@ -58,7 +58,7 @@
         </sys_ui_related_list_entry>
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
+            <list_id display_value="Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
             <order_by/>
             <position>4</position>
             <related_list>REL:d98e7d44db492010762f85184b961905</related_list>
@@ -72,7 +72,7 @@
         </sys_ui_related_list_entry>
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
+            <list_id display_value="Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
             <order_by/>
             <position>5</position>
             <related_list>REL:8f56060cdb492010762f85184b96196d</related_list>
@@ -86,7 +86,7 @@
         </sys_ui_related_list_entry>
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
+            <list_id display_value="Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
             <order_by/>
             <position>6</position>
             <related_list>REL:8447c582972241108986fef3a253af0b</related_list>
@@ -100,7 +100,7 @@
         </sys_ui_related_list_entry>
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
+            <list_id display_value="Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
             <order_by/>
             <position>7</position>
             <related_list>REL:2db94586972241108986fef3a253af1a</related_list>
@@ -114,7 +114,7 @@
         </sys_ui_related_list_entry>
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
+            <list_id display_value="Devices - Default view" name="x_caci_cisco_bcs_cisco_devices" related_list="NULL" sys_domain="global" view="Default view">acba9e8407162010efa6fc018c1ed01e</list_id>
             <order_by/>
             <position>8</position>
             <related_list>REL:b8a9965e97ee01108986fef3a253afb8</related_list>
@@ -127,7 +127,7 @@
             <sys_updated_on>2022-05-26 06:17:17</sys_updated_on>
         </sys_ui_related_list_entry>
         <sys_ui_related_list action="INSERT_OR_UPDATE">
-            <calculated_name>Cisco Devices - Default view</calculated_name>
+            <calculated_name>Devices - Default view</calculated_name>
             <filter/>
             <name>x_caci_cisco_bcs_cisco_devices</name>
             <order_by/>

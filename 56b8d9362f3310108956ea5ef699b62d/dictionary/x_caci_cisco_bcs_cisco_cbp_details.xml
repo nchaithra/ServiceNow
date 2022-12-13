@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="CBP Details" max_length="40" name="x_caci_cisco_bcs_cisco_cbp_details" sizeclass="4393" type="collection">
+        <element label="BP Nugget ID" max_length="255" name="bp_nugget_id" type="string"/>
+        <element label="BP Rule ID" max_length="255" name="bp_rule_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="CBP Rule" max_length="32" name="cbp_rule" reference="x_caci_cisco_bcs_cisco_cbp_rules" type="reference"/>
+        <element label="Config Source" max_length="500" name="config_source" type="string"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Device" max_length="32" name="device" reference="x_caci_cisco_bcs_cisco_devices" type="reference"/>
+        <element label="Device ID" max_length="255" name="device_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="255" name="isdeleted" type="boolean"/>
+        <index name="index">
+            <element name="cbp_rule"/>
+        </index>
+        <index name="index2">
+            <element name="device"/>
+        </index>
+    </element>
+</database>

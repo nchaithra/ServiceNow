@@ -191,7 +191,7 @@
         <sys_mod_count>203</sys_mod_count>
         <sys_name>Vulnerabilities</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
-        <sys_policy>protected</sys_policy>
+        <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>content_block_programmatic_14898fc12f102010bd2551172799b647</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>

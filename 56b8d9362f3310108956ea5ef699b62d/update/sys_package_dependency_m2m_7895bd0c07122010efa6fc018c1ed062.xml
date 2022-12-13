@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
     <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
-        <dependency display_value="Contract Management" source="com.snc.contract_management">476ce8f11b26201026489607b04bcb68</dependency>
+        <dependency display_value="Contract Management" source="com.snc.contract_management">280a40bd21920110a866589604c20dc9</dependency>
         <min_version>1.0.0</min_version>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-12-23 05:25:46</sys_created_on>

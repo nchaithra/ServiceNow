@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Devices" max_length="40" name="x_caci_cisco_bcs_cisco_devices" sizeclass="322" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="CBP Details" max_length="32" name="cbp_details" reference="x_caci_cisco_bcs_cisco_cbp_details" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false,readonly_clickthrough=true" label="CMDB" max_length="32" name="cmdb" reference="cmdb_ci" type="reference"/>
+        <element label="Collector" max_length="40" name="collector" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Configuration Best Practices" max_length="40" name="configuration_guidelines" type="integer"/>
+        <element label="Config Register" max_length="40" name="config_register" type="string"/>
+        <element label="Config Status" max_length="40" name="config_status" type="string"/>
+        <element label="Config Time" max_length="40" name="config_time" type="glide_date_time"/>
+        <element label="Create Date" max_length="40" name="create_date" type="glide_date_time"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Asset" max_length="32" name="device_asset_ref" reference="x_caci_cisco_bcs_cisco_assets" type="reference"/>
+        <element display="true" label="Device ID" max_length="40" name="device_id" type="string"/>
+        <element label="Device IP" max_length="40" name="device_ip" type="string"/>
+        <element label="Device Status" max_length="40" name="device_status" type="string"/>
+        <element label="Device Sys Name" max_length="40" name="device_sys_name" type="string"/>
+        <element label="Device Type" max_length="40" name="device_type" type="string"/>
+        <element label="Device URL" max_length="1000" name="device_url" type="url"/>
+        <element label="Feature Set Description" max_length="40" name="feature_set_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Field Notice" max_length="32" name="field_notice" reference="x_caci_cisco_bcs_cisco_field_notices" type="reference"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Hardware Lifecycle" max_length="32" name="hweox" reference="x_caci_cisco_bcs_cisco_hardware_lifecycle" type="reference"/>
+        <element label="Image Name" max_length="40" name="image_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Incident Reference" max_length="1024" name="incident_reference" reference="incident" type="glide_list"/>
+        <element label="Inseed File" max_length="40" name="inseed_file" type="string"/>
+        <element label="Inventory Status" max_length="40" name="inventory_status" type="string"/>
+        <element label="Inventory Time" max_length="40" name="inventory_time" type="glide_date_time"/>
+        <element label="IP Address" max_length="40" name="ip_address" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element label="Last Reset" max_length="40" name="last_reset" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Messagetype" max_length="1024" name="messagetype" reference="x_caci_cisco_bcs_cisco_syslog_daily" type="glide_list"/>
+        <element label="Device Name" max_length="40" name="name" type="string"/>
+        <element label="Object ID" max_length="40" name="object_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Potentially Vulnerable Field Notices" max_length="40" name="potentially_vulnerable_field_notices" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Potentially Vulnerable Security Advisories" max_length="40" name="potentially_vulnerable_security_advisories" type="integer"/>
+        <element label="Importance" max_length="255" name="predictedimportance" type="string"/>
+        <element label="Role" max_length="255" name="predictedrole" type="string"/>
+        <element label="Product Family" max_length="40" name="product_family" type="string"/>
+        <element label="Product ID" max_length="40" name="product_id" type="string"/>
+        <element label="Product Type" max_length="40" name="product_type" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Security Advisory" max_length="32" name="psirt_cold_id" reference="x_caci_cisco_bcs_cisco_security_advisories" type="reference"/>
+        <element label="Reset Reason" max_length="40" name="reset_reason" type="string"/>
+        <element label="Crash Risk Category" max_length="200" name="riskcategory" type="string"/>
+        <element label="Description" max_length="2500" name="short_description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Softwaretrackid" max_length="40" name="softwaretrackid" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Software Lifecycle" max_length="32" name="sweox" reference="x_caci_cisco_bcs_cisco_software_lifecycle" type="reference"/>
+        <element label="SW Type" max_length="40" name="sw_type" type="string"/>
+        <element label="SW Version" max_length="40" name="sw_version" type="string"/>
+        <element label="Sys Contact" max_length="40" name="sys_contact" type="string"/>
+        <element label="Sys Location" max_length="40" name="sys_location" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Total # of events" max_length="40" name="totaleventcount" type="integer"/>
+        <element label="User Field 1" max_length="40" name="user_field_1" type="string"/>
+        <element label="User Field 2" max_length="40" name="user_field_2" type="string"/>
+        <element label="User Field 3" max_length="40" name="user_field_3" type="string"/>
+        <element label="User Field 4" max_length="40" name="user_field_4" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Vulnerable Field Notices" max_length="40" name="vulnerable_field_notices" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Vulnerable Security Advisories" max_length="40" name="vulnerable_security_advisories" type="integer"/>
+        <index name="index">
+            <element name="cbp_details"/>
+        </index>
+        <index name="index2">
+            <element name="cmdb"/>
+        </index>
+        <index name="index3">
+            <element name="device_asset_ref"/>
+        </index>
+        <index name="index4">
+            <element name="sweox"/>
+        </index>
+        <index name="index5">
+            <element name="field_notice"/>
+        </index>
+        <index name="index6">
+            <element name="psirt_cold_id"/>
+        </index>
+        <index name="index7">
+            <element name="hweox"/>
+        </index>
+    </element>
+</database>

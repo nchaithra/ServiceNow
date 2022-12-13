@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Risk Mitigation Details" max_length="40" name="x_caci_cisco_bcs_cisco_risk_mitigation_details" sizeclass="78" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Device Id" max_length="500" name="deviceid" type="string"/>
+        <element label="Device Ip" max_length="2000" name="deviceip" type="string"/>
+        <element label="Device Name" max_length="2000" name="devicename" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element label="Product Family" max_length="2000" name="productfamily" type="string"/>
+        <element label="Product Id" max_length="2000" name="productid" type="string"/>
+        <element label="Risk Category" max_length="2000" name="riskcategory" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Risk Score" max_length="255" name="riskscore" type="float"/>
+        <element label="Software Type" max_length="2000" name="softwaretype" type="string"/>
+        <element label="Software Version" max_length="1000" name="softwareversion" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>Allow write for records in sysauto_script, for users with role x_caci_cisco_bcs.cisco_bcs_admin.</description>
+        <name>sysauto_script</name>
+        <operation display_value="write">write</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-25 18:15:08</sys_created_on>
+        <sys_id>3a160e822f88a010bd2551172799b617</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>sysauto_script</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_security_acl_3a160e822f88a010bd2551172799b617</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-01-12 07:17:27</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_security_acl_3a160e822f88a010bd2551172799b617</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><condition/><description>Allow write for records in sysauto_script, for users with role x_caci_cisco_bcs.cisco_bcs_admin.</description><name>sysauto_script</name><operation display_value="write">write</operation><script/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2020-10-25 18:15:08</sys_created_on><sys_id>3a160e822f88a010bd2551172799b617</sys_id><sys_mod_count>3</sys_mod_count><sys_name>sysauto_script</sys_name><sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package><sys_policy/><sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope><sys_update_name>sys_security_acl_3a160e822f88a010bd2551172799b617</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2021-01-12 07:17:27</sys_updated_on><type display_value="record">record</type></sys_security_acl></record_update>]]></payload>
+        <payload_hash>1644971965</payload_hash>
+        <record_name>sysauto_script</record_name>
+        <reverted_from/>
+        <source>c0e7e3fe2f229110660cbcb62799b692</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:31:08</sys_created_on>
+        <sys_id>90b82bb22f629110660cbcb62799b62e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183ee826ca40000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-19 04:31:08</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>ff45a65f8861a0104fe94f06f196c13c</update_guid>
+        <update_guid_history>ff45a65f8861a0104fe94f06f196c13c:-192297088,408452df2821a0106dd312bc0ccd541b:-585808708,2c0b6192bd2820101fcd17e8d90aa96e:-192297088</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-11 07:13:31</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>202fd1e9f7654afa86df3bd6c044d6a4</sys_id>
+        <sys_metadata>3a160e822f88a010bd2551172799b617</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sysauto_script</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent display_value="sysauto_script">46b5887121120110a866589604c20dae</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_security_acl_3a160e822f88a010bd2551172799b617</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_3a160e822f88a010bd2551172799b617">90b82bb22f629110660cbcb62799b62e</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-11 07:13:31</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

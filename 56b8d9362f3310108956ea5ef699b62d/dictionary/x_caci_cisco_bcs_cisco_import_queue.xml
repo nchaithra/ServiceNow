@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Import Queue" max_length="40" name="x_caci_cisco_bcs_cisco_import_queue" sizeclass="0" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="BCS" max_length="32" name="bcs" reference="x_caci_cisco_bcs_configuration" type="reference"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="Parameter" max_length="1000" name="parameter" type="string"/>
+        <element label="Payload" max_length="10000" name="payload" type="string"/>
+        <element choice="3" default="ready" label="State" max_length="1000" name="state" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Wait" sequence="0" value="wait"/>
+                <element inactive_on_update="false" label="Ready" sequence="1" value="ready"/>
+                <element inactive_on_update="false" label="In Progress" sequence="2" value="processing"/>
+                <element inactive_on_update="false" label="Completed" sequence="3" value="completed"/>
+                <element inactive_on_update="false" label="Error" sequence="4" value="error"/>
+            </choice>
+        </element>
+        <element label="Topic" max_length="1000" name="topic" type="string"/>
+        <index name="index">
+            <element name="bcs"/>
+        </index>
+    </element>
+</database>

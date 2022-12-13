@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco HW EOX Bulletins Dump V2" max_length="40" name="x_caci_cisco_bcs_cisco_hw_eox_bulletins_dump_v2" sizeclass="0" type="collection">
+        <element label="bulletinNumber" max_length="255" name="bulletinnumber" type="string"/>
+        <element label="bulletinTitle" max_length="2500" name="bulletintitle" type="string"/>
+        <element label="bulletinUrl" max_length="2500" name="bulletinurl" type="string"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="endOfLifeAnnouncementDate" max_length="40" name="endoflifeannouncementdate" type="glide_date"/>
+        <element label="endOfNewServiceAttachmentDate" max_length="40" name="endofnewserviceattachmentdate" type="glide_date"/>
+        <element label="endOfRoutineFailureAnalysisDate" max_length="40" name="endofroutinefailureanalysisdate" type="glide_date"/>
+        <element label="endOfSaleDate" max_length="40" name="endofsaledate" type="glide_date"/>
+        <element label="endOfServiceContractRenewalDate" max_length="40" name="endofservicecontractrenewaldate" type="glide_date"/>
+        <element label="endOfSoftwareMaintenanceReleasesDate" max_length="40" name="endofsoftwaremaintenancereleasesdate" type="glide_date"/>
+        <element label="endOfVulnerabilitySecuritySupportDate" max_length="40" name="endofvulnerabilitysecuritysupportdate" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="hardwareEndOfLifeId" max_length="255" name="hardwareendoflifeid" type="integer"/>
+        <element label="lastDayOfSupportDate" max_length="40" name="lastdayofsupportdate" type="glide_date"/>
+        <element label="lastShipDate" max_length="40" name="lastshipdate" type="glide_date"/>
+        <element label="productId" max_length="500" name="productid" type="string"/>
+    </element>
+</database>

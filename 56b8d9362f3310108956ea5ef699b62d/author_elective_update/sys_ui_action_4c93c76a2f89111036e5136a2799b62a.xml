@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="DELETE">
+        <action_name>create_incident</action_name>
+        <active>false</active>
+        <client>false</client>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
+        <comments/>
+        <condition/>
+        <form_action>false</form_action>
+        <form_button>false</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>false</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <hint/>
+        <isolate_script>true</isolate_script>
+        <list_action>true</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>true</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Create Incident</name>
+        <onclick>createIncident()</onclick>
+        <order>100</order>
+        <script><![CDATA[createIncident();
+
+function createIncident() {
+    //gs.info('test qwer: ' + current.sys_id + current.getTableName());
+    var gr_inc = new CreateIncidentUitl();
+    var url = gr_inc.createIncident(current.sys_id, current.getTableName(),current.customer_id);
+    action.setReturnURL(url);
+    
+
+}]]></script>
+        <show_insert>true</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-08-04 17:50:14</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4c93c76a2f89111036e5136a2799b62a</sys_id>
+        <sys_mod_count>75</sys_mod_count>
+        <sys_name>Create Incident</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_action_4c93c76a2f89111036e5136a2799b62a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-13 07:10:24</sys_updated_on>
+        <table>x_caci_cisco_bcs_device_reset_details</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_ui_action_4c93c76a2f89111036e5136a2799b62a</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_ui_action"&gt;&lt;sys_ui_action action="INSERT_OR_UPDATE"&gt;&lt;action_name&gt;create_incident&lt;/action_name&gt;&lt;active&gt;false&lt;/active&gt;&lt;client&gt;false&lt;/client&gt;&lt;client_script_v2&gt;&lt;![CDATA[function onClick(g_form) {
+
+}]]&gt;&lt;/client_script_v2&gt;&lt;comments/&gt;&lt;condition/&gt;&lt;form_action&gt;false&lt;/form_action&gt;&lt;form_button&gt;false&lt;/form_button&gt;&lt;form_button_v2&gt;false&lt;/form_button_v2&gt;&lt;form_context_menu&gt;false&lt;/form_context_menu&gt;&lt;form_link&gt;false&lt;/form_link&gt;&lt;form_menu_button_v2&gt;false&lt;/form_menu_button_v2&gt;&lt;form_style/&gt;&lt;hint/&gt;&lt;isolate_script&gt;true&lt;/isolate_script&gt;&lt;list_action&gt;true&lt;/list_action&gt;&lt;list_banner_button&gt;false&lt;/list_banner_button&gt;&lt;list_button&gt;false&lt;/list_button&gt;&lt;list_choice&gt;false&lt;/list_choice&gt;&lt;list_context_menu&gt;true&lt;/list_context_menu&gt;&lt;list_link&gt;false&lt;/list_link&gt;&lt;list_save_with_form_button&gt;false&lt;/list_save_with_form_button&gt;&lt;list_style/&gt;&lt;messages/&gt;&lt;name&gt;Create Incident&lt;/name&gt;&lt;onclick&gt;createIncident()&lt;/onclick&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[createIncident();
+
+function createIncident() {
+    //gs.info('test qwer: ' + current.sys_id + current.getTableName());
+    var gr_inc = new CreateIncidentUitl();
+    var url = gr_inc.createIncident(current.sys_id, current.getTableName(),current.customer_id);
+    action.setReturnURL(url);
+    
+
+}]]&gt;&lt;/script&gt;&lt;show_insert&gt;true&lt;/show_insert&gt;&lt;show_multiple_update&gt;false&lt;/show_multiple_update&gt;&lt;show_query&gt;false&lt;/show_query&gt;&lt;show_update&gt;true&lt;/show_update&gt;&lt;sys_class_name&gt;sys_ui_action&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2022-08-04 17:50:14&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;4c93c76a2f89111036e5136a2799b62a&lt;/sys_id&gt;&lt;sys_mod_count&gt;75&lt;/sys_mod_count&gt;&lt;sys_name&gt;Create Incident&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Cisco BCS Operational Insights"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_ui_action_4c93c76a2f89111036e5136a2799b62a&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-13 07:10:24&lt;/sys_updated_on&gt;&lt;table&gt;x_caci_cisco_bcs_device_reset_details&lt;/table&gt;&lt;ui11_compatible&gt;true&lt;/ui11_compatible&gt;&lt;ui16_compatible&gt;false&lt;/ui16_compatible&gt;&lt;/sys_ui_action&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-999554302</payload_hash>
+        <record_name>Create Incident</record_name>
+        <reverted_from/>
+        <source>0f3204772f2ad510660cbcb62799b65e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:44:12</sys_created_on>
+        <sys_id>44bb63fa2f629110660cbcb62799b619</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_recorded_at>183ee8e64f10000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 14:18:17</sys_updated_on>
+        <type>UI Action</type>
+        <update_guid>d2e3fe1ba471d110cca7309072d0cbb0</update_guid>
+        <update_guid_history>d2e3fe1ba471d110cca7309072d0cbb0:-999554302,327166a9ccad9510bfbdb3fac887678c:-1956181761,2d8f1ea5f0ad9510999b39307c0620dd:-855486101,073c9e65d2ad9510e97cb4388b032e6e:2104913904,b6cb5e65a6ad9510aac5cc788b0e1d64:-1609048949,91ca5ee128ad951061dd1e9c3ebabfb2:772392703,458a9ea146ad9510d3202f19b01d019f:1840718300,85b856a14ead95108a0ac368a6237bb5:-1620458489,fbf6122194ad95104369d9c50a354c17:-1434333952,4b36deed616d95100ced31e89fbac2bc:-1245274476,22a596ed876d951064b7673766835afe:-651199413,c8f4da2da86d9510f18a6b5914536877:-1759693513,85611e2d916d95105a24659f19824406:-1997033712,c4fdcee5826d9510302375ace99203ca:-1444966224,ac6b86651e6d9510b3b7e668a97b214c:-479764208,06968625e16d9510d99a68dcb76ba18e:-1783803864,df468aedfd2d9510ffa41f46db54ccb6:1466447293,2305c661446d95108ee252689701c1a5:-1070370355,52dbededc4e99510c57b8b0babccb488:-1904280671,79349e51d7a19510e882c937e6b244a2:1799959297,85d2565112a195107573f9d0c167dc44:1784904475,ce4a4a59f2619510b8131d1d900c66f1:-1320090955,5ad88e59906195101eae17a8b9578110:-20377709,7718ce19b96195103789180550ff997f:-2075498572,a5c6821908619510dafdb1c7406fb4b7:-1170861067,47e5ca951e61951007b4ee2a191f67c0:2090235246,03a586d5bc6195107ca5dfc81b65d36a:640883982,c9f446952a6195107d7bbb0b18a055d2:-261374802,7d5824dddb2d5510f26cd331aede3175:-1948492027,d52864dd8c2d55102f340dded172b921:323225435,4bb72c1dd02d55108b2b6dcdc742bcee:576210864,67846941a32555105cbf18e85d65cf88:174748832,7864e54103255510b47687d94c69a6d0:597830314,88b36101ea255510e25b96ea3eb5e748:174748832,6de229cd74e155100f667509e7ddf88c:-1100121793,6e42ed8d82e1551000e058d78d61047a:-125922433,f531ad8d2de15510f8fa6ee31b077d45:2053742024,4def194dabe15510210f6c55861715ae:-1547103429,2cbf190d8be1551013bf3251bf2a33fb:1766187572,c10f550d60e1551025b87ac4a02f5259:1426339288,235d99c9d2e15510264bdae06265c97a:-297373175,300d55c9afe15510163038b0edf15079:-737090220,728c998940e15510e12b73cf07306446:623331792,b31cd5892de155100721df3238dda9b9:-1106002171,eed999098ae155107a8655776bd61718:1009921859,0bb9190952e15510fe5d5bea8f13f100:539798360,47495109a3e15510c1146ebacf489cb2:425203638,b929110985e1551084efbe5b5abaaa2e:1565095691,ffe899c598e15510b8106f84053291f1:1781761433,3b8895c5e2e1551012cf4ecaac185d53:-641070707,9e6891c10be155100325d98529492bad:46912017,6ff655852de15510280a4519f672ab04:-1628988957,48d251c19de15510c15d43d861da6358:-963149430,8db291c18fe15510d232072cc2bd6b1a:434493927,bf229981e8e155105b733f7d6fdcddac:2080811436,54029d41ade15510fd597b6b6c07596c:2029079357,04a19941e3e155105af3e7fad21f52a7:-1969994150,64d09141c0e155107037ed3a105de8f1:2080811436,8490ddcd93a1551081e9f77c368ab01e:-1561703372,c46f810138e155105ba23bd89969ae26:1169197960,07fe05cd29a155108052ae40085d0bea:-370780576,9cae81cd20a155107939c634a7549941:1931366803,999e81cd6ba155106523f0f70702e83d:-2025652996,458e01cdfda15510d50107c6909064b0:1708163579,513e098d97a15510250b19f3eb7f4416:-838034458,0aad818da6a155100df3afa3e3727d36:-370780576,9b0b010deea15510143b145cfa8ae86e:-342071058,48da45c9cfa155104c0b55881298c060:-751316381,e29a89c96da155109a0322db4eea6a48:1391253262,fd2a8d8985a15510e81401463e228e9a:1574640611,43c1810577a155105aefadc83aef639c:159692010,09618181b1a155108c4e7e8f2802a805:1464256818,dea0c94da6615510e711f990832d4ec6:1506651476,e8400d815ca155102ec54fb99121d80f:-696608357,31973cc957615510e6ffb981d0ea74c5:-807180880,d04738092f215510690a20fb0a258ba1:984329360,b3c6fc0d6b6155105d54faaf19b548ca:-995834960,9f76b0c935615510603feb155f834e5e:-1067384095,7f1710050e215510ab4b9f21d177f7e6:-827547583,8776d805252155104745034f87ec151c:-1770990868,c8165405a1215510c554d7535df6b0c4:-2007972923,15f55cc16a2155109692f0d586be6d3a:688828488,1dd510052d215510539f0373cd0a1ede:-1491042136,5cc5904993ed15103d97bd1e4cc6d618:666280456,ce65d4c58ded15102c4798540007dde5:471136084,5f15904905ed151057f0ebfab887bb11:-356865840,35d40085fded1510eeb10c7f1b61e03d:-218374656,763444857aed15108135006499dabf91:-688426347,9d630c4524ed15104308529a03454417:1002569311,63b28045aced151059249094726ca92d:-43591471,46d10005b3ed151035c802af0b3fbacb:-1123333741,978140cdc1ad1510e57a20c6689e5b0a:-1574316772,b9c000cdd9ad15106dd8ce02cea7c4e0:-1416108168,bb7f3fbcbfad15109de5766b58df6376:-1180934395,c94f77bc7cad15102452d7c3bdef35f4:-831105850,03123b7497ad1510631c5bd5595948f9:-807180880,1d6856a818add110df2dd04389fc8008:984329360,6642d66432add1105daa14839391a188:984329360,c0f11a64ffadd11077e98aa4f3f33b49:929967238,158fcaa0b0add110b45adddf75b809d6:918595872,7b6d82a0ecadd110f726c16cd4a65f36:929967238,283a66b764491110524c8dcb499d0e45:984329360,27d9eab7d84911100fb3a93beb5a2d86:1104618164,f9c82e7771491110e7b57f271abd13a8:-1418724844,97676a379449111014a6ac3b1f037d20:-460673395,ead662373b4911105039930a4d16601b:-871534099,b3ed15f7f70511105b1fe40c7207c578:-1728440339,a1bd51f77b0511109e0e46529a56035d:-1601674547,b87d5d775c051110900532d58b00232a:1244100795,94fc9977490511102f94c926bda798a9:-464431981,b8dc1d77b1051110b81b070961364143:1104618164,c4ccd17704051110c992b7526757c614:539648596,0a6c15b30805111097697786152d236f:1104618164,9d1cd937c8051110eb33a65c139954d3:990179144,a0bb9973b1051110a0372fac379476a0:-139203394,fcb878374f411110e03cf02c89b5393b:984329360,ce5874f38041111044b607f4151c5502:972957994,b8c68f6a7689111025e3a19832579ae2:984329360</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-10 08:38:32</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_action">sys_ui_action</sys_db_object>
+        <sys_id>09774b6078ae4c8492057f32f58b6f10</sys_id>
+        <sys_metadata>4c93c76a2f89111036e5136a2799b62a</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Create Incident</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent display_value="Device Reset Details">0014a26607460110172aff808c1ed03b</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_ui_action_4c93c76a2f89111036e5136a2799b62a</sys_update_name>
+        <sys_update_version display_value="sys_ui_action_4c93c76a2f89111036e5136a2799b62a">44bb63fa2f629110660cbcb62799b619</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-10 08:38:32</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

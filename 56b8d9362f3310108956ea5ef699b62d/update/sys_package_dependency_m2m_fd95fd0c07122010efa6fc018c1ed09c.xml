@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_package_dependency_m2m">
     <sys_package_dependency_m2m action="INSERT_OR_UPDATE">
-        <dependency display_value="Configuration Management (CMDB)" source="com.snc.cmdb">d619e4791b22201026489607b04bcb62</dependency>
+        <dependency display_value="Configuration Management (CMDB)" source="com.snc.cmdb">f4d608f921120110a866589604c20d4d</dependency>
         <min_version>1.1</min_version>
         <sys_created_by>system</sys_created_by>
         <sys_created_on>2020-10-28 15:09:40</sys_created_on>

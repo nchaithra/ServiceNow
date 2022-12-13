@@ -4,6 +4,7 @@
         <angular_module/>
         <formatter>x_caci_cisco_bcs_Cisco BCS logo</formatter>
         <name>Cisco BCS logo Field Notices</name>
+        <seismic_component/>
         <sys_class_name>sys_ui_formatter</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-11-18 11:48:52</sys_created_on>

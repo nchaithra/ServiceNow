@@ -2,7 +2,7 @@
     <sys_ui_related sys_domain="global" table="x_caci_cisco_bcs_cisco_cbp_details" version="2" view="">
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco CBP Details - Default view" name="x_caci_cisco_bcs_cisco_cbp_details" related_list="NULL" sys_domain="global" view="Default view">90999ca60730e4102001f1e08c1ed0c6</list_id>
+            <list_id display_value="CBP Details - Default view" name="x_caci_cisco_bcs_cisco_cbp_details" related_list="NULL" sys_domain="global" view="Default view">90999ca60730e4102001f1e08c1ed0c6</list_id>
             <order_by/>
             <position>0</position>
             <related_list>REL:3ed6d0660730e4102001f1e08c1ed090</related_list>
@@ -15,7 +15,7 @@
             <sys_updated_on>2020-12-03 06:24:22</sys_updated_on>
         </sys_ui_related_list_entry>
         <sys_ui_related_list action="INSERT_OR_UPDATE">
-            <calculated_name>Cisco CBP Details - Default view</calculated_name>
+            <calculated_name>CBP Details - Default view</calculated_name>
             <filter/>
             <name>x_caci_cisco_bcs_cisco_cbp_details</name>
             <order_by/>

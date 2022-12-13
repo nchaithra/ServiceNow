@@ -32,7 +32,7 @@
     if (gs.getSession().isInteractive()) {
         var user = gs.getUserID();
         var bcs = new GlideRecord("x_caci_cisco_bcs_configuration");
-		if(gs.getUserID()!='6816f79cc0a8016401c5a33be04be441'){
+		if(!gs.hasRole('admin')){
 			bcs.addQuery('users_list', user);
 		}
         bcs.query();
@@ -48,7 +48,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>edf865162ffc511036df837cf699b686</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>Cisco Client Group</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -56,7 +56,7 @@
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_edf865162ffc511036df837cf699b686</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-01 12:59:12</sys_updated_on>
+        <sys_updated_on>2022-11-10 08:07:07</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>

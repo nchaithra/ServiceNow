@@ -5,7 +5,7 @@
         <coalesce_case_sensitive>false</coalesce_case_sensitive>
         <coalesce_empty_fields>false</coalesce_empty_fields>
         <date_format>yyyy-MM-dd HH:mm:ss</date_format>
-        <map display_value="Cisco Device Reset Count ">c78c26ae07460110172aff808c1ed0d4</map>
+        <map display_value="Cisco Device Reset Count TM V2">c78c26ae07460110172aff808c1ed0d4</map>
         <reference_value_field/>
         <source_field>devicesreloadcount</source_field>
         <source_script><![CDATA[answer = (function transformEntry(source) {

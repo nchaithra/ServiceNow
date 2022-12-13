@@ -2,7 +2,7 @@
     <sys_ui_related sys_domain="global" table="x_caci_cisco_bcs_cisco_software_lifecycle" version="2" view="">
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Software Tracking - Default view" name="x_caci_cisco_bcs_cisco_software_lifecycle" related_list="NULL" sys_domain="global" view="Default view">e7e43ef32fb42010a7d1d5f62799b631</list_id>
+            <list_id display_value="Software Lifecycle - Default view" name="x_caci_cisco_bcs_cisco_software_lifecycle" related_list="NULL" sys_domain="global" view="Default view">e7e43ef32fb42010a7d1d5f62799b631</list_id>
             <order_by/>
             <position>0</position>
             <related_list>REL:51943af32fb42010a7d1d5f62799b6e7</related_list>
@@ -15,7 +15,7 @@
             <sys_updated_on>2022-05-26 04:46:46</sys_updated_on>
         </sys_ui_related_list_entry>
         <sys_ui_related_list action="INSERT_OR_UPDATE">
-            <calculated_name>Cisco Software Tracking - Default view</calculated_name>
+            <calculated_name>Software Lifecycle - Default view</calculated_name>
             <filter/>
             <name>x_caci_cisco_bcs_cisco_software_lifecycle</name>
             <order_by/>

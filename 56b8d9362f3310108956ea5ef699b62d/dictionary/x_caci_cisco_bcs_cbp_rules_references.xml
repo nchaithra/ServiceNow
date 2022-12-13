@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Cisco.com References" max_length="40" name="x_caci_cisco_bcs_cbp_rules_references" sizeclass="1218" type="collection">
+        <element display="true" label="Rule ID" max_length="255" name="bp_rule_id" type="string"/>
+        <element label="URL" max_length="20000" name="bp_url" type="url"/>
+        <element label="URL Title" max_length="20000" name="bp_url_title" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="CBP Rule" max_length="32" name="cbp_rule" reference="x_caci_cisco_bcs_cisco_cbp_rules" type="reference"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="isDeleted" max_length="255" name="isdeleted" type="string"/>
+        <index name="index">
+            <element name="cbp_rule"/>
+        </index>
+    </element>
+</database>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Contract Lifecycle Dump" max_length="40" name="x_caci_cisco_bcs_cisco_contract_lifecycle_dump" sizeclass="0" type="collection">
+        <element label="basepidlist" max_length="20000" name="basepidlist" type="string"/>
+        <element label="contractsiteaddress1" max_length="500" name="contractsiteaddress1" type="string"/>
+        <element label="contractsitecity" max_length="500" name="contractsitecity" type="string"/>
+        <element label="contractsitecountry" max_length="255" name="contractsitecountry" type="string"/>
+        <element label="contractsitecustomername" max_length="500" name="contractsitecustomername" type="string"/>
+        <element label="contractsitestateprovince" max_length="255" name="contractsitestateprovince" type="string"/>
+        <element label="coveredproductlineenddate" max_length="255" name="coveredproductlineenddate" type="glide_date_time"/>
+        <element label="id" max_length="255" name="id" type="string"/>
+        <element label="iscovered" max_length="255" name="iscovered" type="string"/>
+        <element label="orderablepidlist" max_length="20000" name="orderablepidlist" type="string"/>
+        <element label="parentsrno" max_length="255" name="parentsrno" type="string"/>
+        <element label="servicecontractnumber" max_length="1000" name="servicecontractnumber" type="string"/>
+        <element label="servicelinedescr" max_length="1000" name="servicelinedescr" type="string"/>
+        <element label="srno" max_length="500" name="srno" type="string"/>
+        <element label="warrantyenddate" max_length="255" name="warrantyenddate" type="glide_date"/>
+        <element label="warrantytype" max_length="500" name="warrantytype" type="string"/>
+        <element label="warrantytypedescription" max_length="255" name="warrantytypedescription" type="string"/>
+    </element>
+</database>

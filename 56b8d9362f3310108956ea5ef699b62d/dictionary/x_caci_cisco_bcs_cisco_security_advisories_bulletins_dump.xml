@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Security Advisories Bulletins Dump" max_length="40" name="x_caci_cisco_bcs_cisco_security_advisories_bulletins_dump" sizeclass="0" type="collection">
+        <element label="bulletinfirstpublished" max_length="255" name="bulletinfirstpublished" type="glide_date_time"/>
+        <element label="bulletinlastupdated" max_length="255" name="bulletinlastupdated" type="glide_date_time"/>
+        <element label="bulletinmappingcaveat" max_length="2500" name="bulletinmappingcaveat" type="string"/>
+        <element label="bulletinsummary" max_length="10000" name="bulletinsummary" type="string"/>
+        <element label="bulletintitle" max_length="1000" name="bulletintitle" type="string"/>
+        <element label="bulletinurl" max_length="2000" name="bulletinurl" type="url"/>
+        <element label="bulletinversion" max_length="255" name="bulletinversion" type="string"/>
+        <element label="ciscobugids" max_length="255" name="ciscobugids" type="string"/>
+        <element label="cveid" max_length="500" name="cveid" type="string"/>
+        <element label="cvssbase" max_length="1000" name="cvssbase" type="string"/>
+        <element label="cvsstemporal" max_length="1000" name="cvsstemporal" type="string"/>
+        <element label="psirtadvisoryid" max_length="500" name="psirtadvisoryid" type="string"/>
+        <element label="psirtcoldid" max_length="255" name="psirtcoldid" type="string"/>
+        <element label="sir" max_length="500" name="sir" type="string"/>
+    </element>
+</database>

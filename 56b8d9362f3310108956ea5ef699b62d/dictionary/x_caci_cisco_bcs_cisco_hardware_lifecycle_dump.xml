@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Hardware Lifecycle Dump" max_length="40" name="x_caci_cisco_bcs_cisco_hardware_lifecycle_dump" sizeclass="0" type="collection">
+        <element label="currenteoxmilestone" max_length="255" name="currenteoxmilestone" type="string"/>
+        <element label="currenteoxmilestonedate" max_length="255" name="currenteoxmilestonedate" type="glide_date_time"/>
+        <element label="deviceid" max_length="255" name="deviceid" type="string"/>
+        <element label="devicename" max_length="500" name="devicename" type="string"/>
+        <element label="hweoxid" max_length="255" name="hweoxid" type="string"/>
+        <element label="nexteoxmilestone" max_length="255" name="nexteoxmilestone" type="string"/>
+        <element label="nexteoxmilestonedate" max_length="255" name="nexteoxmilestonedate" type="glide_date_time"/>
+        <element label="physicalelementid" max_length="255" name="physicalelementid" type="string"/>
+        <element label="physicaltype" max_length="255" name="physicaltype" type="string"/>
+        <element label="productid" max_length="500" name="productid" type="string"/>
+    </element>
+</database>

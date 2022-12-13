@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="DELETE">
+        <active>true</active>
+        <map display_value="Cisco Field Notices TM">3d678959db082010c81a7b82399619c2</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+    var logger = new Cisco_BCS_SNLogger();
+    //var daoScript = new Cisco_DAOScript();
+    try {
+        logger.debug("Inside field notices transform map.");
+        /*var sys_id = daoScript.getReferenceMapping("fieldNoticesBulletin", "field_notice_id", target.field_notice_id);
+        target.fieldnoticeid = sys_id;
+
+        var sys_id_physical = daoScript.getReferenceMapping("assets", "physical_element_id", target.physical_element_id);
+        target.physical_element_id_ref = sys_id_physical;
+
+        var sys_id_device = daoScript.getReferenceMapping("devices", "device_id", target.device_id);
+        target.deviceid_ref = sys_id_device;
+
+        target.update();*/
+        var dao = new Cisco_DAOScript();
+
+        // Devices S
+        var resultDevices = dao.createReferences(target.device_id, "device_id", "", target.sys_id, "x_caci_cisco_bcs_cisco_devices", false);
+        if (resultDevices){
+            target.deviceid_ref = resultDevices + "";
+			target.update();
+		}
+
+        // Assets B
+        var resultAssets = dao.createReferences(target.physical_element_id, "physical_element_id", "field_notices_id", target.sys_id, "x_caci_cisco_bcs_cisco_assets", true);
+        if (resultAssets){
+            target.physical_element_id_ref = resultAssets + "";
+			target.update();
+		}
+
+        // FN Bulletins S
+        var resultFnBulletins = dao.createReferences(target.field_notice_id, "field_notice_id", "", target.sys_id, "x_caci_cisco_bcs_cisco_fn_bulletin", false);
+		//gs.info("resultFn:"+resultFnBulletins);
+        if (resultFnBulletins){
+            target.fieldnoticeid = resultFnBulletins + "";
+			target.update();
+		}
+		
+		//for device table calculated fields
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","field_notice_id","match_confidence=Vulnerable^device_id=" + target.device_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_devices","device_id="+target.device_id+"","vulnerable_field_notices",calculatedFieldValue);
+		
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","field_notice_id","match_confidence=Potentially Vulnerable^device_id=" + target.device_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_devices","device_id="+target.device_id+"","potentially_vulnerable_field_notices",calculatedFieldValue);
+		
+		//for fn_bulletin table calculated fields
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","device_id","match_confidence=Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_fn_bulletin","field_notice_id="+target.field_notice_id+"","vulnerable_devices_count",calculatedFieldValue);
+		
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","device_id","match_confidence=Potentially Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_fn_bulletin","field_notice_id="+target.field_notice_id+"","potentially_vulnerable_devices_count",calculatedFieldValue);
+		
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","","match_confidence=Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_fn_bulletin","field_notice_id="+target.field_notice_id+"","vulnerable_assets",calculatedFieldValue);
+		
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","","match_confidence=Potentially Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_fn_bulletin","field_notice_id="+target.field_notice_id+"","potentially_vulnerable_assets",calculatedFieldValue);
+		
+		
+	 } catch (e) {
+        logger.error("Exception caught inside field notice transform map. Error : - " + e);
+    }
+
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>harsh.gupta</sys_created_by>
+        <sys_created_on>2020-11-02 12:19:09</sys_created_on>
+        <sys_id>0afb71acdb5c6010f61cb298f496197b</sys_id>
+        <sys_mod_count>26</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_transform_script_0afb71acdb5c6010f61cb298f496197b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-12-16 12:44:25</sys_updated_on>
+        <when>onAfter</when>
+    </sys_transform_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_transform_script_0afb71acdb5c6010f61cb298f496197b</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_script"&gt;&lt;sys_transform_script action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;map display_value="Cisco Field Notices TM"&gt;3d678959db082010c81a7b82399619c2&lt;/map&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+    var logger = new Cisco_BCS_SNLogger();
+    //var daoScript = new Cisco_DAOScript();
+    try {
+        logger.debug("Inside field notices transform map.");
+        /*var sys_id = daoScript.getReferenceMapping("fieldNoticesBulletin", "field_notice_id", target.field_notice_id);
+        target.fieldnoticeid = sys_id;
+
+        var sys_id_physical = daoScript.getReferenceMapping("assets", "physical_element_id", target.physical_element_id);
+        target.physical_element_id_ref = sys_id_physical;
+
+        var sys_id_device = daoScript.getReferenceMapping("devices", "device_id", target.device_id);
+        target.deviceid_ref = sys_id_device;
+
+        target.update();*/
+        var dao = new Cisco_DAOScript();
+
+        // Devices S
+        var resultDevices = dao.createReferences(target.device_id, "device_id", "", target.sys_id, "x_caci_cisco_bcs_cisco_devices", false);
+        if (resultDevices){
+            target.deviceid_ref = resultDevices + "";
+			target.update();
+		}
+
+        // Assets B
+        var resultAssets = dao.createReferences(target.physical_element_id, "physical_element_id", "field_notices_id", target.sys_id, "x_caci_cisco_bcs_cisco_assets", true);
+        if (resultAssets){
+            target.physical_element_id_ref = resultAssets + "";
+			target.update();
+		}
+
+        // FN Bulletins S
+        var resultFnBulletins = dao.createReferences(target.field_notice_id, "field_notice_id", "", target.sys_id, "x_caci_cisco_bcs_cisco_fn_bulletin", false);
+		//gs.info("resultFn:"+resultFnBulletins);
+        if (resultFnBulletins){
+            target.fieldnoticeid = resultFnBulletins + "";
+			target.update();
+		}
+		
+		//for device table calculated fields
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","field_notice_id","match_confidence=Vulnerable^device_id=" + target.device_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_devices","device_id="+target.device_id+"","vulnerable_field_notices",calculatedFieldValue);
+		
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","field_notice_id","match_confidence=Potentially Vulnerable^device_id=" + target.device_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_devices","device_id="+target.device_id+"","potentially_vulnerable_field_notices",calculatedFieldValue);
+		
+		//for fn_bulletin table calculated fields
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","device_id","match_confidence=Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_fn_bulletin","field_notice_id="+target.field_notice_id+"","vulnerable_devices_count",calculatedFieldValue);
+		
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","device_id","match_confidence=Potentially Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_fn_bulletin","field_notice_id="+target.field_notice_id+"","potentially_vulnerable_devices_count",calculatedFieldValue);
+		
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","","match_confidence=Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_fn_bulletin","field_notice_id="+target.field_notice_id+"","vulnerable_assets",calculatedFieldValue);
+		
+		calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","","match_confidence=Potentially Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		dao.updateCalculatedField("x_caci_cisco_bcs_cisco_fn_bulletin","field_notice_id="+target.field_notice_id+"","potentially_vulnerable_assets",calculatedFieldValue);
+		
+		
+	 } catch (e) {
+        logger.error("Exception caught inside field notice transform map. Error : - " + e);
+    }
+
+})(source, map, log, target);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_transform_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;harsh.gupta&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-11-02 12:19:09&lt;/sys_created_on&gt;&lt;sys_id&gt;0afb71acdb5c6010f61cb298f496197b&lt;/sys_id&gt;&lt;sys_mod_count&gt;26&lt;/sys_mod_count&gt;&lt;sys_name&gt;onAfter&lt;/sys_name&gt;&lt;sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Cisco BCS Operational Insights"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_script_0afb71acdb5c6010f61cb298f496197b&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-12-16 12:44:25&lt;/sys_updated_on&gt;&lt;when&gt;onAfter&lt;/when&gt;&lt;/sys_transform_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1856070530</payload_hash>
+        <record_name>onAfter</record_name>
+        <reverted_from/>
+        <source>c0e7e3fe2f229110660cbcb62799b692</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:31:29</sys_created_on>
+        <sys_id>e9c86fb22f629110660cbcb62799b647</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183ee82be1a0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-19 04:31:29</sys_updated_on>
+        <type>Transform Script</type>
+        <update_guid>063d247ac18d2010701bf30fb3723b49</update_guid>
+        <update_guid_history>063d247ac18d2010701bf30fb3723b49:-923097089,16ec58fee9c920105daf7b82e21e3f87:-1087281597,c42cd0f28e0d2010fcbed95be4109922:1685926741,0779d07658892010c18766c7c69601f4:-1621278507,4da29cf60c8520107d89c28f9f014743:356918357,95c8336a40c12010169246044dc4f899:1088152859,410b19a0c2c520104a995066eca213b2:-1680551844,11b59124c885201040d50bee5b4b12fe:-1596520324,51c29128b4052010d552482fec23fdaa:-1598667584,f3bbc6d0f4342010dbb3ddcea6a4f62e:625725531,3f946190ba78a01074534da33c3ef5f8:1418083162,a70ba592092820103ee987cab1b2779b:-1359498579</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-17 12:19:31</sys_created_on>
+        <sys_db_object display_value="" name="sys_transform_script">sys_transform_script</sys_db_object>
+        <sys_id>3c9d48f0f19947f8bbe798d285ac35a4</sys_id>
+        <sys_metadata>0afb71acdb5c6010f61cb298f496197b</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_transform_script_0afb71acdb5c6010f61cb298f496197b</sys_update_name>
+        <sys_update_version display_value="sys_transform_script_0afb71acdb5c6010f61cb298f496197b">e9c86fb22f629110660cbcb62799b647</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-17 12:19:31</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

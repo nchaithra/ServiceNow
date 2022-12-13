@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="SW EOX Bulletins" max_length="40" name="x_caci_cisco_bcs_cisco_sw_eox_bulletins" sizeclass="40" type="collection">
+        <element label="Bulletin Number" max_length="255" name="bulletin_number" type="string"/>
+        <element label="Bulletin Title" max_length="1000" name="bulletin_title" type="string"/>
+        <element label="Bulletin URL" max_length="2500" name="bulletin_url" type="url"/>
+        <element label="Current Milestone" max_length="255" name="current_milestone" type="glide_date_time"/>
+        <element label="Current Milestone Date" max_length="255" name="current_milestone_date" type="glide_date_time"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" calculation="(function calculatedFieldValue(current) {&#10;&#10;&#9;var count = 0;&#10;&#9;var sw_eox = new GlideRecord(&quot;x_caci_cisco_bcs_cisco_software_lifecycle&quot;);&#10;&#9;sw_eox.addQuery(&quot;sw_id&quot;,current.sw_eox_id);&#10;&#9;sw_eox.query();&#10;&#9;while(sw_eox.next()) &#10;&#9;&#9;count = count + 1;&#10;&#9;return count;&#10;&#10;})(current);" label="Devices" max_length="40" name="devices" type="integer"/>
+        <element label="EoLife Announcement Date" max_length="255" name="eolife_announcement_date" type="glide_date_time"/>
+        <element label="EoSale Date" max_length="255" name="eosale_date" type="glide_date_time"/>
+        <element label="EoSecurity Vul Support Date" max_length="255" name="eosecurity_vul_support_date" type="glide_date_time"/>
+        <element label="EoSW Maintenance Releases Date" max_length="255" name="eosw_maintenance_releases_date" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="255" name="isdeleted" type="boolean"/>
+        <element label="Last Date of Support" max_length="255" name="last_date_of_support" type="glide_date_time"/>
+        <element label="Next Milestone" max_length="255" name="next_milestone" type="glide_date_time"/>
+        <element label="Next Milestone Date" max_length="255" name="next_milestone_date" type="glide_date_time"/>
+        <element display="true" label="SW EOX ID" max_length="255" name="sw_eox_id" type="string"/>
+        <element label="SW Maintenance Version" max_length="500" name="sw_maintenance_version" type="string"/>
+        <element label="SW Major Version" max_length="500" name="sw_major_version" type="string"/>
+        <element label="SW Train" max_length="500" name="sw_train" type="string"/>
+        <element label="SW Type" max_length="500" name="sw_type" type="string"/>
+    </element>
+</database>

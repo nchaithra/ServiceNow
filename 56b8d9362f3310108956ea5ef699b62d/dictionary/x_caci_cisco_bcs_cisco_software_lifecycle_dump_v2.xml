@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Software Lifecycle Dump V2" max_length="40" name="x_caci_cisco_bcs_cisco_software_lifecycle_dump_v2" sizeclass="0" type="collection">
+        <element label="currentEndOfLifeMilestone" max_length="500" name="currentendoflifemilestone" type="string"/>
+        <element label="currentEndOfLifeMilestoneDate" max_length="40" name="currentendoflifemilestonedate" type="glide_date"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="deviceId" max_length="255" name="deviceid" type="string"/>
+        <element label="deviceName" max_length="500" name="devicename" type="string"/>
+        <element label="nextEndOfLifeMilestone" max_length="500" name="nextendoflifemilestone" type="string"/>
+        <element label="nextEndOfLifeMilestoneDate" max_length="500" name="nextendoflifemilestonedate" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareEndOfLifeId" max_length="500" name="softwareendoflifeid" type="integer"/>
+        <element label="softwareType" max_length="500" name="softwaretype" type="string"/>
+        <element label="softwareVersion" max_length="500" name="softwareversion" type="string"/>
+    </element>
+</database>

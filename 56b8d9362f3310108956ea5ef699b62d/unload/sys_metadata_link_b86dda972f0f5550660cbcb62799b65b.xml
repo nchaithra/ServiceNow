@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>unload</directory>
+        <documentkey>a17593122f0f5150660cbcb62799b678</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="service_offering">
+    <service_offering action="INSERT_OR_UPDATE">
+        <aliases/>
+        <asset/>
+        <asset_tag/>
+        <assigned/>
+        <assigned_to/>
+        <assignment_group/>
+        <attestation_score/>
+        <attestation_status>Not Yet Reviewed</attestation_status>
+        <attested>false</attested>
+        <attested_by/>
+        <attested_date/>
+        <attributes/>
+        <billing>monthly</billing>
+        <busines_criticality>2 - somewhat critical</busines_criticality>
+        <business_contact/>
+        <business_need/>
+        <business_relation_manager/>
+        <business_unit/>
+        <can_print>false</can_print>
+        <category/>
+        <change_control/>
+        <checked_in/>
+        <checked_out/>
+        <checkout/>
+        <comments/>
+        <company/>
+        <compatibility_dependencies/>
+        <consumer_type>internal</consumer_type>
+        <contract/>
+        <correlation_id/>
+        <cost/>
+        <cost_cc>USD</cost_cc>
+        <cost_center/>
+        <delivery_date/>
+        <delivery_manager/>
+        <department/>
+        <description/>
+        <discovery_source/>
+        <dns_domain/>
+        <due/>
+        <due_in/>
+        <duplicate_of/>
+        <end_date/>
+        <environment/>
+        <fault_count>0</fault_count>
+        <first_discovered/>
+        <fqdn/>
+        <gl_account/>
+        <install_date/>
+        <install_status>1</install_status>
+        <invoice_number/>
+        <ip_address/>
+        <justification/>
+        <last_discovered/>
+        <last_review_date/>
+        <lease_id/>
+        <life_cycle_stage/>
+        <life_cycle_stage_status/>
+        <location/>
+        <mac_address/>
+        <maintenance_schedule/>
+        <managed_by/>
+        <managed_by_group/>
+        <manufacturer/>
+        <model_id/>
+        <model_number/>
+        <monitor>false</monitor>
+        <monitoring_requirements/>
+        <name>BCS Security Advisories Report</name>
+        <number>BSN0001014</number>
+        <operational_status>1</operational_status>
+        <order/>
+        <order_date/>
+        <owned_by/>
+        <parent display_value="Cisco BCS Subscription">eb74d75e2fcb5150660cbcb62799b6bb</parent>
+        <po_number/>
+        <portfolio_status>pipeline</portfolio_status>
+        <prerequisites/>
+        <price_model>per_unit</price_model>
+        <price_unit/>
+        <published_ref/>
+        <purchase_date/>
+        <schedule/>
+        <serial_number/>
+        <service_classification>Business Service</service_classification>
+        <service_level_requirement/>
+        <service_owner_delegate/>
+        <service_status>requirements</service_status>
+        <short_description/>
+        <skip_sync>false</skip_sync>
+        <sla/>
+        <spm_service_portfolio/>
+        <spm_taxonomy_node/>
+        <stakeholders/>
+        <start_date/>
+        <state/>
+        <subcategory/>
+        <support_group/>
+        <supported_by/>
+        <sys_class_name>service_offering</sys_class_name>
+        <sys_class_path>/!!/!7/!$</sys_class_path>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-11 10:21:32</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>a17593122f0f5150660cbcb62799b678</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-11 10:21:32</sys_updated_on>
+        <technical_contact/>
+        <unit_description/>
+        <unverified>false</unverified>
+        <used_for>Production</used_for>
+        <user_group/>
+        <vendor/>
+        <version/>
+        <warranty_expiration/>
+    </service_offering>
+    <sys_translated_text action="delete_multiple" query="documentkey=a17593122f0f5150660cbcb62799b678"/>
+    <fx_price action="delete_multiple" query="id=a17593122f0f5150660cbcb62799b678"/>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-14 08:50:29</sys_created_on>
+        <sys_id>b86dda972f0f5550660cbcb62799b65b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>BCS Security Advisories Report</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_metadata_link_b86dda972f0f5550660cbcb62799b65b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-14 08:50:29</sys_updated_on>
+        <tablename>service_offering</tablename>
+    </sys_metadata_link>
+</record_update>

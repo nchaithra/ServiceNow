@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Software Lifecycle" max_length="40" name="x_caci_cisco_bcs_cisco_software_lifecycle" sizeclass="89" type="collection">
+        <element label="Current Milestone" max_length="255" name="current_milestone" type="string"/>
+        <element label="Current Milestone Date" max_length="255" name="current_milestone_date" type="glide_date_time"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="Device ID" max_length="255" name="device_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Device" max_length="32" name="device_id_ref" reference="x_caci_cisco_bcs_cisco_devices" type="reference"/>
+        <element label="Device Name" max_length="500" name="device_name" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Incident Reference" max_length="4000" name="incident_reference" reference="incident" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="255" name="isdeleted" type="boolean"/>
+        <element label="Next Milestone" max_length="255" name="next_milestone" type="string"/>
+        <element label="Next Milestone Date" max_length="255" name="next_milestone_date" type="glide_date_time"/>
+        <element display="true" label="SW ID" max_length="255" name="sw_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Software Tracking Bulletins" max_length="32" name="sw_id_ref" reference="x_caci_cisco_bcs_cisco_sw_eox_bulletins" type="reference"/>
+        <element label="SW Type" max_length="255" name="sw_type" type="string"/>
+        <element label="SW Version" max_length="255" name="sw_version" type="string"/>
+        <index name="index">
+            <element name="sw_id_ref"/>
+        </index>
+        <index name="index2">
+            <element name="device_id_ref"/>
+        </index>
+    </element>
+</database>

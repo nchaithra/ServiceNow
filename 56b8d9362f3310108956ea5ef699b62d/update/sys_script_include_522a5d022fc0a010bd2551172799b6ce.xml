@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
     <sys_script_include action="INSERT_OR_UPDATE">
-        <access>package_private</access>
+        <access>public</access>
         <active>true</active>
         <api_name>x_caci_cisco_bcs.Cisco_ClientServerBridge</api_name>
         <caller_access/>
@@ -113,7 +113,7 @@ Cisco_ClientServerBridge.prototype = Object.extendsObject(global.AbstractAjaxPro
             result['Severity: ' + syslogseverity.syslogeventseverity] = syslogseverity.getAggregate('COUNT', 'syslogeventseverity') + ' events';
             // result['Devices with severity ' + ga.syslogeventseverity]= ga.getAggregate('COUNT', 'syslogeventseverity') + ' events';
         }
-		output[0]=result;
+        output[0] = result;
         //output.push(result);
         var tot3 = 0;
         var result_t = 0;
@@ -127,20 +127,20 @@ Cisco_ClientServerBridge.prototype = Object.extendsObject(global.AbstractAjaxPro
             tot3 = parseInt(tot3) + parseInt(syslogmsg.getAggregate('COUNT(DISTINCT', 'messagetype'));
             result_t = tot3;
         }
-		output[1]=result_t;
-		//output.push(result_t);
-		var num=0;
-		var severity = new GlideAggregate('x_caci_cisco_bcs_cisco_syslog_daily');
+        output[1] = result_t;
+        //output.push(result_t);
+        var num = 0;
+        var severity = new GlideAggregate('x_caci_cisco_bcs_cisco_syslog_daily');
         severity.addQuery('customer_id', id);
-        severity.addQuery("syslogeventseverity",'=','1');
-       // severity.addAggregate('COUNT','syslogeventseverity');
+        severity.addQuery("syslogeventseverity", '=', '1');
+        // severity.addAggregate('COUNT','syslogeventseverity');
         // gr.addAggregate('COUNT', 'messagetype');
         severity.query();
         while (severity.next()) {
-			num++;
-		}
-		output[2]=num;
-      
+            num++;
+        }
+        output[2] = num;
+
         gs.info('Syslog json out: ' + JSON.stringify(output));
         return JSON.stringify(output);
     },
@@ -149,9 +149,9 @@ Cisco_ClientServerBridge.prototype = Object.extendsObject(global.AbstractAjaxPro
             var logger = new Cisco_BCS_SNLogger();
             logger.debug("Inside Cisco_ClientServerBridge.gettingDataFromDeleteButton() getting data from delete button.");
             var config_id = this.getParameter("sysparm_id");
-			var clientid=this.getParameter("sysparm_clientid");
+            var clientid = this.getParameter("sysparm_clientid");
             gs.setProperty("x_caci_cisco_bcs.Authentication.Record", config_id);
-           
+
             var daoScrpt = new Cisco_DAOScript();
             var result = daoScrpt.clearApplicationData(clientid);
             return result;
@@ -2009,7 +2009,7 @@ Cisco_ClientServerBridge.prototype = Object.extendsObject(global.AbstractAjaxPro
         var user = gs.getUserID();
         var id;
         var bcs = new GlideRecord("x_caci_cisco_bcs_configuration");
-        if (gs.getUserID() != '6816f79cc0a8016401c5a33be04be441') {
+        if (!gs.hasRole('admin')) {
             bcs.addQuery('users_list', user);
         }
         bcs.orderByDesc('updated');
@@ -2028,9 +2028,9 @@ Cisco_ClientServerBridge.prototype = Object.extendsObject(global.AbstractAjaxPro
         var num = 0;
         var unidentified = new GlideAggregate('x_caci_cisco_bcs_unidentified_inventory_details');
         unidentified.addQuery('customer_id', id);
-       // unidentified.addAggregate('COUNT', 'collectorname');
+        // unidentified.addAggregate('COUNT', 'collectorname');
         unidentified.addNotNullQuery("collectorname");
-      //  unidentified.groupBy('collectorname');
+        //  unidentified.groupBy('collectorname');
         unidentified.query();
         while (unidentified.next()) {
             num++;
@@ -2229,19 +2229,34 @@ Cisco_ClientServerBridge.prototype = Object.extendsObject(global.AbstractAjaxPro
         } else
             return false;
     },
+    getClientname: function() {
+        var clientid = [];
+        var user = gs.getUserID();
+        var bcs = new GlideRecord("x_caci_cisco_bcs_configuration");
+        if (!gs.hasRole('admin')) {
+            bcs.addEncodedQuery('users_listLIKE' + user);
+        }
+        bcs.query();
+        while (bcs.next()) {
+            clientid.push(bcs.getValue('customer_id'));
+        }
+        clientid = clientid.toString(); 
+       return clientid;
+
+    },
     type: 'Cisco_ClientServerBridge'
 });]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-25 15:02:47</sys_created_on>
         <sys_id>522a5d022fc0a010bd2551172799b6ce</sys_id>
-        <sys_mod_count>849</sys_mod_count>
+        <sys_mod_count>879</sys_mod_count>
         <sys_name>Cisco_ClientServerBridge</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_include_522a5d022fc0a010bd2551172799b6ce</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-10-17 06:52:45</sys_updated_on>
+        <sys_updated_on>2022-11-16 05:49:48</sys_updated_on>
     </sys_script_include>
 </record_update>

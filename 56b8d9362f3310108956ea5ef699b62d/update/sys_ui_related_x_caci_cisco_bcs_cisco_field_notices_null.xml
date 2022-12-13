@@ -2,7 +2,7 @@
     <sys_ui_related sys_domain="global" table="x_caci_cisco_bcs_cisco_field_notices" version="2" view="">
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Field Notices - Default view" name="x_caci_cisco_bcs_cisco_field_notices" related_list="NULL" sys_domain="global" view="Default view">37fff1b62f942010bd2551172799b6a7</list_id>
+            <list_id display_value="Field Notices - Default view" name="x_caci_cisco_bcs_cisco_field_notices" related_list="NULL" sys_domain="global" view="Default view">37fff1b62f942010bd2551172799b6a7</list_id>
             <order_by/>
             <position>0</position>
             <related_list>REL:0efb759b972241108986fef3a253afd3</related_list>
@@ -15,7 +15,7 @@
             <sys_updated_on>2022-04-04 13:43:01</sys_updated_on>
         </sys_ui_related_list_entry>
         <sys_ui_related_list action="INSERT_OR_UPDATE">
-            <calculated_name>Cisco Field Notices - Default view</calculated_name>
+            <calculated_name>Field Notices - Default view</calculated_name>
             <filter/>
             <name>x_caci_cisco_bcs_cisco_field_notices</name>
             <order_by/>

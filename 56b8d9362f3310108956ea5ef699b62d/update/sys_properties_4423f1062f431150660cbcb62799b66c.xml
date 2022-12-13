@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>Software Compliance</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_caci_cisco_bcs.cisco.software.compliance</name>
+        <read_roles>x_caci_cisco_bcs.cisco_bcs_admin,x_caci_cisco_bcs.cisco_bcs_user,admin</read_roles>
+        <suffix>cisco.software.compliance</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-10 08:33:26</sys_created_on>
+        <sys_id>4423f1062f431150660cbcb62799b66c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_caci_cisco_bcs.cisco.software.compliance</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_properties_4423f1062f431150660cbcb62799b66c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-10 08:33:26</sys_updated_on>
+        <type>string</type>
+        <value>ed81ae3e97355110fa64f0f6f053af9d</value>
+        <write_roles>admin,x_caci_cisco_bcs.cisco_bcs_admin,x_caci_cisco_bcs.cisco_bcs_user</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=4423f1062f431150660cbcb62799b66c"/>
+</record_update>

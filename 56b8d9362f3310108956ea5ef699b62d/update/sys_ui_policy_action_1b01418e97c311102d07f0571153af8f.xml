@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="INSERT_OR_UPDATE">
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field>asset</field>
+        <mandatory>true</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-10 04:54:53</sys_created_on>
+        <sys_id>1b01418e97c311102d07f0571153af8f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>asset</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_policy_action_1b01418e97c311102d07f0571153af8f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-10 04:54:53</sys_updated_on>
+        <table>x_caci_cisco_bcs_align_cmdb</table>
+        <ui_policy display_value="ci type is asset">84d08d4e97c311102d07f0571153af20</ui_policy>
+        <visible>true</visible>
+    </sys_ui_policy_action>
+</record_update>

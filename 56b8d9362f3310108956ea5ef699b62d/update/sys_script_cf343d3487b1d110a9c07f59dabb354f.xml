@@ -32,109 +32,120 @@
     if (current.correlation_display == "x_caci_cisco_bcs_device_reset_details") {
         current.category = 'crash_insights';
         current.subcategory = 'devices_crash_risk';
-        current.business_service = '41697d3887b1d110a9c07f59dabb35c6';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcs.crashinsightsreport'); //BCS Crash Insights Report
         current.impact = '1';
         current.urgency = '1';
-        current.assignment_group = "d95642b487f1d110a9c07f59dabb3580";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.reactive.services'); //Reactive Services group
         current.short_description = "Devices with potential crash risk";
         current.description = "The devices at potential risk of crashing need to be mitigated. This will require a deep analysis of risk mitigation for each devices identified with crash risk. ";
     }
     //current.update();
     else if (current.correlation_display == "x_caci_cisco_bcs_cisco_devices") {
         current.category = 'device_inventiry';
-       // current.subcategory = '';
-        current.business_service = 'd258b93887b1d110a9c07f59dabb35a0';
+        // current.subcategory = '';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcs.deviceinventoryreport'); //BCS Device Inventory Report
         current.impact = '3';
         current.urgency = '3';
-        current.assignment_group = "54706e7e97355110fa64f0f6f053af42";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.inventory.assets'); //Inventory & Assets group
         current.short_description = "Device inventory issues";
-       // current.description = " ";
+        // current.description = " ";
     } else if (current.correlation_display == "x_caci_cisco_bcs_cisco_assets") {
         current.category = 'assets_contracts';
         //current.subcategory = 'devices_crash_risk';
-       // current.business_service = '5778353887b1d110a9c07f59dabb3542';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
         current.impact = '3';
         current.urgency = '3';
-        current.assignment_group = "54706e7e97355110fa64f0f6f053af42";
-       // current.short_description = "";
-       // current.description = " ";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.inventory.assets'); //Inventory & Assets group
+        // current.short_description = "";
+        // current.description = " ";
+
     } else if (current.correlation_display == "x_caci_cisco_bcs_cisco_security_advisories_bulletins") {
         current.category = 'vulnerabilities';
         current.subcategory = '	field_notices';
-        current.business_service = 'e2a879b487b1d110a9c07f59dabb3544';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcsfieldnoticesreport'); //BCS Field Notices Report
+
         current.impact = '2';
         current.urgency = '2';
-        current.assignment_group = "1f806e3e97355110fa64f0f6f053af42";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.product.vulnerabilities'); //Product Vulnerabilities group
         current.short_description = "Devices with Field Notice(s) vulnerabilities";
         current.description = "The impact of field notices need to be investigated and resolved for each device.";
-		
+
     } else if (current.correlation_display == "x_caci_cisco_bcs_cisco_fn_bulletin") {
         current.category = 'vulnerabilities';
         current.subcategory = '	security_advisories';
-        current.business_service = '7ac8b93887b1d110a9c07f59dabb352f';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcssecurityadvisoriesreport'); //BCS Security Advisories Report
         current.impact = '2';
         current.urgency = '2';
-        current.assignment_group = "1f806e3e97355110fa64f0f6f053af42";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.product.vulnerabilities'); //Product Vulnerabilities group
         current.short_description = "Devices with security vulnerabilities";
         current.description = "The impact of security advisories need to be investigated and resolved for each device.";
-		
+
     } else if (current.correlation_display == "x_caci_cisco_bcs_cisco_software_lifecycle") {
         current.category = 'software_lifecycle';
         //current.subcategory = 'devices_crash_risk';
-        current.business_service = '32d8f53887b1d110a9c07f59dabb3551';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcs.softwarelifecycle.report'); //BCS Software Lifecycle Report
         current.impact = '2';
         current.urgency = '2';
-        current.assignment_group = "0f316e3e97355110fa64f0f6f053afd5";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.productlifecyclemanagement'); //Product LifeCycle Management group
         current.short_description = "Devices with end of support software";
-       // current.description = " ";
-		
+        // current.description = " ";
+
     } else if (current.correlation_display == "x_caci_cisco_bcs_cisco_hardware_lifecycle") {
         current.category = 'hardware_lifecycle';
-      //  current.subcategory = 'devices_crash_risk';
-        current.business_service = 'afe8bdf487b1d110a9c07f59dabb353a';
+        //  current.subcategory = 'devices_crash_risk';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcs.hardwarelifecyclereport'); //BCS Hardware Lifecycle Report 
         current.impact = '2';
         current.urgency = '2';
-        current.assignment_group = "0f316e3e97355110fa64f0f6f053afd5";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.productlifecyclemanagement'); //Product LifeCycle Management group
         current.short_description = "Devices with end of support hardware ";
-       // current.description = " ";
-		
+        // current.description = " ";
+
     } else if (current.correlation_display == "x_caci_cisco_bcs_cisco_cbp_summary") {
         current.category = 'configuration_best_practices';
         current.subcategory = 'cbp_violations';
-        current.business_service = '4959bd3887b1d110a9c07f59dabb3550';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcs.configurationbestpracticesreport'); //BCS Configuration Best Practices Report
         current.impact = '2';
         current.urgency = '2';
-        current.assignment_group = "03516e3e97355110fa64f0f6f053afa5";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.cbp'); //CBP group
         current.short_description = "Devices with CBP exceptions";
         current.description = "The impact of configuration best practices voilations need to be investigated and resolved for each affected device.";
-		
+
     } else if (current.correlation_display == "x_caci_cisco_bcs_cisco_syslog_daily") {
         current.category = 'syslogs';
-       // current.subcategory = 'devices_crash_risk';
-        current.business_service = 'ae0b35b887b1d110a9c07f59dabb35f7';
+        // current.subcategory = 'devices_crash_risk';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcs.syslogreport'); //BCS Syslog Report
         current.impact = '2';
         current.urgency = '2';
-        current.assignment_group = "d95642b487f1d110a9c07f59dabb3580";
-       // current.short_description = "";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.reactive.services'); //Reactive Services group
+        // current.short_description = "";
         //current.description = " ";
-		
+
     } else if (current.correlation_display == "x_caci_cisco_bcs_cisco_software_track_summary") {
         current.category = 'software_compliance';
         current.subcategory = 'track_compliance';
-        current.business_service = 'b179bd3887b1d110a9c07f59dabb3555';
-        current.impact = '2';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcs.softwarecompliancereport'); //BCS Software Compliance Report 
         current.urgency = '2';
-        current.assignment_group = "ed81ae3e97355110fa64f0f6f053af9d";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.software.compliance'); //Software Compliance group
         current.short_description = "Devices runnng non-compliant software";
         current.description = "All devices should comply to customer standard software tracks when enabled. ";
-		
+
     } else if (current.correlation_display == "x_caci_cisco_bcs_unidentified_inventory_details") {
-       current.category = 'device_inventiry';
-       current.subcategory ='unidentified';
-        current.business_service = 'd258b93887b1d110a9c07f59dabb35a0';
+        current.category = 'device_inventiry';
+        current.subcategory = 'unidentified';
+        current.business_service = gs.getProperty('x_caci_cisco_bcs.cisco.cisco.bcs.subscription'); //Cisco BCS Subscription
+        current.service_offering = gs.getProperty('x_caci_cisco_bcs.cisco.bcs.deviceinventoryreport'); //BCS Device Inventory Report
         current.impact = '3';
         current.urgency = '3';
-        current.assignment_group = "54706e7e97355110fa64f0f6f053af42";
+        current.assignment_group = gs.getProperty('x_caci_cisco_bcs.cisco.inventory.assets'); //Inventory & Assets group
         current.short_description = "Device inventory issues";
         current.description = "Unidentified device need to be investigated.";
     }
@@ -146,7 +157,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>cf343d3487b1d110a9c07f59dabb354f</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>Populate Category Value</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -154,7 +165,7 @@
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_cf343d3487b1d110a9c07f59dabb354f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-11 17:35:25</sys_updated_on>
+        <sys_updated_on>2022-11-11 11:25:47</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>

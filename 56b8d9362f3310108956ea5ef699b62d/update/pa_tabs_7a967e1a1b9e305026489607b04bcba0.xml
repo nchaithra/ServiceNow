@@ -2,7 +2,7 @@
     <pa_tabs action="INSERT_OR_UPDATE">
         <canvas_page display_value="PA Cisco BCS Dashboard - New Tab">fa963a1a1b9e305026489607b04bcb90</canvas_page>
         <name>Cisco BCS Dashboard - New Tab</name>
-        <page display_value="PA Cisco BCS Dashboard - New Tab">fe963a1a1b9e305026489607b04bcb8f</page>
+        <page/>
         <sys_class_name>pa_tabs</sys_class_name>
         <sys_created_by>sumangh1</sys_created_by>
         <sys_created_on>2021-09-02 08:57:21</sys_created_on>

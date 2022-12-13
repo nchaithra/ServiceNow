@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Device Reset History" max_length="40" name="x_caci_cisco_bcs_cisco_device_reset_history" sizeclass="31" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Device Id" max_length="40" name="deviceid" type="string"/>
+        <element label="Device Ip" max_length="255" name="deviceip" type="string"/>
+        <element label="Device Name" max_length="255" name="devicename" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element label="Product Family" max_length="255" name="productfamily" type="string"/>
+        <element label="Product Id" max_length="255" name="productid" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Reset Details" max_length="4000" name="resetdetails" type="glide_list"/>
+        <element label="Reset Reason" max_length="255" name="resetreason" type="string"/>
+        <element label="Reset Timestamp" max_length="40" name="resettimestamp" type="glide_date_time"/>
+        <element label="Reset Type" max_length="255" name="resettype" type="string"/>
+        <element label="Software Type" max_length="255" name="softwaretype" type="string"/>
+        <element label="Software Version" max_length="255" name="softwareversion" type="string"/>
+    </element>
+</database>

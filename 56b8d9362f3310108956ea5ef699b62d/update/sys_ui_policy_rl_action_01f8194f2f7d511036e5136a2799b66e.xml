@@ -13,7 +13,7 @@
         <sys_update_name>sys_ui_policy_rl_action_01f8194f2f7d511036e5136a2799b66e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
         <sys_updated_on>2022-09-12 05:54:47</sys_updated_on>
-        <ui_policy display_value="Hide Asset r">dcc8554f2f7d511036e5136a2799b66a</ui_policy>
+        <ui_policy display_value="Hide Asset ">dcc8554f2f7d511036e5136a2799b66a</ui_policy>
         <visible>false</visible>
     </sys_ui_policy_rl_action>
 </record_update>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco CBP Details Dump" max_length="40" name="x_caci_cisco_bcs_cisco_cbp_details_dump" sizeclass="0" type="collection">
+        <element label="bpnuggetid" max_length="255" name="bpnuggetid" type="string"/>
+        <element label="bpruleid" max_length="255" name="bpruleid" type="string"/>
+        <element label="configsource" max_length="500" name="configsource" type="string"/>
+        <element label="deviceid" max_length="255" name="deviceid" type="string"/>
+    </element>
+</database>

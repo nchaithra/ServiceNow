@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco CBP Summary Dump" max_length="40" name="x_caci_cisco_bcs_cisco_cbp_summary_dump" sizeclass="0" type="collection">
+        <element label="bpnuggetid" max_length="255" name="bpnuggetid" type="string"/>
+        <element label="bpprimarytechnology" max_length="500" name="bpprimarytechnology" type="string"/>
+        <element label="bprisk" max_length="500" name="bprisk" type="string"/>
+        <element label="bpruleid" max_length="255" name="bpruleid" type="string"/>
+        <element label="bpsecondarytechnology" max_length="500" name="bpsecondarytechnology" type="string"/>
+        <element label="bptitle" max_length="1000" name="bptitle" type="string"/>
+        <element label="swtype" max_length="255" name="swtype" type="string"/>
+        <element label="totaldevices" max_length="255" name="totaldevices" type="string"/>
+    </element>
+</database>

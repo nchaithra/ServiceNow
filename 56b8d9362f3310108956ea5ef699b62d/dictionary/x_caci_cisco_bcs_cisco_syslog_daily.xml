@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Syslog Daily" max_length="40" name="x_caci_cisco_bcs_cisco_syslog_daily" sizeclass="0" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="Date" max_length="40" name="date" type="glide_date"/>
+        <element label="description" max_length="2000" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="deviceId" max_length="500" name="deviceid" type="string"/>
+        <element label="deviceName" max_length="2000" name="devicename" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="devices" max_length="4000" name="devices" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" label="eventCount" max_length="500" name="eventcount" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Incident Reference" max_length="4000" name="incident_reference" reference="incident" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element display="true" label="Message Type" max_length="2000" name="messagetype" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="# of Devices" max_length="100" name="no_of_devices" type="integer"/>
+        <element label="recommendation" max_length="2000" name="recommendation" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Reviewed Severity" max_length="500" name="reviewedseverity" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Severity" max_length="500" name="syslogeventseverity" type="integer"/>
+        <element label="timestamp" max_length="40" name="timestamp" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="Total # of events" max_length="500" name="totaleventcount" type="integer"/>
+        <index name="index">
+            <element name="messagetype"/>
+            <element name="date"/>
+        </index>
+    </element>
+</database>

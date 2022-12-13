@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
     <sys_script_client action="INSERT_OR_UPDATE">
-        <active>true</active>
+        <active>false</active>
         <applies_extended>false</applies_extended>
         <condition/>
         <description/>
@@ -14,59 +14,59 @@
 
     //Type appropriate comment here, and begin script below
     if (newValue == '') {
-        g_form.setMandatory('device', false);
-        g_form.setMandatory('asset', false);
-        g_form.setDisplay('device', false);
-        g_form.setDisplay('asset', false);
-        g_form.setDisplay('device_ref', false);
-        g_form.setDisplay('asset_ref', false);
-        if (g_form.getValue('mapped_data') == '') {
-            g_form.setDisplay('mapped_data', false);
+       // g_form.setMandatory('device', false);
+      //  g_form.setMandatory('asset', false);
+      //  g_form.setDisplay('device', false);
+     //   g_form.setDisplay('asset', false);
+       // g_form.setDisplay('device_ref', false);
+      //  g_form.setDisplay('asset_ref', false);
+//         if (g_form.getValue('mapped_data') == '') {
+//             g_form.setDisplay('mapped_data', false);
 
-        } else {
-            g_form.setDisplay('primary_key', true);
-        }
-		if (g_form.getValue('primary_key') == '') {
-            g_form.setDisplay('primary_key', false);
+//         } else {
+//             g_form.setDisplay('primary_key', true);
+//         }
+//         if (g_form.getValue('primary_key') == '') {
+//             g_form.setDisplay('primary_key', false);
 
-        } else {
-            g_form.setDisplay('primary_key', true);
-        }
+//         } else {
+//             g_form.setDisplay('primary_key', true);
+//         }
     } else if (newValue == 'device') {
-        g_form.setMandatory('device', true);
-        g_form.setMandatory('asset', false);
-        g_form.setDisplay('device', true);
-        g_form.setDisplay('asset', false);
-        g_form.setDisplay('device_ref', false);
-        g_form.setDisplay('asset_ref', false);
-        if (g_form.getValue('mapped_data') == '') {
-            g_form.setDisplay('mapped_data', false);
-        } else {
-            g_form.setDisplay('mapped_data', true);
-        }
-		if (g_form.getValue('primary_key') == '') {
-            g_form.setDisplay('primary_key', false);
+     //   g_form.setMandatory('device', true);
+       // g_form.setMandatory('asset', false);
+     //   g_form.setDisplay('device', true);
+       // g_form.setDisplay('asset', false);
+      //  g_form.setDisplay('device_ref', false);
+       // g_form.setDisplay('asset_ref', false);
+//         if (g_form.getValue('mapped_data') == '') {
+//             g_form.setDisplay('mapped_data', false);
+//         } else {
+//             g_form.setDisplay('mapped_data', true);
+//         }
+//         if (g_form.getValue('primary_key') == '') {
+//             g_form.setDisplay('primary_key', false);
 
-        } else {
-            g_form.setDisplay('primary_key', true);
-        }
+//         } else {
+//             g_form.setDisplay('primary_key', true);
+//         }
     } else {
-        g_form.setMandatory('device', false);
-        g_form.setMandatory('asset', true);
-        g_form.setDisplay('device', false);
-        g_form.setDisplay('asset', true);
-        g_form.setDisplay('device_ref', false);
-        g_form.setDisplay('asset_ref', false);
-        if (g_form.getValue('mapped_data') == '') {
-            g_form.setDisplay('mapped_data', false);
-        } else {
-            g_form.setDisplay('mapped_data', true);
-        }
-		if (g_form.getValue('primary_key') == '') {
-            g_form.setDisplay('primary_key', false);
-        } else {
-            g_form.setDisplay('primary_key', true);
-        }
+      //  g_form.setMandatory('device', false);
+      //  g_form.setMandatory('asset', true);
+      //  g_form.setDisplay('device', false);
+       // g_form.setDisplay('asset', true);
+     //   g_form.setDisplay('device_ref', false);
+      //  g_form.setDisplay('asset_ref', false);
+//         if (g_form.getValue('mapped_data') == '') {
+//             g_form.setDisplay('mapped_data', false);
+//         } else {
+//             g_form.setDisplay('mapped_data', true);
+//         }
+//         if (g_form.getValue('primary_key') == '') {
+//             g_form.setDisplay('primary_key', false);
+//         } else {
+//             g_form.setDisplay('primary_key', true);
+//         }
     }
 
 }]]></script>
@@ -76,7 +76,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>b4fccdcb071901107f04f96d7c1ed078</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>Cisco_Hide_DeviceAsset</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -84,7 +84,7 @@
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_client_b4fccdcb071901107f04f96d7c1ed078</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-08-29 10:57:31</sys_updated_on>
+        <sys_updated_on>2022-11-10 05:06:00</sys_updated_on>
         <table>x_caci_cisco_bcs_align_cmdb</table>
         <type>onChange</type>
         <ui_type>0</ui_type>

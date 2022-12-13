@@ -6,7 +6,7 @@
         <action_insert>true</action_insert>
         <action_query>false</action_query>
         <action_update>false</action_update>
-        <active>true</active>
+        <active>false</active>
         <add_message>false</add_message>
         <advanced>true</advanced>
         <change_fields>false</change_fields>
@@ -39,9 +39,9 @@
 	json.feedback = current.overall_feedback + "";
 	json.email = current.username+"";
 		
-	var gr = new GlideRecord("x_caci_cisco_bcs_configuration");
-	if(gr.get("02b2c23a2fb310108956ea5ef699b60c")){
-	var response = appUtil.makeApiCall("POST","/feedback",JSON.stringify(json),gr);
+	var bcsrec = new GlideRecord("x_caci_cisco_bcs_configuration");
+	if(bcsrec.get("02b2c23a2fb310108956ea5ef699b60c")){
+	var response = appUtil.makeApiCall("POST","/feedback",JSON.stringify(json),bcsrec);
 	if(response.getStatusCode() + "" =="201"){
 		logger.info("Inside BCS Feedback Post Insert BR feedback has been succesful submit to Cisco BCS");
 	}else{
@@ -58,7 +58,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>d922eeaf2f6c2010cab4d5072799b6ec</sys_id>
-        <sys_mod_count>20</sys_mod_count>
+        <sys_mod_count>22</sys_mod_count>
         <sys_name>BCS Feedback Post Insert BR</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -66,7 +66,7 @@
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_d922eeaf2f6c2010cab4d5072799b6ec</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2021-01-12 06:00:19</sys_updated_on>
+        <sys_updated_on>2022-11-14 06:02:08</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_application">
+    <sys_ui_application action="DELETE">
+        <active>true</active>
+        <hint/>
+        <name>Cisco CBP Summary Dump V2</name>
+        <order/>
+        <roles>x_caci_cisco_bcs.cisco_cbp_summary_dump_v2_user</roles>
+        <sys_class_name>sys_ui_application</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-02-21 05:14:59</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7e253fa507b10110172aff808c1ed0f2</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Cisco CBP Summary Dump V2</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_application_7e253fa507b10110172aff808c1ed0f2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-02-21 05:14:59</sys_updated_on>
+    </sys_ui_application>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_ui_application_7e253fa507b10110172aff808c1ed0f2</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_application"><sys_ui_application action="INSERT_OR_UPDATE"><active>true</active><hint/><name>Cisco CBP Summary Dump V2</name><order/><roles>x_caci_cisco_bcs.cisco_cbp_summary_dump_v2_user</roles><sys_class_name>sys_ui_application</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-02-21 05:14:59</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>7e253fa507b10110172aff808c1ed0f2</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Cisco CBP Summary Dump V2</sys_name><sys_overrides/><sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package><sys_policy/><sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope><sys_update_name>sys_ui_application_7e253fa507b10110172aff808c1ed0f2</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-02-21 05:14:59</sys_updated_on></sys_ui_application></record_update>]]></payload>
+        <payload_hash>1468764178</payload_hash>
+        <record_name>Cisco CBP Summary Dump V2</record_name>
+        <reverted_from/>
+        <source>0f3204772f2ad510660cbcb62799b65e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:44:15</sys_created_on>
+        <sys_id>2cbba3fa2f629110660cbcb62799b60e</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_recorded_at>183ee8e6e2b0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 14:18:47</sys_updated_on>
+        <type>Application Menu</type>
+        <update_guid>f6257fa5c8b10110c394ee90c7cbaf00</update_guid>
+        <update_guid_history>f6257fa5c8b10110c394ee90c7cbaf00:1468764178</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-10 06:21:44</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_application">sys_ui_application</sys_db_object>
+        <sys_id>55c887424c0d4024a71920781acc3164</sys_id>
+        <sys_metadata>7e253fa507b10110172aff808c1ed0f2</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Cisco CBP Summary Dump V2</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_ui_application_7e253fa507b10110172aff808c1ed0f2</sys_update_name>
+        <sys_update_version display_value="sys_ui_application_7e253fa507b10110172aff808c1ed0f2">2cbba3fa2f629110660cbcb62799b60e</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-10 06:21:44</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

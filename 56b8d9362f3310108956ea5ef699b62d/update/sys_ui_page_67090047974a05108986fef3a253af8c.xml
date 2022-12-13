@@ -226,7 +226,6 @@ function gettingDataTimescale(time, func, div) {
 		var id = new Cisco_ClientServerBridge().getclientid();
 	id;	
 	</g:evaluate>
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>	
 	<g:inline template="reporting_includes.xml" />	
 	<body>
 		<div class="row">
@@ -342,13 +341,13 @@ function gettingDataTimescale(time, func, div) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-03-09 14:10:31</sys_created_on>
         <sys_id>67090047974a05108986fef3a253af8c</sys_id>
-        <sys_mod_count>296</sys_mod_count>
+        <sys_mod_count>301</sys_mod_count>
         <sys_name>Crash_Insights</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
-        <sys_policy/>
+        <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_page_67090047974a05108986fef3a253af8c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-11-08 07:31:22</sys_updated_on>
+        <sys_updated_on>2022-11-09 16:25:56</sys_updated_on>
     </sys_ui_page>
 </record_update>

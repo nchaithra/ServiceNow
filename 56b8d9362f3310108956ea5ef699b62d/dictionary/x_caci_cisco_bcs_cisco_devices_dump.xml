@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Devices Dump" max_length="40" name="x_caci_cisco_bcs_cisco_devices_dump" sizeclass="0" type="collection">
+        <element label="collector" max_length="255" name="collector" type="string"/>
+        <element label="configregister" max_length="500" name="configregister" type="string"/>
+        <element label="configstatus" max_length="255" name="configstatus" type="string"/>
+        <element label="configtime" max_length="255" name="configtime" type="glide_date_time"/>
+        <element label="createdate" max_length="255" name="createdate" type="glide_date_time"/>
+        <element label="deviceid" max_length="255" name="deviceid" type="string"/>
+        <element label="deviceip" max_length="255" name="deviceip" type="string"/>
+        <element label="devicename" max_length="500" name="devicename" type="string"/>
+        <element label="devicestatus" max_length="255" name="devicestatus" type="string"/>
+        <element label="devicesysname" max_length="500" name="devicesysname" type="string"/>
+        <element label="devicetype" max_length="500" name="devicetype" type="string"/>
+        <element label="deviceurl" max_length="2000" name="deviceurl" type="url"/>
+        <element label="featuresetdesc" max_length="1000" name="featuresetdesc" type="string"/>
+        <element label="imagename" max_length="500" name="imagename" type="string"/>
+        <element label="inseedfile" max_length="255" name="inseedfile" type="string"/>
+        <element label="inventorystatus" max_length="500" name="inventorystatus" type="string"/>
+        <element label="inventorytime" max_length="255" name="inventorytime" type="glide_date_time"/>
+        <element label="ipaddress" max_length="255" name="ipaddress" type="string"/>
+        <element label="lastreset" max_length="1000" name="lastreset" type="string"/>
+        <element label="productfamily" max_length="1000" name="productfamily" type="string"/>
+        <element label="productid" max_length="500" name="productid" type="string"/>
+        <element label="producttype" max_length="1000" name="producttype" type="string"/>
+        <element label="resetreason" max_length="1000" name="resetreason" type="string"/>
+        <element label="swtype" max_length="255" name="swtype" type="string"/>
+        <element label="swversion" max_length="255" name="swversion" type="string"/>
+        <element label="syscontact" max_length="1000" name="syscontact" type="string"/>
+        <element label="sysdescription" max_length="2500" name="sysdescription" type="string"/>
+        <element label="syslocation" max_length="500" name="syslocation" type="string"/>
+        <element label="sysobjectid" max_length="500" name="sysobjectid" type="string"/>
+        <element label="userfield1" max_length="500" name="userfield1" type="string"/>
+        <element label="userfield2" max_length="500" name="userfield2" type="string"/>
+        <element label="userfield3" max_length="500" name="userfield3" type="string"/>
+        <element label="userfield4" max_length="500" name="userfield4" type="string"/>
+    </element>
+</database>

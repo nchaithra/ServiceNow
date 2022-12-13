@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="SW Track Maintenance Upgrade Recommendations" max_length="40" name="x_caci_cisco_bcs_cisco_sw_track_maintenance_upgrade_recommendations" sizeclass="30" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element display="true" label="Software Name" max_length="2000" name="softwarename" type="string"/>
+        <element label="SMU/PIE" max_length="2000" name="softwarerole" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackId" max_length="500" name="softwaretrackid" type="string"/>
+        <element label="Track Name" max_length="2000" name="softwaretrackname" type="string"/>
+        <element label="Software Track Version Type" max_length="2000" name="softwaretrackrecommendationhistory" type="string"/>
+        <element label="Software Version" max_length="100" name="softwareversion" type="string"/>
+    </element>
+</database>

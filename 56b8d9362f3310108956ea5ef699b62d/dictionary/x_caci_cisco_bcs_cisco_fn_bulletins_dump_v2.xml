@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco FN Bulletins Dump V2" max_length="40" name="x_caci_cisco_bcs_cisco_fn_bulletins_dump_v2" sizeclass="0" type="collection">
+        <element label="bulletinFirstPublishedTimestamp" max_length="500" name="bulletinfirstpublishedtimestamp" type="glide_date_time"/>
+        <element label="bulletinLastUpdatedTimestamp" max_length="40" name="bulletinlastupdatedtimestamp" type="glide_date_time"/>
+        <element label="bulletinMappingCaveat" max_length="1000" name="bulletinmappingcaveat" type="string"/>
+        <element label="bulletinTitle" max_length="2500" name="bulletintitle" type="string"/>
+        <element label="bulletinUrl" max_length="1000" name="bulletinurl" type="string"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="fieldNoticeId" max_length="255" name="fieldnoticeid" type="string"/>
+        <element label="fieldNoticeType" max_length="500" name="fieldnoticetype" type="string"/>
+        <element label="problemDescription" max_length="10000" name="problemdescription" type="string"/>
+    </element>
+</database>

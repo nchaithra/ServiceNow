@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="cmdb_metadata_hosting">
+    <cmdb_metadata_hosting action="DELETE">
+        <child_type>cmdb_ci_spkg</child_type>
+        <is_reverse>false</is_reverse>
+        <parent_type>cmdb_ci_logical_datacenter</parent_type>
+        <rel_type display_value="Hosted on::Hosts">5f985e0ec0a8010e00a9714f2a172815</rel_type>
+        <sys_class_name>cmdb_metadata_hosting</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-20 11:08:22</sys_created_on>
+        <sys_id>c53d0e932faed110660cbcb62799b624</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>5f985e0ec0a8010e00a9714f2a172815</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>cmdb_metadata_hosting_c53d0e932faed110660cbcb62799b624</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-20 11:08:22</sys_updated_on>
+    </cmdb_metadata_hosting>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>cmdb_metadata_hosting_c53d0e932faed110660cbcb62799b624</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="cmdb_metadata_hosting"><cmdb_metadata_hosting action="INSERT_OR_UPDATE"><child_type>cmdb_ci_spkg</child_type><is_reverse>false</is_reverse><parent_type>cmdb_ci_logical_datacenter</parent_type><rel_type display_value="Hosted on::Hosts">5f985e0ec0a8010e00a9714f2a172815</rel_type><sys_class_name>cmdb_metadata_hosting</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-10-20 11:08:22</sys_created_on><sys_id>c53d0e932faed110660cbcb62799b624</sys_id><sys_mod_count>0</sys_mod_count><sys_name>5f985e0ec0a8010e00a9714f2a172815</sys_name><sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package><sys_policy/><sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope><sys_update_name>cmdb_metadata_hosting_c53d0e932faed110660cbcb62799b624</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-10-20 11:08:22</sys_updated_on></cmdb_metadata_hosting></record_update>]]></payload>
+        <payload_hash>31479159</payload_hash>
+        <record_name>5f985e0ec0a8010e00a9714f2a172815</record_name>
+        <reverted_from/>
+        <source>061ae7762f629110660cbcb62799b615</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-20 11:08:23</sys_created_on>
+        <sys_id>013d0e932faed110660cbcb62799b627</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183f51478740000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-20 11:08:23</sys_updated_on>
+        <type>CMDB Metadata Hosting Rules</type>
+        <update_guid>093d0e93fdaed110bb859dd875f08f26</update_guid>
+        <update_guid_history>093d0e93fdaed110bb859dd875f08f26:31479159</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="Hosted on::Hosts">f277eb6b2fa6d510660cbcb62799b6fe</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-21 12:21:17</sys_created_on>
+        <sys_db_object display_value="" name="cmdb_metadata_hosting">cmdb_metadata_hosting</sys_db_object>
+        <sys_id>40dfd987891a4798a2190151c09f9490</sys_id>
+        <sys_metadata>c53d0e932faed110660cbcb62799b624</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>5f985e0ec0a8010e00a9714f2a172815</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>cmdb_metadata_hosting_c53d0e932faed110660cbcb62799b624</sys_update_name>
+        <sys_update_version display_value="cmdb_metadata_hosting_c53d0e932faed110660cbcb62799b624">013d0e932faed110660cbcb62799b627</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 12:21:17</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

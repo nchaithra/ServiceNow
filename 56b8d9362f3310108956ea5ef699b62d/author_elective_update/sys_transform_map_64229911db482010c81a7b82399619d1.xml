@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_map">
+    <sys_transform_map action="DELETE">
+        <active>true</active>
+        <copy_empty_fields>true</copy_empty_fields>
+        <create_new_record_on_empty_coalesce_fields>false</create_new_record_on_empty_coalesce_fields>
+        <enforce_mandatory_fields>No</enforce_mandatory_fields>
+        <name>Cisco Software Lifecycle TM</name>
+        <order>100</order>
+        <run_business_rules>false</run_business_rules>
+        <run_script>true</run_script>
+        <script><![CDATA[(function transformRow(source, target, map, log, isUpdate) {
+
+	target.isdeleted = false;
+
+})(source, target, map, log, action==="update");]]></script>
+        <source_table>x_caci_cisco_bcs_cisco_software_lifecycle_dump</source_table>
+        <sys_class_name>sys_transform_map</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-10-23 06:39:19</sys_created_on>
+        <sys_id>64229911db482010c81a7b82399619d1</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Cisco Software Lifecycle TM</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_transform_map_64229911db482010c81a7b82399619d1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-02-13 06:12:56</sys_updated_on>
+        <target_table>x_caci_cisco_bcs_cisco_software_lifecycle</target_table>
+    </sys_transform_map>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_transform_map_64229911db482010c81a7b82399619d1</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_map"&gt;&lt;sys_transform_map action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;copy_empty_fields&gt;true&lt;/copy_empty_fields&gt;&lt;create_new_record_on_empty_coalesce_fields&gt;false&lt;/create_new_record_on_empty_coalesce_fields&gt;&lt;enforce_mandatory_fields&gt;No&lt;/enforce_mandatory_fields&gt;&lt;name&gt;Cisco Software Lifecycle TM&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;run_business_rules&gt;false&lt;/run_business_rules&gt;&lt;run_script&gt;true&lt;/run_script&gt;&lt;script&gt;&lt;![CDATA[(function transformRow(source, target, map, log, isUpdate) {
+
+	target.isdeleted = false;
+
+})(source, target, map, log, action==="update");]]&gt;&lt;/script&gt;&lt;source_table&gt;x_caci_cisco_bcs_cisco_software_lifecycle_dump&lt;/source_table&gt;&lt;sys_class_name&gt;sys_transform_map&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-10-23 06:39:19&lt;/sys_created_on&gt;&lt;sys_id&gt;64229911db482010c81a7b82399619d1&lt;/sys_id&gt;&lt;sys_mod_count&gt;3&lt;/sys_mod_count&gt;&lt;sys_name&gt;Cisco Software Lifecycle TM&lt;/sys_name&gt;&lt;sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_package&gt;&lt;sys_policy&gt;read&lt;/sys_policy&gt;&lt;sys_scope display_value="Cisco BCS Operational Insights"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_map_64229911db482010c81a7b82399619d1&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-02-13 06:12:56&lt;/sys_updated_on&gt;&lt;target_table&gt;x_caci_cisco_bcs_cisco_software_lifecycle&lt;/target_table&gt;&lt;/sys_transform_map&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1227080153</payload_hash>
+        <record_name>Cisco Software Lifecycle TM</record_name>
+        <reverted_from/>
+        <source>c0e7e3fe2f229110660cbcb62799b692</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:31:29</sys_created_on>
+        <sys_id>29c86fb22f629110660cbcb62799b63a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183ee82bced0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-19 04:31:29</sys_updated_on>
+        <type>Table Transform Map</type>
+        <update_guid>fa6987a13b1220104f29ddae3c27364c</update_guid>
+        <update_guid_history>fa6987a13b1220104f29ddae3c27364c:1776846177,57575653e561a010b6d29ebc81840ae2:664082010,f83f112c75706010d79b3fa9ab843395:159252758,270ba5929c2820107eac80552686be90:-1866631623</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-17 12:24:11</sys_created_on>
+        <sys_db_object display_value="" name="sys_transform_map">sys_transform_map</sys_db_object>
+        <sys_id>53e7156d73224710bf4c18e7e790ac40</sys_id>
+        <sys_metadata>64229911db482010c81a7b82399619d1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Cisco Software Lifecycle TM</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_transform_map_64229911db482010c81a7b82399619d1</sys_update_name>
+        <sys_update_version display_value="sys_transform_map_64229911db482010c81a7b82399619d1">29c86fb22f629110660cbcb62799b63a</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-17 12:24:11</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

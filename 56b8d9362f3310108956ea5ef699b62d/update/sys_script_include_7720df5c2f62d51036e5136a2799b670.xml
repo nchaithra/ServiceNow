@@ -71,17 +71,16 @@ CMDB_IRE.prototype = {
                 identyfyEntry.addQuery('table=' + induvalRecordData[i].sys_class_name);
                 identyfyEntry.query();
                 while (identyfyEntry.next()) {
-                    gs.info("values" + induvalRecordData[i].sys_id);
+
                     attributesArray.push(identyfyEntry.attributes.toString());
                 }
-                //gs.info(attributesArray);
+
                 var attributesArrayString = attributesArray.toString();
                 var attributesArraySplit = attributesArrayString.split(',');
-                gs.info("attribute" + attributesArraySplit);
+
                 var values = {};
                 for (var j = 0; j < attributesArraySplit.length; j++) {
-                    //gs.info(attributesArraySplit[j].toString())
-                    //var test = attributesArraySplit[j].toString();
+
                     gs.info("test" + attributesArraySplit[j]);
                     var deviceattribute = new GlideRecord(induvalRecordData[i].sys_class_name);
                     deviceattribute.addQuery("sys_id", induvalRecordData[i].sys_id);
@@ -94,7 +93,7 @@ CMDB_IRE.prototype = {
                             values[attributesArraySplit[j]] = deviceattribute.getValue(attributesArraySplit[j]);
                         }
                     }
-                } // gs.info(JSON.stringify(values ,0,4));
+                }
                 objRelationPlayLoad.className = induvalRecordData[i].sys_class_name;
                 objRelationPlayLoad.lookup = [];
                 objRelationPlayLoad.values = values;
@@ -106,28 +105,27 @@ CMDB_IRE.prototype = {
                     gs.info("values" + induvalRecordData[i].sys_id);
                     attributesArray.push(identyfyEntry1.attributes.toString());
                 }
-				
+
                 //gs.info(attributesArray);
                 var attributesArrayString1 = attributesArray.toString();
                 var attributesArraySplit1 = attributesArrayString1.split(',');
-                gs.info("attribute" + attributesArraySplit1);
+
                 var values = {};
                 for (var j = 0; j < attributesArraySplit1.length; j++) {
-                    //gs.info(attributesArraySplit[j].toString())
-                    //var test = attributesArraySplit[j].toString();
-                    gs.info("test" + attributesArraySplit1[j]);
+
+
                     var deviceattribute1 = new GlideRecord(induvalRecordData[i].sys_class_name);
                     deviceattribute1.addQuery("sys_id", induvalRecordData[i].sys_id);
                     deviceattribute1.query();
                     if (deviceattribute1.next()) {
-                        gs.info("record sys_id" + induvalRecordData[i].sys_id);
+
                         if (deviceattribute1.getValue(attributesArraySplit1[j]) == null) {
                             values[attributesArraySplit1[j]] = '';
                         } else {
                             values[attributesArraySplit1[j]] = deviceattribute1.getValue(attributesArraySplit1[j]);
                         }
                     }
-                } // gs.info(JSON.stringify(values ,0,4));
+                }
                 objRelationPlayLoad.className = induvalRecordData[i].sys_class_name;
                 objRelationPlayLoad.lookup = [];
                 objRelationPlayLoad.values = values;
@@ -139,69 +137,87 @@ CMDB_IRE.prototype = {
             relations.push(objectRelation);
         }
         finalobj.items = items;
-        //finalobj.items.push(getParaentCI_Payload(ci_sys_id, ci_class));
+
         finalobj.relations = relations;
-        gs.info("55final payload" + JSON.stringify(finalobj, 0, 4));
+
         return finalobj;
     },
 
     getParaentCI_Payload: function(ciSysID, ciClass, demo) {
-        //         var currentCI_attributesArray = [];
-        //         var currentCI = new GlideRecord(ciClass);
-        //         currentCI.addQuery('sys_id', ciSysID);
-        //         currentCI.query();
-        //         if (currentCI.next()) {
-        //             var currentCI_Identifire = new GlideRecord('cmdb_identifier');
-        //             currentCI_Identifire.addQuery('applies_to=' + ciClass);
-        //             currentCI_Identifire.query();
-        //             if (currentCI_Identifire.next()) {
 
-        //                 var currentCI_identyfyEntry = new GlideRecord('cmdb_identifier_entry');
-        //                 currentCI_identyfyEntry.addQuery('identifier=' + currentCI_Identifire.sys_id.toString());
-        //                 currentCI_identyfyEntry.query();
-        //                 while (currentCI_identyfyEntry.next()) {
-        //                     currentCI_attributesArray.push(currentCI_identyfyEntry.attributes.toString());
-        //                 }
-        //             }
-        //             var attributesArrayString = currentCI_attributesArray.toString();
-        //             var currentCI_attributesArray = attributesArrayString.split(',');
-        //             var currentCiValues = {};
-        //             for (var j = 0; j < currentCI_attributesArray.length; j++) {
+        var currentCI_attributesArray = [];
+        var currentCI = new GlideRecord(ciClass);
+        currentCI.addQuery('sys_id', ciSysID);
+        currentCI.query();
+        if (currentCI.next()) {
+            var currentCI_Identifire = new GlideRecord('cmdb_identifier');
+            currentCI_Identifire.addQuery('applies_to=' + ciClass);
+            currentCI_Identifire.query();
+            if (currentCI_Identifire.next()) {
+
+                var currentCI_identyfyEntry = new GlideRecord('cmdb_identifier_entry');
+                currentCI_identyfyEntry.addQuery('identifier=' + currentCI_Identifire.sys_id.toString());
+                currentCI_identyfyEntry.query();
+                while (currentCI_identyfyEntry.next()) {
+                    currentCI_attributesArray.push(currentCI_identyfyEntry.attributes.toString());
+                }
+            }
+            var attributesArrayString = currentCI_attributesArray.toString();
+            var currentCI_attributesArray = attributesArrayString.split(',');
+            var currentCiValues = {};
+            var resultdata = {};
+            for (var j = 0; j < currentCI_attributesArray.length; j++) {
 
 
 
-        //                 var test = currentCI_attributesArray[j].toString();
-        //                 if (currentCI.getValue(test) == null) {
-        //                     currentCiValues[test] = '';
-        //                 } else {
-        //                     currentCiValues[test] = currentCI.getValue(test);
-        //                 }
+                var test = currentCI_attributesArray[j].toString();
+                if (currentCI.getValue(test) == null) {
+                    currentCiValues[test] = '';
+                } else {
+                    resultdata[test] = currentCI.getValue(test);
+                    //currentCiValues[test] = currentCI.getValue(test);
+                }
 
-        //             }
+            }
 
-        var current_ci_obj_final = {};
-        current_ci_obj_final.className = ciClass.toString();
-        current_ci_obj_final.lookup = [];
-        //current_ci_obj_final.values = currentCiValues;
-        current_ci_obj_final.values = demo;
-        //gs.info(JSON.stringify(current_ci_obj_final ,0,4));
-        return current_ci_obj_final;
-        // }
+            var json1 = JSON.stringify(demo, 0, 4);
+            var json2 = JSON.stringify(resultdata, 0, 4);
+
+            var output = {};
+
+            output = this.jsonConcat(output, demo);
+            output = this.jsonConcat(output, resultdata);
+            var current_ci_obj_final = {};
+            current_ci_obj_final.className = ciClass.toString();
+            current_ci_obj_final.lookup = [];
+
+            current_ci_obj_final.values = output;
+
+            return current_ci_obj_final;
+        }
+
     },
+    jsonConcat: function(o1, o2) {
 
+        for (var key in o2) {
+            o1[key] = o2[key];
+        }
+
+        return o1;
+    },
     type: 'CMDB_IRE'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2022-10-11 08:47:45</sys_created_on>
         <sys_id>7720df5c2f62d51036e5136a2799b670</sys_id>
-        <sys_mod_count>21</sys_mod_count>
+        <sys_mod_count>55</sys_mod_count>
         <sys_name>CMDB_IRE</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_script_include_7720df5c2f62d51036e5136a2799b670</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-10-21 12:41:33</sys_updated_on>
+        <sys_updated_on>2022-11-17 11:08:35</sys_updated_on>
     </sys_script_include>
 </record_update>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>unload</directory>
+        <documentkey>1c590685c0a8018b2a473a7159ff5d9a</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_group">
+    <sys_user_group action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <cost_center/>
+        <default_assignee/>
+        <description>Responsible for Return Material Authorization approvals
+			and RMA number allocations in Inventory Management</description>
+        <email/>
+        <exclude_manager>false</exclude_manager>
+        <include_members>false</include_members>
+        <manager/>
+        <name>RMA Approvers</name>
+        <parent/>
+        <roles/>
+        <source/>
+        <sys_created_by>dariusz.maint</sys_created_by>
+        <sys_created_on>2022-03-17 21:01:31</sys_created_on>
+        <sys_id>1c590685c0a8018b2a473a7159ff5d9a</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>dariusz.maint</sys_updated_by>
+        <sys_updated_on>2022-03-17 21:12:50</sys_updated_on>
+        <type/>
+    </sys_user_group>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-14 08:51:07</sys_created_on>
+        <sys_id>968d5e972f0f5550660cbcb62799b6e6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>RMA Approvers</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_metadata_link_968d5e972f0f5550660cbcb62799b6e6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-14 08:51:07</sys_updated_on>
+        <tablename>sys_user_group</tablename>
+    </sys_metadata_link>
+</record_update>

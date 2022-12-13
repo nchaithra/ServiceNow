@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Unidentified Inventory Details" max_length="40" name="x_caci_cisco_bcs_unidentified_inventory_details" sizeclass="288" type="collection">
+        <element label="Collector Name" max_length="255" name="collectorname" type="string"/>
+        <element label="Client ID" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Incident Reference" max_length="4000" name="incident_reference" reference="incident" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element label="Last Updated Timestamp" max_length="40" name="lastupdatedtimestamp" type="glide_date_time"/>
+        <element label="Seen By Managed Device Name" max_length="1000" name="seenbymanageddevicename" type="string"/>
+        <element label="Unidentified Device Ip Address" max_length="255" name="unidentifieddeviceipaddress" type="string"/>
+        <element label="Unidentified Device Name" max_length="255" name="unidentifieddevicename" type="string"/>
+        <element label="Unidentified Device Platform" max_length="255" name="unidentifieddeviceplatform" type="string"/>
+        <element label="Unidentified Device Score" max_length="255" name="unidentifieddevicescore" type="string"/>
+        <element label="Unidentified Device Source" max_length="255" name="unidentifieddevicesource" type="string"/>
+        <element label="Unidentified Device Status" max_length="255" name="unidentifieddevicestatus" type="string"/>
+    </element>
+</database>

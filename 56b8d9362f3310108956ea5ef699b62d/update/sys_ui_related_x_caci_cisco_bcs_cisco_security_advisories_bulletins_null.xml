@@ -2,7 +2,7 @@
     <sys_ui_related sys_domain="global" table="x_caci_cisco_bcs_cisco_security_advisories_bulletins" version="2" view="">
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Security Advisories Bulletins - Default view" name="x_caci_cisco_bcs_cisco_security_advisories_bulletins" related_list="NULL" sys_domain="global" view="Default view">afe2f46f2f98a010bd2551172799b614</list_id>
+            <list_id display_value="Security Advisories Bulletins - Default view" name="x_caci_cisco_bcs_cisco_security_advisories_bulletins" related_list="NULL" sys_domain="global" view="Default view">afe2f46f2f98a010bd2551172799b614</list_id>
             <order_by/>
             <position>0</position>
             <related_list>REL:279225362fd02010bd2551172799b6dd</related_list>
@@ -15,7 +15,7 @@
             <sys_updated_on>2020-11-11 14:17:43</sys_updated_on>
         </sys_ui_related_list_entry>
         <sys_ui_related_list action="INSERT_OR_UPDATE">
-            <calculated_name>Cisco Security Advisories Bulletins - Default view</calculated_name>
+            <calculated_name>Security Advisories Bulletins - Default view</calculated_name>
             <filter/>
             <name>x_caci_cisco_bcs_cisco_security_advisories_bulletins</name>
             <order_by/>

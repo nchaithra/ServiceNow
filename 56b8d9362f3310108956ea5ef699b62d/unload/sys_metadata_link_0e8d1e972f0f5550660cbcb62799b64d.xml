@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>unload</directory>
+        <documentkey>0c5e2a7ce4001410f877ce457cda6b98</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_group">
+    <sys_user_group action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <cost_center/>
+        <default_assignee/>
+        <description>Approval group for Business Application lifecycle management service requests for Registering a new Business Application</description>
+        <email/>
+        <exclude_manager>false</exclude_manager>
+        <include_members>false</include_members>
+        <manager/>
+        <name>Business Application Registration Approval Group</name>
+        <parent/>
+        <roles/>
+        <source/>
+        <sys_created_by>maint</sys_created_by>
+        <sys_created_on>2020-04-06 03:47:08</sys_created_on>
+        <sys_id>0c5e2a7ce4001410f877ce457cda6b98</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>maint</sys_updated_by>
+        <sys_updated_on>2020-07-29 04:02:26</sys_updated_on>
+        <type>1cb8ab9bff500200158bffffffffff62</type>
+    </sys_user_group>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-14 08:51:07</sys_created_on>
+        <sys_id>0e8d1e972f0f5550660cbcb62799b64d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Business Application Registration Approval Group</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_metadata_link_0e8d1e972f0f5550660cbcb62799b64d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-14 08:51:07</sys_updated_on>
+        <tablename>sys_user_group</tablename>
+    </sys_metadata_link>
+</record_update>

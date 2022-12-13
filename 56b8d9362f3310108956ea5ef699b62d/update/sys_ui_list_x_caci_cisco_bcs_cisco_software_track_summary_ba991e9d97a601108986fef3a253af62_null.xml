@@ -113,7 +113,7 @@
             <name>x_caci_cisco_bcs_cisco_sw_track_maintenance_upgrade_compliance</name>
             <parent>x_caci_cisco_bcs_cisco_software_track_summary</parent>
             <position/>
-            <relationship display_value="Cisco SMU/PIE Compliances">ba991e9d97a601108986fef3a253af62</relationship>
+            <relationship display_value="SMU/PIE Compliances">ba991e9d97a601108986fef3a253af62</relationship>
             <sum>false</sum>
             <sys_class_name>sys_ui_list</sys_class_name>
             <sys_created_by>admin</sys_created_by>

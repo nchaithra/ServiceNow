@@ -12,7 +12,7 @@
         <name>Cisco BCS Dashboard</name>
         <no_tabs>false</no_tabs>
         <order/>
-        <owner display_value="Suman Guha">aabb303d1b26201026489607b04bcb3b</owner>
+        <owner display_value="">aabb303d1b26201026489607b04bcb3b</owner>
         <restrict_to_roles/>
         <role_override>true</role_override>
         <roles/>

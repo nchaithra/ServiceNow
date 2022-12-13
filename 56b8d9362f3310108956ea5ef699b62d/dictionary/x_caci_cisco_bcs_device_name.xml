@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Device Name" max_length="40" name="x_caci_cisco_bcs_device_name" sizeclass="0" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="Date" max_length="40" name="date" type="glide_date"/>
+        <element label="Description" max_length="500" name="description" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="DeviceId" max_length="100" name="deviceid" reference="x_caci_cisco_bcs_cisco_devices" type="reference"/>
+        <element label="DeviceName" max_length="100" name="devicename" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="EventCount" max_length="100" name="eventcount" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element label="MessageType" max_length="1000" name="messagetype" type="string"/>
+        <element label="Recommendation" max_length="500" name="recommendation" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="reviewedseverity" max_length="100" name="reviewedseverity" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="syslogeventseverity" max_length="100" name="syslogeventseverity" type="integer"/>
+        <element label="Syslog ID" max_length="40" name="syslog_id" type="string"/>
+        <index name="index">
+            <element name="deviceid"/>
+        </index>
+    </element>
+</database>

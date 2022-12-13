@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco CBP Rules Dump" max_length="40" name="x_caci_cisco_bcs_cisco_cbp_rules_dump" sizeclass="0" type="collection">
+        <element label="bpcaveat" max_length="500" name="bpcaveat" type="string"/>
+        <element label="bpcorrectiveaction" max_length="20000" name="bpcorrectiveaction" type="string"/>
+        <element label="bpdescription" max_length="20000" name="bpdescription" type="string"/>
+        <element label="bpnuggetid" max_length="255" name="bpnuggetid" type="string"/>
+        <element label="bpprimarytechnology" max_length="500" name="bpprimarytechnology" type="string"/>
+        <element label="bprecommendation" max_length="25000" name="bprecommendation" type="string"/>
+        <element label="bprisk" max_length="255" name="bprisk" type="string"/>
+        <element label="bpruleid" max_length="255" name="bpruleid" type="string"/>
+        <element label="bpsecondarytechnology" max_length="500" name="bpsecondarytechnology" type="string"/>
+        <element label="bptitle" max_length="1000" name="bptitle" type="string"/>
+        <element label="createdate" max_length="255" name="createdate" type="glide_date_time"/>
+        <element label="swtype" max_length="255" name="swtype" type="string"/>
+        <element label="updatedate" max_length="500" name="updatedate" type="string"/>
+    </element>
+</database>

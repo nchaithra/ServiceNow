@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco Field Notices Dump" max_length="40" name="x_caci_cisco_bcs_cisco_field_notices_dump" sizeclass="0" type="collection">
+        <element label="deviceid" max_length="255" name="deviceid" type="string"/>
+        <element label="fieldnoticeid" max_length="255" name="fieldnoticeid" type="string"/>
+        <element label="matchconfidence" max_length="500" name="matchconfidence" type="string"/>
+        <element label="matchconfidencereason" max_length="2000" name="matchconfidencereason" type="string"/>
+        <element label="physicalelementid" max_length="255" name="physicalelementid" type="string"/>
+    </element>
+</database>

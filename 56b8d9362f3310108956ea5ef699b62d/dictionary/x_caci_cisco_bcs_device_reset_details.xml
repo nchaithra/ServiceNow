@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Device Reset Details" max_length="40" name="x_caci_cisco_bcs_device_reset_details" sizeclass="31" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Device Id" max_length="40" name="deviceid" type="string"/>
+        <element label="Device Ip" max_length="255" name="deviceip" type="string"/>
+        <element label="Device Name" max_length="255" name="devicename" type="string"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false,no_sort=true,slushbucket_ref_no_expand=true" label="Incident Reference" max_length="1024" name="incident_reference" reference="incident" type="glide_list"/>
+        <element label="Inventory Timestamp" max_length="40" name="inventorytimestamp" type="glide_date_time"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element label="Last Reset Timestamp" max_length="40" name="lastresettimestamp" type="glide_date_time"/>
+        <element label="Product Family" max_length="255" name="productfamily" type="string"/>
+        <element label="Product Id" max_length="255" name="productid" type="string"/>
+        <element label="Reset Reason" max_length="255" name="resetreason" type="string"/>
+        <element label="Reset Type" max_length="255" name="resettype" type="string"/>
+        <element label="Risk Category" max_length="100" name="risk_category" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Risk Score" max_length="100" name="risk_score" type="float"/>
+        <element label="Software Type" max_length="255" name="softwaretype" type="string"/>
+        <element label="Software Version" max_length="255" name="softwareversion" type="string"/>
+        <element label="Total Reset" max_length="40" name="total_reset" type="string"/>
+    </element>
+</database>

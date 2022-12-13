@@ -15,6 +15,7 @@
         <form_link>false</form_link>
         <form_menu_button_v2>false</form_menu_button_v2>
         <form_style/>
+        <format_for_configurable_workspace>false</format_for_configurable_workspace>
         <hint/>
         <isolate_script>false</isolate_script>
         <list_action>false</list_action>
@@ -51,9 +52,10 @@ try {
             "secret": cl_secret,
             "scope": "api.bcs.manage"
         };
+		var tokens=gs.getProperty('x_caci_cisco_bcs.cisco.token');
         var request = new sn_ws.RESTMessageV2();
         request.setHttpMethod('POST');
-        request.setEndpoint('https://api-cx.cisco.com/torii-auth/v1/token');//  https://api-cx-stg.cisco.com/torii-auth/v1/token
+        request.setEndpoint(tokens);//  https://api-cx-stg.cisco.com/torii-auth/v1/token
         request.setRequestBody(JSON.stringify(body));
 
         request.setRequestHeader("Content-Type", 'Application/json');
@@ -61,7 +63,7 @@ try {
         // request.setRequestHeader('Host','');
         // request.setRequestHeader('Content-Length','');
 
-        var response = request.execute();
+        var response = request.executeAsync();
         var httpResponseStatus = response.getStatusCode();
         var httpResponsebody = response.getBody();
 
@@ -147,7 +149,7 @@ try {
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>84775d15db482010c81a7b82399619ec</sys_id>
-        <sys_mod_count>131</sys_mod_count>
+        <sys_mod_count>133</sys_mod_count>
         <sys_name>Save &amp; Import</sys_name>
         <sys_overrides/>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -155,7 +157,7 @@ try {
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_ui_action_84775d15db482010c81a7b82399619ec</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-10-11 08:51:35</sys_updated_on>
+        <sys_updated_on>2022-11-10 08:45:47</sys_updated_on>
         <table>x_caci_cisco_bcs_configuration</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>

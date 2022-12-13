@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="DELETE">
+        <active>true</active>
+        <map display_value="Cisco FN Bulletin TM">026b8560db502010c81a7b82399619c3</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+	try{
+		var dao = new Cisco_DAOScript();
+		var resultFnBulletins = dao.createReferences(target.field_notice_id, "field_notice_id", "fieldnoticeid", target.sys_id, "x_caci_cisco_bcs_cisco_field_notices", true,target.customer_id);
+
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","device_id","match_confidence=Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		target.vulnerable_devices_count = calculatedFieldValue;
+		target.update();
+
+
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","device_id","match_confidence=Potentially Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		target.potentially_vulnerable_devices_count = calculatedFieldValue;
+		target.update();
+
+
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","","match_confidence=Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		target.vulnerable_assets = calculatedFieldValue;
+		target.update();
+
+
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","","match_confidence=Potentially Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		target.potentially_vulnerable_assets = calculatedFieldValue;
+		target.update();
+
+
+	}catch(e) {
+		gs.info("on after resultFnBulletins:"+e);
+	}
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-26 11:17:38</sys_created_on>
+        <sys_id>a437dd182f38a010cab4d5072799b6f4</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_transform_script_a437dd182f38a010cab4d5072799b6f4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-09-20 08:10:22</sys_updated_on>
+        <when>onAfter</when>
+    </sys_transform_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_transform_script_a437dd182f38a010cab4d5072799b6f4</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_script"&gt;&lt;sys_transform_script action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;map display_value="Cisco FN Bulletin TM"&gt;026b8560db502010c81a7b82399619c3&lt;/map&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+	try{
+		var dao = new Cisco_DAOScript();
+		var resultFnBulletins = dao.createReferences(target.field_notice_id, "field_notice_id", "fieldnoticeid", target.sys_id, "x_caci_cisco_bcs_cisco_field_notices", true,target.customer_id);
+
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","device_id","match_confidence=Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		target.vulnerable_devices_count = calculatedFieldValue;
+		target.update();
+
+
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","device_id","match_confidence=Potentially Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		target.potentially_vulnerable_devices_count = calculatedFieldValue;
+		target.update();
+
+
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","","match_confidence=Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		target.vulnerable_assets = calculatedFieldValue;
+		target.update();
+
+
+		var calculatedFieldValue = dao.calculateField("x_caci_cisco_bcs_cisco_field_notices","","match_confidence=Potentially Vulnerable^field_notice_id=" + target.field_notice_id + "");
+		target.potentially_vulnerable_assets = calculatedFieldValue;
+		target.update();
+
+
+	}catch(e) {
+		gs.info("on after resultFnBulletins:"+e);
+	}
+})(source, map, log, target);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_transform_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-11-26 11:17:38&lt;/sys_created_on&gt;&lt;sys_id&gt;a437dd182f38a010cab4d5072799b6f4&lt;/sys_id&gt;&lt;sys_mod_count&gt;12&lt;/sys_mod_count&gt;&lt;sys_name&gt;onAfter&lt;/sys_name&gt;&lt;sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Cisco BCS Operational Insights"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_script_a437dd182f38a010cab4d5072799b6f4&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2022-09-20 08:10:22&lt;/sys_updated_on&gt;&lt;when&gt;onAfter&lt;/when&gt;&lt;/sys_transform_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-850755758</payload_hash>
+        <record_name>onAfter</record_name>
+        <reverted_from/>
+        <source>0f3204772f2ad510660cbcb62799b65e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:44:11</sys_created_on>
+        <sys_id>2fab23fa2f629110660cbcb62799b6b5</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_recorded_at>183ee8e5e810000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 14:18:12</sys_updated_on>
+        <type>Transform Script</type>
+        <update_guid>c5c40bed920a1110d7f30c1bcc326768</update_guid>
+        <update_guid_history>c5c40bed920a1110d7f30c1bcc326768:-850755758,fedbacf65e8d2010096d4a200277d80b:-1812937780,f3899de40b8520107683bcaa5bf73311:2057547090,ae79dde47a8520101ce8262253f20378:1634103927,989855e44d85201028b60c0654bb008e:76331614,2d889da41e85201021e7613fd47c5525:1693017530,288211682f0520109b9010f660599466:1146964130,0f6e05e86e812010463dcabea36c1bf2:-826530509,58f2229cb5382010891cd2cf5d834591:588326214,2ba425901d78a0107d19d26ab1b3c389:-1191407080,cea42590a278a01045aba983d96c0863:1468398193,2a4fd59c0038a01082dcd9acc15ac00a:-490782853,338999983338a01028cbe0ec30082d7a:1516323411</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-17 12:20:29</sys_created_on>
+        <sys_db_object display_value="" name="sys_transform_script">sys_transform_script</sys_db_object>
+        <sys_id>15f0cc089fcd4158a735af4c529a1d44</sys_id>
+        <sys_metadata>a437dd182f38a010cab4d5072799b6f4</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_transform_script_a437dd182f38a010cab4d5072799b6f4</sys_update_name>
+        <sys_update_version display_value="sys_transform_script_a437dd182f38a010cab4d5072799b6f4">2fab23fa2f629110660cbcb62799b6b5</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-17 12:20:29</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Incident- Device Relationship" max_length="40" name="x_caci_cisco_bcs_incident_device_relationship" sizeclass="54" type="collection">
+        <element attributes="edge_encryption_enabled=true" label="Count" max_length="40" name="count" type="integer"/>
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Incident Reference" max_length="32" name="incident_reference" reference="incident" type="reference"/>
+        <element label="List Of Devices" max_length="50000" name="list_of_devices" type="string_full_utf8"/>
+        <index name="index">
+            <element name="incident_reference"/>
+        </index>
+    </element>
+</database>

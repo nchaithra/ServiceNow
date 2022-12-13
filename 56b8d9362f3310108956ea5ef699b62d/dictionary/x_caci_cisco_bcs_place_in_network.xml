@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Place IN Network" max_length="40" name="x_caci_cisco_bcs_place_in_network" sizeclass="128" type="collection">
+        <element label="Client ID" max_length="255" name="customer_id" type="string"/>
+        <element label="Device Id" max_length="255" name="deviceid" type="string"/>
+        <element label="Device Name" max_length="255" name="devicename" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element label="Predicted Importance" max_length="255" name="predictedimportance" type="string"/>
+        <element label="Predicted Role" max_length="255" name="predictedrole" type="string"/>
+    </element>
+</database>

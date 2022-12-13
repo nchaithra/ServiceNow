@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_transform_script">
+    <sys_transform_script action="DELETE">
+        <active>true</active>
+        <map display_value="Cisco CBP Rules TM">7235e4e52f5020100a8bd39df699b61c</map>
+        <order>100</order>
+        <script><![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+	var dao = new Cisco_DAOScript();
+	
+	// CBP Summary 
+	var resultCbpSummary = dao.createReferences(target.bp_rule_id, "bp_rule_id", "cbp_rule", target.sys_id, "x_caci_cisco_bcs_cisco_cbp_summary", true);
+	if(resultCbpSummary) {
+		target.cbp_summary = resultCbpSummary + "";
+		target.update();
+	}
+	
+// 	target.update();
+
+})(source, map, log, target);]]></script>
+        <sys_class_name>sys_transform_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-11-26 11:40:23</sys_created_on>
+        <sys_id>0ebcd11c2f38a010cab4d5072799b622</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_transform_script_0ebcd11c2f38a010cab4d5072799b622</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-11-26 15:28:43</sys_updated_on>
+        <when>onAfter</when>
+    </sys_transform_script>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_transform_script_0ebcd11c2f38a010cab4d5072799b622</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update table="sys_transform_script"&gt;&lt;sys_transform_script action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;map display_value="Cisco CBP Rules TM"&gt;7235e4e52f5020100a8bd39df699b61c&lt;/map&gt;&lt;order&gt;100&lt;/order&gt;&lt;script&gt;&lt;![CDATA[(function runTransformScript(source, map, log, target /*undefined onStart*/ ) {
+
+	var dao = new Cisco_DAOScript();
+	
+	// CBP Summary 
+	var resultCbpSummary = dao.createReferences(target.bp_rule_id, "bp_rule_id", "cbp_rule", target.sys_id, "x_caci_cisco_bcs_cisco_cbp_summary", true);
+	if(resultCbpSummary) {
+		target.cbp_summary = resultCbpSummary + "";
+		target.update();
+	}
+	
+// 	target.update();
+
+})(source, map, log, target);]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_transform_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-11-26 11:40:23&lt;/sys_created_on&gt;&lt;sys_id&gt;0ebcd11c2f38a010cab4d5072799b622&lt;/sys_id&gt;&lt;sys_mod_count&gt;2&lt;/sys_mod_count&gt;&lt;sys_name&gt;onAfter&lt;/sys_name&gt;&lt;sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Cisco BCS Operational Insights"&gt;56b8d9362f3310108956ea5ef699b62d&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_transform_script_0ebcd11c2f38a010cab4d5072799b622&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-11-26 15:28:43&lt;/sys_updated_on&gt;&lt;when&gt;onAfter&lt;/when&gt;&lt;/sys_transform_script&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>-1925670785</payload_hash>
+        <record_name>onAfter</record_name>
+        <reverted_from/>
+        <source>c0e7e3fe2f229110660cbcb62799b692</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:31:29</sys_created_on>
+        <sys_id>65c86fb22f629110660cbcb62799b649</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>183ee82be520000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-19 04:31:29</sys_updated_on>
+        <type>Transform Script</type>
+        <update_guid>46031a946cb420101a4f1a4c7c529164</update_guid>
+        <update_guid_history>46031a946cb420101a4f1a4c7c529164:-390239268,399aca50ca3420103af9a39ae3ef47af:1211218778,81cedd5ce238a0100325ffef87e8e972:331294573</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-17 12:16:18</sys_created_on>
+        <sys_db_object display_value="" name="sys_transform_script">sys_transform_script</sys_db_object>
+        <sys_id>52c243720ebf4fd8a5c79860caaf7d90</sys_id>
+        <sys_metadata>0ebcd11c2f38a010cab4d5072799b622</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>onAfter</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_transform_script_0ebcd11c2f38a010cab4d5072799b622</sys_update_name>
+        <sys_update_version display_value="sys_transform_script_0ebcd11c2f38a010cab4d5072799b622">65c86fb22f629110660cbcb62799b649</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-17 12:16:18</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

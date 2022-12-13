@@ -2,7 +2,7 @@
     <pa_m2m_dashboard_tabs action="INSERT_OR_UPDATE">
         <dashboard display_value="Cisco BCS Dashboard">32963a1a1b9e305026489607b04bcb8f</dashboard>
         <home>false</home>
-        <homepage display_value="Cisco BCS Dashboard">5a28d5c62fec6010fd52d6ab2799b6a5</homepage>
+        <homepage/>
         <order>1</order>
         <sys_class_name>pa_m2m_dashboard_tabs</sys_class_name>
         <sys_created_by>sumangh1</sys_created_by>

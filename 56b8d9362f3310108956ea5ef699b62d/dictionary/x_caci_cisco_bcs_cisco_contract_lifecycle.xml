@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Contract Lifecycle" max_length="40" name="x_caci_cisco_bcs_cisco_contract_lifecycle" sizeclass="1386" type="collection">
+        <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Asset" max_length="32" name="asset" reference="x_caci_cisco_bcs_cisco_assets" type="reference"/>
+        <element label="Contract Site Address 1" max_length="500" name="contract_site_address_1" type="string"/>
+        <element label="Contract Site City" max_length="500" name="contract_site_city" type="string"/>
+        <element label="Contract Site Country" max_length="255" name="contract_site_country" type="string"/>
+        <element label="Contract Site Customer Name" max_length="500" name="contract_site_customer_name" type="string"/>
+        <element label="Contract Site State Province" max_length="255" name="contract_site_state_province" type="string"/>
+        <element label="Covered Product Line End Date" max_length="255" name="covered_product_line_end_date" type="glide_date_time"/>
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="ID" max_length="255" name="id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="255" name="isdeleted" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Is Covered" max_length="255" name="is_covered" type="boolean"/>
+        <element label="Parent Sr No" max_length="255" name="parent_sr_no" type="string"/>
+        <element label="Service Contract Number" max_length="1000" name="service_contract_number" type="string"/>
+        <element label="Service Line Descr" max_length="1000" name="service_line_descr" type="string"/>
+        <element label="Sr No" max_length="500" name="sr_no" type="string"/>
+        <element label="Warranty End Date" max_length="255" name="warranty_end_date" type="glide_date_time"/>
+        <element label="Warranty Type" max_length="500" name="warranty_type" type="string"/>
+        <element label="Warranty Type Description" max_length="255" name="warranty_type_description" type="string"/>
+        <index name="index">
+            <element name="asset"/>
+        </index>
+    </element>
+</database>

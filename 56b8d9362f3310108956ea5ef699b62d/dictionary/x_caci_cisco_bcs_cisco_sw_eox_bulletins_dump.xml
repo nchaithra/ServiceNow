@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco SW EOX Bulletins Dump" max_length="40" name="x_caci_cisco_bcs_cisco_sw_eox_bulletins_dump" sizeclass="0" type="collection">
+        <element label="bulletinnumber" max_length="255" name="bulletinnumber" type="string"/>
+        <element label="bulletintitle" max_length="1000" name="bulletintitle" type="string"/>
+        <element label="bulletinurl" max_length="2500" name="bulletinurl" type="url"/>
+        <element label="eolifeannouncementdate" max_length="255" name="eolifeannouncementdate" type="glide_date_time"/>
+        <element label="eosaledate" max_length="255" name="eosaledate" type="glide_date_time"/>
+        <element label="eosecurityvulsupportdate" max_length="255" name="eosecurityvulsupportdate" type="glide_date_time"/>
+        <element label="eoswmaintenancereleasesdate" max_length="255" name="eoswmaintenancereleasesdate" type="glide_date_time"/>
+        <element label="lastdateofsupport" max_length="255" name="lastdateofsupport" type="glide_date_time"/>
+        <element label="sweoxid" max_length="255" name="sweoxid" type="string"/>
+        <element label="swmaintenanceversion" max_length="500" name="swmaintenanceversion" type="string"/>
+        <element label="swmajorversion" max_length="500" name="swmajorversion" type="string"/>
+        <element label="swtrain" max_length="500" name="swtrain" type="string"/>
+        <element label="swtype" max_length="500" name="swtype" type="string"/>
+    </element>
+</database>

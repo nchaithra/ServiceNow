@@ -32,7 +32,7 @@
         <foreign_database/>
         <function_definition/>
         <function_field>false</function_field>
-        <internal_type display_value="">boolean</internal_type>
+        <internal_type display_value="String">string</internal_type>
         <mandatory>false</mandatory>
         <max_length>40</max_length>
         <name>x_caci_cisco_bcs_cisco_software_track_members_dump_v2</name>
@@ -52,8 +52,8 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2022-03-06 15:04:25</sys_created_on>
-        <sys_id>aba8348e070a0110172aff808c1ed088</sys_id>
+        <sys_created_on>2022-11-15 12:22:59</sys_created_on>
+        <sys_id>b57758372f8bd550660cbcb62799b6c7</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>isSoftwareTrackPreviousCompliant</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
@@ -61,7 +61,7 @@
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_dictionary_x_caci_cisco_bcs_cisco_software_track_members_dump_v2_issoftwaretrackpreviouscompliant</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-03-06 15:04:25</sys_updated_on>
+        <sys_updated_on>2022-11-15 12:22:59</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

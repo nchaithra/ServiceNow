@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element extends="sys_import_set_row" label="Cisco SW Track Maintenance Upgrade Compliance Dump V2" max_length="40" name="x_caci_cisco_bcs_cisco_sw_track_maintenance_upgrade_compliance_dump_v2" sizeclass="0" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="deviceId" max_length="500" name="deviceid" type="string"/>
+        <element label="softwareMaintenanceUpdatePackageInstallationEnvelopeType" max_length="2000" name="softwaremaintenanceupdatepackageinstallationenvelopetype" type="string"/>
+        <element label="softwareName" max_length="2000" name="softwarename" type="string"/>
+        <element label="softwareRole" max_length="2000" name="softwarerole" type="string"/>
+        <element label="softwareTrackDeviceSoftwareMaintenanceUpdatePIEAction" max_length="2000" name="softwaretrackdevicesoftwaremaintenanceupdatepieaction" type="string"/>
+        <element label="softwareTrackDeviceSoftwareMaintenanceUpdatePIECompliance" max_length="2000" name="softwaretrackdevicesoftwaremaintenanceupdatepiecompliance" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackId" max_length="500" name="softwaretrackid" type="string"/>
+        <element label="softwareTrackName" max_length="2000" name="softwaretrackname" type="string"/>
+    </element>
+</database>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <before>false</before>
+        <description>Add cmdb Source</description>
+        <name>Add cmdb Source</name>
+        <record_for_rollback>true</record_for_rollback>
+        <script><![CDATA[var dsUtil = new global.CMDBDataSourceUtil();
+dsUtil.addDataSource("Cisco BCS"); //update MySource with the name of your Scoped App name]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-14 10:41:28</sys_created_on>
+        <sys_id>59b6b6532f8f5550660cbcb62799b664</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Add cmdb Source</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_script_fix_59b6b6532f8f5550660cbcb62799b664</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-14 10:41:28</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>

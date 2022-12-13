@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_application">
+    <sys_ui_application action="DELETE">
+        <active>true</active>
+        <hint/>
+        <name>Cisco Devices Dump V2</name>
+        <order/>
+        <roles>x_caci_cisco_bcs.cisco_devices_dump_v2_user</roles>
+        <sys_class_name>sys_ui_application</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-02-23 08:50:24</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b1a932d207350110172aff808c1ed0d1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Cisco Devices Dump V2</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_update_name>sys_ui_application_b1a932d207350110172aff808c1ed0d1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-02-23 08:50:24</sys_updated_on>
+    </sys_ui_application>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</application>
+        <file_path/>
+        <instance_id>00710de0dbbcbb403050ac44d49619b7</instance_id>
+        <instance_name>dev80094</instance_name>
+        <name>sys_ui_application_b1a932d207350110172aff808c1ed0d1</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_application"><sys_ui_application action="INSERT_OR_UPDATE"><active>true</active><hint/><name>Cisco Devices Dump V2</name><order/><roles>x_caci_cisco_bcs.cisco_devices_dump_v2_user</roles><sys_class_name>sys_ui_application</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2022-02-23 08:50:24</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>b1a932d207350110172aff808c1ed0d1</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Cisco Devices Dump V2</sys_name><sys_overrides/><sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package><sys_policy/><sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope><sys_update_name>sys_ui_application_b1a932d207350110172aff808c1ed0d1</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2022-02-23 08:50:24</sys_updated_on></sys_ui_application></record_update>]]></payload>
+        <payload_hash>1166960033</payload_hash>
+        <record_name>Cisco Devices Dump V2</record_name>
+        <reverted_from/>
+        <source>0f3204772f2ad510660cbcb62799b65e</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-10-19 04:44:15</sys_created_on>
+        <sys_id>20bba3fa2f629110660cbcb62799b614</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_recorded_at>183ee8e6e930000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-10-21 14:18:44</sys_updated_on>
+        <type>Application Menu</type>
+        <update_guid>39a932d2b03501101b347580addbffd2</update_guid>
+        <update_guid_history>39a932d2b03501101b347580addbffd2:1166960033</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-11-10 06:21:44</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_application">sys_ui_application</sys_db_object>
+        <sys_id>17639526c95e4d68832dfb2e514dce84</sys_id>
+        <sys_metadata>b1a932d207350110172aff808c1ed0d1</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Cisco Devices Dump V2</sys_name>
+        <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
+        <sys_scope_delete display_value="">051332bed1934b709318384fcb4b2891</sys_scope_delete>
+        <sys_update_name>sys_ui_application_b1a932d207350110172aff808c1ed0d1</sys_update_name>
+        <sys_update_version display_value="sys_ui_application_b1a932d207350110172aff808c1ed0d1">20bba3fa2f629110660cbcb62799b614</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-11-10 06:21:44</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

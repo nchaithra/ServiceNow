@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Software Compliance Summaries" max_length="40" name="x_caci_cisco_bcs_cisco_software_track_summary" sizeclass="19" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element attributes="edge_encryption_enabled=true,no_sort=true,slushbucket_ref_no_expand=true" label="Incident Reference" max_length="4000" name="incident_reference" reference="incident" type="glide_list"/>
+        <element attributes="edge_encryption_enabled=true" label="isDeleted" max_length="40" name="isdeleted" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Standard Recommended PIEs/SMUs" max_length="40" name="recommendations" type="boolean"/>
+        <element label="softwareTrackCandidateVersion" max_length="200" name="softwaretrackcandidateversion" type="string"/>
+        <element label="softwareTrackComments" max_length="200" name="softwaretrackcomments" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="% Conformance" max_length="40" name="softwaretrackcompliancepercent" type="float"/>
+        <element attributes="edge_encryption_enabled=true" label="Total Conform" max_length="100" name="softwaretrackcompliantdevicecount" type="integer"/>
+        <element label="softwareTrackDescription" max_length="200" name="softwaretrackdescription" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="% Flexible Conformance" max_length="40" name="softwaretrackflexiblecompliancepercent" type="float"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackId" max_length="100" name="softwaretrackid" type="string"/>
+        <element label="Update Time" max_length="40" name="softwaretracklastmodifieddate" type="glide_date"/>
+        <element label="Track Name" max_length="200" name="softwaretrackname" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Total Non-Conform" max_length="100" name="softwaretracknoncompliantdevicecount" type="integer"/>
+        <element label="softwareTrackPrevious1PackageInstallationEnvelopeCriteria" max_length="200" name="softwaretrackprevious1packageinstallationenvelopecriteria" type="string"/>
+        <element label="softwareTrackPrevious1SoftwareMaintenanceUpdateCriteria" max_length="200" name="softwaretrackprevious1softwaremaintenanceupdatecriteria" type="string"/>
+        <element label="softwareTrackPrevious2PackageInstallationEnvelopeCriteria" max_length="200" name="softwaretrackprevious2packageinstallationenvelopecriteria" type="string"/>
+        <element label="softwareTrackPrevious2SoftwareMaintenanceUpdateCriteria" max_length="200" name="softwaretrackprevious2softwaremaintenanceupdatecriteria" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Total Previous" max_length="100" name="softwaretrackpreviouscompliantdevicecount" type="integer"/>
+        <element label="softwareTrackPreviousVersion1" max_length="200" name="softwaretrackpreviousversion1" type="string"/>
+        <element label="softwareTrackPreviousVersion2" max_length="200" name="softwaretrackpreviousversion2" type="string"/>
+        <element label="Track Rating" max_length="200" name="softwaretrackrating" type="string"/>
+        <element label="Date Recommendation Updated" max_length="40" name="softwaretrackrecommendationdate" type="glide_date"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackSoftwareMaintenanceUpdateCompliancePercent" max_length="40" name="softwaretracksoftwaremaintenanceupdatecompliancepercent" type="float"/>
+        <element label="softwareTrackStandardPackageInstallationEnvelopeCriteria" max_length="200" name="softwaretrackstandardpackageinstallationenvelopecriteria" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="softwareTrackStandardSoftwareMaintenanceUpdateCount" max_length="100" name="softwaretrackstandardsoftwaremaintenanceupdatecount" type="integer"/>
+        <element label="softwareTrackStandardSoftwareMaintenanceUpdateCriteria" max_length="200" name="softwaretrackstandardsoftwaremaintenanceupdatecriteria" type="string"/>
+        <element label="Standard Recommended Version" max_length="200" name="softwaretrackstandardversion" type="string"/>
+        <element label="softwareTrackStatus" max_length="200" name="softwaretrackstatus" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Total Devices" max_length="100" name="softwaretracktotaldevicecount" type="integer"/>
+        <element attributes="edge_encryption_enabled=true" label="Total SW Versions" max_length="100" name="softwaretracktotalversioncount" type="integer"/>
+        <element label="softwareTrackUpgradeReason" max_length="200" name="softwaretrackupgradereason" type="string"/>
+        <element label="softwareType" max_length="200" name="softwaretype" type="string"/>
+    </element>
+</database>

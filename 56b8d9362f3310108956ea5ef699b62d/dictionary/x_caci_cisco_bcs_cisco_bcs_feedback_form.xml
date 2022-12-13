@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="BCS Feedback Form" max_length="40" name="x_caci_cisco_bcs_cisco_bcs_feedback_form" sizeclass="0" type="collection">
+        <element label="Client ID" mandatory="true" max_length="255" name="customer_id" type="string"/>
+        <element label="Drilldown View" max_length="500" name="drilldown_view" type="string"/>
+        <element label="Feedback View" max_length="255" name="feedback_view" type="string"/>
+        <element label="Comments" max_length="10000" name="overall_feedback" read_only="true" type="string"/>
+        <element label="Rating" max_length="255" name="rating" type="string"/>
+        <element label="Email" max_length="255" name="username" read_only="true" type="string"/>
+        <element label="User name" max_length="40" name="user_name" type="string"/>
+    </element>
+</database>

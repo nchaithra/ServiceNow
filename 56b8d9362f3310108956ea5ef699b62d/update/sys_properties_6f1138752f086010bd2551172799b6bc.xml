@@ -11,16 +11,16 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-10-24 17:26:55</sys_created_on>
         <sys_id>6f1138752f086010bd2551172799b6bc</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>x_caci_cisco_bcs.Authentication.Record</sys_name>
         <sys_package display_value="Cisco BCS Operational Insights" source="x_caci_cisco_bcs">56b8d9362f3310108956ea5ef699b62d</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Cisco BCS Operational Insights">56b8d9362f3310108956ea5ef699b62d</sys_scope>
         <sys_update_name>sys_properties_6f1138752f086010bd2551172799b6bc</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2022-09-02 14:02:00</sys_updated_on>
+        <sys_updated_on>2022-11-16 09:51:41</sys_updated_on>
         <type>string</type>
-        <value>4491a04c07420110172aff808c1ed079</value>
+        <value>01fdac002fd35950660cbcb62799b6e1</value>
         <write_roles>x_caci_cisco_bcs.cisco_bcs_user,admin,x_caci_cisco_bcs.cisco_bcs_admin</write_roles>
     </sys_properties>
     <sys_translated_text action="delete_multiple" query="documentkey=6f1138752f086010bd2551172799b6bc"/>

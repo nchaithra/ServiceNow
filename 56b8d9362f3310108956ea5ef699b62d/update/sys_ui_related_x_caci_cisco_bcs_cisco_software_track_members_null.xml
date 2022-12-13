@@ -2,7 +2,7 @@
     <sys_ui_related sys_domain="global" table="x_caci_cisco_bcs_cisco_software_track_members" version="2" view="">
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Cisco Software Track Members - Default view" name="x_caci_cisco_bcs_cisco_software_track_members" related_list="NULL" sys_domain="global" view="Default view">f9a671d7972241108986fef3a253afbb</list_id>
+            <list_id display_value="Software Track Members - Default view" name="x_caci_cisco_bcs_cisco_software_track_members" related_list="NULL" sys_domain="global" view="Default view">f9a671d7972241108986fef3a253afbb</list_id>
             <order_by/>
             <position>0</position>
             <related_list>REL:1bd5b197972241108986fef3a253af70</related_list>
@@ -15,7 +15,7 @@
             <sys_updated_on>2022-04-04 13:18:42</sys_updated_on>
         </sys_ui_related_list_entry>
         <sys_ui_related_list action="INSERT_OR_UPDATE">
-            <calculated_name>Cisco Software Track Members - Default view</calculated_name>
+            <calculated_name>Software Track Members - Default view</calculated_name>
             <filter/>
             <name>x_caci_cisco_bcs_cisco_software_track_members</name>
             <order_by/>
